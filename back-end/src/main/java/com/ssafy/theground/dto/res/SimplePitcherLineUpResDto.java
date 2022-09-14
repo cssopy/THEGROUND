@@ -1,4 +1,4 @@
-package com.ssafy.theground.dto;
+package com.ssafy.theground.dto.res;
 
 import lombok.*;
 
@@ -7,5 +7,5 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class SimplePitcherLineUpDto {
+public class SimplePitcherLineUpResDto {
 }
