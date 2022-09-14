@@ -1,5 +1,5 @@
 import styles from "./css/Landing.module.css";
-import landingVideo from "../assets/landing-light.mp4";
+import landingVideo from "../assets/landing-dark.mp4";
 
 const Landing = () => {
   return (
