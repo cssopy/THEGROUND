@@ -9,16 +9,27 @@
   top: 25px;
   height: 900px;
   width: 1800px;
-  background-color: #051430;
-  opacity: 0.5;
+  background-color: rgba(05, 20, 48, 0.5);
   border-radius: 20px;
 }
 
 .innerbox {
   position: relative;
   top: 25px;
-  height: 600px;
+  left: 25px;
+  height: 500px;
   width: 600px;
-  background-color: #041E42;
+  background: linear-gradient(#041E42, rgba(04, 30, 66, 0.3));
   border-radius: 20px;
+}
+
+#field {
+  width: 100%;
+  margin-top: 15px;
+}
+
+#ballcount {
+  width: 600px;
+  height: 100px;
+  background-color: #000000;
 }
