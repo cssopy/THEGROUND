@@ -23,7 +23,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/com.google.code.gson/gson
