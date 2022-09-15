@@ -19,6 +19,7 @@
 
 .buttonLoc {
   position: relative;
+  position: center;
   display: flex;
   justify-content: center;
   align-items: center;
