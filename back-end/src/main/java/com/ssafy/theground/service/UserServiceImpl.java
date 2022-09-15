@@ -1,4 +1,5 @@
 package com.ssafy.theground.service;
 
-public interface UserService {
+public class UserServiceImpl {
+
 }
