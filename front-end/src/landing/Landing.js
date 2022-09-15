@@ -2,8 +2,12 @@ import styles from "./css/Landing.module.css";
 import landingVideo from "../assets/landing-dark.mp4";
 import title from "../assets/title.png";
 import subtitle from "../assets/subtitle.png";
+import Modal from "./components/Modal.js";
+import { useState } from "react";
 
 const Landing = () => {
+  const [signup, setSignup] = useState(false);
+  const [login, setLogin] = useState(false);
   return (
     <>
       <video autoPlay muted loop className={styles.bg}>
@@ -18,11 +22,17 @@ const Landing = () => {
         </div>
       </div>
       <div className={styles.buttonLoc}>
-        <button className={styles.button}>Sign Up</button>
+        <button className={styles.button} onClick={() => setSignup(!signup)}>
+          Sign Up
+        </button>
       </div>
       <div className={styles.buttonLoc}>
-        <button className={styles.button}>Login</button>
+        <button className={styles.button} onClick={() => setLogin(!login)}>
+          Login
+        </button>
       </div>
+      {signup && <Modal closeModal={() => setSignup(!signup)}>회원가입</Modal>}
+      {login && <Modal closeModal={() => setLogin(!login)}>로그인</Modal>}
     </>
   );
 };
