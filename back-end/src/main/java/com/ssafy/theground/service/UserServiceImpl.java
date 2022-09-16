@@ -3,10 +3,12 @@ package com.ssafy.theground.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.repository.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
