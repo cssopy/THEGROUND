@@ -2,24 +2,28 @@ package com.ssafy.theground.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="users")
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class User {
 	
 	@Id
 	@Column(name="user_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userSeq;
 	
 	@Column(name="user_logintype")
@@ -44,6 +48,6 @@ public class User {
 	@Column(name="user_payroll")
 	private int userPayroll;
 	
-	@Column(name="in_play_yn")
-	private Boolean inPlayYn;
+	@Column(name="in_play_flag")
+	private Boolean inPlayFlag;
 }
