@@ -4,6 +4,7 @@ import Game from "./game/Game";
 import Landing from "./landing/Landing";
 import Main from "./main/Main"
 import KakaoLoginHandler from "./landing/components/KakaoLoginHandler"
+import SignupModal from "./landing/components/SignupModal";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/game" element={<Game />} />
       <Route path="/kakaoLogin" element={<KakaoLoginHandler/>} />
       <Route path="/main" element={<Main />}></Route>
+      <Route path="/signupModal" element={<SignupModal/>}></Route>
     </Routes>
   );
 }
