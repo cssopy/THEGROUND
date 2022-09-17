@@ -19,7 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtServiceImpl implements JwtService{
-	private String SECRET_KEY = "ssafybaseball";
+	private String SECRET_KEY = "ssafybaseballssafybaseballssafybaseballssafybaseballssafybaseball";
 	/*
 	@param userUid
 	@return String

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.ssafy.theground.entity.Logo;
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.LogoService;
@@ -234,7 +237,15 @@ public class UserController {
 		String loginType = vo.get("loginType");
 
 		if (!userService.findByUserUid(uid).isPresent()) {
-			User u = new User(null,loginType.charAt(0),uid,userTeamname,1,0,logoService.findById(logoSeq).get(),10000000,false);
+			User u = new User();
+			u.setInPlayFlag(false);
+			u.setLogo(logoService.findById(logoSeq).get());
+			u.setUserExp(0);
+			u.setUserLevel(1);
+			u.setUserLogintype(loginType.charAt(0));
+			u.setUserPayroll(10000000);
+			u.setUserTeamname(userTeamname);
+			u.setUserUid(uid);
 			userService.save(u);
 			
 			resultMap.put("userTeamname", userTeamname);
@@ -269,5 +280,32 @@ public class UserController {
 		}
 	}
 	
+	@DeleteMapping("/quit")
+	public ResponseEntity<Map<String, Object>> quit(@RequestBody Map<String, String> vo){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		String uid = vo.get("uid");
+		
+		Optional<User> o = userService.findByUserUid(uid);
+		if(o.isPresent()) {
+			userService.deleteByUserUid(uid);
+			resultMap.put("message", "success");
+			status = HttpStatus.ACCEPTED;
+		} else {
+			resultMap.put("message", "failed");
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return new ResponseEntity<>(resultMap, status);
+	}
+	
+	@GetMapping("/logo")
+	public List<Logo> findAll(){
+		return logoService.findAll();
+	}
+	
+	@GetMapping("/list")
+	public List<User> findAllUser(){
+		return userService.findAll();
+	}
 	
 }
