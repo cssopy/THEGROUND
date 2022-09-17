@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const KakaoLoginHandler = () => {
   const navigate = useNavigate();
@@ -29,11 +30,29 @@ const KakaoLoginHandler = () => {
               loginType: "K",
             }),
           })
+          // axios
+          //   .post(
+          //     "https://j7d109.p.ssafy.io/back/users/login",
+          //     {
+          //       accessToken: data.access_token,
+          //       loginType: "K",
+          //     },
+              // {
+              //   headers: {
+              //     "Content-type": "application/json",
+              //     Accept: "application/json",
+              //   },
+              // },
+            // )
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              if (data.message === "회원가입을 먼저 해주세요.") {
+                //main으로 보내고 거기서 모달 띄우는 방법??
+                navigate("/signupModal");
+              } else {
+                navigate("/main");
+              }
             });
-          navigate("/main");
         } else {
           navigate("/");
         }

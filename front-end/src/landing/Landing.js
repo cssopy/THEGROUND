@@ -6,7 +6,6 @@ import Modal from "./components/Modal.js";
 import { useState } from "react";
 
 const Landing = () => {
-  const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
   return (
     <>
