@@ -1,5 +1,6 @@
 package com.ssafy.theground.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.ssafy.theground.entity.User;
@@ -15,4 +16,6 @@ public interface UserService {
 	public void updateById(String useruid, User user);
 
 	public Long count();
+	
+	public List<User> findAll();
 }
