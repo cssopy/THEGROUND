@@ -1,6 +1,7 @@
 import styles from "../css/Modal.module.css";
 import title from "../../assets/title.png";
 import subtitle from "../../assets/subtitle.png";
+import Kakao from "./Kakao.js";
 
 const Modal = (props) => {
   const closeModal = () => {
@@ -13,8 +14,11 @@ const Modal = (props) => {
         <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
           <img src={title} alt="" className={styles.modalTitle} />
           <img src={subtitle} alt="" className={styles.modalSubtitle} />
-          {/* {props.children} */}
-          <p className={styles.back} onClick={closeModal}>Back</p>
+          <br />
+          <Kakao />
+          <p className={styles.back} onClick={closeModal}>
+            BACK
+          </p>
         </div>
       </div>
     </>

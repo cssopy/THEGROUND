@@ -22,17 +22,11 @@ const Landing = () => {
         </div>
       </div>
       <div className={styles.buttonLoc}>
-        <button className={styles.button} onClick={() => setSignup(!signup)}>
-          Sign Up
-        </button>
-      </div>
-      <div className={styles.buttonLoc}>
         <button className={styles.button} onClick={() => setLogin(!login)}>
           Login
         </button>
       </div>
-      {signup && <Modal closeModal={() => setSignup(!signup)}>회원가입</Modal>}
-      {login && <Modal closeModal={() => setLogin(!login)}>로그인</Modal>}
+      {login && <Modal closeModal={() => setLogin(!login)}></Modal>}
     </>
   );
 };
