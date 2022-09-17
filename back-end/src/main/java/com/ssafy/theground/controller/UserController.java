@@ -58,6 +58,7 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> vo) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
+		System.out.println(vo.toString());
 		String accessToken = vo.get("accessToken");
 		String loginType = vo.get("loginType");
 
