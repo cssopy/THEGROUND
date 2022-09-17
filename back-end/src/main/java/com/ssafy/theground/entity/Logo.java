@@ -6,14 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="logos")
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Logo {
 	
 	@Id
