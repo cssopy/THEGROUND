@@ -9,7 +9,7 @@ const ScoreBoard = (props) => {
   return (
     <>
       <Table bordered className={`${styles['score-board']}`}>
-        <thead>
+        <thead className={styles.thead}>
           <tr className={styles.top}>
             <th className={styles.left}></th>
             <th>1</th>
@@ -26,7 +26,7 @@ const ScoreBoard = (props) => {
             <th className={styles.right}>B</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           <tr>
             <th className={styles.left}>logo</th>
             <th></th>
