@@ -27,7 +27,7 @@ const Game = () => {
   return (
     <>
       <img src={bgimg} alt='bg' className={styles.bg}/>
-      <div className={`${styles.box} mx-auto`}>
+      <div className={`${styles.box} mx-auto justify-content-center align-items-center`}>
         <Row>
           <Col>
             <Row>
