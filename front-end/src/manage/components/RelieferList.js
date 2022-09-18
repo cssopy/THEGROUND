@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Table } from "react-bootstrap";
 
-import style from "../css/PitcherList.module.css";
+import style from "../css/RelieferList.module.css";
 
-import Pitcher from "./Pitcher";
+import Reliefer from "./Reliefer";
 
-const PitcherList = memo((props) => {
+const RelieferList = memo((props) => {
   return (
     <>
       <Table className={`${style["table"]} table-borderless`}>
@@ -14,12 +14,14 @@ const PitcherList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>ERA</th>
-            <th>게임수</th>
+            <th>삼진</th>
+            <th>실점</th>
+            <th>WHIP</th>
           </tr>
         </thead>
         <tbody className={style["tbody"]}>
-          {props.pitchers.map((pitcher, index) => (
-            <Pitcher key={index} pitcher={pitcher}></Pitcher>
+          {props.reliefers.map((reliefer, index) => (
+            <Reliefer key={index} reliefer={reliefer}></Reliefer>
           ))}
         </tbody>
       </Table>
@@ -27,4 +29,4 @@ const PitcherList = memo((props) => {
   );
 });
 
-export default PitcherList;
+export default RelieferList;
