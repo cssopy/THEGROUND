@@ -3,7 +3,7 @@ import title from "../../assets/title.png";
 import subtitle from "../../assets/subtitle.png";
 import { useState, useRef } from "react";
 
-const signupModal = (props) => {
+const SignupModal = (props) => {
   const clubNameInput = useRef();
   const closeModal = () => {
     props.closeModal();
