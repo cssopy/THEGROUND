@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Table } from "react-bootstrap";
 
-import style from "../css/PitcherList.module.css";
+import style from "../css/HitterList.module.css";
 
-import Pitcher from "./Pitcher";
+import Hitter from "./Hitter";
 
-const PitcherList = memo((props) => {
+const HitterList = memo((props) => {
   return (
     <>
       <Table className={`${style["table"]} table-borderless`}>
@@ -13,13 +13,17 @@ const PitcherList = memo((props) => {
           <tr className={style["color-cst6"]}>
             <th>스탠드</th>
             <th>이름</th>
-            <th>ERA</th>
+            <th>타율</th>
             <th>게임수</th>
+            <th>타수</th>
+            <th>OBP</th>
+            <th>SLG</th>
+            <th>홈런</th>
           </tr>
         </thead>
         <tbody className={style["tbody"]}>
-          {props.pitchers.map((pitcher, index) => (
-            <Pitcher key={index} pitcher={pitcher}></Pitcher>
+          {props.hitters.map((hitter, index) => (
+            <Hitter key={index} hitter={hitter}></Hitter>
           ))}
         </tbody>
       </Table>
@@ -27,4 +31,4 @@ const PitcherList = memo((props) => {
   );
 });
 
-export default PitcherList;
+export default HitterList;
