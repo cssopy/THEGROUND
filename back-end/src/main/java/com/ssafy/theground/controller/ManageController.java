@@ -18,11 +18,17 @@ public class ManageController {
 
     @GetMapping("/pitchers")
     public ResponseEntity<?> pitcherList() throws Exception {
-        return new ResponseEntity<>(manageService.pitcherList(), HttpStatus.OK);
+        if(manageService.pitcherList() != null) {
+            return new ResponseEntity<>(manageService.pitcherList(), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/hitters")
-    public ResponseEntity<?> bb(){
-        return new ResponseEntity<>(manageService.bb(), HttpStatus.OK);
+    public ResponseEntity<?> hitterList() throws Exception {
+        if(manageService.hitterList() != null) {
+            return new ResponseEntity<>(manageService.hitterList(), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }
