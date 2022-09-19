@@ -17,7 +17,7 @@ public class StatsService {
 
     private StatsRepository statsRepository;
 
-    public ResponseEntity<?> aa(@RequestParam Long id){
+//    public ResponseEntity<?> aa(@RequestParam Long id){
 //        if(id == 투수Seq){
 //            Pitcher pitcher = new Pitcher();
 //            return new ResponseEntity<>(pitcher, HttpStatus.OK);
@@ -25,5 +25,5 @@ public class StatsService {
 //            Hitter hitter = new Hitter();
 //            return new ResponseEntity<>(hitter, HttpStatus.OK);
 //        }
-    }
+//    }
 }
