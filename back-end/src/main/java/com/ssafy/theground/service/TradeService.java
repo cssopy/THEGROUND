@@ -62,4 +62,12 @@ public class TradeService {
 
         return notPossHitterResDto;
     }
+
+    public void tradeIn(Long playerSeq){
+
+    }
+
+    public void tradeOut(Long playerSeq){
+
+    }
 }

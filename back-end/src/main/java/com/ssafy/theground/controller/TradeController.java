@@ -4,9 +4,7 @@ import com.ssafy.theground.service.TradeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/trade")
@@ -33,5 +31,17 @@ public class TradeController {
     @GetMapping("/not-poss-hitters")
     public ResponseEntity<?> notPossHitterList(){
         return new ResponseEntity<>(tradeService.ff(), HttpStatus.OK);
+    }
+
+    @PostMapping("/in")
+    public ResponseEntity<?> tradeIn(@RequestBody Long playerSeq){
+        tradeService.tradeIn(playerSeq);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @PostMapping("/out")
+    public ResponseEntity<?> tradeOut(@RequestBody Long playerSeq){
+        tradeService.tradeOut(playerSeq);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }
