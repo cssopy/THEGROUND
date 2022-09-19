@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import styles from '../css/Field.module.css';
 
 const Field = (props) => {
-  const { runners } = props;
+  // const { runners } = props;
 
   return (
     <>
