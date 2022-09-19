@@ -46,6 +46,15 @@ public class User {
 	@Column(name="user_payroll")
 	private int userPayroll;
 	
-	@Column(name="in_play_flag")
-	private Boolean inPlayFlag;
+	@Column(name="user_in_play_flag")
+	private Boolean userInPlayFlag;
+	
+	@Column(name="user_win")
+	private int userWin;
+	
+	@Column(name="user_draw")
+	private int userDraw;
+	
+	@Column(name="user_lose")
+	private int userLose;
 }
