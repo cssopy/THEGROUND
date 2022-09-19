@@ -26,13 +26,10 @@ const Game = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <img src={bgimg} alt='bg' className={styles.bg}/>
-      <div className={`${styles.box} mx-auto justify-content-center align-items-center`}>
-=======
       <img src={bgimg} alt="bg" className={styles.bg} />
-      <div className={`${styles.box} mx-auto`}>
->>>>>>> d2420cf524dcded3080016821029c1c390249d42
+      <div
+        className={`${styles.box} mx-auto justify-content-center align-items-center`}
+      >
         <Row>
           <Col>
             <Row>

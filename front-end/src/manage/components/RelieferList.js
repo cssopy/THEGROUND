@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { memo } from "react";
 import { Table } from "react-bootstrap";
 
@@ -14,14 +15,20 @@ const RelieferList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>ERA</th>
-            <th>삼진</th>
-            <th>실점</th>
-            <th>WHIP</th>
+            <th>게임수</th>
+            <th>이닝수</th>
+            <th>승리</th>
+            <th>패배</th>
           </tr>
         </thead>
         <tbody className={style["tbody"]}>
           {props.reliefers.map((reliefer, index) => (
-            <Reliefer key={index} reliefer={reliefer}></Reliefer>
+            <Reliefer
+              key={index}
+              reliefer={reliefer}
+              pitchers={props.pitchers}
+              setPitchers={props.setPitchers}
+            ></Reliefer>
           ))}
         </tbody>
       </Table>

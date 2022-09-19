@@ -5,8 +5,8 @@ const Hitter = ({ hitter }) => {
 
   const testStyle = {
     position: "absolute",
-    top: "0",
-    left: "0",
+    top: "300px",
+    left: "300px",
     width: "150px",
     height: "150px",
     "border-radius": "50%",
@@ -35,7 +35,7 @@ const Hitter = ({ hitter }) => {
     <>
       <tr onMouseOver={handleHover} onMouseLeave={handleLeave}>
         <td>{hitter.batArm}</td>
-        <td>{hitter.playerName}</td>
+        <td>{hitter.name}</td>
         <td>{hitter.avg}</td>
         <td>{hitter.game}</td>
         <td>{hitter.atBat}</td>
