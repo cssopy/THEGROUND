@@ -7,7 +7,7 @@ import lombok.*;
 public class PitcherResDto {
     private Long pitcherSeq;
     private String pitcherName;
-    private String arm;
+    private String pitArm;
     private int era;
     private int game;
     private int inning;
