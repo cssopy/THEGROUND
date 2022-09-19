@@ -21,8 +21,10 @@ public class TradeController {
     }
 
     @GetMapping("/poss-hitters")
-    public ResponseEntity<?> possHitterList(){
-        return new ResponseEntity<>(tradeService.dd(), HttpStatus.OK);
+    public ResponseEntity<?> possHitterList() throws Exception {
+        if(tradeService.possHitterList() != null) {
+            return new ResponseEntity<>(tradeService.possHitterList(), HttpStatus.OK);
+        } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/not-poss-pitchers")
