@@ -28,8 +28,8 @@ public class TradeController {
     }
 
     @GetMapping("/not-poss-pitchers")
-    public ResponseEntity<?> notPossPitcherList(){
-        return new ResponseEntity<>(tradeService.ee(), HttpStatus.OK);
+    public ResponseEntity<?> notPossPitcherList() throws Exception {
+        return new ResponseEntity<>(tradeService.notPossPitcherList(), HttpStatus.OK);
     }
 
     @GetMapping("/not-poss-hitters")
