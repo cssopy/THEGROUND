@@ -7,8 +7,27 @@
 }
 
 .mainbox {
-  width: 100px;
-  height: 100px;
+  position: absolute;
+  width: 180px;
+  height: 180px;
   background: #000;
   border-radius: 20px;
+}
+
+.row {
+  position: absolute;
+  width: 180px;
+  height: 60px;
+  border: 2px dashed white;
+  border-left: none;
+  border-right: none;
+}
+
+.col {
+  position: absolute;
+  width: 60px;
+  height: 180px;
+  border: 2px dashed white;
+  border-top: none;
+  border-bottom: none;
 }
