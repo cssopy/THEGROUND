@@ -16,23 +16,23 @@ import GameLogs from "./components/GameLogs";
 
 const Game = () => {
   // 필요한것
-  // 1. 현재 출루 상황
-  // 2. 현재 타자 이름 및 오늘 기록
-  // 3. 현재 타자의 BSO 상황
-  // 4. 현재 타자의
-  // 5. 이번 투구의 구속
-  // 6. 양 투수의 정보
+  // 1. Field => runners(현재 출루 상황)
+
+  // 2. Hitter => hitter(name, position, log)
+  // 3. BallCount => BallCounts(세 자리의 배열)
+
+  // 4. StrikeZone => balls(공 배열 정보)
+
+  // 5. BallVelocity => velocity (투구 속도)
+  // 6. Pitchers => 양 투수의 name, balls, threes 및 현재 이닝 정보 now
+
   // 7. 지금까지의 중계 기록 및 점수, 홈런, 볼 정보 등
+  // 8. ScoreBoard => 현재까지의 기록, 로고
 
   return (
     <>
-<<<<<<< HEAD
-      <img src={bgimg} alt='bg' className={styles.bg}/>
-      <div className={`${styles.box} mx-auto justify-content-center align-items-center`}>
-=======
       <img src={bgimg} alt="bg" className={styles.bg} />
       <div className={`${styles.box} mx-auto`}>
->>>>>>> d2420cf524dcded3080016821029c1c390249d42
         <Row>
           <Col>
             <Row>
@@ -40,7 +40,7 @@ const Game = () => {
             </Row>
             <Row>
               <Col>
-                <StrikeZone />
+                <StrikeZone balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:100, y:100}]}/>
               </Col>
               <Col>
                 <Row>
@@ -53,8 +53,8 @@ const Game = () => {
             </Row>
           </Col>
           <Col>
-            <Row className="mb-4">
-              <ScoreBoard scores={[1, 2, 3]} />
+            <Row className="mb-2">
+              <ScoreBoard scores={[0,0,1,2,1,0,0,4,0,0]} R={[1, 3]} H={[0, 1]} B={[2, 1]} />
             </Row>
             <Row>
               <Col>
