@@ -16,8 +16,8 @@ public class StatsController {
 
     private final StatsService statsService;
 
-    @GetMapping
-    public ResponseEntity<?> playerDetailData(@RequestParam Long id){
-        return statsService.aa(id);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> playerDetailData(@RequestParam Long id){
+//        return statsService.aa(id);
+//    }
 }

@@ -17,8 +17,8 @@ public class ManageController {
     private final ManageService manageService;
 
     @GetMapping("/pitchers")
-    public ResponseEntity<?> aa(){
-        return new ResponseEntity<>(manageService.aa(), HttpStatus.OK);
+    public ResponseEntity<?> pitcherList() throws Exception {
+        return new ResponseEntity<>(manageService.pitcherList(), HttpStatus.OK);
     }
 
     @GetMapping("/hitters")
