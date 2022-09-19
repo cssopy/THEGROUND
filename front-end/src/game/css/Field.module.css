@@ -10,3 +10,31 @@
   -webkit-user-drag: none;
   width: 90%;
 }
+
+
+.first, .second, .third {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background: red;
+  border-radius: 15px;
+}
+
+.x {
+  visibility: hidden;
+}
+
+.first {
+  top: 285px;
+  left: 385px;
+}
+
+.second {
+  top: 225px;
+}
+
+.third {
+  top: 285px;
+  left: 235px;
+}
+
