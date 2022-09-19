@@ -1,7 +1,6 @@
 package com.ssafy.theground.service;
 
-import com.ssafy.theground.dto.res.NotPossHitterResDto;
-import com.ssafy.theground.dto.res.PossHitterResDto;
+import com.ssafy.theground.dto.res.PossOrNotHitterResDto;
 import com.ssafy.theground.dto.res.PossOrNotPitcherResDto;
 import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
@@ -52,8 +51,8 @@ public class TradeService {
         return list;
     }
 
-    public List<PossHitterResDto> possHitterList() throws Exception {
-        List<PossHitterResDto> list = new ArrayList<>();
+    public List<PossOrNotHitterResDto> possHitterList() throws Exception {
+        List<PossOrNotHitterResDto> list = new ArrayList<>();
 
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
@@ -62,13 +61,13 @@ public class TradeService {
             for(UserHitter oneHitter : allHitters){
                 Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
                 if (byId.isPresent()){
-                    PossHitterResDto possHitterResDto = new PossHitterResDto();
-                    possHitterResDto.setHitterSeq(byId.get().getHitterSeq());
-                    possHitterResDto.setHitterName(byId.get().getHitterName());
-                    possHitterResDto.setBatArm(byId.get().getBatArm());
-                    possHitterResDto.setAvg(byId.get().getAvg());
+                    PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
+                    possOrNotHitterResDto.setHitterSeq(byId.get().getHitterSeq());
+                    possOrNotHitterResDto.setHitterName(byId.get().getHitterName());
+                    possOrNotHitterResDto.setBatArm(byId.get().getBatArm());
+                    possOrNotHitterResDto.setAvg(byId.get().getAvg());
 
-                    list.add(possHitterResDto);
+                    list.add(possOrNotHitterResDto);
                 } else return null;
             }
         } else return null;
@@ -95,21 +94,29 @@ public class TradeService {
             }
         } else return null;
 
-
-
         return list;
     }
 
-    public NotPossHitterResDto ff(){
-        Hitter hitter = new Hitter();
-        NotPossHitterResDto notPossHitterResDto = new NotPossHitterResDto();
+    public List<PossOrNotHitterResDto> notPossHitterList() throws Exception {
+        List<PossOrNotHitterResDto> list = new ArrayList<>();
 
-        notPossHitterResDto.setHitterSeq(hitter.getHitterSeq());
-        notPossHitterResDto.setHitterName(hitter.getHitterName());
-        notPossHitterResDto.setBatArm(hitter.getBatArm());
-        notPossHitterResDto.setAvg(hitter.getAvg());
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
-        return notPossHitterResDto;
+        if (byUserUid.isPresent()){
+            List<Long> hitterSeqById = manageHitterRepository.findHitterSeqById(byUserUid.get().getUserSeq());
+            List<Hitter> all = hitterRepository.findAllByIdNotIn(hitterSeqById);
+            for(Hitter one : all){
+                PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
+                possOrNotHitterResDto.setHitterSeq(one.getHitterSeq());
+                possOrNotHitterResDto.setHitterName(one.getHitterName());
+                possOrNotHitterResDto.setBatArm(one.getBatArm());
+                possOrNotHitterResDto.setAvg(one.getAvg());
+
+                list.add(possOrNotHitterResDto);
+            }
+        } else return null;
+
+        return list;
     }
 
     public void tradeIn(Long playerSeq){
