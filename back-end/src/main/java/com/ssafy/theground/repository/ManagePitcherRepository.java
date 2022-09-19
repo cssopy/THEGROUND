@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ManagePitcherRepository extends JpaRepository<UserPitcher, Long> {
     List<UserPitcher> findAllByUserSeq(Long userSeq);
+
+    List<Long> findPitcherSeqById(Long userSeq);
 }
