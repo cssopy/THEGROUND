@@ -6,25 +6,53 @@ import com.ssafy.theground.dto.res.PossHitterResDto;
 import com.ssafy.theground.dto.res.PossPitcherResDto;
 import com.ssafy.theground.entity.Hitter;
 import com.ssafy.theground.entity.Pitcher;
+import com.ssafy.theground.entity.User;
+import com.ssafy.theground.entity.UserPitcher;
+import com.ssafy.theground.repository.ManagePitcherRepository;
+import com.ssafy.theground.repository.PitcherRepository;
 import com.ssafy.theground.repository.TradeRepository;
+import com.ssafy.theground.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class TradeService {
-    private final TradeRepository tradeRepository;
+    private final UserRepository userRepository;
 
-    public PossPitcherResDto cc(){
-        Pitcher pitcher = new Pitcher();
-        PossPitcherResDto possPitcherResDto = new PossPitcherResDto();
+    private final JwtService jwtService;
 
-        possPitcherResDto.setPitcherSeq(pitcher.getPitcherSeq());
-        possPitcherResDto.setPitcherName(pitcher.getPitcherName());
-        possPitcherResDto.setPitArm(pitcher.getPitArm());
-        possPitcherResDto.setEra(pitcher.getEra());
+    private final ManagePitcherRepository managePitcherRepository;
 
-        return possPitcherResDto;
+    private final PitcherRepository pitcherRepository;
+
+
+    public List<PossPitcherResDto> possPitcherList() throws Exception {
+        List<PossPitcherResDto> list = new ArrayList<>();
+
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
+
+        if (byUserUid.isPresent()){
+            List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            for(UserPitcher onePitcher : allPitchers){
+                Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
+                if (byId.isPresent()){
+                    PossPitcherResDto possPitcherResDto = new PossPitcherResDto();
+                    possPitcherResDto.setPitcherSeq(byId.get().getPitcherSeq());
+                    possPitcherResDto.setPitcherName(byId.get().getPitcherName());
+                    possPitcherResDto.setPitArm(byId.get().getPitArm());
+                    possPitcherResDto.setEra(byId.get().getEra());
+
+                    list.add(possPitcherResDto);
+                } else return null;
+            }
+        } else return null;
+
+        return list;
     }
 
     public PossHitterResDto dd(){
