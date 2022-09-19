@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NotPossHitterResDto {
+public class PossOrNotHitterResDto {
     private Long hitterSeq;
 
     private String hitterName;
