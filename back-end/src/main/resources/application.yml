@@ -3,12 +3,12 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://j7d109.p.ssafy.io:13109/the_ground?characterEncoding=UTF-8&serverTimezone=UTC
-    username: d109
-    password: gumi109
-#    url: jdbc:mariadb://localhost:3306/theground?characterEncoding=UTF-8&serverTimezone=UTC
-#    username: ssafy
-#    password: ssafy
+#    url: jdbc:mariadb://j7d109.p.ssafy.io:13109/the_ground?characterEncoding=UTF-8&serverTimezone=UTC
+#    username: d109
+#    password: gumi109
+    url: jdbc:mariadb://localhost:3306/theground?characterEncoding=UTF-8&serverTimezone=UTC
+    username: ssafy
+    password: ssafy
 
   jpa:
     hibernate:
