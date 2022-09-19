@@ -1,9 +1,8 @@
 package com.ssafy.theground.service;
 
 import com.ssafy.theground.dto.res.NotPossHitterResDto;
-import com.ssafy.theground.dto.res.NotPossPitcherResDto;
 import com.ssafy.theground.dto.res.PossHitterResDto;
-import com.ssafy.theground.dto.res.PossPitcherResDto;
+import com.ssafy.theground.dto.res.PossOrNotPitcherResDto;
 import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +28,8 @@ public class TradeService {
     private final HitterRepository hitterRepository;
 
 
-    public List<PossPitcherResDto> possPitcherList() throws Exception {
-        List<PossPitcherResDto> list = new ArrayList<>();
+    public List<PossOrNotPitcherResDto> possPitcherList() throws Exception {
+        List<PossOrNotPitcherResDto> list = new ArrayList<>();
 
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
@@ -39,13 +38,13 @@ public class TradeService {
             for(UserPitcher onePitcher : allPitchers){
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
                 if (byId.isPresent()){
-                    PossPitcherResDto possPitcherResDto = new PossPitcherResDto();
-                    possPitcherResDto.setPitcherSeq(byId.get().getPitcherSeq());
-                    possPitcherResDto.setPitcherName(byId.get().getPitcherName());
-                    possPitcherResDto.setPitArm(byId.get().getPitArm());
-                    possPitcherResDto.setEra(byId.get().getEra());
+                    PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
+                    possOrNotPitcherResDto.setPitcherSeq(byId.get().getPitcherSeq());
+                    possOrNotPitcherResDto.setPitcherName(byId.get().getPitcherName());
+                    possOrNotPitcherResDto.setPitArm(byId.get().getPitArm());
+                    possOrNotPitcherResDto.setEra(byId.get().getEra());
 
-                    list.add(possPitcherResDto);
+                    list.add(possOrNotPitcherResDto);
                 } else return null;
             }
         } else return null;
@@ -77,16 +76,28 @@ public class TradeService {
         return list;
     }
 
-    public NotPossPitcherResDto ee(){
-        Pitcher pitcher = new Pitcher();
-        NotPossPitcherResDto notPossPitcherResDto = new NotPossPitcherResDto();
+    public List<PossOrNotPitcherResDto> notPossPitcherList() throws Exception {
+        List<PossOrNotPitcherResDto> list = new ArrayList<>();
 
-        notPossPitcherResDto.setPitcherSeq(pitcher.getPitcherSeq());
-        notPossPitcherResDto.setPitcherName(pitcher.getPitcherName());
-        notPossPitcherResDto.setPitArm(pitcher.getPitArm());
-        notPossPitcherResDto.setEra(pitcher.getEra());
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
-        return notPossPitcherResDto;
+        if (byUserUid.isPresent()){
+            List<Long> pitcherSeqById = managePitcherRepository.findPitcherSeqById(byUserUid.get().getUserSeq());
+            List<Pitcher> all = pitcherRepository.findAllByIdNotIn(pitcherSeqById);
+            for(Pitcher one : all){
+                PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
+                possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
+                possOrNotPitcherResDto.setPitcherName(one.getPitcherName());
+                possOrNotPitcherResDto.setPitArm(one.getPitArm());
+                possOrNotPitcherResDto.setEra(one.getEra());
+
+                list.add(possOrNotPitcherResDto);
+            }
+        } else return null;
+
+
+
+        return list;
     }
 
     public NotPossHitterResDto ff(){
