@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user_players")
-public class UserPlayer {
+@Table(name = "user_hitters")
+public class UserHitter {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,7 +22,5 @@ public class UserPlayer {
 
     private Long hitterSeq;
 
-    private Long pitcherSeq;
-
-    private String playerName;
+    private String userHitterName;
 }
