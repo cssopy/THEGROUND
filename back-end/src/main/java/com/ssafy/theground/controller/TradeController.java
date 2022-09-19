@@ -29,12 +29,16 @@ public class TradeController {
 
     @GetMapping("/not-poss-pitchers")
     public ResponseEntity<?> notPossPitcherList() throws Exception {
-        return new ResponseEntity<>(tradeService.notPossPitcherList(), HttpStatus.OK);
+        if(tradeService.notPossPitcherList() != null) {
+            return new ResponseEntity<>(tradeService.notPossPitcherList(), HttpStatus.OK);
+        } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/not-poss-hitters")
-    public ResponseEntity<?> notPossHitterList(){
-        return new ResponseEntity<>(tradeService.ff(), HttpStatus.OK);
+    public ResponseEntity<?> notPossHitterList() throws Exception {
+        if(tradeService.notPossHitterList() != null) {
+            return new ResponseEntity<>(tradeService.notPossHitterList(), HttpStatus.OK);
+        } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/in")
