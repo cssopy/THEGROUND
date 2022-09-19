@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.ssafy.theground.dto.res.UserMypageDto;
 import com.ssafy.theground.entity.Logo;
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.service.JwtService;
@@ -241,13 +242,16 @@ public class UserController {
 
 		if (!userService.findByUserUid(uid).isPresent()) {
 			User u = new User();
-			u.setInPlayFlag(false);
+			u.setUserInPlayFlag(false);
 			u.setLogo(logoService.findById(logoSeq).get());
 			u.setUserExp(0);
 			u.setUserLevel(1);
 			u.setUserLogintype(loginType.charAt(0));
 			u.setUserPayroll(10000000);
 			u.setUserTeamname(userTeamname);
+			u.setUserWin(0);
+			u.setUserLose(0);
+			u.setUserDraw(0);
 			u.setUserUid(uid);
 			userService.save(u);
 			
@@ -309,6 +313,19 @@ public class UserController {
 	@GetMapping("/list")
 	public List<User> findAllUser(){
 		return userService.findAll();
+	}
+	
+	@GetMapping("/mypage")
+	public UserMypageDto mymage() {
+		try {
+			User u = userService.findByUserUid(jwtService.getUserUid(jwtService.getJwt())).get();
+			UserMypageDto dto = new UserMypageDto(u);
+			return dto;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }
