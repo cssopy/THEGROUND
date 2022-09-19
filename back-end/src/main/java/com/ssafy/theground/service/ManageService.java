@@ -2,13 +2,8 @@ package com.ssafy.theground.service;
 
 import com.ssafy.theground.dto.res.HitterResDto;
 import com.ssafy.theground.dto.res.PitcherResDto;
-import com.ssafy.theground.entity.Hitter;
-import com.ssafy.theground.entity.Pitcher;
-import com.ssafy.theground.entity.User;
-import com.ssafy.theground.entity.UserPitcher;
-import com.ssafy.theground.repository.ManagePitcherRepository;
-import com.ssafy.theground.repository.PitcherRepository;
-import com.ssafy.theground.repository.UserRepository;
+import com.ssafy.theground.entity.*;
+import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ManageService {
 
-    private final ManagePitcherRepository manageRepository;
+    private final ManagePitcherRepository managePitcherRepository;
+
+    private final ManageHitterRepository manageHitterRepository;
 
     private final PitcherRepository pitcherRepository;
+
+    private final HitterRepository hitterRepository;
 
     private final JwtService jwtService;
 
@@ -35,7 +34,7 @@ public class ManageService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if(byUserUid.isPresent()) {
-            List<UserPitcher> allPitchers = manageRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
             for (UserPitcher onePitcher : allPitchers) {
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
                 if(byId.isPresent()) {
@@ -50,25 +49,38 @@ public class ManageService {
 
                     list.add(pitcherResDto);
                 }
+                else return null;
             }
-        }
+        } else return null;
+
         return list;
     }
 
-    public HitterResDto bb(){
-        Hitter hitter = new Hitter();
-        HitterResDto hitterResDto = new HitterResDto();
+    public List<HitterResDto> hitterList() throws Exception {
+        List<HitterResDto> list = new ArrayList<>();
 
-        hitterResDto.setHitterSeq(hitter.getHitterSeq());
-        hitterResDto.setHitterName(hitter.getHitterName());
-        hitterResDto.setBatArm(hitter.getBatArm());
-        hitterResDto.setAvg(hitter.getAvg());
-        hitterResDto.setGame(hitter.getGame());
-        hitterResDto.setAtBat(hitter.getAtBat());
-        hitterResDto.setObp(hitter.getObp());
-        hitterResDto.setSlg(hitter.getSlg());
-        hitterResDto.setHomerun(hitter.getHomerun());
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
-        return hitterResDto;
+        if(byUserUid.isPresent()) {
+            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            for (UserHitter oneHitter : allHitters) {
+                Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
+                if(byId.isPresent()) {
+                    HitterResDto hitterResDto = new HitterResDto();
+                    hitterResDto.setHitterName(byId.get().getHitterName());
+                    hitterResDto.setBatArm(byId.get().getBatArm());
+                    hitterResDto.setAvg(byId.get().getAvg());
+                    hitterResDto.setGame(byId.get().getGame());
+                    hitterResDto.setAtBat(byId.get().getAtBat());
+                    hitterResDto.setObp(byId.get().getObp());
+                    hitterResDto.setSlg(byId.get().getSlg());
+                    hitterResDto.setHomerun(byId.get().getHomerun());
+
+                    list.add(hitterResDto);
+                } else return null;
+            }
+        } else return null;
+
+        return list;
     }
 }
