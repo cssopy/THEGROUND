@@ -14,8 +14,10 @@ public class TradeController {
     private final TradeService tradeService;
 
     @GetMapping("/poss-pitchers")
-    public ResponseEntity<?> possPitcherList(){
-        return new ResponseEntity<>(tradeService.cc(), HttpStatus.OK);
+    public ResponseEntity<?> possPitcherList() throws Exception {
+        if(tradeService.possPitcherList() != null) {
+            return new ResponseEntity<>(tradeService.possPitcherList(), HttpStatus.OK);
+        } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/poss-hitters")
