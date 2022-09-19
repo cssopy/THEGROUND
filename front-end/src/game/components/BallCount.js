@@ -1,6 +1,5 @@
 import styles from '../css/BallCount.module.css';
 import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
 
 const BallCount = (props) => {
 
@@ -9,7 +8,7 @@ const BallCount = (props) => {
   const counting = (num, type) => {
     const result = [];
     for (let i=0; i<num; i++) {
-      result.push(<div className={`${styles[type]} ${styles.count}`}></div>)
+      result.push(<div className={`${styles[type]} ${styles.count}`} key={i}></div>)
     }
     return result;
   };
