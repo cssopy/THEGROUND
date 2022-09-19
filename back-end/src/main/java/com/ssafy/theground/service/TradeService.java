@@ -4,14 +4,8 @@ import com.ssafy.theground.dto.res.NotPossHitterResDto;
 import com.ssafy.theground.dto.res.NotPossPitcherResDto;
 import com.ssafy.theground.dto.res.PossHitterResDto;
 import com.ssafy.theground.dto.res.PossPitcherResDto;
-import com.ssafy.theground.entity.Hitter;
-import com.ssafy.theground.entity.Pitcher;
-import com.ssafy.theground.entity.User;
-import com.ssafy.theground.entity.UserPitcher;
-import com.ssafy.theground.repository.ManagePitcherRepository;
-import com.ssafy.theground.repository.PitcherRepository;
-import com.ssafy.theground.repository.TradeRepository;
-import com.ssafy.theground.repository.UserRepository;
+import com.ssafy.theground.entity.*;
+import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +22,11 @@ public class TradeService {
 
     private final ManagePitcherRepository managePitcherRepository;
 
+    private final ManageHitterRepository manageHitterRepository;
+
     private final PitcherRepository pitcherRepository;
+
+    private final HitterRepository hitterRepository;
 
 
     public List<PossPitcherResDto> possPitcherList() throws Exception {
@@ -55,16 +53,28 @@ public class TradeService {
         return list;
     }
 
-    public PossHitterResDto dd(){
-        Hitter hitter = new Hitter();
-        PossHitterResDto possHitterResDto = new PossHitterResDto();
+    public List<PossHitterResDto> possHitterList() throws Exception {
+        List<PossHitterResDto> list = new ArrayList<>();
 
-        possHitterResDto.setHitterSeq(hitter.getHitterSeq());
-        possHitterResDto.setHitterName(hitter.getHitterName());
-        possHitterResDto.setBatArm(hitter.getBatArm());
-        possHitterResDto.setAvg(hitter.getAvg());
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
-        return possHitterResDto;
+        if (byUserUid.isPresent()){
+            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            for(UserHitter oneHitter : allHitters){
+                Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
+                if (byId.isPresent()){
+                    PossHitterResDto possHitterResDto = new PossHitterResDto();
+                    possHitterResDto.setHitterSeq(byId.get().getHitterSeq());
+                    possHitterResDto.setHitterName(byId.get().getHitterName());
+                    possHitterResDto.setBatArm(byId.get().getBatArm());
+                    possHitterResDto.setAvg(byId.get().getAvg());
+
+                    list.add(possHitterResDto);
+                } else return null;
+            }
+        } else return null;
+
+        return list;
     }
 
     public NotPossPitcherResDto ee(){
