@@ -81,8 +81,8 @@ public class TradeService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if (byUserUid.isPresent()){
-            List<Long> pitcherSeqById = managePitcherRepository.findPitcherSeqById(byUserUid.get().getUserSeq());
-            List<Pitcher> all = pitcherRepository.findAllByIdNotIn(pitcherSeqById);
+            List<Long> pitcherSeqById = managePitcherRepository.findPitcherSeqByUserSeq(byUserUid.get().getUserSeq());
+            List<Pitcher> all = pitcherRepository.findAllByPitcherSeqNotIn(pitcherSeqById);
             for(Pitcher one : all){
                 PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
                 possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
@@ -103,8 +103,8 @@ public class TradeService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if (byUserUid.isPresent()){
-            List<Long> hitterSeqById = manageHitterRepository.findHitterSeqById(byUserUid.get().getUserSeq());
-            List<Hitter> all = hitterRepository.findAllByIdNotIn(hitterSeqById);
+            List<Long> hitterSeqById = manageHitterRepository.findHitterSeqByUserSeq(byUserUid.get().getUserSeq());
+            List<Hitter> all = hitterRepository.findAllByHitterSeqNotIn(hitterSeqById);
             for(Hitter one : all){
                 PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
                 possOrNotHitterResDto.setHitterSeq(one.getHitterSeq());

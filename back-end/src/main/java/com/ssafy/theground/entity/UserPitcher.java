@@ -15,6 +15,8 @@ import javax.persistence.*;
 public class UserPitcher {
 
     @Id
+    private Long userPitcherSeq;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userSeq")
     @NotNull
