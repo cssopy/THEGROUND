@@ -33,9 +33,18 @@ public class ManageService {
 
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
+        TeamSetting teamSetting = byUserUid.get().getTeamSetting();
+
         if(byUserUid.isPresent()) {
             List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
             for (UserPitcher onePitcher : allPitchers) {
+                if(onePitcher.getPitcherSeq() == teamSetting.getTeamSetting1stSp() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting2ndSp() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting3rdSp() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting4thSp() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting5thSp()){
+                    continue;
+                }
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
                 if(byId.isPresent()) {
                     PitcherResDto pitcherResDto = new PitcherResDto();
