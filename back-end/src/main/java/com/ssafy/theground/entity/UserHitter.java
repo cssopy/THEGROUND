@@ -15,6 +15,8 @@ import javax.persistence.*;
 public class UserHitter {
 
     @Id
+    private Long userHitterSeq;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userSeq")
     @NotNull

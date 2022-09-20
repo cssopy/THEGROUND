@@ -14,6 +14,8 @@ import javax.persistence.*;
 public class TeamSetting {
 
     @Id
+    private Long teamSettingSeq;
+
     @OneToOne
     @JoinColumn(name = "userSeq")
     private User userSeq;
