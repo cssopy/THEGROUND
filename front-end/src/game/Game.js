@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styles from "./css/Game.module.css";
 import "./css/Game.css";
-import bgimg from "../assets/background1.jpg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -11,10 +10,10 @@ import StrikeZone from "./components/StrikeZone";
 import BallVelocity from "./components/BallVelocity";
 import BallCount from "./components/BallCount";
 import ScoreBoard from "./components/ScoreBoard";
-import Pitchers from "./components/Pitchers";
-import Hitter from "./components/Hitters";
+import Pitchers from "./components/CurrentPitchers";
+import Hitter from "./components/CurrentHitter";
 import GameLogs from "./components/GameLogs";
-import ChangePlayer from "./components/ChangePlyer";
+import ChangePlayer from "./components/ChangePlayer";
 
 const Game = () => {
   // 구현 완료
@@ -43,81 +42,80 @@ const Game = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-center">
-        <img src={bgimg} alt="bg" className={styles.bg} />
-        <div className={`${styles.box}`}>
-          <Row>
-            <Col>
-              <Row>
-                <Field runners={['o', 'o', 'x']} />
-              </Row>
-              <Row>
-                <Col>
-                  <StrikeZone balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:100, y:100}]}/>
-                </Col>
-                <Col>
-                  <Row>
-                    <BallVelocity velocity={130} />
-                  </Row>
-                  <Row>
-                    <BallCount ballCounts={[3, 1, 2]} />
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-            <Col>
-              <Row className="mb-2">
-                <ScoreBoard scores={[0,0,1,2,1,0,0,4,0,0,1]} R={[1, 3]} H={[0, 1]} B={[2, 1]} />
-              </Row>
-              <Row>
-                <Col>
-                  <Row>
-                    <Pitchers
-                      pitchers={[
-                        { name: "류현진", balls: 25, threes: 3 },
-                        { name: "원태인", balls: 14, threes: 0 },
-                      ]}
-                      now={1}
-                    />
-                  </Row>
-                  <Row>
-                    <Hitter
-                      hitter={{
-                        name: "류현진",
-                        position: ["좌타", "외야수"],
-                        log: ["삼진", "땅볼"],
-                      }}
-                    />
-                  </Row>
-                  <Row>
-                    <Col>
-                      <Button
-                        className={`${styles.btn} ${styles.change}`}
-                        variant="success"
-                        onClick={openModal}
-                      >
-                        선수 교체
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        className={`${styles.btn} ${styles.skip}`}
-                        variant="danger"
-                      >
-                        SKIP
-                      </Button>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <GameLogs logs={[]} />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </div>
+    <div className={`${styles.bg} d-flex justify-content-center align-items-center`}>
+      <div className={`${styles.box}`}>
+        <Row>
+          <Col>
+            <Row>
+              <Field runners={['o', 'o', 'x']} />
+            </Row>
+            <Row>
+              <Col>
+                <StrikeZone balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:50, y:50}]}/>
+              </Col>
+              <Col>
+                <Row>
+                  <BallVelocity velocity={130} />
+                </Row>
+                <Row>
+                  <BallCount ballCounts={[3, 1, 2]} />
+                </Row>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row className="mb-2">
+              <ScoreBoard scores={[0,0,1,2,1,0,0,4,0,0,1]} R={[1, 3]} H={[0, 1]} B={[2, 1]} />
+            </Row>
+            <Row>
+              <Col>
+                <Row>
+                  <Pitchers
+                    pitchers={[
+                      { name: "류현진", balls: 25, threes: 3 },
+                      { name: "원태인", balls: 14, threes: 0 },
+                    ]}
+                    now={1}
+                  />
+                </Row>
+                <Row>
+                  <Hitter
+                    hitter={{
+                      name: "류현진",
+                      position: ["좌타", "외야수"],
+                      log: ["삼진", "땅볼"],
+                    }}
+                  />
+                </Row>
+                <Row>
+                  <Col>
+                    <Button
+                      className={`${styles.btn} ${styles.change}`}
+                      variant="success"
+                      onClick={openModal}
+                    >
+                      선수 교체
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      className={`${styles.btn} ${styles.skip}`}
+                      variant="danger"
+                    >
+                      SKIP
+                    </Button>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <GameLogs logs={[111,222,333,444,555,666,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
       </div>
-      <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading">팝업창입니다. 쉽게 만들 수 있어요. 같이 만들어봐요!</ChangePlayer>
+    </div>
     </>
   );
 };

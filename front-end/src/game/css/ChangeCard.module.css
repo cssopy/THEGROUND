@@ -1,31 +1,40 @@
-.logs {
-  width: 530px;
-  height: 430px;
+.body {
+  width: 450px;
   border-radius: 15px;
-  margin-right: 20px;
-  background: linear-gradient(#041E42, rgba(04, 30, 66, 0.6));
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(#041E42, rgba(04, 30, 66, 0.5));
   color: white;
   text-align: center;
+  padding: 0;
 }
 
 .title {
-  width: 530px;
-  height: 40px;
+  width: 450px;
+  height: 24px;
   border-start-end-radius: 15px;
   border-start-start-radius: 15px;
   background: linear-gradient(#053167, rgba(5, 49, 103, 0.6));
-  font-size: 24px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.table {
+  display: block;
+  color: #aaaaaa;
+  font-size: 12px;
 }
 
 .content {
-  height: 360px;
   margin: 15px;
+  color: white;
   overflow: auto;
-  font-size: 16px;
 }
 
 .content::-webkit-scrollbar {
   width: 8px;
+  position: absolute;
 }
 
 .content::-webkit-scrollbar-thumb {
@@ -41,4 +50,8 @@
 .content::-webkit-scrollbar-track {
   background: #123360;
   border-radius: 10px;
+}
+
+.content tr:hover {
+  background-color: #264b7d;
 }
