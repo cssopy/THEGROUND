@@ -1,0 +1,51 @@
+.modal {
+  position: absolute;
+  width: 34%;
+  height: 74%;
+  top: 9%;
+  left: 12%;
+  animation: animation-modal-show 0.5s;
+}
+
+.head {
+  height: 5%;
+  width: 100%;
+  line-height: 200%;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167);
+  border-radius: 20px 20px 0 0;
+}
+
+.body {
+  height: 95%;
+  width: 100%;
+  background-color: rgb(4, 30, 66);
+  border-radius: 0 0 20px 20px;
+  color: white;
+  text-align: center;
+}
+
+.stat {
+  position: absolute;
+  top: 350px;
+  text-align: center;
+}
+
+.table {
+  color: white;
+  font-size: 0.5rem;
+}
+
+.table tr:nth-child(2n + 1) {
+  color: #aaaaaa;
+}
+
+@keyframes animation-modal-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

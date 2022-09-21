@@ -1,11 +1,26 @@
-import { memo } from "react";
+import userEvent from "@testing-library/user-event";
+import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
 
 import style from "../css/HitterList.module.css";
 
 import Hitter from "./Hitter";
 
+import HitterDetailModal from "./HitterDetailModal";
+
 const HitterList = memo((props) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [hitter, setHitter] = useState();
+
+  const onMouseOver = (hitter) => {
+    setModalIsOpen(true);
+    setHitter(hitter);
+  };
+
+  const onMouseLeave = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <>
       <Table className={`${style["table"]} table-borderless`}>
@@ -23,10 +38,18 @@ const HitterList = memo((props) => {
         </thead>
         <tbody className={style["tbody"]}>
           {props.hitters.map((hitter, index) => (
-            <Hitter key={index} hitter={hitter}></Hitter>
+            <Hitter
+              key={index}
+              hitter={hitter}
+              onMouseOver={() => {
+                onMouseOver(hitter);
+              }}
+              onMouseLeave={onMouseLeave}
+            ></Hitter>
           ))}
         </tbody>
       </Table>
+      {modalIsOpen && <HitterDetailModal hitter={hitter} />}
     </>
   );
 });
