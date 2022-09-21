@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 @SuppressWarnings("FieldCanBeLocal")
 @Service
 public class ImageService {
-    private final String IMAGE_PATH = "/data/img/";
+    private final String IMAGE_PATH = "";
 
     public ImageDto downloadFile(String fileName) {
         System.out.println("Service started");
@@ -26,7 +26,7 @@ public class ImageService {
         Path path = Paths.get(filePath);
         File file = new File(filePath);
         if (!file.exists()) {
-            System.out.println("No file such as" + filePath);
+            System.out.println("No file such as : " + filePath);
             imageDto.setResult(ImageDto.ImageResult.FILE_NOT_FOUND);
             return imageDto;
         }
