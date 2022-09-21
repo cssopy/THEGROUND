@@ -16,6 +16,7 @@ public class ImageService {
     private final String IMAGE_PATH = "/data/img/";
 
     public ImageDto downloadFile(String fileName) {
+        System.out.println("Service started");
         ImageDto imageDto = new ImageDto();
         if (fileName == null) {
             imageDto.setResult(ImageDto.ImageResult.BAD_REQUEST);
@@ -25,7 +26,7 @@ public class ImageService {
         Path path = Paths.get(filePath);
         File file = new File(filePath);
         if (!file.exists()) {
-            System.out.println(filePath);
+            System.out.println("No file such as" + filePath);
             imageDto.setResult(ImageDto.ImageResult.FILE_NOT_FOUND);
             return imageDto;
         }
