@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class UserHitter {
 
     @Id
+    @Column(name = "user_hitter_seq")
     private Long userHitterSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,7 +23,9 @@ public class UserHitter {
     @NotNull
     private User userSeq;
 
+    @Column(name = "hitter_seq")
     private Long hitterSeq;
 
+    @Column(name = "user_hitter_name")
     private String userHitterName;
 }
