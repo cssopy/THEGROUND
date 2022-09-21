@@ -1,4 +1,4 @@
 export const ItemTypes = {
   Pitcher: "pitcher",
-  Reliefer: "reliefer",
+  Bullpen: "bullpen",
 };
