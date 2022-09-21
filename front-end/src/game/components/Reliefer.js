@@ -2,19 +2,18 @@ import { useDrag } from "react-dnd";
 
 const Reliefer = (props) => {
   
-  const { reliefer, relToHit } = props
+  const { reliefer, relToHit, idx } = props
 
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [, drag] = useDrag(() => ({
     type: 'reliefer',
-    item: { reliefer },
+    item: { reliefer, idx },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
     end: (droptem, monitor) => {
       const didDrop = monitor.getDropResult();
       if (didDrop) {
-        relToHit(droptem.reliefer);
-        console.log(droptem.reliefer);
+        relToHit(droptem.reliefer, droptem.idx);
       }
     },
   }));
