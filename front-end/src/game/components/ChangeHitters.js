@@ -1,13 +1,13 @@
-import { Table } from 'react-bootstrap';
-import styles from '../css/ChangeCard.module.css';
 import { memo } from 'react';
-import Hitter from './Hitter';
 import { useDrop } from 'react-dnd';
+
+import styles from '../css/ChangeCard.module.css';
+import Hitter from './Hitter';
 
 
 const ChangeHitters = memo((props) => {
 
-  const { hitters, setHitters } = props;
+  const { hitters, hitToRel } = props;
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'reliefer',
     drop: () => ({ name: 'ChangeReliefers' }),
@@ -29,7 +29,7 @@ const ChangeHitters = memo((props) => {
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>선발 타자</div>
-        <Table borderless className={styles.table} style={{height: '160px'}}>
+        <table borderless className={styles.table} style={{height: '180px'}}>
           <thead>
             <tr>
               <th>스탠드</th>
@@ -47,15 +47,20 @@ const ChangeHitters = memo((props) => {
             style={{ backgroundColor }}
             ref={drop}
           >
-            {hitters.map((hitter, idx) => (
-              <Hitter
-                className={styles.tr}
-                key={idx}
-                hitter={{...hitter, key:idx}}
-              />
-            ))}
+            {hitters.map((hitter, idx) => {
+              if (hitter !== 0) {
+                return ((
+                  <Hitter
+                    key={idx}
+                    idx={idx}
+                    hitter={hitter}
+                    hitToRel={hitToRel}
+                  />
+                ))
+              }
+            })}
           </tbody>
-        </Table>
+        </table>
       </div>
     </>
   );

@@ -1,30 +1,36 @@
-import { Table } from 'react-bootstrap';
+import { memo } from 'react';
+import { useDrop } from 'react-dnd';
+
 import styles from '../css/ChangeCard.module.css';
 import Reliefer from './Reliefer';
-import { memo } from 'react';
 
 
 const ChangeReliefers = memo((props) => {
 
   
   const { reliefers, relToHit } = props;
-  
-  // const rels = (rs) => {
-    
-  //   return (rs.map((reliefer, idx) => (
-  //     <Reliefer
-  //       key={idx}
-  //       reliefer={{...reliefer, idx}}
-  //       relToHit={relToHit}
-  //     />
-  //   )));
-  // }
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    accept: 'hitter',
+    drop: () => ({ name: 'ChangeHitters' }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }));
+
+  const isActive = canDrop && isOver;
+  let backgroundColor = "#ffffff00";
+  if (isActive) {
+    backgroundColor = "#aaaaaa6b";
+  } else if (canDrop) {
+    backgroundColor = "#aaaaaa32";
+  }
 
   return (
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>후보 선수</div>
-        <Table borderless className={styles.table} style={{height: '480px'}}>
+        <table borderless className={styles.table} style={{height: '500px'}}>
           <thead>
             <tr>
               <th>스탠드</th>
@@ -37,20 +43,25 @@ const ChangeReliefers = memo((props) => {
               <th>홈런</th>
             </tr>
           </thead>
-          <tbody className={styles.content}>
+          <tbody
+            className={styles.content}
+            style={{ backgroundColor }}
+            ref={drop}
+          >
             {reliefers.map((reliefer, idx) => {
-              if (reliefer != 0) {
+              if (reliefer !== 0) {
                 return ((
                   <Reliefer
                     key={idx}
-                    reliefer={{...reliefer, idx}}
+                    idx={idx}
+                    reliefer={reliefer}
                     relToHit={relToHit}
                   />
                 ))
               }
             })}
           </tbody>
-        </Table>
+        </table>
       </div>
     </>
   );
