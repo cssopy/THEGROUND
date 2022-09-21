@@ -1,49 +1,28 @@
-import { useState } from "react";
+import style from "../css/HitterList.module.css";
 
-const Hitter = ({ hitter }) => {
-  const [likeList, setLikeList] = useState("");
-
-  const testStyle = {
-    position: "absolute",
-    top: "300px",
-    left: "300px",
-    width: "150px",
-    height: "150px",
-    "border-radius": "50%",
-    "background-color": "#ee6c4d",
-    transform: "translate(-50%, -50%)",
-  };
-
-  const testobj = () => {
-    return <div className="circle" style={testStyle}></div>;
-  };
-  const handleLeave = () => {
-    setLikeList("");
-  };
-  const handleHover = () => {
-    setLikeList(testobj);
-    const circle = document.querySelector(".circle");
-    document.addEventListener("mousemove", (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      circle.style.left = mouseX + "px";
-      circle.style.top = mouseY + "px";
-    });
-  };
-
+const Hitter = (props) => {
   return (
     <>
-      <tr onMouseOver={handleHover} onMouseLeave={handleLeave}>
-        <td>{hitter.batArm}</td>
-        <td>{hitter.name}</td>
-        <td>{hitter.avg}</td>
-        <td>{hitter.game}</td>
-        <td>{hitter.atBat}</td>
-        <td>{hitter.obp}</td>
-        <td>{hitter.slg}</td>
-        <td>{hitter.homerun}</td>
+      <tr onMouseOver={props.onMouseOver} onMouseLeave={props.onMouseLeave}>
+        <td>
+          <div
+            className={
+              style[
+                props.hitter.batArm == "좌타" ? "leftHitter" : "rightHitter"
+              ]
+            }
+          >
+            {props.hitter.batArm}
+          </div>
+        </td>
+        <td>{props.hitter.name}</td>
+        <td>{props.hitter.avg}</td>
+        <td>{props.hitter.game}</td>
+        <td>{props.hitter.atBat}</td>
+        <td>{props.hitter.obp}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.homerun}</td>
       </tr>
-      {likeList}
     </>
   );
 };
