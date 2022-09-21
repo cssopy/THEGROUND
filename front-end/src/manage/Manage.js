@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { DndProvider } from "react-dnd";
@@ -8,22 +8,21 @@ import style from "./css/Manage.module.css";
 
 import HitterList from "./components/HitterList";
 import PitcherList from "./components/PitcherList";
-import RelieferList from "./components/RelieferList";
+import BullpenList from "./components/BullpenList";
 
 const Manage = () => {
+  const initHittersRef = useRef([]);
+  const initPitchersRef = useRef([]);
+  const initBullpensRef = useRef([]);
+
   const [hitters, setHitters] = useState([]);
   const [pitchers, setPitchers] = useState([]);
-  const [reliefers, setReliefers] = useState([]);
+  const [bullpens, setBullpens] = useState([]);
 
-  // 사용자가 save 하기전 선발투수 및 구원투수 목록
-  let initPitchers = [];
-  let initReliefers = [];
-
-  // 최초 한번 타자, 선발투수, 구원투수 데이터를 받아 초기화
+  // 컴포넌트가 마운트 될때
   useEffect(() => {
-    // 서버에서 데이터 얻어와서 초기화 (hitters, pitchers, reliefers, initPitchers, initReliefers)
-    // API 구현되면 그때 다시 수정
-    setHitters([
+    // 서버에서 데이터 얻어와서 초기화 (hitters, pitchers, bullpens, initPitchers, initBullpens)
+    initHittersRef.current = [
       {
         hitterSeq: 1,
         batArm: "우타",
@@ -46,12 +45,12 @@ const Manage = () => {
         slg: 0.159,
         homerun: 2,
       },
-    ]);
-    setPitchers([
+    ];
+    initPitchersRef.current = [
       {
         pitcherSeq: 1,
         pitArm: "좌완",
-        name: "리오넬 메시",
+        name: "선발투수1",
         era: 0.274,
         game: 50,
         inning: 180,
@@ -61,19 +60,19 @@ const Manage = () => {
       {
         pitcherSeq: 2,
         pitArm: "우완",
-        name: "레오나르도 다빈치",
+        name: "선발투수2",
         era: 0.274,
         game: 50,
         inning: 180,
         win: 37,
         lose: 11,
       },
-    ]);
-    setReliefers([
+    ];
+    initBullpensRef.current = [
       {
-        pitcherSeq: 1,
+        pitcherSeq: 3,
         pitArm: "좌완",
-        name: "리오넬 메시",
+        name: "구원투수1",
         era: 0.274,
         game: 50,
         inning: 180,
@@ -81,31 +80,80 @@ const Manage = () => {
         lose: 11,
       },
       {
-        pitcherSeq: 2,
+        pitcherSeq: 4,
         pitArm: "우완",
-        name: "레오나르도 다빈치",
+        name: "구원투수2",
         era: 0.274,
         game: 50,
         inning: 180,
         win: 37,
         lose: 11,
       },
-    ]);
+      {
+        pitcherSeq: 5,
+        pitArm: "우완",
+        name: "구원투수3",
+        era: 0.274,
+        game: 50,
+        inning: 180,
+        win: 37,
+        lose: 11,
+      },
+    ];
+
+    setHitters(initHittersRef.current);
+    setPitchers(initPitchersRef.current);
+    setBullpens(initBullpensRef.current);
   }, []);
 
   // reset 버튼 함수
   const reset = () => {
-    // pitchers, reliefers를 save 하기전 값들인 initPitchersin, itReliefers으로 재초기화
-    setPitchers(initPitchers);
-    setReliefers(initReliefers);
+    // pitchers, reliefers를 save 하기전 값들인 initPitchersin, initBullpens으로 재초기화
+    setPitchers(initPitchersRef.current);
+    setBullpens(initBullpensRef.current);
   };
 
   // save 버튼 함수
   const save = () => {
-    // 현재 pitchers, reliefers 의 목록을 서버에 전달
-    // 구단관리 API에 저장 관련 API필요 => 백엔드에 요청
-    alert("구단관리 API에 저장 관련 API필요 => 백엔드에 요청");
+    // 선수들 인원수 체크
+    // 현재 pitchers, bullpens 의 목록을 서버에 전달
+    alert(pitchers.length);
+    alert(bullpens.length);
+    alert(pitchers.length + bullpens.length);
   };
+
+  //
+  const addPitchers = (bullpen) => {
+    setPitchers((pitchers) => {
+      return [...pitchers, bullpen];
+    });
+    setBullpens((bullpens) => {
+      return bullpens.map((item) => {
+        return item.pitcherSeq !== bullpen.pitcherSeq ? item : 0;
+      });
+    });
+  };
+
+  const addBullpens = (pitcher) => {
+    setBullpens((bullpens) => {
+      return [...bullpens, pitcher];
+    });
+    setPitchers((pitchers) => {
+      return pitchers.map((item) => {
+        return item.pitcherSeq !== pitcher.pitcherSeq ? item : 0;
+      });
+    });
+  };
+
+  // useEffect(() => {
+  //   console.log(bullpens);
+  // }, [bullpens]);
+
+  // // 컴포넌트가 업데이트 될때마다
+  // useEffect(() => {
+  //   console.log(pitchers);
+  //   console.log(reliefers);
+  // });
 
   return (
     <>
@@ -123,10 +171,7 @@ const Manage = () => {
                     보유 타자
                   </Container>
                   <Container className={style["batterBody"]}>
-                    <HitterList
-                      hitters={hitters}
-                      setHitters={setHitters}
-                    ></HitterList>
+                    <HitterList hitters={hitters}></HitterList>
                   </Container>
                 </Row>
               </Col>
@@ -138,7 +183,7 @@ const Manage = () => {
                   <Container className={style["pircherBody"]}>
                     <PitcherList
                       pitchers={pitchers}
-                      setPitchers={setPitchers}
+                      addBullpens={addBullpens}
                     ></PitcherList>
                   </Container>
                 </Row>
@@ -147,33 +192,29 @@ const Manage = () => {
                     구원 투수
                   </Container>
                   <Container className={style["pircherBody"]}>
-                    <RelieferList
-                      pitchers={pitchers}
-                      setPitchers={setPitchers}
-                      reliefers={reliefers}
-                      setReliefers={setReliefers}
-                    ></RelieferList>
+                    <BullpenList
+                      bullpens={bullpens}
+                      addPitchers={addPitchers}
+                    ></BullpenList>
                   </Container>
                 </Row>
               </Col>
             </Row>
             <Row className={style["clubBody-row2"]}>
               <div className={style["clubBody-row2-div"]}>
-                <div
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]}`}
+                <Link
+                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
+                  to="/market"
                 >
-                  <Link className={style["link"]} to="/main">
-                    MAIN
-                  </Link>
-                </div>
+                  MAIN
+                </Link>
                 &nbsp;&nbsp;
-                <div
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]}`}
+                <Link
+                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
+                  to="/market"
                 >
-                  <Link className={style["link"]} to="/market">
-                    이적시장
-                  </Link>
-                </div>
+                  이적시장
+                </Link>
                 &nbsp;&nbsp;
                 <div
                   className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst4"]}`}
