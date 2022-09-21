@@ -1,0 +1,20 @@
+.velocity-title {
+  width: 200px;
+  height: 35px;
+  border-start-end-radius: 15px;
+  border-start-start-radius: 15px;
+  background: linear-gradient(#000000, rgba(0, 0, 0, 0.3));
+  color: #FFFFFF;
+  font-size: 20px;
+}
+
+.velocity-content {
+  width: 200px;
+  height: 90px;
+  margin-left: 20px;
+  padding: 0;
+  border-radius: 15px;
+  color: #FFFFFF;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
