@@ -135,6 +135,7 @@ const ChangePlayer = (props) => {
     const relToHit = (rel) => {
       setHitters((prevState) => { return [...prevState, rel] });
       setReliefers((prevState) => prevState.map((r, idx) => idx !== rel.idx? r : 0));
+      setInterval(() => {console.log(reliefers)}, '1000');
     };
 
 
