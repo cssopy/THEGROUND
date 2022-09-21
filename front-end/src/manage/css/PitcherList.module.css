@@ -57,7 +57,7 @@
 .table {
   display: block;
   width: 100%;
-  font-size: 20%;
+  font-size: 12px;
 }
 
 .table th:nth-of-type(1),
@@ -89,6 +89,10 @@
   width: 10vw;
 }
 
+.table tr {
+  line-height: 13px;
+}
+
 .tbody tr:hover {
   background-color: #264b7d;
 }
@@ -100,7 +104,7 @@
 
 .tbody {
   display: block;
-  height: 22vh;
+  height: 23vh;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -124,4 +128,24 @@
 .tbody::-webkit-scrollbar-track {
   background: #123360;
   border-radius: 10px;
+}
+
+.leftPitcher {
+  width: 100%;
+  height: 15px;
+  background-color: #bf0d3e;
+  margin-right: 2px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
+}
+
+.rightPitcher {
+  width: 100%;
+  height: 15px;
+  background-color: #0d5fbf;
+  margin-right: 2px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
 }

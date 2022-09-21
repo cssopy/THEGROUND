@@ -2,17 +2,17 @@ import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDrop } from "react-dnd";
 
-import Pitcher from "./Pitcher";
-import { ItemTypes } from "./ItemTypes.js";
+import style from "../css/BullpenList.module.css";
 
-import style from "../css/PitcherList.module.css";
+import Bullpen from "./Bullpen";
+import { ItemTypes } from "./ItemTypes.js";
 
 import PitcherDetailModal from "./PitcherDetailModal";
 
-const PitcherList = memo((props) => {
+const BullpenList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: ItemTypes.Bullpen,
-    drop: () => ({ name: "PitcherList" }),
+    accept: ItemTypes.Pitcher,
+    drop: () => ({ name: "BullpenList" }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -56,20 +56,21 @@ const PitcherList = memo((props) => {
           className={style["tbody"]}
           ref={drop}
           style={{ backgroundColor }}
-          data-testid="pitcherList"
+          data-testid="bullpenList"
         >
-          {props.pitchers.map((pitcher, index) => {
-            if (pitcher != 0) {
+          {props.bullpens.map((bullpen, index) => {
+            if (bullpen != 0) {
               return (
-                <Pitcher
+                <Bullpen
                   key={index}
-                  pitcher={pitcher}
-                  addBullpens={props.addBullpens}
+                  bullpen={bullpen}
+                  addPitchers={props.addPitchers}
+                  removeBullpens={props.removeBullpens}
                   onMouseOver={() => {
-                    onMouseOver(pitcher);
+                    onMouseOver(bullpen);
                   }}
                   onMouseLeave={onMouseLeave}
-                ></Pitcher>
+                ></Bullpen>
               );
             }
           })}
@@ -80,4 +81,4 @@ const PitcherList = memo((props) => {
   );
 });
 
-export default PitcherList;
+export default BullpenList;
