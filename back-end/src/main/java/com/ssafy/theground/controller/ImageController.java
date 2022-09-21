@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/download")
@@ -24,6 +26,9 @@ public class ImageController {
 
     @GetMapping("/{file_name}")
     public ResponseEntity<byte[]> imageGet(@PathVariable("file_name") String fileName) {
+        Path currentPath = Paths.get("");
+        String path = currentPath.toAbsolutePath().toString();
+        System.out.println("현재 작업 경로: " + path);
         System.out.println("Controller start");
         ImageDto imageDto = this.imageService.downloadFile(fileName);
         HttpHeaders headers = new HttpHeaders();
