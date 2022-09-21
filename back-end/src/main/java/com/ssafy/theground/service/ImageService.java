@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 @SuppressWarnings("FieldCanBeLocal")
 @Service
 public class ImageService {
-    private final String IMAGE_PATH = "/resource/static/image/";
+    private final String IMAGE_PATH = "/src/main/resource/static/image/";
 
     public ImageDto downloadFile(String fileName) {
         System.out.println("Service started");
