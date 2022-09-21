@@ -1,8 +1,8 @@
 .innerbox {
-  margin: 25px;
-  height: 500px;
-  width: 600px;
-  border-radius: 20px;
+  margin: 20px;
+  height: 400px;
+  width: 460px;
+  border-radius: 15px;
   background: linear-gradient(#041E42, rgba(04, 30, 66, 0.6));
 }
 
@@ -14,8 +14,8 @@
 
 .first, .second, .third {
   position: absolute;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   background: red;
   border-radius: 15px;
 }
@@ -25,16 +25,16 @@
 }
 
 .first {
-  top: 285px;
-  left: 385px;
+  top: 230px;
+  left: 295px;
 }
 
 .second {
-  top: 225px;
+  top: 180px;
 }
 
 .third {
-  top: 285px;
-  left: 235px;
+  top: 230px;
+  left: 185px;
 }
 

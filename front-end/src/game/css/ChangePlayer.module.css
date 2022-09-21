@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   z-index: 99;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
@@ -15,22 +15,27 @@
   cursor: pointer;
   border: 0;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   width: 40px;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
-  line-height: 30px;
-  color: red;
+  line-height: 20px;
+  color: white;
   background-color: transparent;
 }
+
+.close-button:hover {
+  color: red;
+}
+
 
 .section {
   width: 1000px;
   margin: 0 auto;
-  border-radius: 20px;
-  background: #041E42ee;
-  height: 800px;
+  border-radius: 15px;
+  background: rgba(5, 20, 48, 0.5);
+  height: 600px;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
   overflow: hidden;
@@ -39,9 +44,9 @@
 .header {
   position: relative;
   background: linear-gradient(#053167, #053167dd);
-  font-size: 40px;
+  font-size: 24px;
   text-align: center;
-  height: 60px;
+  height: 40px;
 }
 
 .openModal {
@@ -49,6 +54,16 @@
   align-items: center;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-bg-show 0.3s;
+}
+
+
+.reset, .save {
+  font-size: 24px;
+  border: none;
+  height: 50px;
+  width: 120px;
+  border-radius: 15px;
+  margin-left: 30px;
 }
 
 .reset {
