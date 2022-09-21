@@ -57,7 +57,7 @@
 .table {
   display: block;
   width: 100%;
-  font-size: 20%;
+  font-size: 12px;
 }
 
 .table th:nth-of-type(1),
@@ -66,15 +66,15 @@
 }
 .table th:nth-of-type(2),
 .table td:nth-of-type(2) {
-  width: 40%;
+  width: 35%;
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
-  width: 7%;
+  width: 8%;
 }
 .table th:nth-of-type(4),
 .table td:nth-of-type(4) {
-  width: 9%;
+  width: 10%;
 }
 .table th:nth-of-type(5),
 .table td:nth-of-type(5) {
@@ -90,7 +90,11 @@
 }
 .table th:nth-of-type(8),
 .table td:nth-of-type(8) {
-  width: 7%;
+  width: 8%;
+}
+
+.table tr {
+  line-height: 13px;
 }
 
 .tbody tr:hover {
@@ -128,4 +132,24 @@
 .tbody::-webkit-scrollbar-track {
   background: #123360;
   border-radius: 10px;
+}
+
+.leftHitter {
+  width: 100%;
+  height: 15px;
+  background-color: rgb(194, 94, 0);
+  margin-right: 2px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
+}
+
+.rightHitter {
+  width: 100%;
+  height: 15px;
+  background-color: green;
+  margin-right: 2px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
 }
