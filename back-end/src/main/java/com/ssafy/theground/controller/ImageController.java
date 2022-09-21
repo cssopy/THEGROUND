@@ -22,6 +22,7 @@ public class ImageController {
 
     @GetMapping("/{file_name}")
     public ResponseEntity<byte[]> imageGet(@PathVariable("file_name") String fileName) {
+        System.out.println("Controller start");
         ImageDto imageDto = this.imageService.downloadFile(fileName);
         HttpHeaders headers = new HttpHeaders();
         switch (imageDto.getResult()) {
@@ -33,6 +34,7 @@ public class ImageController {
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             case FILE_NOT_FOUND:
+                System.out.println("Return 404");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             case BAD_REQUEST:
             default:
