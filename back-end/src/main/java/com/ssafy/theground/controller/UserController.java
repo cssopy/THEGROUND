@@ -56,7 +56,7 @@ public class UserController {
         String result = "";
         for(String str : strs)
             result += str+" "; 
-		return "result";
+		return result;
 	}
 	
 	@Autowired
