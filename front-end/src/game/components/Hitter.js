@@ -2,21 +2,19 @@ import { useDrag } from "react-dnd";
 
 const Hitter = (props) => {
 
-  const { hitter, setHitters, reliefers } = props;
+  const { hitter, hitToRel, idx } = props;
 
-  const [{isDragging}, drag] = useDrag(() => ({
-      type: 'hitter',
-      item: { hitter },
-      collect: (monitor) => ({
+  const [, drag] = useDrag(() => ({
+    type: 'hitter',
+    item: { hitter, idx },
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    end: (result, monitor) => {
+    end: (droptem, monitor) => {
       const didDrop = monitor.getDropResult();
-      // if (didDrop) {
-      //   props.setHitters((prevState) => {
-      //     return [...prevState, result.hitter];
-      //   });
-      // }
+      if (didDrop) {
+        hitToRel(droptem.hitter, droptem.idx);
+      }
     },
   }));
 

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import styles from '../css/ChangePlayer.module.css';
 import { Row, Col, Button } from "react-bootstrap";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+
+import styles from '../css/ChangePlayer.module.css';
 import ChangePitcher from "./ChangePitchers";
 import ChangeReliefers from "./ChangeReliefers";
 import ChangeHitters from "./ChangeHitters";
@@ -132,10 +134,15 @@ const ChangePlayer = (props) => {
     };
 
     // Reliefer에서 Hitter로
-    const relToHit = (rel) => {
+    const relToHit = (rel, idx) => {
       setHitters((prevState) => { return [...prevState, rel] });
-      setReliefers((prevState) => prevState.map((r, idx) => idx !== rel.idx? r : 0));
-      setInterval(() => {console.log(reliefers)}, '1000');
+      setReliefers((prevState) => prevState.map((r, index) => index !== idx? r : 0));
+    };
+
+    // Hitter에서 Reliefer로
+    const hitToRel = (hit, idx) => {
+      setReliefers((prevState) => { return [...prevState, hit] });
+      setHitters((prevState) => prevState.map((h, index) => index !== idx? h : 0));
     };
 
 
@@ -168,7 +175,7 @@ const ChangePlayer = (props) => {
                 <Row>
                   <ChangeHitters
                     hitters={hitters}
-                    setHitters={setHitters}
+                    hitToRel={hitToRel}
                   />
                 </Row>
                 <Row>
