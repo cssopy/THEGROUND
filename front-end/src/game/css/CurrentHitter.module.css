@@ -1,0 +1,28 @@
+.hitters {
+  width: 320px;
+  height: 150px;
+  background: linear-gradient(#041E42, rgba(04, 30, 66, 0.6));
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: bolder;
+}
+
+.dashes {
+  color: #BF0D3E;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-weight: bolder;
+}
+
+.content {
+  font-size: 18px;
+}
+
+.log {
+  font-size: 20px;
+}
