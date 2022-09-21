@@ -1,19 +1,19 @@
 .ball, .strike {
   position: relative;
-  width:50px;
-  height:50px;
+  width:30px;
+  height:30px;
   opacity: 0.6;
-  border-radius: 25px;
-  font-size: 40px;
+  border-radius:15px;
+  font-size: 24px;
   color: black;
   text-align: center;
-  line-height: 40px;
+  line-height: 27px;
 }
 
 .strike {
-  background-color: #FAFF00;
+  background-color: #A2E90B;
 }
 
 .ball {
-  background-color: #A2E90B;
+  background-color: #FAFF00;
 }

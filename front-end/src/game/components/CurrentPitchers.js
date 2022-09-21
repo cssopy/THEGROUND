@@ -1,4 +1,4 @@
-import styles from '../css/Pitchers.module.css';
+import styles from '../css/CurrentPitchers.module.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 

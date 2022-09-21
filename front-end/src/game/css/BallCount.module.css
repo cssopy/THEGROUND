@@ -1,33 +1,33 @@
 .bso {
-  width: 250px;
-  height: 180px;
+  width: 200px;
+  height: 130px;
   margin-left: 20px;
   margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 20px;
+  border-radius: 15px;
   color: white;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bolder;
 }
 
 .count {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
   margin-left: 10px;
 }
 
 .subtitle {
-  width: 50px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
 }
 
 .ball {
-  background: #A2E90B;
+  background: #FAFF00;
 }
 
 .strike {
-  background: #FAFF00;
+  background: #A2E90B;
 }
 
 .out {

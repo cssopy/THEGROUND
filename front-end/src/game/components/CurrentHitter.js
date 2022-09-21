@@ -1,6 +1,6 @@
-import styles from '../css/Hitter.module.css';
+import styles from '../css/CurrentHitter.module.css';
 
-const Hitter = (props) => {
+const CurrentHitter = (props) => {
   const {hitter} = props;
 
   return (
@@ -15,4 +15,4 @@ const Hitter = (props) => {
 };
 
 
-export default Hitter;
+export default CurrentHitter;
