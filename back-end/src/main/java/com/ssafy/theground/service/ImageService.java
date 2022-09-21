@@ -21,9 +21,11 @@ public class ImageService {
             imageDto.setResult(ImageDto.ImageResult.BAD_REQUEST);
             return imageDto;
         }
-        Path path = Paths.get(IMAGE_PATH + fileName);
-        File file = new File(IMAGE_PATH + fileName);
+        String filePath = IMAGE_PATH + fileName;
+        Path path = Paths.get(filePath);
+        File file = new File(filePath);
         if (!file.exists()) {
+            System.out.println(filePath);
             imageDto.setResult(ImageDto.ImageResult.FILE_NOT_FOUND);
             return imageDto;
         }
