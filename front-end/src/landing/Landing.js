@@ -22,7 +22,7 @@ const Landing = () => {
       </div>
       <div className={styles.buttonLoc}>
         <button className={styles.button} onClick={() => setLogin(!login)}>
-          hi
+          Login
         </button>
       </div>
       {login && <Modal closeModal={() => setLogin(!login)}></Modal>}

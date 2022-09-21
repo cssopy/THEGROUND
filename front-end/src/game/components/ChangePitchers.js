@@ -1,5 +1,6 @@
 import { memo } from 'react';
-import { Table } from 'react-bootstrap';
+import { useDrop } from 'react-dnd';
+
 import styles from '../css/ChangeCard.module.css';
 import Pitcher from './Pitcher';
 
@@ -11,7 +12,7 @@ const ChangePitchers = memo((props) => {
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>선발 투수</div>
-        <Table borderless className={styles.table} style={{height: '160px'}}>
+        <table borderless className={styles.table} style={{height: '180px'}}>
           <thead>
             <tr>
               <th>스탠드</th>
@@ -31,7 +32,7 @@ const ChangePitchers = memo((props) => {
               />
             ))}
           </tbody>
-        </Table>
+        </table>
       </div>
     </>
   );
