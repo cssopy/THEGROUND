@@ -48,15 +48,15 @@ const ChangeHitters = memo((props) => {
             style={{ backgroundColor, height:'180px' }}
             ref={drop}
           >
-            {hitters.map((hitter) => {
-                return ((
+            {hitters.map((hit) => {
+                return (
                   <Hitter
-                    key={hitter.hitterSeq}
-                    idx={hitter.hitterSeq}
-                    hitter={hitter}
+                    key={hit.hitterSeq}
+                    idx={hit.hitterSeq}
+                    hitter={hit}
                     hitToRel={hitToRel}
                   />
-                ))
+                );
             })}
           </tbody>
         </table>

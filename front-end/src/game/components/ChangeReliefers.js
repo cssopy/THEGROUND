@@ -49,15 +49,15 @@ const ChangeReliefers = memo((props) => {
             style={{ backgroundColor, height:'500px' }}
             ref={drop}
           >
-            {reliefers.map((reliefer) => {
-              return ((
+            {reliefers.map((rel) => {
+              return (
                 <Reliefer
-                  key={reliefer.hitterSeq}
-                  idx={reliefer.hitterSeq}
-                  reliefer={reliefer}
+                  key={rel.hitterSeq}
+                  idx={rel.hitterSeq}
+                  reliefer={rel}
                   relToHit={relToHit}
                 />
-              ))
+              );
             })}
           </tbody>
         </table>
