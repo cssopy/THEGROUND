@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { Row } from 'react-bootstrap';
 
 import styles from '../css/ChangeCard.module.css';
@@ -9,17 +9,6 @@ const ChangePitchers = memo((props) => {
 
   const { pitchers, pitTopit } = props;
 
-  const renderPit = useCallback((pit, idx) => {
-    return (
-      <Pitcher
-        key={pit.pitcherSeq}
-        index={idx}
-        id={pit.pitcherSeq}
-        pitcher={pit}
-        pitTopit={pitTopit}
-      />
-    );
-  }, []);
 
   return (
     <>
@@ -58,7 +47,16 @@ const ChangePitchers = memo((props) => {
               className={styles.content}
               style={{ height:'160px' }}
             >
-              {pitchers.map((pitcher, idx) => renderPit(pitcher, idx))}
+              {pitchers.map((pit, idx) => {
+                return (
+                  <Pitcher
+                    key={pit.pitcherSeq}
+                    index={idx}
+                    pitcher={pit}
+                    pitTopit={pitTopit}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </Row>
