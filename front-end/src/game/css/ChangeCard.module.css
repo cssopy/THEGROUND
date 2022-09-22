@@ -59,6 +59,11 @@
   border-radius: 10px;
 }
 
+
 .content tr:hover {
   background-color: #264b7d;
+}
+
+.content tr:active {
+  background-color: #264b7d00;
 }
