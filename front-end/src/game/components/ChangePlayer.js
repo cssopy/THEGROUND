@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import update from 'immutability-helper';
+
 
 
 import styles from '../css/ChangePlayer.module.css';
@@ -33,7 +33,7 @@ const ChangePlayer = (props) => {
       {
         hitterSeq: 1,
         batArm: "우타",
-        name: "리오넬 메시",
+        name: "선발타자 1",
         avg: 0.314,
         game: 0.123,
         atBat: 0.456,
@@ -44,7 +44,80 @@ const ChangePlayer = (props) => {
       {
         hitterSeq: 2,
         batArm: "좌타",
-        name: "레오나르도 다빈치",
+        name: "선발타자 2",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },{
+        hitterSeq: 3,
+        batArm: "우타",
+        name: "선발타자 3",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },
+      {
+        hitterSeq: 4,
+        batArm: "좌타",
+        name: "선발타자 4",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },{
+        hitterSeq: 5,
+        batArm: "우타",
+        name: "선발타자 5",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },
+      {
+        hitterSeq: 6,
+        batArm: "좌타",
+        name: "선발타자 6",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },{
+        hitterSeq: 7,
+        batArm: "우타",
+        name: "선발타자 7",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },
+      {
+        hitterSeq: 8,
+        batArm: "좌타",
+        name: "선발타자 8",
+        avg: 0.314,
+        game: 0.123,
+        atBat: 0.456,
+        obp: 0.789,
+        slg: 0.159,
+        homerun: 2,
+      },{
+        hitterSeq: 9,
+        batArm: "우타",
+        name: "선발타자 9",
         avg: 0.314,
         game: 0.123,
         atBat: 0.456,
@@ -57,7 +130,7 @@ const ChangePlayer = (props) => {
       {
         pitcherSeq: 1,
         pitArm: "좌완",
-        name: "리오넬 메시",
+        name: "선발투수 1",
         era: 0.274,
         game: 50,
         inning: 180,
@@ -67,7 +140,37 @@ const ChangePlayer = (props) => {
       {
         pitcherSeq: 2,
         pitArm: "우완",
-        name: "레오나르도 다빈치",
+        name: "선발투수 2",
+        era: 0.274,
+        game: 50,
+        inning: 180,
+        win: 37,
+        lose: 11,
+      },
+      {
+        pitcherSeq: 3,
+        pitArm: "좌완",
+        name: "선발투수 3",
+        era: 0.274,
+        game: 50,
+        inning: 180,
+        win: 37,
+        lose: 11,
+      },
+      {
+        pitcherSeq: 4,
+        pitArm: "좌완",
+        name: "선발투수 4",
+        era: 0.274,
+        game: 50,
+        inning: 180,
+        win: 37,
+        lose: 11,
+      },
+      {
+        pitcherSeq: 5,
+        pitArm: "우완",
+        name: "선발투수 5",
         era: 0.274,
         game: 50,
         inning: 180,
@@ -77,7 +180,7 @@ const ChangePlayer = (props) => {
     ];
     const apiReliefers = [
       {
-        hitterSeq: 1,
+        hitterSeq: 10,
         batArm: "우타",
         name: "리오넬 메시",
         avg: 0.314,
@@ -88,7 +191,7 @@ const ChangePlayer = (props) => {
         homerun: 2,
       },
       {
-        hitterSeq: 2,
+        hitterSeq: 11,
         batArm: "좌타",
         name: "레오나르도 다빈치",
         avg: 0.314,
@@ -99,7 +202,7 @@ const ChangePlayer = (props) => {
         homerun: 2,
       },
       {
-        hitterSeq: 3,
+        hitterSeq: 12,
         batArm: "우타",
         name: "이정재",
         avg: 0.314,
@@ -118,33 +221,44 @@ const ChangePlayer = (props) => {
     setInitReliefers([...apiReliefers]);
   }, []);
 
-    // reset 버튼 함수
-    const reset = () => {
-      // pitchers, reliefers를 save 하기전 값들인 initPitchersin, itReliefers으로 재초기화
-      setHitters([...initHitters]);
-      setPitchers([...initPitchers]);
-      setReliefers([...initReliefers]);
-    };
-  
-    // save 버튼 함수
-    const save = () => {
-      // 현재 pitchers, reliefers 의 목록을 서버에 전달
-      // 구단관리 API에 저장 관련 API필요 => 백엔드에 요청
-      alert("구단관리 API에 저장 관련 API필요 => 백엔드에 요청");
-    };
+  // reset 버튼 함수
+  const reset = () => {
+    // pitchers, reliefers를 save 하기전 값들인 initPitchersin, itReliefers으로 재초기화
+    setHitters([...initHitters]);
+    setPitchers([...initPitchers]);
+    setReliefers([...initReliefers]);
+  };
 
-    // Reliefer에서 Hitter로
-    const relToHit = (rel, idx) => {
-      setHitters((prevState) => { return [...prevState, rel] });
-      setReliefers((prevState) => prevState.map((r, index) => index !== idx? r : 0));
-    };
+  // save 버튼 함수
+  const save = () => {
+    // 현재 pitchers, reliefers 의 목록을 서버에 전달
+    // 구단관리 API에 저장 관련 API필요 => 백엔드에 요청
+    alert("구단관리 API에 저장 관련 API필요 => 백엔드에 요청");
+  };
 
-    // Hitter에서 Reliefer로
-    const hitToRel = (hit, idx) => {
-      setReliefers((prevState) => { return [...prevState, hit] });
-      setHitters((prevState) => prevState.map((h, index) => index !== idx? h : 0));
-    };
+  // Reliefer에서 Hitter로
+  const relToHit = useCallback((rel, idx) => {
+    setHitters((prevState) => { return [...prevState, rel] });
+    setReliefers((prevState) => prevState.filter((r) => r.hitterSeq !== idx));
+  }, []);
 
+  // Hitter에서 Reliefer로
+  const hitToRel = useCallback((hit, idx) => {
+    setReliefers((prevState) => [...prevState, hit]);
+    setHitters((prevState) => prevState.filter((h) => h.hitterSeq !== idx));
+  }, []);
+
+  const pitTopit = useCallback((dragIndex, hoverIndex) => {
+    setPitchers((prevState) => (
+      update(prevState, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevState[dragIndex]]
+        ]
+      })
+    ));
+  }, []);
+      
 
   return (  
     // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -157,7 +271,7 @@ const ChangePlayer = (props) => {
               &times;
             </button>
           </div>
-          <DndProvider backend={HTML5Backend}>
+          <div>
             <Row>
               <Col>
                 <ChangeReliefers
@@ -169,7 +283,7 @@ const ChangePlayer = (props) => {
                 <Row>
                   <ChangePitcher
                     pitchers={pitchers}
-                    setPitchers={setPitchers}
+                    pitTopit={pitTopit}
                   />
                 </Row>
                 <Row>
@@ -190,7 +304,7 @@ const ChangePlayer = (props) => {
                 </Row>
               </Col>
             </Row>
-          </DndProvider>
+          </div>
         </div>
       ) : null}
     </div>

@@ -4,6 +4,8 @@ import "./css/Game.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import Field from "./components/Field";
 import StrikeZone from "./components/StrikeZone";
@@ -14,6 +16,7 @@ import Pitchers from "./components/CurrentPitchers";
 import Hitter from "./components/CurrentHitter";
 import GameLogs from "./components/GameLogs";
 import ChangePlayer from "./components/ChangePlayer";
+
 
 const Game = () => {
   // 구현 완료
@@ -113,7 +116,9 @@ const Game = () => {
             </Row>
           </Col>
         </Row>
-      <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
+        <DndProvider backend={HTML5Backend}>
+          <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
+        </DndProvider>
       </div>
     </div>
     </>

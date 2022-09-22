@@ -1,4 +1,5 @@
 import { useDrag } from "react-dnd";
+import styles from '../css/ChangeReliefers.module.css';
 
 const Reliefer = (props) => {
   
@@ -21,7 +22,17 @@ const Reliefer = (props) => {
   return (
     <>
       <tr ref={drag}>
-        <td>{reliefer.batArm}</td>
+        <td>
+          <div
+            className={
+              styles[
+                reliefer.batArm === "좌타" ? "leftHitter" : "rightHitter"
+              ]
+            }
+          >
+            {reliefer.batArm}
+          </div>
+        </td>
         <td>{reliefer.name}</td>
         <td>{reliefer.avg}</td>
         <td>{reliefer.game}</td>
