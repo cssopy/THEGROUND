@@ -7,15 +7,21 @@ import arrowImg from '../../assets/up-down-arrow.png';
 const Pitcher = (props) => {
 
   const ref = useRef(null);
-  const { pitcher, index, pitTopit, id } = props;
+  const { pitcher, index, pitTopit } = props;
 
-  const [{ handlerId }, drop] = useDrop({
+  const [{ isDragging }, drag] = useDrag({
+    type: 'pitcher',
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
     accept: 'pitcher',
-    collect: (monitor) => {
-      return {
+    collect: (monitor) => ({
         handlerId: monitor.getHandlerId()
-      };
-    },
+    }),
     hover(item, monitor) {
       if (!ref.current) {
         return;
@@ -41,19 +47,12 @@ const Pitcher = (props) => {
     }
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    type: 'pitcher',
-    item: { id, index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-  const opacity = isDragging ? 0 : 1;
+
   drag(drop(ref))
 
   return (
     <>
-      <tr ref={ref} style={{ opacity }} data-handler-id={handlerId}>
+      <tr ref={ref} style={{ opacity: isDragging ? 0 : 1}}>
         <td>
           <div
             className={
@@ -71,7 +70,7 @@ const Pitcher = (props) => {
         <td>{pitcher.inning}</td>
         <td>{pitcher.win}</td>
         <td>{pitcher.lose}</td>
-        <td><img src={arrowImg} style={{width:'10px', opacity:0.3}}></img></td>
+        <td><img src={arrowImg} style={{width:'10px', opacity:0.3}} alt="arrow"></img></td>
       </tr>
     </>
   );
