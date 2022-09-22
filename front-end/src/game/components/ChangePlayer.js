@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import update from 'immutability-helper';
 
 
 
@@ -249,14 +248,12 @@ const ChangePlayer = (props) => {
   }, []);
 
   const pitTopit = useCallback((dragIndex, hoverIndex) => {
-    setPitchers((prevState) => (
-      update(prevState, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, prevState[dragIndex]]
-        ]
-      })
-    ));
+    setPitchers((prevState) => {
+      const pits = prevState.slice();
+      pits.splice(dragIndex, 1);
+      pits.splice(hoverIndex, 0, prevState[dragIndex]);
+      return pits;
+    });
   }, []);
       
 
