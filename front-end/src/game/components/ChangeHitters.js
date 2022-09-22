@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { useDrop } from 'react-dnd';
 
 import styles from '../css/ChangeCard.module.css';
+import hitStyles from '../css/ChangeHitters.module.css';
 import Hitter from './Hitter';
 
 
@@ -29,8 +30,8 @@ const ChangeHitters = memo((props) => {
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>선발 타자</div>
-        <table borderless className={styles.table} style={{height: '180px'}}>
-          <thead>
+        <table className={hitStyles.table}>
+          <thead className={styles.thead}>
             <tr>
               <th>스탠드</th>
               <th>이름</th>
@@ -44,20 +45,18 @@ const ChangeHitters = memo((props) => {
           </thead>
           <tbody
             className={styles.content}
-            style={{ backgroundColor }}
+            style={{ backgroundColor, height:'180px' }}
             ref={drop}
           >
-            {hitters.map((hitter, idx) => {
-              if (hitter !== 0) {
+            {hitters.map((hitter) => {
                 return ((
                   <Hitter
-                    key={idx}
-                    idx={idx}
+                    key={hitter.hitterSeq}
+                    idx={hitter.hitterSeq}
                     hitter={hitter}
                     hitToRel={hitToRel}
                   />
                 ))
-              }
             })}
           </tbody>
         </table>

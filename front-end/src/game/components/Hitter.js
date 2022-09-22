@@ -1,4 +1,5 @@
 import { useDrag } from "react-dnd";
+import styles from '../css/ChangeHitters.module.css';
 
 const Hitter = (props) => {
 
@@ -21,7 +22,17 @@ const Hitter = (props) => {
   return (
     <>
       <tr ref={drag}>
-        <td>{hitter.batArm}</td>
+        <td>
+          <div
+            className={
+              styles[
+                hitter.batArm === "좌타" ? "leftHitter" : "rightHitter"
+              ]
+            }
+          >
+            {hitter.batArm}
+          </div>  
+        </td>
         <td>{hitter.name}</td>
         <td>{hitter.avg}</td>
         <td>{hitter.game}</td>
