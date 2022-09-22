@@ -31,11 +31,11 @@
 
 
 .section {
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
   border-radius: 15px;
   background: rgba(5, 20, 48, 0.5);
-  height: 600px;
+  height: 650px;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
   overflow: hidden;
@@ -58,12 +58,13 @@
 
 
 .reset, .save {
-  font-size: 24px;
+  font-size: 18px;
   border: none;
-  height: 50px;
+  height: 32px;
   width: 120px;
-  border-radius: 15px;
+  border-radius: 10px;
   margin-left: 30px;
+  line-height: 20px;
 }
 
 .reset {
