@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useDrop } from 'react-dnd';
 
+import relStyles from '../css/ChangeReliefers.module.css';
 import styles from '../css/ChangeCard.module.css';
 import Reliefer from './Reliefer';
 
@@ -30,8 +31,8 @@ const ChangeReliefers = memo((props) => {
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>후보 선수</div>
-        <table borderless className={styles.table} style={{height: '500px'}}>
-          <thead>
+        <table className={`${styles.table} ${relStyles.table}`}>
+          <thead className={styles.thead}>
             <tr>
               <th>스탠드</th>
               <th>이름</th>
@@ -45,20 +46,18 @@ const ChangeReliefers = memo((props) => {
           </thead>
           <tbody
             className={styles.content}
-            style={{ backgroundColor }}
+            style={{ backgroundColor, height:'500px' }}
             ref={drop}
           >
-            {reliefers.map((reliefer, idx) => {
-              if (reliefer !== 0) {
-                return ((
-                  <Reliefer
-                    key={idx}
-                    idx={idx}
-                    reliefer={reliefer}
-                    relToHit={relToHit}
-                  />
-                ))
-              }
+            {reliefers.map((reliefer) => {
+              return ((
+                <Reliefer
+                  key={reliefer.hitterSeq}
+                  idx={reliefer.hitterSeq}
+                  reliefer={reliefer}
+                  relToHit={relToHit}
+                />
+              ))
             })}
           </tbody>
         </table>
