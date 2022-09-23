@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { DndProvider } from "react-dnd";
@@ -9,6 +9,10 @@ import style from "./css/Manage.module.css";
 import HitterList from "./components/HitterList";
 import PitcherList from "./components/PitcherList";
 import BullpenList from "./components/BullpenList";
+
+import HittersData from "../market/HittersData";
+import PitchersData from "../market/PitchersData";
+import BullpensData from "../market/BullpensData";
 
 const Manage = () => {
   const initHittersRef = useRef([]);
@@ -22,84 +26,9 @@ const Manage = () => {
   // 컴포넌트가 마운트 될때
   useEffect(() => {
     // 서버에서 데이터 얻어와서 초기화 (hitters, pitchers, bullpens, initPitchers, initBullpens)
-    initHittersRef.current = [
-      {
-        hitterSeq: 1,
-        batArm: "우타",
-        name: "리오넬 메시",
-        avg: 0.314,
-        game: 0.123,
-        atBat: 0.456,
-        obp: 0.789,
-        slg: 0.159,
-        homerun: 2,
-      },
-      {
-        hitterSeq: 2,
-        batArm: "좌타",
-        name: "레오나르도 다빈치",
-        avg: 0.314,
-        game: 0.123,
-        atBat: 0.456,
-        obp: 0.789,
-        slg: 0.159,
-        homerun: 2,
-      },
-    ];
-    initPitchersRef.current = [
-      {
-        pitcherSeq: 1,
-        pitArm: "좌완",
-        name: "선발투수1",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 2,
-        pitArm: "우완",
-        name: "선발투수2",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-    ];
-    initBullpensRef.current = [
-      {
-        pitcherSeq: 3,
-        pitArm: "좌완",
-        name: "구원투수1",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 4,
-        pitArm: "우완",
-        name: "구원투수2",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 5,
-        pitArm: "우완",
-        name: "구원투수3",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-    ];
+    initHittersRef.current = HittersData;
+    initPitchersRef.current = PitchersData;
+    initBullpensRef.current = BullpensData;
 
     setHitters(initHittersRef.current);
     setPitchers(initPitchersRef.current);
@@ -123,27 +52,27 @@ const Manage = () => {
   };
 
   //
-  const addPitchers = (bullpen) => {
+  const addPitchers = useCallback((bullpen) => {
     setPitchers((pitchers) => {
       return [...pitchers, bullpen];
     });
     setBullpens((bullpens) => {
-      return bullpens.map((item) => {
-        return item.pitcherSeq !== bullpen.pitcherSeq ? item : 0;
+      return bullpens.filter((item) => {
+        return item.pitcherSeq !== bullpen.pitcherSeq;
       });
     });
-  };
+  }, []);
 
-  const addBullpens = (pitcher) => {
+  const addBullpens = useCallback((pitcher) => {
     setBullpens((bullpens) => {
       return [...bullpens, pitcher];
     });
     setPitchers((pitchers) => {
-      return pitchers.map((item) => {
-        return item.pitcherSeq !== pitcher.pitcherSeq ? item : 0;
+      return pitchers.filter((item) => {
+        return item.pitcherSeq !== pitcher.pitcherSeq;
       });
     });
-  };
+  }, []);
 
   // useEffect(() => {
   //   console.log(bullpens);
@@ -161,6 +90,9 @@ const Manage = () => {
         <Container
           fluid
           className={`${style["background"]} ${style["manage"]}`}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
         >
           <Container className={style["clubHead"]}>구단 관리</Container>
           <Container className={style["clubBody"]}>
@@ -204,7 +136,7 @@ const Manage = () => {
               <div className={style["clubBody-row2-div"]}>
                 <Link
                   className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
-                  to="/market"
+                  to="/main"
                 >
                   MAIN
                 </Link>

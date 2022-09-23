@@ -6,6 +6,7 @@ import Main from "./main/Main";
 import KakaoLoginHandler from "./landing/components/KakaoLoginHandler";
 import SignupModal from "./landing/components/SignupModal";
 import Manage from "./manage/Manage";
+import Market from "./market/Market";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/main" element={<Main />}></Route>
       <Route path="/signupModal" element={<SignupModal />}></Route>
       <Route path="/manage" element={<Manage />}></Route>
+      <Route path="/market" element={<Market />}></Route>
     </Routes>
   );
 }

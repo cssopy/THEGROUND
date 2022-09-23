@@ -8,7 +8,7 @@ const Hitter = (props) => {
           <div
             className={
               style[
-                props.hitter.batArm == "좌타" ? "leftHitter" : "rightHitter"
+                props.hitter.batArm === "좌타" ? "leftHitter" : "rightHitter"
               ]
             }
           >
