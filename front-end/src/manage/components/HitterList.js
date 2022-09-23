@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
 
