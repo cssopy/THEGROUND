@@ -12,11 +12,11 @@ const Pitcher = (props) => {
     }),
     end: (item, monitor) => {
       const didDrop = monitor.getDropResult();
-      // 선발투수를 구원투수 영역에 넣을 경우
+      // 타자를 보유타자 영역에 넣을 경우
       if (didDrop) {
-        // 구원투수목록에 추가
-        props.addBullpens(item.pitcher);
-        props.onMouseLeave();
+        // 보유 타자목록에 추가
+        props.addPitcher(item.pitcher);
+        // props.onMouseLeave();
       }
     },
   }));
@@ -26,8 +26,13 @@ const Pitcher = (props) => {
       <tr
         ref={drag}
         data-testid={`pitcher`}
-        onMouseOver={props.onMouseOver}
-        onMouseLeave={props.onMouseLeave}
+        // onMouseOver={props.onMouseOver}
+        // onMouseLeave={props.onMouseLeave}
+        onMouseDown={(e) => {
+          if (e.button === 2) {
+            props.addPitcher(props.pitcher);
+          }
+        }}
       >
         <td>
           <div

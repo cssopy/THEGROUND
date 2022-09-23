@@ -11,7 +11,7 @@ import PitcherDetailModal from "./PitcherDetailModal";
 
 const PitcherList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: ItemTypes.Bullpen,
+    accept: ItemTypes.MyPitcher,
     drop: () => ({ name: "PitcherList" }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -64,6 +64,7 @@ const PitcherList = memo((props) => {
                 key={pitcher.pitcherSeq}
                 pitcher={pitcher}
                 addBullpens={props.addBullpens}
+                addPitcher={props.addPitcher}
                 onMouseOver={() => {
                   onMouseOver(pitcher);
                 }}
