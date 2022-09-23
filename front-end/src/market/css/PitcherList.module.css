@@ -70,7 +70,7 @@
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(4),
 .table td:nth-of-type(4) {
@@ -78,19 +78,15 @@
 }
 .table th:nth-of-type(5),
 .table td:nth-of-type(5) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(6),
 .table td:nth-of-type(6) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(7),
 .table td:nth-of-type(7) {
-  width: 40px;
-}
-.table th:nth-of-type(8),
-.table td:nth-of-type(8) {
-  width: 40px;
+  width: 50px;
 }
 
 .table tr {
@@ -108,7 +104,7 @@
 
 .tbody {
   display: block;
-  height: 63vh;
+  height: 480px;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -134,20 +130,20 @@
   border-radius: 10px;
 }
 
-.leftHitter {
+.leftPitcher {
   width: 100%;
   height: 15px;
-  background-color: rgb(194, 94, 0);
+  background-color: #bf0d3e;
   margin-right: 2px;
   text-align: center;
   border-radius: 3px;
   margin: 0;
 }
 
-.rightHitter {
+.rightPitcher {
   width: 100%;
   height: 15px;
-  background-color: green;
+  background-color: #0d5fbf;
   margin-right: 2px;
   text-align: center;
   border-radius: 3px;

@@ -4,7 +4,7 @@ import { ItemTypes } from "./ItemTypes";
 import style from "../css/BullpenList.module.css";
 
 const Bullpen = (props) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [, drag] = useDrag(() => ({
     type: ItemTypes.Bullpen,
     item: { bullpen: props.bullpen },
     collect: (monitor) => ({
@@ -33,7 +33,7 @@ const Bullpen = (props) => {
           <div
             className={
               style[
-                props.bullpen.pitArm == "좌완" ? "leftPitcher" : "rightPitcher"
+                props.bullpen.pitArm === "좌완" ? "leftPitcher" : "rightPitcher"
               ]
             }
           >

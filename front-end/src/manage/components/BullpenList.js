@@ -58,21 +58,16 @@ const BullpenList = memo((props) => {
           style={{ backgroundColor }}
           data-testid="bullpenList"
         >
-          {props.bullpens.map((bullpen, index) => {
-            if (bullpen != 0) {
-              return (
-                <Bullpen
-                  key={index}
-                  bullpen={bullpen}
-                  addPitchers={props.addPitchers}
-                  removeBullpens={props.removeBullpens}
-                  onMouseOver={() => {
-                    onMouseOver(bullpen);
-                  }}
-                  onMouseLeave={onMouseLeave}
-                ></Bullpen>
-              );
-            }
+          {props.bullpens.map((bullpen) => {
+            return (
+              <Bullpen
+                key={bullpen.pitcherSeq}
+                bullpen={bullpen}
+                addPitchers={props.addPitchers}
+                onMouseOver={() => onMouseOver(bullpen)}
+                onMouseLeave={onMouseLeave}
+              />
+            );
           })}
         </tbody>
       </Table>
