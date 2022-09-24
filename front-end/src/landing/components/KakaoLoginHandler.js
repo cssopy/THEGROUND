@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const KakaoLoginHandler = () => {
+
   const navigate = useNavigate();
-  const REST_API_KEY = "df92f033940b721122d9a6a84759896b";
-  const REDIRECT_URI = "http://localhost:3000/kakaoLogin";
+  const REST_API_KEY = "1ae04a78365d2a5f1e2e1d4ee529fe84";
+  // const MAIN_URI = "https://j7d109.p.ssafy.io";
+  const MAIN_URI = "http://localhost:3000";
+  const REDIRECT_URI = MAIN_URI + "/kakaoLogin";
+
   //인가코드
   let code = new URL(window.location.href).searchParams.get("code");
 
@@ -21,32 +25,22 @@ const KakaoLoginHandler = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.access_token) {
-          //서버로 전송
-          fetch("https://j7d109.p.ssafy.io/back/users/login", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-              accessToken: data.access_token,
-              loginType: "K",
-            }),
-          })
-          // axios
-          //   .post(
-          //     "https://j7d109.p.ssafy.io/back/users/login",
-          //     {
-          //       accessToken: data.access_token,
-          //       loginType: "K",
-          //     },
-              // {
-              //   headers: {
-              //     "Content-type": "application/json",
-              //     Accept: "application/json",
-              //   },
-              // },
-            // )
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.message === "회원가입을 먼저 해주세요.") {
+          axios
+            .post(
+              "https://j7d109.p.ssafy.io/back/users/login",
+              {
+                accessToken: data.access_token,
+                loginType: "K",
+              },
+              {
+                headers: {
+                  "Content-type": "application/json",
+                  Accept: "application/json",
+                },
+              },
+            )
+            .then((res) => {
+              if (res.data.message === "회원가입을 먼저 해주세요.") {
                 //main으로 보내고 거기서 모달 띄우는 방법??
                 navigate("/signupModal");
               } else {
@@ -56,7 +50,6 @@ const KakaoLoginHandler = () => {
         } else {
           navigate("/");
         }
-        return 0;
       });
   };
 
@@ -65,7 +58,7 @@ const KakaoLoginHandler = () => {
     getKakaoToken();
   }, []);
 
-  return <p>카카오 로그인 중</p>;
+  return <p style={{color:'red'}}>카카오 로그인 중</p>;
 };
 
 export default KakaoLoginHandler;
