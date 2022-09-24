@@ -7,6 +7,7 @@ import NaverLoginHandler from "./landing/components/NaverLoginHandler";
 import SignupModal from "./landing/components/SignupModal";
 import Manage from "./manage/Manage";
 import Market from "./market/Market";
+import Game from "./game/Game";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/signupModal" element={<SignupModal />}></Route>
       <Route path="/manage" element={<Manage />}></Route>
       <Route path="/market" element={<Market />}></Route>
+      <Route path="/game" element={<Game />}></Route>
     </Routes>
   );
 }
