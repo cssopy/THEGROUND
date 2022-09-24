@@ -19,7 +19,7 @@ public class UserPitcher {
     private Long userPitcherSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "user_seq")
     @NotNull
     private User userSeq;
 
