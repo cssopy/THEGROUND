@@ -4,8 +4,6 @@ import "./css/Game.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 import Field from "./components/Field";
 import StrikeZone from "./components/StrikeZone";
@@ -116,9 +114,7 @@ const Game = () => {
             </Row>
           </Col>
         </Row>
-        <DndProvider backend={HTML5Backend}>
-          <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
-        </DndProvider>
+        <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
       </div>
     </div>
     </>
