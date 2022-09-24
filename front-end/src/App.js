@@ -6,7 +6,7 @@ import KakaoLoginHandler from "./landing/components/KakaoLoginHandler";
 import NaverLoginHandler from "./landing/components/NaverLoginHandler";
 import SignupModal from "./landing/components/SignupModal";
 import Manage from "./manage/Manage";
-import Game from "./game/Game";
+import Market from "./market/Market";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
       <Route path="/naverLogin" element={<NaverLoginHandler />} />
       <Route path="/signupModal" element={<SignupModal />}></Route>
       <Route path="/manage" element={<Manage />}></Route>
-      <Route path="/game" element={<Game />} />
+      <Route path="/market" element={<Market />}></Route>
     </Routes>
   );
 }
