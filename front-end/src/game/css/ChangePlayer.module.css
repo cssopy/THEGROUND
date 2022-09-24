@@ -6,6 +6,8 @@
   bottom: 0;
   left: 0;
   z-index: 99;
+  justify-content: center;
+  justify-items: center;
   background-color: rgba(0, 0, 0, 0.9);
   color: white;
 }
@@ -30,9 +32,10 @@
 }
 
 
+
 .section {
   width: 1200px;
-  margin: 0 auto;
+  position: absolute;
   border-radius: 15px;
   background: rgba(5, 20, 48, 0.5);
   height: 650px;

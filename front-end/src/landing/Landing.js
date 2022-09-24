@@ -12,20 +12,22 @@ const Landing = () => {
       <video autoPlay muted loop className={styles.bg}>
         <source src={landingVideo} type="video/mp4" />
       </video>
-      <div>
-        <div className={styles.title}>
-          <img src={title} alt="" />
-        </div>
-        <div className={styles.subtitle}>
-          <img src={subtitle} alt="" />
+      <div className={styles.landing}>
+        <div>
+          <div className={styles.title}>
+            <img src={title} alt="" />
+          </div>
+          <div className={styles.subtitle}>
+            <img src={subtitle} alt="" />
+          </div>
+          <div className={styles.buttonLoc}>
+            <button className={styles.button} onClick={() => setLogin(!login)}>
+              시작하기
+            </button>
+          </div>
         </div>
       </div>
-      <div className={styles.buttonLoc}>
-        <button className={styles.button} onClick={() => setLogin(!login)}>
-          Login
-        </button>
-      </div>
-      {login && <Modal closeModal={() => setLogin(!login)}></Modal>}
+      <Modal closeModal={() => setLogin(!login)} login={login}></Modal>
     </>
   );
 };

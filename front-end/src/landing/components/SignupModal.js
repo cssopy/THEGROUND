@@ -1,7 +1,8 @@
-import styles from "../css/Modal.module.css";
+import styles from "../css/SignupModal.module.css";
 import title from "../../assets/title.png";
 import subtitle from "../../assets/subtitle.png";
 import { useState, useRef } from "react";
+import Landing from "../Landing";
 
 const SignupModal = (props) => {
   const clubNameInput = useRef();
@@ -32,6 +33,7 @@ const SignupModal = (props) => {
 
   return (
     <>
+      <Landing />
       <div className={styles.modal} onClick={closeModal}>
         <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
           <img src={title} alt="" className={styles.modalTitle} />
