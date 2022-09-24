@@ -7,6 +7,8 @@ import styles from '../css/ChangePlayer.module.css';
 import ChangePitcher from "./ChangePitchers";
 import ChangeReliefers from "./ChangeReliefers";
 import ChangeHitters from "./ChangeHitters";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 const ChangePlayer = (props) => {
@@ -258,53 +260,54 @@ const ChangePlayer = (props) => {
       
 
   return (  
-    // 모달이 열릴때 openModal 클래스가 생성된다.
-    <div className={`${styles.modal} ${open ? styles.openModal : ""}`}>
-      {open ? (
-        <div className={styles.section}>
-          <div className={styles.header}>
-            선수 교체
-            <button className={styles['close-button']} onClick={close}>
-              &times;
-            </button>
-          </div>
-          <div>
-            <Row>
-              <Col>
-                <ChangeReliefers
-                  reliefers={reliefers}
-                  relToHit={relToHit}
-                 />
-              </Col>
-              <Col>
-                <Row>
-                  <ChangePitcher
-                    pitchers={pitchers}
-                    pitTopit={pitTopit}
+    <DndProvider backend={HTML5Backend}>
+      <div className={`${styles.modal} ${open ? styles.openModal : ""}`} onClick={close}>
+        {open ? (
+          <div className={styles.section} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.header}>
+              선수 교체
+              <button className={styles['close-button']} onClick={close}>
+                &times;
+              </button>
+            </div>
+            <div>
+              <Row>
+                <Col>
+                  <ChangeReliefers
+                    reliefers={reliefers}
+                    relToHit={relToHit}
                   />
-                </Row>
-                <Row>
-                  <ChangeHitters
-                    hitters={hitters}
-                    hitToRel={hitToRel}
-                  />
-                </Row>
-                <Row>
-                  <Col className="d-flex justify-content-center m-4 ">
-                    <Button className={styles.reset} variant="danger" onClick={reset}>
-                      RESET
-                    </Button>
-                    <Button className={styles.save} variant="success" onClick={save}>
-                      SAVE
-                    </Button>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
+                </Col>
+                <Col>
+                  <Row>
+                    <ChangePitcher
+                      pitchers={pitchers}
+                      pitTopit={pitTopit}
+                    />
+                  </Row>
+                  <Row>
+                    <ChangeHitters
+                      hitters={hitters}
+                      hitToRel={hitToRel}
+                    />
+                  </Row>
+                  <Row>
+                    <Col className="d-flex justify-content-center m-4 ">
+                      <Button className={styles.reset} variant="danger" onClick={reset}>
+                        RESET
+                      </Button>
+                      <Button className={styles.save} variant="success" onClick={save}>
+                        SAVE
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </div>
           </div>
-        </div>
-      ) : null}
-    </div>
+        ) : null}
+      </div>
+    </DndProvider>
   );
 };
 
