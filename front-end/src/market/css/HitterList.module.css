@@ -66,11 +66,11 @@
 }
 .table th:nth-of-type(2),
 .table td:nth-of-type(2) {
-  width: 180px;
+  width: 135px;
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(4),
 .table td:nth-of-type(4) {
@@ -78,19 +78,19 @@
 }
 .table th:nth-of-type(5),
 .table td:nth-of-type(5) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(6),
 .table td:nth-of-type(6) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(7),
 .table td:nth-of-type(7) {
-  width: 40px;
+  width: 50px;
 }
 .table th:nth-of-type(8),
 .table td:nth-of-type(8) {
-  width: 40px;
+  width: 50px;
 }
 
 .table tr {
@@ -108,7 +108,7 @@
 
 .tbody {
   display: block;
-  height: 63vh;
+  height: 480px;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
