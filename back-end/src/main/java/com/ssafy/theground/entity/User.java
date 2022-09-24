@@ -51,6 +51,6 @@ public class User {
 	@Column(name="user_lose")
 	private int userLose;
 
-	@OneToOne(mappedBy = "userSeq")
+	@OneToOne(mappedBy = "user_seq")
 	private TeamSetting teamSetting;
 }
