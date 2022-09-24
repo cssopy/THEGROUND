@@ -18,7 +18,7 @@ public class TeamSetting {
     private Long teamSettingSeq;
 
     @OneToOne
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "user_seq")
     private User userSeq;
 
     @Column(name = "team_setting_1st_sp")
