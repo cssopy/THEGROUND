@@ -9,7 +9,7 @@ public interface UserService {
 	
 	public Optional<User> findByUserUid(String useruid);
 
-	public void deleteByUserUid(String useruid);
+	public void quitUser(String useruid);
 
 	public User save(User user);
 
