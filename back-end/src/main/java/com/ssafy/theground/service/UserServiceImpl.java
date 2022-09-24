@@ -25,8 +25,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteByUserUid(String useruid) {
-		userRepository.deleteByUserUid(useruid);
+	public void quitUser(String useruid) {
+		Optional<User> u = userRepository.findByUserUid(useruid);
+		if(u.isPresent()) {
+			User user = u.get();
+			user.setUserTeamname(null);
+			userRepository.save(user);
+		}
+		
 	}
 
 	@Override

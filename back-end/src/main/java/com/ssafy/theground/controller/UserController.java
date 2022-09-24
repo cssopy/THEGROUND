@@ -295,7 +295,7 @@ public class UserController {
 		
 		Optional<User> o = userService.findByUserUid(uid);
 		if(o.isPresent()) {
-			userService.deleteByUserUid(uid);
+			userService.quitUser(uid);
 			resultMap.put("message", "success");
 			status = HttpStatus.ACCEPTED;
 		} else {
