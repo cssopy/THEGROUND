@@ -3,11 +3,14 @@ import title from "../../assets/title.png";
 import subtitle from "../../assets/subtitle.png";
 import { useState, useRef } from "react";
 import Landing from "../Landing";
+import { useNavigate } from "react-router-dom";
 
-const SignupModal = (props) => {
+const SignupModal = () => {
   const clubNameInput = useRef();
+  const navigate = useNavigate();
   const closeModal = () => {
-    props.closeModal();
+    // 나중에는 메인 화면에 띄울 예정
+    navigate("/");
   };
 
   const [state, setState] = useState({ clubName: "" });
