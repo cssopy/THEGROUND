@@ -128,113 +128,113 @@ public class UserController {
 			}
 		}
 
-		else if(loginType.equals("N")) {
-			String reqURL = "https://openapi.naver.com/v1/nid/me";
-			try {
-	            URL url = new URL(reqURL);
-	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	            conn.setRequestMethod("POST");
-
-	            //    요청에 필요한 Header에 포함될 내용
-	            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-
-	            int responseCode = conn.getResponseCode();
-	            System.out.println("responseCode : " + responseCode);
-
-	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-	            String line = "";
-	            String result = "";
-
-	            while ((line = br.readLine()) != null) {
-	                result += line;
-	            }
-	            System.out.println("response body : " + result);
-
-	            JsonParser parser = new JsonParser();
-	            JsonElement element = parser.parse(result);
-
-	            String id = element.getAsJsonObject().get("response").getAsJsonObject().get("id").getAsString();
-	            System.out.println("id : " + id);
-
-	            Optional<User> user = userService.findByUserUid(id);
-				// 이미 db에 존재하는 회원이라면
-				if (user.isPresent()) {
-					resultMap.put("uid", user.get().getUserUid());
-					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
-					resultMap.put("message", "success");
-					status = HttpStatus.OK;
-				}
-				// db에 없는 경우 회원가입 하라고 보내야 한다.
-				else {
-					resultMap.put("loginType", "N");
-					resultMap.put("uid", id);
-					resultMap.put("message", "회원가입을 먼저 해주세요.");
-					status = HttpStatus.ACCEPTED;
-				}
-	        } catch (IOException e) {
-	        	e.printStackTrace();
-				resultMap.put("message", e.getMessage());
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-	        }
-		}
+//		else if(loginType.equals("N")) {
+//			String reqURL = "https://openapi.naver.com/v1/nid/me";
+//			try {
+//	            URL url = new URL(reqURL);
+//	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//	            conn.setRequestMethod("POST");
+//
+//	            //    요청에 필요한 Header에 포함될 내용
+//	            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+//
+//	            int responseCode = conn.getResponseCode();
+//	            System.out.println("responseCode : " + responseCode);
+//
+//	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//
+//	            String line = "";
+//	            String result = "";
+//
+//	            while ((line = br.readLine()) != null) {
+//	                result += line;
+//	            }
+//	            System.out.println("response body : " + result);
+//
+//	            JsonParser parser = new JsonParser();
+//	            JsonElement element = parser.parse(result);
+//
+//	            String id = element.getAsJsonObject().get("response").getAsJsonObject().get("id").getAsString();
+//	            System.out.println("id : " + id);
+//
+//	            Optional<User> user = userService.findById(id);
+//				// 이미 db에 존재하는 회원이라면
+//				if (user.isPresent()) {
+//					resultMap.put("uid", user.get().getUserUid());
+//					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
+//					resultMap.put("message", "success");
+//					status = HttpStatus.OK;
+//				}
+//				// db에 없는 경우 회원가입 하라고 보내야 한다.
+//				else {
+//					resultMap.put("loginType", "N");
+//					resultMap.put("uid", id);
+//					resultMap.put("message", "fail");
+//					status = HttpStatus.ACCEPTED;
+//				}
+//	        } catch (IOException e) {
+//	        	e.printStackTrace();
+//				resultMap.put("message", e.getMessage());
+//				status = HttpStatus.INTERNAL_SERVER_ERROR;
+//	        }
+//		}
 //
 //
-		else if(loginType.equals("G")) {
-			String reqURL = "https://www.googleapis.com/oauth2/v3/userinfo";
-
-			try {
-				URL url = new URL(reqURL);
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-				conn.setRequestMethod("GET");
-				conn.setDoOutput(true);
-				conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-
-				int responseCode = conn.getResponseCode();
-				System.out.println("responseCode : " + responseCode);
-
-				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				String line = "";
-				String result = "";
-
-				while ((line = br.readLine()) != null) {
-					result += line;
-				}
-				System.out.println("response body : " + result);
-
-				JsonParser parser = new JsonParser();
-				JsonElement element = parser.parse(result);
-
-				String id = element.getAsJsonObject().get("sub").getAsString();
-				// String nickname =
-				// element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
-
-				System.out.println("id : " + id);
-
-				Optional<User> user = userService.findByUserUid(id);
-				// 이미 db에 존재하는 회원이라면
-				if (user.isPresent()) {
-					resultMap.put("uid", user.get().getUserUid());
-					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
-					resultMap.put("message", "success");
-					status = HttpStatus.OK;
-				}
-				// db에 없는 경우 회원가입 하라고 보내야 한다.
-				else {
-					resultMap.put("loginType", "G");
-					resultMap.put("uid", id);
-					resultMap.put("message", "회원가입을 먼저 해주세요.");
-					status = HttpStatus.ACCEPTED;
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-				resultMap.put("message", e.getMessage());
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}
-
-		}
+//		else if(loginType.equals("G")) {
+//			String reqURL = "https://www.googleapis.com/oauth2/v3/userinfo";
+//
+//			try {
+//				URL url = new URL(reqURL);
+//				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//
+//				conn.setRequestMethod("GET");
+//				conn.setDoOutput(true);
+//				conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+//
+//				int responseCode = conn.getResponseCode();
+//				System.out.println("responseCode : " + responseCode);
+//
+//				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//				String line = "";
+//				String result = "";
+//
+//				while ((line = br.readLine()) != null) {
+//					result += line;
+//				}
+//				System.out.println("response body : " + result);
+//
+//				JsonParser parser = new JsonParser();
+//				JsonElement element = parser.parse(result);
+//
+//				String id = element.getAsJsonObject().get("sub").getAsString();
+//				// String nickname =
+//				// element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
+//
+//				System.out.println("id : " + id);
+//
+//				Optional<User> user = userService.findById(id);
+//				// 이미 db에 존재하는 회원이라면
+//				if (user.isPresent()) {
+//					resultMap.put("uid", user.get().getUserUid());
+//					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
+//					resultMap.put("message", "success");
+//					status = HttpStatus.OK;
+//				}
+//				// db에 없는 경우 회원가입 하라고 보내야 한다.
+//				else {
+//					resultMap.put("loginType", "G");
+//					resultMap.put("uid", id);
+//					resultMap.put("message", "fail");
+//					status = HttpStatus.ACCEPTED;
+//				}
+//
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				resultMap.put("message", e.getMessage());
+//				status = HttpStatus.INTERNAL_SERVER_ERROR;
+//			}
+//
+//		}
 		return new ResponseEntity<>(resultMap, status);
 	}
 
