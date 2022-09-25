@@ -58,12 +58,11 @@
   display: block;
   width: 100%;
   font-size: 12px;
-  text-align: center;
 }
 
 .table th:nth-of-type(1),
 .table td:nth-of-type(1) {
-  width: 50px;
+  width: 170px;
 }
 .table th:nth-of-type(2),
 .table td:nth-of-type(2) {
@@ -71,27 +70,11 @@
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
-  width: 50px;
+  width: 170px;
 }
 .table th:nth-of-type(4),
 .table td:nth-of-type(4) {
   width: 50px;
-}
-.table th:nth-of-type(5),
-.table td:nth-of-type(5) {
-  width: 50px;
-}
-.table th:nth-of-type(6),
-.table td:nth-of-type(6) {
-  width: 50px;
-}
-.table th:nth-of-type(7),
-.table td:nth-of-type(7) {
-  width: 50px;
-}
-.table th:nth-of-type(8),
-.table td:nth-of-type(8) {
-  width: 40px;
 }
 
 .table tr {
@@ -109,7 +92,7 @@
 
 .tbody {
   display: block;
-  height: 410px;
+  height: 200px;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -135,22 +118,8 @@
   border-radius: 10px;
 }
 
-.leftHitter {
-  width: 100%;
-  height: 15px;
-  background-color: rgb(194, 94, 0);
-  margin-right: 2px;
-  text-align: center;
-  border-radius: 3px;
-  margin: 0;
-}
-
-.rightHitter {
-  width: 100%;
-  height: 15px;
-  background-color: green;
-  margin-right: 2px;
-  text-align: center;
-  border-radius: 3px;
-  margin: 0;
+.scoreDash {
+  margin-left: 15px;
+  margin-right: 15px;
+  color: #aaaaaa;
 }
