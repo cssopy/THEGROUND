@@ -3,33 +3,25 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-const NaverLoginHandler = () => {
+const GoogleLoginHandler = () => {
 
   const navigate = useNavigate();
-  const CLIENT_ID = "PVGrBZM8vqHq_92Vh6Wx";
-  const CLIENT_SECRET = "tSbysXbRL1";
+  const CLIENT_ID = "824400159984-9lg3ubjictcle5lbsbj39s076lko1fhh.apps.googleusercontent.com";
+  const CLIENT_SECRET = "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";
   const MAIN_URI = "https://j7d109.p.ssafy.io";
   // const MAIN_URI = "http://localhost:3000";
-  const REDIRECT_URI = MAIN_URI + "/naverLogin";
-  const CORS_URI = "https://cors-anywhere.herokuapp.com/";
+  const REDIRECT_URI = MAIN_URI + "/googleLogin";
 
   // 인가코드
   const location = useLocation();
-
   const CODE = location.search.split('=')[1];
-  const STATE = location.search.split('=')[2];
   
 
   // 네이버로 토큰 발급 요청
-  const getNaverToken = () => {
+  const getGoogleToken = () => {
     axios
       .post(
-        `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${CODE}&state=${STATE}`,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-          },
-        },
+        `https://www.googleapis.com/oauth2/v4/token?code=${CODE}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REDIRECT_URI}`,
         {
           responseType: "json"
         },
@@ -42,7 +34,7 @@ const NaverLoginHandler = () => {
               "https://j7d109.p.ssafy.io/back/users/login",
               {
                 accessToken: data.access_token,
-                loginType: "N",
+                loginType: "G",
               },
               {
                 headers: {
@@ -73,14 +65,14 @@ const NaverLoginHandler = () => {
 
   useEffect(() => {
     if (!CODE) return;
-    getNaverToken();
+    getGoogleToken();
     if (error === 'Canceled By User') {
       navigate("/");
     };  
   }, []);
 
-  return <p style={{color:'green'}}>네이버 로그인 중</p>;
+  return <p style={{color:'black'}}>구글 로그인 중</p>;
 };
 
 
-export default NaverLoginHandler;
+export default GoogleLoginHandler;
