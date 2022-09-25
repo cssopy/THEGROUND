@@ -2,14 +2,17 @@ import styles from "../css/Modal.module.css";
 
 
 const Google = () => {
-  const REST_API_KEY = "df92f033940b721122d9a6a84759896b";
-  const REDIRECT_URI = "http://localhost:3000/kakaoLogin";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const CLIENT_ID = "824400159984-9lg3ubjictcle5lbsbj39s076lko1fhh.apps.googleusercontent.com";
+  const MAIN_URI = "https://j7d109.p.ssafy.io";
+  // const MAIN_URI = "http://localhost:3000";
+  const REDIRECT_URI = MAIN_URI + "/googleLogin";
+  const SCOPE = 'https://www.googleapis.com/auth/userinfo.email'
+  const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseacount?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
 
 
   return (
     <>
-      <a href={KAKAO_AUTH_URL}>
+      <a href={GOOGLE_AUTH_URL}>
         <div className={styles.googleBtn}></div>
       </a>
     </>
