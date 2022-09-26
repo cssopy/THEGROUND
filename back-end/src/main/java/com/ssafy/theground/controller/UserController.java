@@ -312,7 +312,7 @@ public class UserController {
 		return new ResponseEntity<>(resultMap, status);
 	}
 	
-	@GetMapping("/logo")
+	@GetMapping("/logos")
 	public List<Logo> findAll(){
 		return logoService.findAll();
 	}
