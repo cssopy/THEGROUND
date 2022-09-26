@@ -39,3 +39,8 @@
 .skip {
   background: linear-gradient(#BF0D3E, rgba(191, 13, 62, 0.4));
 }
+
+.zero {
+  margin: 0px;
+  padding: 0px;
+}
