@@ -1,10 +1,16 @@
 package com.ssafy.theground.controller;
 
+import com.ssafy.theground.dto.req.TradeSaveReqDto;
+import com.ssafy.theground.dto.res.PossOrNotHitterResDto;
+import com.ssafy.theground.dto.res.PossOrNotPitcherResDto;
 import com.ssafy.theground.service.TradeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/trade")
@@ -15,41 +21,41 @@ public class TradeController {
 
     @GetMapping("/poss-pitchers")
     public ResponseEntity<?> possPitcherList() throws Exception {
-        if(tradeService.possPitcherList() != null) {
-            return new ResponseEntity<>(tradeService.possPitcherList(), HttpStatus.OK);
+        List<PossOrNotPitcherResDto> possOrNotPitcherResDtos = tradeService.possPitcherList();
+        if(possOrNotPitcherResDtos != null) {
+            return new ResponseEntity<>(possOrNotPitcherResDtos, HttpStatus.OK);
         } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/poss-hitters")
     public ResponseEntity<?> possHitterList() throws Exception {
-        if(tradeService.possHitterList() != null) {
-            return new ResponseEntity<>(tradeService.possHitterList(), HttpStatus.OK);
+        List<PossOrNotHitterResDto> possOrNotHitterResDtos = tradeService.possHitterList();
+        if(possOrNotHitterResDtos != null) {
+            return new ResponseEntity<>(possOrNotHitterResDtos, HttpStatus.OK);
         } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/not-poss-pitchers")
     public ResponseEntity<?> notPossPitcherList() throws Exception {
-        if(tradeService.notPossPitcherList() != null) {
-            return new ResponseEntity<>(tradeService.notPossPitcherList(), HttpStatus.OK);
+        List<PossOrNotPitcherResDto> possOrNotPitcherResDtos = tradeService.notPossPitcherList();
+        if(possOrNotPitcherResDtos != null) {
+            return new ResponseEntity<>(possOrNotPitcherResDtos, HttpStatus.OK);
         } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/not-poss-hitters")
     public ResponseEntity<?> notPossHitterList() throws Exception {
-        if(tradeService.notPossHitterList() != null) {
-            return new ResponseEntity<>(tradeService.notPossHitterList(), HttpStatus.OK);
+        List<PossOrNotHitterResDto> possOrNotHitterResDtos = tradeService.notPossHitterList();
+        if(possOrNotHitterResDtos != null) {
+            return new ResponseEntity<>(possOrNotHitterResDtos, HttpStatus.OK);
         } else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/in")
-    public ResponseEntity<?> tradeIn(@RequestBody Long playerSeq){
-        tradeService.tradeIn(playerSeq);
-        return new ResponseEntity<>(true, HttpStatus.OK);
-    }
-
-    @PostMapping("/out")
-    public ResponseEntity<?> tradeOut(@RequestBody Long playerSeq){
-        tradeService.tradeOut(playerSeq);
-        return new ResponseEntity<>(true, HttpStatus.OK);
+    @PutMapping("/save")
+    public ResponseEntity<?> tradeSave(@RequestBody TradeSaveReqDto tradeSaveReqDto) throws Exception {
+        boolean b = tradeService.tradeSave(tradeSaveReqDto);
+        if (b) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 }
