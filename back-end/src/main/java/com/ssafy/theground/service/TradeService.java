@@ -1,11 +1,13 @@
 package com.ssafy.theground.service;
 
+import com.ssafy.theground.dto.req.TradeSaveReqDto;
 import com.ssafy.theground.dto.res.PossOrNotHitterResDto;
 import com.ssafy.theground.dto.res.PossOrNotPitcherResDto;
 import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class TradeService {
     private final HitterRepository hitterRepository;
 
 
+    @Transactional
     public List<PossOrNotPitcherResDto> possPitcherList() throws Exception {
         List<PossOrNotPitcherResDto> list = new ArrayList<>();
 
@@ -51,6 +54,7 @@ public class TradeService {
         return list;
     }
 
+    @Transactional
     public List<PossOrNotHitterResDto> possHitterList() throws Exception {
         List<PossOrNotHitterResDto> list = new ArrayList<>();
 
@@ -75,6 +79,7 @@ public class TradeService {
         return list;
     }
 
+    @Transactional
     public List<PossOrNotPitcherResDto> notPossPitcherList() throws Exception {
         List<PossOrNotPitcherResDto> list = new ArrayList<>();
 
@@ -97,6 +102,7 @@ public class TradeService {
         return list;
     }
 
+    @Transactional
     public List<PossOrNotHitterResDto> notPossHitterList() throws Exception {
         List<PossOrNotHitterResDto> list = new ArrayList<>();
 
@@ -119,11 +125,38 @@ public class TradeService {
         return list;
     }
 
-    public void tradeIn(Long playerSeq){
-
-    }
-
-    public void tradeOut(Long playerSeq){
-
+    @Transactional
+    public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
+        if(byUserUid.isPresent()) {
+            // 보유 투수 모두 삭제
+            managePitcherRepository.deleteAll();
+            // 투수 이적(in)
+            for(Long seq : tradeSaveReqDto.getPitSeq()){
+                if(managePitcherRepository.existsByPitcherSeq(seq)) continue;
+                else {
+                    UserPitcher build = UserPitcher.builder()
+                            .userSeq(byUserUid.get())
+                            .pitcherSeq(seq)
+                            .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
+                    managePitcherRepository.save(build);
+                }
+            }
+            // 보유 타자 모두 삭제
+            manageHitterRepository.deleteAll();
+            // 타자 이적(in)
+            for(Long seq : tradeSaveReqDto.getHitSeq()){
+                if(manageHitterRepository.existsByHitterSeq(seq)) continue;
+                else {
+                    UserHitter build = UserHitter.builder()
+                            .userSeq(byUserUid.get())
+                            .hitterSeq(seq)
+                            .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
+                    manageHitterRepository.save(build);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
