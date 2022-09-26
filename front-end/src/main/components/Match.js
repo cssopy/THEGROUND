@@ -1,16 +1,34 @@
 import style from "../css/MatchList.module.css";
 
+import teamLogo from "../../assets/ground2.png";
+
 const Match = (props) => {
   return (
     <>
       <tr>
-        <td>{props.match.home}</td>
+        <td>
+          {props.match.home}
+          &nbsp;&nbsp;&nbsp;
+          <img
+            className={style["matchTeamLogo"]}
+            src={teamLogo}
+            alt="teamlogo"
+          ></img>
+        </td>
         <td>
           <span>{props.match.home_score}</span>
           <span className={style["scoreDash"]}>-</span>
           <span>{props.match.away_score}</span>
         </td>
-        <td>{props.match.away}</td>
+        <td>
+          <img
+            className={style["matchTeamLogo"]}
+            src={teamLogo}
+            alt="teamlogo"
+          ></img>
+          &nbsp;&nbsp;&nbsp;
+          {props.match.away}
+        </td>
         <td
           style={{
             color:

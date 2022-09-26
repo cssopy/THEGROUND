@@ -1,7 +1,7 @@
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 
-import style from "../css/PitcherList.module.css";
+import style from "../css/MyPitcherList.module.css";
 
 const Pitcher = (props) => {
   const [, drag] = useDrag(() => ({
