@@ -1,5 +1,6 @@
 package com.ssafy.theground.controller;
 
+import com.ssafy.theground.dto.res.HitterResDto;
 import com.ssafy.theground.dto.res.PitcherResDto;
 import com.ssafy.theground.service.ManageService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/manage")
@@ -18,16 +21,18 @@ public class ManageController {
 
     @GetMapping("/pitchers")
     public ResponseEntity<?> pitcherList() throws Exception {
-        if(manageService.pitcherList() != null) {
-            return new ResponseEntity<>(manageService.pitcherList(), HttpStatus.OK);
+        List<PitcherResDto> pitcherResDtos = manageService.pitcherList();
+        if(pitcherResDtos != null) {
+            return new ResponseEntity<>(pitcherResDtos, HttpStatus.OK);
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/hitters")
     public ResponseEntity<?> hitterList() throws Exception {
-        if(manageService.hitterList() != null) {
-            return new ResponseEntity<>(manageService.hitterList(), HttpStatus.OK);
+        List<HitterResDto> hitterResDtos = manageService.hitterList();
+        if(hitterResDtos != null) {
+            return new ResponseEntity<>(hitterResDtos, HttpStatus.OK);
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
