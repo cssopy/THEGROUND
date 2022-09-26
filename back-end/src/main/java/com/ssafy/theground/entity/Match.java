@@ -29,5 +29,5 @@ public class Match {
     private Long aiTeamSeq;
 
     @Column(name = "match_home_flag")
-    private boolean matchHomeFlag;
+    private Boolean matchHomeFlag;
 }
