@@ -184,15 +184,15 @@
 
 .WLD {
   margin-top: 10px;
-  margin-left: 50px;
+  margin-left: 10px;
   font-size: 20px;
-  width: 100px;
+  width: 160px;
 }
 
 .recentMatchListHead {
   margin-top: 40px;
   margin-left: auto;
-  margin-right: 70px;
+  margin-right: 40px;
   height: 30px;
   width: 600px;
   line-height: 30px;
@@ -204,7 +204,7 @@
 
 .recentMatchListBody {
   margin-left: auto;
-  margin-right: 70px;
+  margin-right: 40px;
   height: 250px;
   width: 600px;
   background-color: rgba(4, 30, 66, 0.9);
@@ -242,7 +242,7 @@
 
 .startingRotationHead {
   margin-left: auto;
-  margin-right: 70px;
+  margin-right: 40px;
   height: 30px;
   width: 600px;
   line-height: 30px;
@@ -254,7 +254,7 @@
 
 .startingRotationBody {
   margin-left: auto;
-  margin-right: 70px;
+  margin-right: 40px;
   height: 250px;
   width: 600px;
   background-color: rgba(4, 30, 66, 0.9);

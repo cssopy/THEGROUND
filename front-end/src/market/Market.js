@@ -103,11 +103,12 @@ const Market = () => {
               <div>이적 시장</div>
             </Row>
             <Row className={style["marketBody"]}>
-              <Row>
+              <Row className={style["mpZero"]}>
                 <Col>
                   <Row className={style["playerListHead"]}>
-                    <Col>
+                    <Col className={style["playerListHead-div"]}>
                       <div
+                        className={style["playerListHead-div"]}
                         style={{ backgroundColor: listTab[0] }}
                         onClick={() => {
                           setListTab(["#041e42", "#ffffff00"]);
@@ -117,8 +118,9 @@ const Market = () => {
                         타자 선수 목록
                       </div>
                     </Col>
-                    <Col>
+                    <Col className={style["playerListHead-div"]}>
                       <div
+                        className={style["playerListHead-div"]}
                         style={{ backgroundColor: listTab[1] }}
                         onClick={() => {
                           setListTab(["#ffffff00", "#041e42"]);
@@ -165,7 +167,7 @@ const Market = () => {
                       </div>
                     </Row>
                   </Row>
-                  <Row>
+                  <Row className={style["mpZero"]}>
                     <Row className={style["playerHead"]}>
                       <div>
                         보유 선수 / 타자:{myHitters.length} 투수:
@@ -173,7 +175,7 @@ const Market = () => {
                         {myHitters.length + myPitchers.length}
                       </div>
                     </Row>
-                    <Row className={style["playerBody"]}>
+                    <Row className={`${style["playerBody"]}`}>
                       {toggle && (
                         <MyHitterList
                           hitters={myHitters}

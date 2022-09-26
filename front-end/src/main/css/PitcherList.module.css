@@ -97,10 +97,6 @@
   line-height: 17px;
 }
 
-.tbody tr:hover {
-  background-color: #264b7d;
-}
-
 .thead {
   display: block;
   width: 100%;
