@@ -10,5 +10,7 @@ import java.util.List;
 public interface ManageHitterRepository extends JpaRepository<UserHitter, Long> {
     List<UserHitter> findAllByUserSeq(Long userSeq);
 
+    boolean existsByHitterSeq(Long hitterSeq);
+
     List<Long> findHitterSeqByUserSeq(Long userSeq);
 }
