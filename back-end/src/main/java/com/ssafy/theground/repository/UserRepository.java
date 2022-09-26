@@ -10,5 +10,6 @@ import com.ssafy.theground.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	public Optional<User> findByUserUid(String useruid);
+	public Optional<User> findByUserSeq(Long seq);
 	public void deleteByUserUid(String useruid);
 }
