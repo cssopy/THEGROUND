@@ -16,9 +16,11 @@ public class GameController {
     private final GameService gameService;
 
     @GetMapping("/brief")
-    public ResponseEntity<?> teamBriefInfo(){
+    public ResponseEntity<?> teamBriefInfo() throws Exception {
 
-//        return new ResponseEntity<>(gameService.teamBriefInfo(), HttpStatus.OK)
-        return null;
+        if(gameService.teamBriefInfo() != null) {
+            return new ResponseEntity<>(gameService.teamBriefInfo(), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }
