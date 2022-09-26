@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./css/Game.module.css";
-import "./css/Game.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -45,32 +44,32 @@ const Game = () => {
     <>
     <div className={`${styles.bg} d-flex justify-content-center align-items-center`}>
       <div className={`${styles.box}`}>
-        <Row>
-          <Col>
-            <Row>
+        <Row className={styles.zero}>
+          <Col className={styles.zero}>
+            <Row className={styles.zero}>
               <Field runners={['o', 'o', 'x']} />
             </Row>
-            <Row>
-              <Col>
+            <Row className={styles.zero}>
+              <Col className={styles.zero}>
                 <StrikeZone balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:50, y:50}]}/>
               </Col>
-              <Col>
-                <Row>
+              <Col className={styles.zero}>
+                <Row className={styles.zero}>
                   <BallVelocity velocity={130} />
                 </Row>
-                <Row>
+                <Row className={styles.zero}>
                   <BallCount ballCounts={[3, 1, 2]} />
                 </Row>
               </Col>
             </Row>
           </Col>
-          <Col>
-            <Row className="mb-2">
+          <Col className={styles.zero}>
+            <Row className={`${styles.zero} mb-2`}>
               <ScoreBoard scores={[0,0,1,2,1,0,0,4,0,0,1]} R={[1, 3]} H={[0, 1]} B={[2, 1]} />
             </Row>
-            <Row>
-              <Col>
-                <Row>
+            <Row className={styles.zero}>
+              <Col className={styles.zero}>
+                <Row className={styles.zero}>
                   <Pitchers
                     pitchers={[
                       { name: "류현진", balls: 25, threes: 3 },
@@ -79,7 +78,7 @@ const Game = () => {
                     now={1}
                   />
                 </Row>
-                <Row>
+                <Row className={styles.zero}>
                   <Hitter
                     hitter={{
                       name: "류현진",
@@ -88,8 +87,8 @@ const Game = () => {
                     }}
                   />
                 </Row>
-                <Row>
-                  <Col>
+                <Row className={styles.zero}>
+                  <Col className={styles.zero}>
                     <Button
                       className={`${styles.btn} ${styles.change}`}
                       variant="success"
@@ -98,7 +97,7 @@ const Game = () => {
                       선수 교체
                     </Button>
                   </Col>
-                  <Col>
+                  <Col className={styles.zero}>
                     <Button
                       className={`${styles.btn} ${styles.skip}`}
                       variant="danger"
@@ -108,7 +107,7 @@ const Game = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col>
+              <Col className={styles.zero}>
                 <GameLogs logs={[111,222,333,444,555,666,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]} />
               </Col>
             </Row>
