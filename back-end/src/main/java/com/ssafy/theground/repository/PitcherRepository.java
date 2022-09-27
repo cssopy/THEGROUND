@@ -12,5 +12,5 @@ public interface PitcherRepository extends JpaRepository<Pitcher, Long> {
 
     Pitcher findByPitcherSeq(Long pitcherSeq);
 
-    List<Pitcher> findAllByPitcherSeqNotIn(List<UserPitcher> pitcherSeq);
+    List<Pitcher> findAllByPitcherSeqNotIn(List<Long> pitcherSeq);
 }
