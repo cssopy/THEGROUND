@@ -36,7 +36,7 @@ public class TradeService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if (byUserUid.isPresent()){
-            List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get());
             for(UserPitcher onePitcher : allPitchers){
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
                 if (byId.isPresent()){
@@ -61,7 +61,7 @@ public class TradeService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if (byUserUid.isPresent()){
-            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get());
             for(UserHitter oneHitter : allHitters){
                 Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
                 if (byId.isPresent()){
