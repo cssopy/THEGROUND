@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "TeamSetting")
+@ToString(exclude = "teamSetting")
 public class User {
 	
 	@Id
