@@ -4,7 +4,7 @@ import subtitle from "../../assets/subtitle.png";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../slice/UserSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ const SignupModal = (props) => {
   let { loginType } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
   const [progress, setProgress] = useState(0);
   const [logos, setLogos] = useState([]);
@@ -19,7 +20,9 @@ const SignupModal = (props) => {
   const [myLogo, setMyLogo] = useState(false);
   const [valid, setValid] = useState(0);
   const clubNameInput = useRef("");
+  const uid = useSelector(state => state.user.uid);
   const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+  const check_spc = /[~!@#$%^&*()_+|<>?:{}]/;
 
   const handleClubName = () => {
     const target = clubNameInput.current.value;
@@ -35,7 +38,7 @@ const SignupModal = (props) => {
 
     if (count > 20) {setValid(1);}
     else {setValid(0);}
-    console.log(valid);
+    if (check_spc.test(target)) {setValid(prev => prev+2);}
   }
 
   const userSubmit = () => {
@@ -44,10 +47,10 @@ const SignupModal = (props) => {
         .post(
           "https://j7d109.p.ssafy.io/back/users/signup",
           {
-            uid: localStorage.getItem("uid"),
+            uid,
             userTeamname: clubNameInput.current.value,
             logoSeq: myLogo.logoSeq,
-            loginType: loginType,
+            loginType,
         })
         .then((res) => {
           dispatch(userActions.setJwtToken(res.data.jwt));
@@ -105,7 +108,7 @@ const SignupModal = (props) => {
             <div className={`${styles.content} ${styles[`move${progress}`]}`}>
               <div className={`${styles.hide} ${progress === 0 ? styles.show : ""}`}>
                 <div className={styles.contentTitle}>구단 로고</div>
-                <div>나만의 팀을 나타내는 상징이 됩니다</div>
+                <div>나만의 팀을 나타내는 상징이 됩니다.</div>
                 <div>
                   <img src={myLogo ? myLogo.logoUrl : ""} className={styles.img} alt="myLogo"/>
                 </div>
@@ -113,7 +116,7 @@ const SignupModal = (props) => {
               </div>
               <div className={`${styles.hide} ${progress === 1 ? styles.show : ""}`}>
                 <div className={styles.contentTitle}>구단명</div>
-                <div style={{'marginBottom': '50px'}}>구단의 아이덴티티를 나타냅니다</div>
+                <div style={{'marginBottom': '50px'}}>구단의 아이덴티티를 나타냅니다.</div>
                 <div className="d-flex justify-content-center">
                   <Form.Control
                     aria-label="Default"
@@ -127,12 +130,15 @@ const SignupModal = (props) => {
                   />
                 </div>
                 <span style={{ "fontSize": '12px', color:'gray', width:'300px'}}>
-                  {
-                    (valid === 0) ?
-                        <p>숫자와 영문자 기준 최대 20자, 한글 기준 최대 10자</p>
-                      :
-                        <p style={{color:'red'}}>글자 제한을 초과하였습니다</p>
-                  }
+                  { (valid === 0) && (
+                    <>
+                      <div>숫자와 영문자 기준 최대 20자, 한글 기준 최대 10자</div>
+                      <div>특수 문자는 입력할 수 없습니다</div>
+                    </>
+                  ) }
+                  { (valid%2 === 1) && <div style={{color:'red'}}>글자 제한을 초과하였습니다</div> }
+                  { (valid >= 2) && <div style={{color:'red'}}>특수 문자가 포함되어 있습니다</div> }
+                  
                 </span>
               </div>
               <div className={`${styles.hide} ${progress === 2 ? styles.show : ""}`}>
@@ -141,13 +147,20 @@ const SignupModal = (props) => {
                   <div className={styles.userName}>{clubNameInput.current.value}</div>
                 </div>
                 <div>
-                  <div>선택을 완료하시겠습니까?</div>
-                  <p style={{ fontSize:'12px', color:'grey' }}>구단 로고와 구단명은 마이페이지에서 수정 가능합니다</p>
+                  { valid === 0 ?
+                    <>
+                      <div>선택을 완료하시겠습니까?</div>
+                      <p style={{ fontSize:'12px', color:'grey' }}>구단 로고와 구단명은 마이페이지에서 수정 가능합니다.</p>
+                    </>
+                    :
+                    <p style={{ fontSize:'16px', color:'red' }}>입력하신 내용을 다시 확인해주세요.</p>
+                  }
+                  
                   {
                     (valid === 0) ?
                       <Button variant="primary" onClick={userSubmit}>가입</Button>
                       :
-                      <Button variant="danger" onClick={prev}>구단명 확인 필요</Button>
+                      <Button variant="dark" onClick={prev}>수정 필요</Button>
                   }
                 </div>
               </div>
