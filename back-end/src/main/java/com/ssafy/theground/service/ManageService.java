@@ -72,7 +72,7 @@ public class ManageService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
         if(byUserUid.isPresent()) {
-            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
+            List<UserHitter> allHitters = manageHitterRepository.findAllByUserSeq(byUserUid.get());
             for (UserHitter oneHitter : allHitters) {
                 Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
                 if(byId.isPresent()) {
