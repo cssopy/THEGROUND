@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Builder
 @Getter
-@ToString(exclude = "User")
+@ToString(exclude = "userSeq")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
