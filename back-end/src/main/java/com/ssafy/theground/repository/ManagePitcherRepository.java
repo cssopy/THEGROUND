@@ -16,5 +16,5 @@ public interface ManagePitcherRepository extends JpaRepository<UserPitcher, Long
 
     List<Long> findPitcherSeqByUserSeq(Long userSeq);
 
-    List<UserPitcher> findAllByUser(User user);
+    List<UserPitcher> findAllByUserSeq(User user);
 }
