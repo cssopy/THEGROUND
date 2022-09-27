@@ -45,6 +45,10 @@ public class TradeService {
                     possOrNotPitcherResDto.setPitcherName(byId.get().getPitcherName());
                     possOrNotPitcherResDto.setPitArm(byId.get().getPitArm());
                     possOrNotPitcherResDto.setEra(byId.get().getEra());
+                    possOrNotPitcherResDto.setInning(byId.get().getInning());
+                    possOrNotPitcherResDto.setWin(byId.get().getWin());
+                    possOrNotPitcherResDto.setLose(byId.get().getLose());
+                    possOrNotPitcherResDto.setSalary(byId.get().getSalary());
 
                     list.add(possOrNotPitcherResDto);
                 } else return null;
@@ -70,6 +74,10 @@ public class TradeService {
                     possOrNotHitterResDto.setHitterName(byId.get().getHitterName());
                     possOrNotHitterResDto.setBatArm(byId.get().getBatArm());
                     possOrNotHitterResDto.setAvg(byId.get().getAvg());
+                    possOrNotHitterResDto.setObp(byId.get().getObp());
+                    possOrNotHitterResDto.setSlg(byId.get().getSlg());
+                    possOrNotHitterResDto.setHomerun(byId.get().getHomerun());
+                    possOrNotHitterResDto.setSalary(byId.get().getSalary());
 
                     list.add(possOrNotHitterResDto);
                 } else return null;
@@ -97,6 +105,10 @@ public class TradeService {
                 possOrNotPitcherResDto.setPitcherName(one.getPitcherName());
                 possOrNotPitcherResDto.setPitArm(one.getPitArm());
                 possOrNotPitcherResDto.setEra(one.getEra());
+                possOrNotPitcherResDto.setInning(one.getInning());
+                possOrNotPitcherResDto.setWin(one.getWin());
+                possOrNotPitcherResDto.setLose(one.getLose());
+                possOrNotPitcherResDto.setSalary(one.getSalary());
 
                 list.add(possOrNotPitcherResDto);
             }
@@ -122,6 +134,10 @@ public class TradeService {
                 possOrNotHitterResDto.setHitterName(one.getHitterName());
                 possOrNotHitterResDto.setBatArm(one.getBatArm());
                 possOrNotHitterResDto.setAvg(one.getAvg());
+                possOrNotHitterResDto.setObp(one.getObp());
+                possOrNotHitterResDto.setSlg(one.getSlg());
+                possOrNotHitterResDto.setHomerun(one.getHomerun());
+                possOrNotHitterResDto.setSalary(one.getSalary());
 
                 list.add(possOrNotHitterResDto);
             }
