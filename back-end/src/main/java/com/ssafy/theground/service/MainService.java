@@ -39,7 +39,7 @@ public class MainService {
             for(Schedule schedule : byScheduleSeq){
                 MatchResDto matchResDto = new MatchResDto();
                 AITeam byAiTeamSeq = aiTeamRepository.findByAiTeamSeq(schedule.getTeamSeq().getAiTeamSeq());
-
+                matchResDto.setTeamSeq(byAiTeamSeq.getAiTeamSeq());
                 matchResDto.setTeamName(byAiTeamSeq.getAiTeamName());
                 matchResDto.setLogoUrl(logoRepository.findByLogoSeq(byAiTeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl());
 
