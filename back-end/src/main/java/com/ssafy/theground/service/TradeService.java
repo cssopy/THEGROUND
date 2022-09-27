@@ -87,7 +87,9 @@ public class TradeService {
 
         if (byUserUid.isPresent()){
             List<UserPitcher> byUserSeq = managePitcherRepository.findByUserSeq(byUserUid.get());
-            List<Pitcher> all = pitcherRepository.findAllByPitcherSeqNotIn(byUserSeq);
+            List<Long> pitcherSeq = new ArrayList<>();
+            byUserSeq.forEach(userPitcher -> pitcherSeq.add(userPitcher.getUserPitcherSeq()));
+            List<Pitcher> all = pitcherRepository.findAllByPitcherSeqNotIn(pitcherSeq);
             for(Pitcher one : all){
                 PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
                 possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
