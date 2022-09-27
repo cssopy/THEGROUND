@@ -77,6 +77,7 @@ public class ManageService {
                 Optional<Hitter> byId = hitterRepository.findById(oneHitter.getHitterSeq());
                 if(byId.isPresent()) {
                     HitterResDto hitterResDto = new HitterResDto();
+                    hitterResDto.setHitterSeq(byId.get().getHitterSeq());
                     hitterResDto.setHitterName(byId.get().getHitterName());
                     hitterResDto.setBatArm(byId.get().getBatArm());
                     hitterResDto.setAvg(byId.get().getAvg());
