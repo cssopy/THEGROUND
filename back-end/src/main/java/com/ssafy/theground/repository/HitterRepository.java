@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface HitterRepository extends JpaRepository<Hitter, Long> {
+
+    Hitter findByHitterSeq(Long hitterSeq);
+
     List<Hitter> findAllByHitterSeqNotIn(List<Long> hitterSeq);
 }
