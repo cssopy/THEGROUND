@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService{
 		if(u.isPresent()) {
 			User user = u.get();
 			user.setUserTeamname(null);
+			user.setUserUid(null);
 			userRepository.save(user);
 		}
 		
