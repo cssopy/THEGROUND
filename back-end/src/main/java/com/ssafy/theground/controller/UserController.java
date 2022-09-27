@@ -327,6 +327,7 @@ public class UserController {
 	@GetMapping("/mypage")
 	public UserMypageDto mymage() {
 		try {
+			System.out.println(jwtService.getUserUid(jwtService.getJwt()));
 			User u = userService.findByUserUid(jwtService.getUserUid(jwtService.getJwt())).get();
 			UserMypageDto dto = new UserMypageDto(u);
 			return dto;
