@@ -1,23 +1,27 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { userActions } from "../../slice/UserSlice";
+import { useDispatch } from "react-redux/es/exports";
 
-const KakaoLoginHandler = () => {
+const KakaoLoginHandler = (props) => {
 
+  const { loginType } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const REST_API_KEY = "1ae04a78365d2a5f1e2e1d4ee529fe84";
-  const MAIN_URI = "https://j7d109.p.ssafy.io";
-  // const MAIN_URI = "http://localhost:3000";
-  const REDIRECT_URI = MAIN_URI + "/kakaoLogin";
+  const REDIRECT_URI = "https://j7d109.p.ssafy.io";
+  // const REDIRECT_URI = "http://localhost:3000";
 
   //인가코드
-  let code = new URL(window.location.href).searchParams.get("code");
+  let CODE = new URL(window.location.href).searchParams.get("code");
 
   //카카오로 토큰 발급 요청
   const getKakaoToken = () => {
     axios
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`,
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${CODE}`,
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -45,11 +49,15 @@ const KakaoLoginHandler = () => {
               },
             )
             .then((res) => {
-              localStorage.setItem("uid", res.data.uid)
               if (res.data.message === "회원가입을 먼저 해주세요.") {
                 // 전역 스테이트로 메인에서 화면이 모달이 뜨게 하기
-                navigate("/signupModal");
+                dispatch(userActions.setUid(res.data.uid));
+                navigate("/");
               } else {
+                dispatch(userActions.setJwtToken(res.data.jwt));
+                dispatch(userActions.setUserTeamname(res.data.userTeamname));
+                localStorage.removeItem("loginType");
+                localStorage.setItem("jwt", res.data.jwt);
                 navigate("/main");
               }
             });
@@ -60,11 +68,11 @@ const KakaoLoginHandler = () => {
   };
 
   useEffect(() => {
-    if (!code) return;
-    getKakaoToken();
+    if (!CODE) return;
+    if (loginType === 'K') {getKakaoToken();}
   }, []);
 
-  return <p style={{color:'yellow'}}>카카오 로그인 중</p>;
+  return <></>;
 };
 
 export default KakaoLoginHandler;
