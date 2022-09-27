@@ -13,4 +13,12 @@ public class PossOrNotHitterResDto {
     private String batArm;
 
     private double avg;
+
+    private double obp;
+
+    private double slg;
+
+    private int homerun;
+
+    private int salary;
 }
