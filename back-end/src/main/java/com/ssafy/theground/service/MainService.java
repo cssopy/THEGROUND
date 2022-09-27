@@ -34,7 +34,7 @@ public class MainService {
         List<MatchResDto> list = new ArrayList<>();
 
         if(byUserUid.isPresent()){
-            Season byUserSeq = seasonRepository.findByUserSeq(byUserUid.get().getUserSeq());
+            Season byUserSeq = seasonRepository.findByUserSeq(byUserUid.get());
             List<Schedule> byScheduleSeq = scheduleRepository.findTop3ByScheduleSeq(byUserSeq.getSeasonSeq());
             for(Schedule schedule : byScheduleSeq){
                 MatchResDto matchResDto = new MatchResDto();
