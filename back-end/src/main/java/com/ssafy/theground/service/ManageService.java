@@ -36,7 +36,6 @@ public class ManageService {
         TeamSetting teamSetting = byUserUid.get().getTeamSetting();
 
         if(byUserUid.isPresent()) {
-//            List<UserPitcher> allPitchers = managePitcherRepository.findAllByUserSeq(byUserUid.get().getUserSeq());
             List<UserPitcher> allByUser = managePitcherRepository.findAllByUserSeq(byUserUid.get());
             for (UserPitcher onePitcher : allByUser) {
                 if(onePitcher.getPitcherSeq() == teamSetting.getTeamSetting1stSp() ||
@@ -49,6 +48,7 @@ public class ManageService {
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
                 if(byId.isPresent()) {
                     PitcherResDto pitcherResDto = new PitcherResDto();
+                    pitcherResDto.setPitcherSeq(byId.get().getPitcherSeq());
                     pitcherResDto.setPitcherName(byId.get().getPitcherName());
                     pitcherResDto.setPitArm(byId.get().getPitArm());
                     pitcherResDto.setEra(byId.get().getEra());
