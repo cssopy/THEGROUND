@@ -297,20 +297,28 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/quit")
-	public ResponseEntity<Map<String, Object>> quit(@RequestBody Map<String, String> vo){
+	public ResponseEntity<Map<String, Object>> quit(){
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
-		String uid = vo.get("uid");
-		
-		Optional<User> o = userService.findByUserUid(uid);
-		if(o.isPresent()) {
-			userService.quitUser(uid);
-			resultMap.put("message", "success");
-			status = HttpStatus.ACCEPTED;
-		} else {
+		String uid;
+		try {
+			uid = jwtService.getUserUid(jwtService.getJwt());
+			Optional<User> o = userService.findByUserUid(uid);
+			if(o.isPresent()) {
+				userService.quitUser(uid);
+				resultMap.put("message", "success");
+				status = HttpStatus.ACCEPTED;
+			} else {
+				resultMap.put("message", "failed");
+				status = HttpStatus.BAD_REQUEST;
+			}
+		} catch (Exception e) {
 			resultMap.put("message", "failed");
 			status = HttpStatus.BAD_REQUEST;
 		}
+		
+		//
+		
 		return new ResponseEntity<>(resultMap, status);
 	}
 	
