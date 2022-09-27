@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ManagePitcherRepository extends JpaRepository<UserPitcher, Long> {
-    List<UserPitcher> findAllByUserSeq(Long userSeq);
 
     boolean existsByPitcherSeq(Long pitcherSeq);
 
