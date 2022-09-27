@@ -12,5 +12,5 @@ public interface HitterRepository extends JpaRepository<Hitter, Long> {
 
     Hitter findByHitterSeq(Long hitterSeq);
 
-    List<Hitter> findAllByHitterSeqNotIn(List<UserHitter> hitterSeq);
+    List<Hitter> findAllByHitterSeqNotIn(List<Long> hitterSeq);
 }
