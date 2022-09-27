@@ -13,7 +13,7 @@ public interface ManagePitcherRepository extends JpaRepository<UserPitcher, Long
 
     boolean existsByPitcherSeq(Long pitcherSeq);
 
-    List<Long> findPitcherSeqByUserSeq(Long userSeq);
+    List<Long> findPitcherSeqByUserSeq(User userSeq);
 
     List<UserPitcher> findAllByUserSeq(User user);
 }
