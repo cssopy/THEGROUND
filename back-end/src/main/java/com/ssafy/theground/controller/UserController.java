@@ -29,6 +29,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ssafy.theground.dto.res.UserMypageDto;
 import com.ssafy.theground.entity.Logo;
+import com.ssafy.theground.entity.TeamSetting;
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.LogoService;
@@ -260,6 +261,7 @@ public class UserController {
 			u.setUserLose(0);
 			u.setUserDraw(0);
 			u.setUserUid(uid);
+			u.setTeamSetting(null);
 			userService.save(u);
 			
 			resultMap.put("userTeamname", userTeamname);
