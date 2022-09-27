@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
+    List<Match> findTop3ByUserSeq(Long userSeq);
+    List<Match> findByUserSeq_UserUidOrderByMatchSeqDesc(String userUid);
     List<Match> findByUserSeq(Long userSeq);
 }
