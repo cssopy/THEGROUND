@@ -3,10 +3,18 @@ import landingVideo from "../assets/landing-dark.mp4";
 import title from "../assets/title.png";
 import subtitle from "../assets/subtitle.png";
 import Modal from "./components/Modal.js";
-import { useState } from "react";
+import NaverLoginHandler from "./components/NaverLoginHandler";
+import KakaoLoginHandler from "./components/KakaoLoginHandler";
+import GoogleLoginHandler from './components/GoogleLoginHandler';
+import SignupModal from "./components/SignupModal";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux/es/exports";
 
 const Landing = () => {
   const [login, setLogin] = useState(false);
+  const loginType = localStorage.getItem('loginType');
+  const uid = useSelector(state => state.user.uid);
+
   return (
     <>
       <video autoPlay muted loop className={styles.bg}>
@@ -27,7 +35,11 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <Modal closeModal={() => setLogin(!login)} login={login}></Modal>
+      <NaverLoginHandler loginType={loginType} />
+      <KakaoLoginHandler loginType={loginType} />
+      <GoogleLoginHandler loginType={loginType} />
+      <Modal closeModal={() => setLogin(!login)} login={login} />
+      {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
     </>
   );
 };
