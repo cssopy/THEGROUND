@@ -13,6 +13,7 @@ public class UserMypageDto {
 	private int userWin;
 	private int userLose;
 	private int userDraw;
+	private int userPayroll;
 	private Boolean userInPlayFlag;
 	
 	public UserMypageDto(User u) {
@@ -24,5 +25,6 @@ public class UserMypageDto {
 		this.userLose=u.getUserLose();
 		this.userDraw=u.getUserDraw();
 		this.userInPlayFlag=u.getUserInPlayFlag();
+		this.userPayroll=u.getUserPayroll();
 	}
 }
