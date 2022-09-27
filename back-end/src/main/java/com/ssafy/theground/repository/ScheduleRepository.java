@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    List<Schedule> findTop3ByScheduleSeq(Schedule scheduleSeq);
+    List<Schedule> findByScheduleSeq(Schedule scheduleSeq);
 }
