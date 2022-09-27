@@ -47,7 +47,6 @@ const GoogleLoginHandler = (props) => {
               },
             )
             .then((res) => {
-              console.log(res)
               if (res.data.message === "회원가입을 먼저 해주세요.") {
                 // 전역 스테이트로 메인에서 화면이 모달이 뜨게 하기
                 dispatch(userActions.setUid(res.data.uid));
