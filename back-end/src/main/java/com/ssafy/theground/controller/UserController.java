@@ -162,7 +162,7 @@ public class UserController {
 				// 이미 db에 존재하는 회원이라면
 				if (user.isPresent()) {
 					resultMap.put("uid", user.get().getUserUid());
-					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
+					resultMap.put("jwt", jwtService.createJwt(user.get().getUserUid()));
 					resultMap.put("message", "success");
 					status = HttpStatus.OK;
 				}
@@ -217,7 +217,7 @@ public class UserController {
 				// 이미 db에 존재하는 회원이라면
 				if (user.isPresent()) {
 					resultMap.put("uid", user.get().getUserUid());
-					resultMap.put("accessToken", jwtService.createJwt(user.get().getUserUid()));
+					resultMap.put("jwt", jwtService.createJwt(user.get().getUserUid()));
 					resultMap.put("message", "success");
 					status = HttpStatus.OK;
 				}
@@ -265,7 +265,7 @@ public class UserController {
 			userService.save(u);
 			
 			resultMap.put("userTeamname", userTeamname);
-			resultMap.put("accessToken", jwtService.createJwt(uid));
+			resultMap.put("jwt", jwtService.createJwt(uid));
 			resultMap.put("message", "success");
 			status = HttpStatus.ACCEPTED;
 		}
