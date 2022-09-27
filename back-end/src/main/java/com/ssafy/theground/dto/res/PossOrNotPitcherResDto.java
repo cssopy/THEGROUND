@@ -13,4 +13,12 @@ public class PossOrNotPitcherResDto {
     private String pitArm;
 
     private int era;
+
+    private int inning;
+
+    private int win;
+
+    private int lose;
+
+    private int salary;
 }

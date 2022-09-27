@@ -2,7 +2,6 @@ package com.ssafy.theground.controller;
 
 import com.ssafy.theground.service.StatsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,8 @@ public class StatsController {
 
     private final StatsService statsService;
 
-//    @GetMapping
-//    public ResponseEntity<?> playerDetailData(@RequestParam Long id){
-//        return statsService.aa(id);
-//    }
+    @GetMapping
+    public ResponseEntity<?> statsDetail(@RequestParam("playerType") String type, @RequestParam("id") Long playerSeq){
+        return statsService.statsDetail(type, playerSeq);
+    }
 }
