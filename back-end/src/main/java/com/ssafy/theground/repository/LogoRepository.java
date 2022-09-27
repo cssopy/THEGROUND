@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LogoRepository extends JpaRepository<Logo, Long>{
-
+    Logo findByLogoSeq(Long logoSeq);
 }

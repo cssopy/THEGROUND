@@ -1,9 +1,11 @@
 package com.ssafy.theground.service;
 
+import com.ssafy.theground.dto.res.BriefInfoResDto;
+import com.ssafy.theground.entity.AITeam;
 import com.ssafy.theground.entity.Match;
+import com.ssafy.theground.entity.TeamSetting;
 import com.ssafy.theground.entity.User;
-import com.ssafy.theground.repository.MatchRepository;
-import com.ssafy.theground.repository.UserRepository;
+import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +24,63 @@ public class GameService {
 
     private final MatchRepository matchRepository;
 
-    public void teamBriefInfo() throws Exception {
+    private final LogoRepository logoRepository;
+    private final TeamSettingRepository teamSettingRepository;
+
+    private final PitcherRepository pitcherRepository;
+
+    private final AITeamRepository aiTeamRepository;
+
+    public Map<String, BriefInfoResDto> teamBriefInfo() throws Exception {
+        Map<String, BriefInfoResDto> map = new HashMap<>();
+
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()){
-            List<Match> top3ByUserSeq = matchRepository.findTop3ByUserSeq(byUserUid.get().getUserSeq());
+            List<Match> ByUserSeq = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+            Match match = ByUserSeq.get(0);
+            boolean matchHomeFlag = match.isMatchHomeFlag();
+            BriefInfoResDto homeTeam = new BriefInfoResDto();
+            BriefInfoResDto awayTeam = new BriefInfoResDto();
 
+            // 유저가 Home
+            if(matchHomeFlag == true){
+                homeTeam.setTeamName(byUserUid.get().getUserTeamname());
+                homeTeam.setTeamLogoUrl(byUserUid.get().getLogo().getLogoUrl());
+                homeTeam.setTeamWin(byUserUid.get().getUserWin());
+                homeTeam.setTeamLose(byUserUid.get().getUserLose());
+                homeTeam.setTeamDraw(byUserUid.get().getUserDraw());
+                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                homeTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp()).getPitcherName());
+                map.put("home", homeTeam);
+
+                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
+                awayTeam.setTeamName(byAITeamSeq.getAiTeamName());
+                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq()).getLogoUrl();
+                awayTeam.setTeamLogoUrl(logoUrl);
+                map.put("away", awayTeam);
+            }
+            // 유저가 Away
+            else {
+                awayTeam.setTeamName(byUserUid.get().getUserTeamname());
+                awayTeam.setTeamLogoUrl(byUserUid.get().getLogo().getLogoUrl());
+                awayTeam.setTeamWin(byUserUid.get().getUserWin());
+                awayTeam.setTeamLose(byUserUid.get().getUserLose());
+                awayTeam.setTeamDraw(byUserUid.get().getUserDraw());
+                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                awayTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp()).getPitcherName());
+                map.put("away", awayTeam);
+
+                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
+                homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
+                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq()).getLogoUrl();
+                homeTeam.setTeamLogoUrl(logoUrl);
+                map.put("away", homeTeam);
+            }
+
+            return map;
         }
+        else return null;
     }
 }
