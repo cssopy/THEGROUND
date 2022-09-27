@@ -88,7 +88,7 @@ public class TradeService {
         if (byUserUid.isPresent()){
             List<UserPitcher> byUserSeq = managePitcherRepository.findByUserSeq(byUserUid.get());
             List<Long> pitcherSeq = new ArrayList<>();
-            byUserSeq.forEach(userPitcher -> pitcherSeq.add(userPitcher.getUserPitcherSeq()));
+            byUserSeq.forEach(userPitcher -> pitcherSeq.add(userPitcher.getPitcherSeq()));
             for(Long seq : pitcherSeq){
                 System.out.println("보유 투수 seq : " + seq);
             }
