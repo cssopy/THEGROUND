@@ -2,11 +2,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app){
   app.use(
-    createProxyMiddleware('/naver', {
-      target: 'https://nid.naver.com/oauth2.0/token',
-      pathRewrite: {
-        '^/naver':''
-      },
+    createProxyMiddleware('/token', {
+      target: 'https://nid.naver.com/oauth2.0',
       changeOrigin: true
     })
   )
