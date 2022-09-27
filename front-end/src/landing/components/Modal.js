@@ -4,6 +4,7 @@ import subtitle from "../../assets/subtitle.png";
 import Kakao from "./Kakao.js";
 import Naver from "./Naver";
 import Google from "./Google";
+// import Tal from "../Tal";
 
 const Modal = (props) => {
   const {closeModal, login} = props;
@@ -20,6 +21,7 @@ const Modal = (props) => {
             <Naver />
             <Google />
           </div>
+          {/* <Tal /> */}
           <span className={styles.back} onClick={closeModal}>
             &#8592;&nbsp;&nbsp;&nbsp;BACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </span>
