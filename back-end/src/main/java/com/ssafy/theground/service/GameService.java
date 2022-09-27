@@ -1,10 +1,7 @@
 package com.ssafy.theground.service;
 
 import com.ssafy.theground.dto.res.BriefInfoResDto;
-import com.ssafy.theground.entity.AITeam;
-import com.ssafy.theground.entity.Match;
-import com.ssafy.theground.entity.TeamSetting;
-import com.ssafy.theground.entity.User;
+import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +35,7 @@ public class GameService {
         if(byUserUid.isPresent()){
             List<Match> ByUserSeq = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
             Match match = ByUserSeq.get(0);
-            boolean matchHomeFlag = match.isMatchHomeFlag();
+            boolean matchHomeFlag = match.getMatchHomeFlag();
             BriefInfoResDto homeTeam = new BriefInfoResDto();
             BriefInfoResDto awayTeam = new BriefInfoResDto();
 
@@ -56,7 +53,7 @@ public class GameService {
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
                 awayTeam.setTeamName(byAITeamSeq.getAiTeamName());
-                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq()).getLogoUrl();
+                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 awayTeam.setTeamLogoUrl(logoUrl);
                 map.put("away", awayTeam);
             }
@@ -74,7 +71,7 @@ public class GameService {
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
-                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq()).getLogoUrl();
+                String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 homeTeam.setTeamLogoUrl(logoUrl);
                 map.put("away", homeTeam);
             }

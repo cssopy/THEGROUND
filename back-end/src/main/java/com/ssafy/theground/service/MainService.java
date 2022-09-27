@@ -41,7 +41,7 @@ public class MainService {
                 AITeam byAiTeamSeq = aiTeamRepository.findByAiTeamSeq(schedule.getTeamSeq().getAiTeamSeq());
 
                 matchResDto.setTeamName(byAiTeamSeq.getAiTeamName());
-                matchResDto.setLogoUrl(logoRepository.findByLogoSeq(byAiTeamSeq.getLogoSeq()).getLogoUrl());
+                matchResDto.setLogoUrl(logoRepository.findByLogoSeq(byAiTeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl());
 
                 list.add(matchResDto);
             }
