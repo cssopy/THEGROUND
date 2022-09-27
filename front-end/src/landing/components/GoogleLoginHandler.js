@@ -12,8 +12,8 @@ const GoogleLoginHandler = (props) => {
 
   const CLIENT_ID = "824400159984-9lg3ubjictcle5lbsbj39s076lko1fhh.apps.googleusercontent.com";
   const CLIENT_SECRET = "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";
-  // const REDIRECT_URI = "https://j7d109.p.ssafy.io";
-  const REDIRECT_URI = "http://localhost:3000";
+  const REDIRECT_URI = "https://j7d109.p.ssafy.io";
+  // const REDIRECT_URI = "http://localhost:3000";
 
   // 인가코드
   const location = useLocation();
