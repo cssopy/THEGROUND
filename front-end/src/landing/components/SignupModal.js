@@ -143,7 +143,7 @@ const SignupModal = (props) => {
               </div>
               <div className={`${styles.hide} ${progress === 2 ? styles.show : ""}`}>
                 <div className="d-flex justify-content-center m-5">
-                  <img src={logos[0] ? logos[0].logoUrl : ""} className={styles.logo} alt="selectedLogo"/>
+                  <img src={logos[0] ? myLogo.logoUrl : ""} className={styles.logo} alt="selectedLogo"/>
                   <div className={styles.userName}>{clubNameInput.current.value}</div>
                 </div>
                 <div>
