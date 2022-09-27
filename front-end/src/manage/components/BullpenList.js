@@ -7,7 +7,7 @@ import style from "../css/BullpenList.module.css";
 import Bullpen from "./Bullpen";
 import { ItemTypes } from "./ItemTypes.js";
 
-import PitcherDetailModal from "./PitcherDetailModal";
+import BullpenDetailModal from "./BullpenDetailModal";
 
 const BullpenList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -71,7 +71,7 @@ const BullpenList = memo((props) => {
           })}
         </tbody>
       </Table>
-      {modalIsOpen && <PitcherDetailModal pitcher={pitcher} />}
+      {modalIsOpen && <BullpenDetailModal pitcher={pitcher} />}
     </>
   );
 });

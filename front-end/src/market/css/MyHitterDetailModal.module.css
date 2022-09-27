@@ -1,7 +1,7 @@
 .modal {
   padding: 0px;
-  margin-top: -554px;
-  margin-left: 572px;
+  margin-top: -100px;
+  margin-left: -1048px;
   animation: animation-modal-show 0.5s;
   z-index: 1;
 }
@@ -17,8 +17,8 @@
 }
 
 .body {
-  margin-top: -10px;
-  height: 514px;
+  margin-top: -6px;
+  height: 518px;
   width: 500px;
   background-color: rgb(4, 30, 66);
   border-radius: 0 0 20px 20px;

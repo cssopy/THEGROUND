@@ -58,35 +58,36 @@
   display: block;
   width: 100%;
   font-size: 12px;
+  text-align: center;
 }
 
 .table th:nth-of-type(1),
 .table td:nth-of-type(1) {
-  width: 10vw;
+  width: 50px;
 }
 .table th:nth-of-type(2),
 .table td:nth-of-type(2) {
-  width: 40vw;
+  width: 160px;
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
-  width: 10vw;
+  width: 50px;
 }
 .table th:nth-of-type(4),
 .table td:nth-of-type(4) {
-  width: 10vw;
+  width: 50px;
 }
 .table th:nth-of-type(5),
 .table td:nth-of-type(5) {
-  width: 10vw;
+  width: 50px;
 }
 .table th:nth-of-type(6),
 .table td:nth-of-type(6) {
-  width: 10vw;
+  width: 50px;
 }
 .table th:nth-of-type(7),
 .table td:nth-of-type(7) {
-  width: 10vw;
+  width: 50px;
 }
 
 .table tr {
@@ -104,7 +105,7 @@
 
 .tbody {
   display: block;
-  height: 23vh;
+  height: 190px;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;

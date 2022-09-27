@@ -1,9 +1,9 @@
 import { Row } from "react-bootstrap";
 import Radar from "./Radar";
 
-import style from "../css/HitterDetailModal.module.css";
+import style from "../css/MyPitcherDetailModal.module.css";
 
-const HitterDetailModal = (props) => {
+const PitcherDetailModal = (props) => {
   const data = [
     {
       taste: "fruity",
@@ -26,12 +26,11 @@ const HitterDetailModal = (props) => {
       chardonay: 82,
     },
   ];
-
   return (
     <>
       <Row className={style["modal"]}>
         <Row className={style["head"]}>
-          <div>{props.hitter.hitterName}</div>
+          <div>{props.pitcher.pitcherName}</div>
         </Row>
         <Row className={style["body"]}>
           <Row>
@@ -44,4 +43,4 @@ const HitterDetailModal = (props) => {
   );
 };
 
-export default HitterDetailModal;
+export default PitcherDetailModal;

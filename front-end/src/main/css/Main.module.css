@@ -1,6 +1,7 @@
 .background {
   height: 100vh;
   width: 100vw;
+  margin: 0px;
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
@@ -146,10 +147,6 @@
 
 .infoBtn {
   margin-left: 60px;
-}
-
-.infoBtn:hover {
-  cursor: pointer;
 }
 
 .barAll {

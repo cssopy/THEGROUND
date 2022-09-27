@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { BsPencilSquare } from "react-icons/bs";
+import UserInfoModal from "./components/UserInfoModal";
+import BackDrop from "./components/BackDrop";
 
 import MatchList from "./components/MatchList";
 import PitcherList from "./components/PitcherList";
@@ -11,7 +13,6 @@ import subtitle from "../assets/subtitle.png";
 import teamLogo from "../assets/ground2.png";
 
 import style from "./css/Main.module.css";
-import { useEffect } from "react";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Main = () => {
   const [menuBar, setMeunuBar] = useState([true, false, false, false]);
   const [matchs, setMatchs] = useState([]);
   const [pitchers, setPitchers] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const activeMenu = "rgba(5, 20, 48, 0.5)";
 
@@ -283,7 +285,13 @@ const Main = () => {
                         <Row className={style["nickName"]}>구단 명</Row>
                       </Col>
                       <Col>
-                        <BsPencilSquare className={style["infoBtn"]} />
+                        <BsPencilSquare
+                          className={style["infoBtn"]}
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            setModalIsOpen(true);
+                          }}
+                        />
                       </Col>
                     </Row>
                     <Row>
@@ -350,6 +358,8 @@ const Main = () => {
           </Row>
         </div>
       </Row>
+      {modalIsOpen && <BackDrop setModalIsOpen={setModalIsOpen} />}
+      {modalIsOpen && <UserInfoModal setModalIsOpen={setModalIsOpen} />}
     </>
   );
 };
