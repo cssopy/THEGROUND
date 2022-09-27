@@ -35,7 +35,7 @@ public class MainService {
 
         if(byUserUid.isPresent()){
             Season byUserSeq = seasonRepository.findByUserSeq(byUserUid.get());
-            List<Schedule> byScheduleSeq = scheduleRepository.findTop3ByScheduleSeq(byUserSeq.getSeasonSeq());
+            List<Schedule> byScheduleSeq = scheduleRepository.findTop3ByScheduleSeq(byUserSeq.getScheduleSeq());
             for(Schedule schedule : byScheduleSeq){
                 MatchResDto matchResDto = new MatchResDto();
                 AITeam byAiTeamSeq = aiTeamRepository.findByAiTeamSeq(schedule.getTeamSeq().getAiTeamSeq());
