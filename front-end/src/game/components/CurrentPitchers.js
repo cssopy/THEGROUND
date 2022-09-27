@@ -7,7 +7,7 @@ const Pitchers = (props) => {
 
   return (
     <>
-      <Row className={`${styles.pitchers} align-items-center text-white`}>
+      <Row className={`${styles.pitchers} align-items-center text-white mx-0`}>
         <Col>
           <div className={`${styles.name} ${now === 0 ? styles.now : ''} d-flex justify-content-center`}>{pitchers[0].name}</div>
           <div className={`${styles.content} d-flex justify-content-center`}>투구 수 : {pitchers[0].balls}</div>
