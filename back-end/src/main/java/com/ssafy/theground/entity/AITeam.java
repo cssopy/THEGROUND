@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Builder
@@ -23,6 +25,7 @@ public class AITeam {
     @Column(name = "ai_team_name")
     private String aiTeamName;
 
-    @Column(name = "logo_seq")
-    private Long logoSeq;
+    @ManyToOne
+    @JoinColumn(name = "logo_seq", referencedColumnName="logo_seq")
+    private Logo logoSeq;
 }
