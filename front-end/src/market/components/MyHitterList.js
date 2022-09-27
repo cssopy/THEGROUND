@@ -8,7 +8,7 @@ import style from "../css/MyHitterList.module.css";
 
 import MyHitter from "./MyHitter";
 
-import HitterDetailModal from "./HitterDetailModal";
+import MyHitterDetailModal from "./MyHitterDetailModal";
 
 const HitterList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -47,11 +47,10 @@ const HitterList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>타율</th>
-            <th>게임수</th>
-            <th>타수</th>
-            <th>OBP</th>
-            <th>SLG</th>
+            <th>출루율</th>
+            <th>장타율</th>
             <th>홈런</th>
+            <th>연봉</th>
           </tr>
         </thead>
         <tbody
@@ -60,12 +59,11 @@ const HitterList = memo((props) => {
           style={{ backgroundColor }}
           data-testid="myHitterList"
         >
-          {props.hitters.map((hitter, index) => (
+          {props.hitters.map((hitter) => (
             <MyHitter
-              key={index}
-              idx={index}
+              key={hitter.hitterSeq}
               hitter={hitter}
-              removeHitter={props.removeHitter}
+              addHitter={props.addHitter}
               onMouseOver={() => {
                 onMouseOver(hitter);
               }}
@@ -74,7 +72,7 @@ const HitterList = memo((props) => {
           ))}
         </tbody>
       </Table>
-      {modalIsOpen && <HitterDetailModal hitter={hitter} />}
+      {modalIsOpen && <MyHitterDetailModal hitter={hitter} />}
     </>
   );
 });

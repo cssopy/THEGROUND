@@ -30,7 +30,7 @@ const PitcherDetailModal = (props) => {
     <>
       <Row className={style["modal"]}>
         <Row className={style["head"]}>
-          <div>{props.pitcher.name}</div>
+          <div>{props.pitcher.pitcherName}</div>
         </Row>
         <Row className={style["body"]}>
           <Row>

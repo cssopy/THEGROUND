@@ -67,7 +67,7 @@
 }
 .table th:nth-of-type(2),
 .table td:nth-of-type(2) {
-  width: 170px;
+  width: 150px;
 }
 .table th:nth-of-type(3),
 .table td:nth-of-type(3) {
@@ -87,7 +87,7 @@
 }
 .table th:nth-of-type(7),
 .table td:nth-of-type(7) {
-  width: 50px;
+  width: 70px;
 }
 
 .table tr {

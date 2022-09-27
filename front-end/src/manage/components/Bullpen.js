@@ -4,7 +4,7 @@ import { ItemTypes } from "./ItemTypes";
 import style from "../css/BullpenList.module.css";
 
 const Bullpen = (props) => {
-  const [, drag] = useDrag(() => ({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.Bullpen,
     item: { bullpen: props.bullpen },
     collect: (monitor) => ({
@@ -16,10 +16,13 @@ const Bullpen = (props) => {
       if (didDrop) {
         // 선발투수목록에 추가
         props.addPitchers(item.bullpen);
-        props.onMouseLeave();
       }
     },
   }));
+
+  if (isDragging) {
+    props.onMouseLeave();
+  }
 
   return (
     <>
@@ -28,19 +31,25 @@ const Bullpen = (props) => {
         data-testid={`bullpen`}
         onMouseOver={props.onMouseOver}
         onMouseLeave={props.onMouseLeave}
+        onMouseDown={(e) => {
+          if (e.button === 2) {
+            props.addPitchers(props.bullpen);
+            props.onMouseLeave();
+          }
+        }}
       >
         <td>
           <div
             className={
               style[
-                props.bullpen.pitArm === "좌완" ? "leftPitcher" : "rightPitcher"
+                props.bullpen.pitArm === "L" ? "leftPitcher" : "rightPitcher"
               ]
             }
           >
-            {props.bullpen.pitArm}
+            {props.bullpen.pitArm === "L" ? "좌완" : "우완"}
           </div>
         </td>
-        <td>{props.bullpen.name}</td>
+        <td>{props.bullpen.pitcherName}</td>
         <td>{props.bullpen.era}</td>
         <td>{props.bullpen.game}</td>
         <td>{props.bullpen.inning}</td>
