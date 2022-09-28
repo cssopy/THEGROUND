@@ -4,15 +4,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import Field from "./components/Field";
-import StrikeZone from "./components/StrikeZone";
-import BallVelocity from "./components/BallVelocity";
-import BallCount from "./components/BallCount";
-import ScoreBoard from "./components/ScoreBoard";
-import Pitchers from "./components/CurrentPitchers";
-import Hitter from "./components/CurrentHitter";
-import GameLogs from "./components/GameLogs";
-import ChangePlayer from "./components/ChangePlayer";
+import Field from "./components/main/Field";
+import StrikeZone from "./components/main/StrikeZone";
+import BallVelocity from "./components/main/BallVelocity";
+import BallCount from "./components/main/BallCount";
+import ScoreBoard from "./components/main/ScoreBoard";
+import Pitchers from "./components/main/CurrentPitchers";
+import Hitter from "./components/main/CurrentHitter";
+import GameLogs from "./components/main/GameLogs";
+import ChangePlayer from "./components/changePlayer/ChangePlayer";
 
 
 const Game = () => {
@@ -42,34 +42,77 @@ const Game = () => {
 
   return (
     <>
-    <div className={`${styles.bg} d-flex justify-content-center align-items-center`}>
-      <div className={`${styles.box}`}>
-        <Row className={styles.zero}>
-          <Col className={styles.zero}>
-            <Row className={styles.zero}>
-              <Field runners={['o', 'o', 'x']} />
+    <div
+      className={`${styles.bg} d-flex justify-content-center align-items-center`}
+    >
+      <div
+        className={`${styles.box}`}
+      >
+        <Row
+          className={styles.zero}
+        >
+          <Col
+            className={styles.zero}
+          >
+            <Row
+              className={styles.zero}
+            >
+              <Field
+                runners={['o', 'o', 'x']}
+              />
             </Row>
-            <Row className={styles.zero}>
-              <Col className={styles.zero}>
-                <StrikeZone balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:50, y:50}]}/>
+            <Row
+              className={styles.zero}
+            >
+              <Col
+                className={styles.zero}
+              >
+                <StrikeZone
+                  balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:50, y:50}]}
+                />
               </Col>
-              <Col className={styles.zero}>
-                <Row className={styles.zero}>
-                  <BallVelocity velocity={130} />
+              <Col
+                className={styles.zero}
+              >
+                <Row
+                  className={styles.zero}
+                >
+                  <BallVelocity
+                    velocity={130}
+                  />
                 </Row>
-                <Row className={styles.zero}>
-                  <BallCount ballCounts={[3, 1, 2]} />
+                <Row
+                  className={styles.zero}
+                >
+                  <BallCount
+                    ballCounts={[3, 1, 2]}
+                  />
                 </Row>
               </Col>
             </Row>
           </Col>
-          <Col className={styles.zero}>
-            <Row className={`${styles.zero} mb-2`}>
-              <ScoreBoard scores={[0,0,1,2,1,0,0,4,0,0,1]} R={[1, 3]} H={[0, 1]} B={[2, 1]} />
+          <Col
+            className={styles.zero}
+          >
+            <Row
+              className={`${styles.zero} mb-2`}
+            >
+              <ScoreBoard
+                scores={[0,0,1,2,1,0,0,4,0,0,1]}
+                R={[1, 3]}
+                H={[0, 1]}
+                B={[2, 1]}
+              />
             </Row>
-            <Row className={styles.zero}>
-              <Col className={styles.zero}>
-                <Row className={styles.zero}>
+            <Row
+              className={styles.zero}
+            >
+              <Col
+                className={styles.zero}
+              >
+                <Row
+                  className={styles.zero}
+                >
                   <Pitchers
                     pitchers={[
                       { name: "류현진", balls: 25, threes: 3 },
@@ -78,7 +121,9 @@ const Game = () => {
                     now={1}
                   />
                 </Row>
-                <Row className={styles.zero}>
+                <Row
+                  className={styles.zero}
+                >
                   <Hitter
                     hitter={{
                       name: "류현진",
@@ -87,8 +132,12 @@ const Game = () => {
                     }}
                   />
                 </Row>
-                <Row className={styles.zero}>
-                  <Col className={styles.zero}>
+                <Row
+                  className={styles.zero}
+                >
+                  <Col
+                    className={styles.zero}
+                  >
                     <Button
                       className={`${styles.btn} ${styles.change}`}
                       variant="success"
@@ -97,7 +146,9 @@ const Game = () => {
                       선수 교체
                     </Button>
                   </Col>
-                  <Col className={styles.zero}>
+                  <Col
+                    className={styles.zero}
+                  >
                     <Button
                       className={`${styles.btn} ${styles.skip}`}
                       variant="danger"
@@ -107,13 +158,21 @@ const Game = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col className={styles.zero}>
-                <GameLogs logs={[111,222,333,444,555,666,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]} />
+              <Col
+                className={styles.zero}
+              >
+                <GameLogs
+                  logs={[111,222,333,444,555,666,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}
+                />
               </Col>
             </Row>
           </Col>
         </Row>
-        <ChangePlayer open={modalOpen} close={closeModal} header="Modal heading" />
+        <ChangePlayer
+          open={modalOpen}
+          close={closeModal}
+          header="Modal heading"
+        />
       </div>
     </div>
     </>

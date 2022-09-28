@@ -1,0 +1,33 @@
+.strike-zone {
+  margin-left: 20px;
+  width: 240px;
+  height: 240px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+}
+
+.mainbox {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #000;
+  border-radius: 15px;
+}
+
+.row {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  border: 1px dashed white;
+  border-left: none;
+  border-right: none;
+}
+
+.col {
+  position: absolute;
+  width: 40px;
+  height: 120px;
+  border: 1px dashed white;
+  border-top: none;
+  border-bottom: none;
+}
