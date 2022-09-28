@@ -165,6 +165,7 @@ public class TradeService {
 
                 pitcher.add(p);
             }
+            managePitcherRepository.saveAll(pitcher);
 
             // 보유 타자 모두 삭제
             manageHitterRepository.deleteAll();
@@ -178,6 +179,7 @@ public class TradeService {
 
                 hitter.add(h);
             }
+            manageHitterRepository.saveAll(hitter);
             return true;
         }
         return false;
