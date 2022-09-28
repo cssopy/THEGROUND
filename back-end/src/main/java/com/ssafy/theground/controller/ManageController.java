@@ -2,7 +2,11 @@ package com.ssafy.theground.controller;
 
 import com.ssafy.theground.dto.res.HitterResDto;
 import com.ssafy.theground.dto.res.PitcherResDto;
+import com.ssafy.theground.dto.res.RotationResDto;
+import com.ssafy.theground.entity.TeamSetting;
+import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.ManageService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,7 @@ import java.util.List;
 public class ManageController {
 
     private final ManageService manageService;
+    private final JwtService jwtService;
 
     @GetMapping("/pitchers")
     public ResponseEntity<?> pitcherList() throws Exception {
@@ -35,5 +40,10 @@ public class ManageController {
             return new ResponseEntity<>(hitterResDtos, HttpStatus.OK);
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+    
+    @GetMapping("/rotation")
+    public RotationResDto rotationList() throws Exception {
+    	return manageService.rotationList(jwtService.getUserUid(jwtService.getJwt()));
     }
 }
