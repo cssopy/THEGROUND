@@ -65,13 +65,11 @@
   object-fit: cover;
 }
 
-
 .back {
   color: #041e42;
   font-weight: bold;
   cursor: pointer;
 }
-
 
 .content {
   display: flex;
@@ -86,7 +84,6 @@
   font-weight: 800;
 }
 
-
 .hide {
   width: 350px;
   margin: 25px;
@@ -97,10 +94,15 @@
   opacity: 1;
 }
 
-.move0 { margin-left: 0px; }
-.move1 { margin-left: -400px; }
-.move2 { margin-left: -800px; }
-
+.move0 {
+  margin-left: 0px;
+}
+.move1 {
+  margin-left: -400px;
+}
+.move2 {
+  margin-left: -800px;
+}
 
 .noBorder {
   border: none;

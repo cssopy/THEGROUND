@@ -5,7 +5,6 @@ import { userActions } from "../../slice/UserSlice";
 import { useDispatch } from "react-redux/es/exports";
 
 const NaverLoginHandler = (props) => {
-
   const { loginType } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,9 +14,8 @@ const NaverLoginHandler = (props) => {
 
   // 인가코드
   const location = useLocation();
-  const CODE = location.search.split('=')[1];
-  const STATE = location.search.split('=')[2];
-  
+  const CODE = location.search.split("=")[1];
+  const STATE = location.search.split("=")[2];
 
   // 네이버로 토큰 발급 요청
   const getNaverToken = () => {
@@ -30,11 +28,12 @@ const NaverLoginHandler = (props) => {
           },
         },
         {
-          responseType: "json"
-        },
+          responseType: "json",
+        }
       )
       .then((res) => res.data)
       .then((data) => {
+        // 액세스 토큰으로 로그인 요청
         if (data.access_token) {
           axios
             .post(
@@ -48,15 +47,16 @@ const NaverLoginHandler = (props) => {
                   "Content-type": "application/json",
                   Accept: "application/json",
                 },
-              },
+              }
             )
             .then((res) => {
               if (res.data.message === "회원가입을 먼저 해주세요.") {
-                // 전역 스테이트로 메인에서 화면이 모달이 뜨게 하기
-                console.log(res)
+                // 회원가입을 위해 uid를 저장 후 이동
+                // loginType은 로컬 스토리지에 있음
                 dispatch(userActions.setUid(res.data.uid));
                 navigate("/");
               } else {
+                // jwt 토큰과 유저 이름을 저장 후 메인 페이지로 이동
                 dispatch(userActions.setJwtToken(res.data.jwt));
                 dispatch(userActions.setUserTeamname(res.data.userTeamname));
                 localStorage.removeItem("loginType");
@@ -71,18 +71,21 @@ const NaverLoginHandler = (props) => {
   };
 
   // 취소시 로직
-  let error = new URL(window.location.href).searchParams.get("error_description");
+  let error = new URL(window.location.href).searchParams.get(
+    "error_description"
+  );
 
   useEffect(() => {
     if (!CODE) return;
-    if (loginType === 'N') {getNaverToken();}
-    if (error === 'Canceled By User') {
+    if (loginType === "N") {
+      getNaverToken();
+    }
+    if (error === "Canceled By User") {
       navigate("/");
-    };  
+    }
   }, []);
 
   return <></>;
 };
-
 
 export default NaverLoginHandler;

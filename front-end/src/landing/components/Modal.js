@@ -4,14 +4,17 @@ import subtitle from "../../assets/subtitle.png";
 import Kakao from "./Kakao.js";
 import Naver from "./Naver";
 import Google from "./Google";
-// import Tal from "../Tal";
 
 const Modal = (props) => {
-  const {closeModal, login} = props;
+  // 로그인 띄우는 모달
+  const { closeModal, login } = props;
 
   return (
     <>
-      <div className={`${styles.modal} ${login ? styles.open : ''}`} onClick={closeModal}>
+      <div
+        className={`${styles.modal} ${login ? styles.open : ""}`}
+        onClick={closeModal}
+      >
         <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
           <img src={title} alt="" className={styles.modalTitle} />
           <img src={subtitle} alt="" className={styles.modalSubtitle} />
@@ -21,7 +24,6 @@ const Modal = (props) => {
             <Naver />
             <Google />
           </div>
-          {/* <Tal /> */}
           <span className={styles.back} onClick={closeModal}>
             &#8592;&nbsp;&nbsp;&nbsp;BACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </span>
