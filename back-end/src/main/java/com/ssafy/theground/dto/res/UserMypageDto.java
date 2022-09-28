@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserMypageDto {
 	private String logoUrl;
-	private String userTeamName;
+	private String userTeamname;
 	private int userExp;
 	private int userLevel;
 	private int userWin;
@@ -18,7 +18,7 @@ public class UserMypageDto {
 	
 	public UserMypageDto(User u) {
 		this.logoUrl=u.getLogo().getLogoUrl();
-		this.userTeamName=u.getUserTeamname();
+		this.userTeamname=u.getUserTeamname();
 		this.userExp=u.getUserExp();
 		this.userLevel=u.getUserLevel();
 		this.userWin=u.getUserWin();
