@@ -39,7 +39,7 @@ public class MainService {
             for(Season s : byUserSeq) {
                 seq.add(s.getScheduleSeq().getScheduleSeq());
             }
-            List<Schedule> byScheduleSeq = scheduleRepository.findByScheduleSeqIn(seq);
+            List<Schedule> byScheduleSeq = scheduleRepository.findTop3ByScheduleSeqIn(seq);
             for(Schedule schedule : byScheduleSeq){
                 MatchResDto matchResDto = new MatchResDto();
                 AITeam byAiTeamSeq = aiTeamRepository.findByAiTeamSeq(schedule.getTeamSeq().getAiTeamSeq());
