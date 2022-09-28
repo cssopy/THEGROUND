@@ -8,11 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class TradeSaveReqDto {
-    private String pit;
+    private String playerType;
 
-    private List<Long> pitSeq;
-
-    private String hit;
-
-    private List<Long> hitSeq;
+    private List<Long> playerSeq;
 }
