@@ -1,5 +1,5 @@
 import styles from "../css/Modal.module.css";
-import naverBtn from "../../assets/naver_login.png";
+import naverBtn from "../../assets/etc/naver_login.png";
 
 const Naver = () => {
   const CLIENT_ID = "PVGrBZM8vqHq_92Vh6Wx";

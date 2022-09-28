@@ -1,6 +1,6 @@
 import style from "../css/MatchList.module.css";
 
-import teamLogo from "../../assets/ground2.png";
+import teamLogo from "../../assets/etc/ground2.png";
 
 const Match = (props) => {
   return (

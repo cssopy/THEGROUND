@@ -8,9 +8,9 @@ import BackDrop from "./components/BackDrop";
 import MatchList from "./components/MatchList";
 import PitcherList from "./components/PitcherList";
 
-import title from "../assets/title.png";
-import subtitle from "../assets/subtitle.png";
-import teamLogo from "../assets/ground2.png";
+import title from "../assets/etc/title.png";
+import subtitle from "../assets/etc/subtitle.png";
+import teamLogo from "../assets/etc/ground2.png";
 
 import style from "./css/Main.module.css";
 
