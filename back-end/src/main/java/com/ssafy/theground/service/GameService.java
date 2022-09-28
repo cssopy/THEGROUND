@@ -73,7 +73,7 @@ public class GameService {
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 homeTeam.setTeamLogoUrl(logoUrl);
-                map.put("away", homeTeam); 
+                map.put("home", homeTeam);
             }
 
             return map;
