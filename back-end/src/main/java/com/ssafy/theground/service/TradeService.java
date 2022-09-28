@@ -148,8 +148,8 @@ public class TradeService {
 
     @Transactional
     public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
-        User byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt())).orElseThrow(() -> new IllegalArgumentException("mesg"));
-//        if(byUserUid.isPresent()) {
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
+        if(byUserUid.isPresent()) {
             UserPitcher pitcher = new UserPitcher();
             UserHitter hitter = new UserHitter();
 
@@ -159,10 +159,10 @@ public class TradeService {
             for (Long seq : tradeSaveReqDto.getPitcherSeq()) {
                 System.out.println("pSeq = " + seq);
                 pitcher.builder()
-//                        .userSeq(byUserUid.get())
-                        .userSeq(byUserUid)
+                        .userSeq(byUserUid.get())
                         .pitcherSeq(seq)
                         .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
+                managePitcherRepository.save(pitcher);
             }
 
             // 보유 타자 모두 삭제
@@ -171,15 +171,13 @@ public class TradeService {
             for (Long seq : tradeSaveReqDto.getHitterSeq()) {
                 System.out.println("hSeq = " + seq);
                 hitter.builder()
-//                        .userSeq(byUserUid.get())
-                        .userSeq(byUserUid)
+                        .userSeq(byUserUid.get())
                         .hitterSeq(seq)
                         .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
+                manageHitterRepository.save(hitter);
             }
-            managePitcherRepository.save(pitcher);
-            manageHitterRepository.save(hitter);
             return true;
-//        }
-//        return false;
+        }
+        return false;
     }
 }
