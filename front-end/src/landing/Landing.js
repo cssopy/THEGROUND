@@ -13,7 +13,7 @@ import { useSelector } from "react-redux/es/exports";
 const Landing = () => {
   const [login, setLogin] = useState(false);
   const loginType = localStorage.getItem("loginType");
-  const uid = useSelector((state) => state.user.uid);
+  const uid = useSelector((state) => state.user.user.uid);
 
   return (
     <>
@@ -39,7 +39,7 @@ const Landing = () => {
       <KakaoLoginHandler loginType={loginType} />
       <GoogleLoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
-      {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
+      {loginType && uid ? <SignupModal uid={uid} /> : <></>}
     </>
   );
 };
