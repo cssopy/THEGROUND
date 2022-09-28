@@ -1,4 +1,5 @@
 import styles from "../css/Modal.module.css";
+import naverBtn from "../../assets/naver_login.png";
 
 const Naver = () => {
   const CLIENT_ID = "PVGrBZM8vqHq_92Vh6Wx";
@@ -17,7 +18,9 @@ const Naver = () => {
 
   return (
     <>
-      <div className={styles.naverBtn} onClick={naverLogin} />
+      <div onClick={naverLogin}>
+        <img className={styles.loginBtn} src={naverBtn} alt="naverButton" />
+      </div>
     </>
   );
 };
