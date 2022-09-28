@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class UserHitter {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_hitter_seq")
     private Long userHitterSeq;
 

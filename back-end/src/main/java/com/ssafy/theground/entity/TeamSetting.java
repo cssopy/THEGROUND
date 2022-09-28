@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class TeamSetting {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_setting_seq")
     private Long teamSettingSeq;
 

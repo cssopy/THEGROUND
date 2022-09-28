@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class UserPitcher {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_pitcher_seq")
     private Long userPitcherSeq;
 
