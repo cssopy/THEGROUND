@@ -46,8 +46,8 @@ public class GameService {
                 homeTeam.setTeamWin(byUserUid.get().getUserWin());
                 homeTeam.setTeamLose(byUserUid.get().getUserLose());
                 homeTeam.setTeamDraw(byUserUid.get().getUserDraw());
-                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq(byUserUid.get().getUserSeq());
-                homeTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp()).getPitcherName());
+                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
+                homeTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp().getPitcherSeq()).getPitcherName());
                 map.put("home", homeTeam);
 
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
@@ -64,8 +64,8 @@ public class GameService {
                 awayTeam.setTeamWin(byUserUid.get().getUserWin());
                 awayTeam.setTeamLose(byUserUid.get().getUserLose());
                 awayTeam.setTeamDraw(byUserUid.get().getUserDraw());
-                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq(byUserUid.get().getUserSeq());
-                awayTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp()).getPitcherName());
+                TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
+                awayTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp().getPitcherSeq()).getPitcherName());
                 map.put("away", awayTeam);
 
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
@@ -73,7 +73,7 @@ public class GameService {
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 homeTeam.setTeamLogoUrl(logoUrl);
-                map.put("away", homeTeam);
+                map.put("away", homeTeam); 
             }
 
             return map;
