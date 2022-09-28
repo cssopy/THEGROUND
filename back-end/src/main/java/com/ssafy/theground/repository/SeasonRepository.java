@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
-    Season findByUserSeq(User userSeq);
+    List<Season> findByUserSeq(User userSeq);
 }
