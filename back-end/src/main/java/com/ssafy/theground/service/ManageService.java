@@ -29,6 +29,8 @@ public class ManageService {
     private final UserRepository userRepository;
     
     private final TeamSettingRepository teamSettingRepository;
+    
+    private final UserPitcherRepository userPitcherRepository;
 
     // 투수 목록 상세 조회
     public List<PitcherResDto> pitcherList() throws Exception {
@@ -109,5 +111,18 @@ public class ManageService {
     	result.setTeamSetting5thSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting5thSp().getPitcherSeq()));
     	result.setTeamSettingNextSp(t.getTeamSettingNextSp());
     	return result;
+    }
+    
+    public void rotationUpdate(String uid, Long[] list) {
+    	Optional<UserPitcher> o;
+    	Long userSeq = userRepository.findByUserUid(uid).get().getUserSeq();
+    	for(int i=0;i<5;i++) {
+    		o = userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(userSeq, list[i]);
+    		if(o.isPresent()) {
+    			
+    		}else {
+    			return;
+    		}
+    	}
     }
 }
