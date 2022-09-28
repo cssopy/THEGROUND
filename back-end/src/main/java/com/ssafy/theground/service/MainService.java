@@ -34,8 +34,12 @@ public class MainService {
         List<MatchResDto> list = new ArrayList<>();
 
         if(byUserUid.isPresent()){
-            Season byUserSeq = seasonRepository.findByUserSeq(byUserUid.get());
-            List<Schedule> byScheduleSeq = scheduleRepository.findTop3ByScheduleSeq(byUserSeq.getScheduleSeq().getScheduleSeq());
+            List<Season> byUserSeq = seasonRepository.findByUserSeq(byUserUid.get());
+            List<Long> seq = new ArrayList<>();
+            for(Season s : byUserSeq) {
+                seq.add(s.getScheduleSeq().getScheduleSeq());
+            }
+            List<Schedule> byScheduleSeq = scheduleRepository.findByScheduleSeqIn(seq);
             for(Schedule schedule : byScheduleSeq){
                 MatchResDto matchResDto = new MatchResDto();
                 AITeam byAiTeamSeq = aiTeamRepository.findByAiTeamSeq(schedule.getTeamSeq().getAiTeamSeq());
