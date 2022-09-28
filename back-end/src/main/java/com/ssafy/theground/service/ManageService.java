@@ -2,6 +2,7 @@ package com.ssafy.theground.service;
 
 import com.ssafy.theground.dto.res.HitterResDto;
 import com.ssafy.theground.dto.res.PitcherResDto;
+import com.ssafy.theground.dto.res.RotationResDto;
 import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ public class ManageService {
     private final JwtService jwtService;
 
     private final UserRepository userRepository;
+    
+    private final TeamSettingRepository teamSettingRepository;
 
     // 투수 목록 상세 조회
     public List<PitcherResDto> pitcherList() throws Exception {
@@ -38,11 +41,11 @@ public class ManageService {
         if(byUserUid.isPresent()) {
             List<UserPitcher> allByUser = managePitcherRepository.findAllByUserSeq(byUserUid.get());
             for (UserPitcher onePitcher : allByUser) {
-                if(onePitcher.getPitcherSeq() == teamSetting.getTeamSetting1stSp() ||
-                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting2ndSp() ||
-                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting3rdSp() ||
-                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting4thSp() ||
-                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting5thSp()){
+                if(onePitcher.getPitcherSeq() == teamSetting.getTeamSetting1stSp().getPitcherSeq() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting2ndSp().getPitcherSeq() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting3rdSp().getPitcherSeq() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting4thSp().getPitcherSeq() ||
+                onePitcher.getPitcherSeq() == teamSetting.getTeamSetting5thSp().getPitcherSeq()){
                     continue;
                 }
                 Optional<Pitcher> byId = pitcherRepository.findById(onePitcher.getPitcherSeq());
@@ -93,5 +96,18 @@ public class ManageService {
         } else return null;
 
         return list;
+    }
+    
+    public RotationResDto rotationList(String uid){
+    	User u = userRepository.findByUserUid(uid).get();
+    	TeamSetting t = teamSettingRepository.findByUserSeq_UserSeq(u.getUserSeq());
+    	RotationResDto result = new RotationResDto();
+    	result.setTeamSetting1stSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting1stSp().getPitcherSeq()));
+    	result.setTeamSetting2ndSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting2ndSp().getPitcherSeq()));
+    	result.setTeamSetting3rdSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting3rdSp().getPitcherSeq()));
+    	result.setTeamSetting4thSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting4thSp().getPitcherSeq()));
+    	result.setTeamSetting5thSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting5thSp().getPitcherSeq()));
+    	result.setTeamSettingNextSp(t.getTeamSettingNextSp());
+    	return result;
     }
 }
