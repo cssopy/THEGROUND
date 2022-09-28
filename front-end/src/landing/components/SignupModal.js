@@ -7,6 +7,7 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../slice/UserSlice";
 import { useNavigate } from "react-router-dom";
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
 const SignupModal = (props) => {
   let { loginType } = props;
@@ -17,7 +18,8 @@ const SignupModal = (props) => {
   const [logos, setLogos] = useState([]);
   const [selectLogo, setSelectLogo] = useState(false);
   const [myLogo, setMyLogo] = useState(false);
-  const [valid, setValid] = useState(0);
+  const [valid, setValid] = useState(4);
+  const [isActive, setIsActive] = useState(true);
   const clubNameInput = useRef("");
   const uid = useSelector((state) => state.user.uid);
   const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
@@ -26,6 +28,10 @@ const SignupModal = (props) => {
 
   const handleClubName = () => {
     const target = clubNameInput.current.value;
+    if (target.length === 0) {
+      setValid(4);
+      return;
+    }
     let count = 0;
     let special_check = 0;
     // 한글은 2자리로 체크
@@ -80,6 +86,7 @@ const SignupModal = (props) => {
     if (progress === 0) {
       return;
     }
+    btnToggle();
     setProgress((prev) => (prev + 2) % 3);
   };
 
@@ -87,7 +94,15 @@ const SignupModal = (props) => {
     if (progress === 2) {
       return;
     }
+    btnToggle();
     setProgress((prev) => (prev + 1) % 3);
+  };
+
+  const btnToggle = () => {
+    setIsActive((prev) => !prev);
+    setTimeout(() => {
+      setIsActive((prev) => !prev);
+    }, 700);
   };
 
   const moveCard = (event) => {
@@ -114,7 +129,6 @@ const SignupModal = (props) => {
         <div className={`${styles.modal} ${styles.open}`}>
           <div className={styles.modalBody}>
             <img src={title} alt="" className={styles.modalTitle} />
-            <img src={subtitle} alt="" className={styles.modalSubtitle} />
             <div className={`${styles.content} ${styles[`move${progress}`]}`}>
               <div
                 className={`${styles.hide} ${
@@ -158,23 +172,17 @@ const SignupModal = (props) => {
                 <span
                   style={{ fontSize: "12px", color: "gray", width: "300px" }}
                 >
-                  {valid === 0 && (
-                    <>
-                      <div>
-                        숫자와 영문자 기준 최대 20자, 한글 기준 최대 10자
-                      </div>
-                      <div>특수 문자는 입력할 수 없습니다</div>
-                    </>
-                  )}
+                  <div className="my-3">
+                    <div>숫자와 영문자 기준 최대 20자, 한글 기준 최대 10자</div>
+                    <div>특수 문자는 입력할 수 없습니다</div>
+                  </div>
                   {valid % 2 === 1 && (
-                    <div style={{ color: "red" }}>
-                      글자 제한을 초과하였습니다
-                    </div>
+                    <li style={{ color: "red" }}>글자 제한을 초과하였습니다</li>
                   )}
-                  {valid >= 2 && (
-                    <div style={{ color: "red" }}>
+                  {(valid === 2 || valid === 3) && (
+                    <li style={{ color: "red" }}>
                       특수 문자가 포함되어 있습니다
-                    </div>
+                    </li>
                   )}
                 </span>
               </div>
@@ -183,6 +191,7 @@ const SignupModal = (props) => {
                   progress === 2 ? styles.show : ""
                 }`}
               >
+                <div className={styles.contentTitle}>최종 확인</div>
                 <div className="d-flex justify-content-center m-5">
                   <img
                     src={logos[0] ? myLogo.logoUrl : ""}
@@ -194,7 +203,7 @@ const SignupModal = (props) => {
                   </div>
                 </div>
                 <div>
-                  {valid === 0 ? (
+                  {valid === 0 && clubNameInput.current.value.trim().length ? (
                     <>
                       <div>선택을 완료하시겠습니까?</div>
                       <p style={{ fontSize: "12px", color: "grey" }}>
@@ -219,7 +228,29 @@ const SignupModal = (props) => {
                 </div>
               </div>
             </div>
-            <div className="d-flex justify-content-center">
+            <div className={styles.moveBtn}>
+              {progress !== 0 ? (
+                <IoChevronBackOutline
+                  onClick={prev}
+                  className={`${styles.changeBtn} ${
+                    isActive ? "" : styles.closeBtn
+                  }`}
+                />
+              ) : (
+                <div />
+              )}
+              {progress !== 2 ? (
+                <IoChevronForwardOutline
+                  onClick={next}
+                  className={`${styles.changeBtn} ${
+                    isActive ? "" : styles.closeBtn
+                  }`}
+                />
+              ) : (
+                <div />
+              )}
+            </div>
+            <div className="d-flex justify-content-center mt-3 mb-4">
               <div>
                 <button
                   className={`${styles.button} ${
@@ -243,22 +274,6 @@ const SignupModal = (props) => {
                   onClick={moveCard}
                 />
               </div>
-            </div>
-            <div className="d-flex justify-content-around mt-3 mb-4">
-              {progress !== 0 ? (
-                <button onClick={prev} className={styles.noBorder}>
-                  &#171;
-                </button>
-              ) : (
-                <div style={{ width: "20px" }} />
-              )}
-              {progress !== 2 ? (
-                <button onClick={next} className={styles.noBorder}>
-                  &#187;
-                </button>
-              ) : (
-                <div style={{ width: "20px" }} />
-              )}
             </div>
             <span className={styles.back} onClick={closeModal}>
               &#8592;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CANCLE&nbsp;&nbsp;&nbsp;
