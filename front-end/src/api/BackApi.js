@@ -33,7 +33,7 @@ export default {
   },
   game: {
     brief: HOST + GAME + "/brief",
-    batting_order: HOST + GAME + "/batting-order",
+    battingOrder: HOST + GAME + "/batting-order",
     lineUp: HOST + GAME + "/line-up",
     logs: HOST + GAME + "/logs",
     play: HOST + GAME + "/play",
