@@ -150,35 +150,32 @@ public class TradeService {
     public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()) {
-            System.out.println("선수 이적 : " + tradeSaveReqDto.getPlayerType() + tradeSaveReqDto.getPlayerSeq());
-            if(tradeSaveReqDto.getPlayerType().equals("pitcher")) {
-                // 보유 투수 모두 삭제
-                managePitcherRepository.deleteAll();
-                // 투수 이적(in)
-                for (Long seq : tradeSaveReqDto.getPlayerSeq()) {
-                    if (managePitcherRepository.existsByPitcherSeq(seq)) continue;
-                    else {
-                        UserPitcher build = UserPitcher.builder()
-                                .userSeq(byUserUid.get())
-                                .pitcherSeq(seq)
-                                .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
-                        managePitcherRepository.save(build);
-                    }
+            System.out.println("투수 : " + tradeSaveReqDto.getPitcherSeq() + "타자 : " +  tradeSaveReqDto.getHitterSeq());
+            // 보유 투수 모두 삭제
+            managePitcherRepository.deleteAll();
+            // 투수 이적(in)
+            for (Long seq : tradeSaveReqDto.getPitcherSeq()) {
+                if (managePitcherRepository.existsByPitcherSeq(seq)) continue;
+                else {
+                    UserPitcher build = UserPitcher.builder()
+                            .userSeq(byUserUid.get())
+                            .pitcherSeq(seq)
+                            .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
+                    managePitcherRepository.save(build);
                 }
             }
-            else if(tradeSaveReqDto.getPlayerType().equals("hitter")) {
-                // 보유 타자 모두 삭제
-                manageHitterRepository.deleteAll();
-                // 타자 이적(in)
-                for (Long seq : tradeSaveReqDto.getPlayerSeq()) {
-                    if (manageHitterRepository.existsByHitterSeq(seq)) continue;
-                    else {
-                        UserHitter build = UserHitter.builder()
-                                .userSeq(byUserUid.get())
-                                .hitterSeq(seq)
-                                .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
-                        manageHitterRepository.save(build);
-                    }
+
+            // 보유 타자 모두 삭제
+            manageHitterRepository.deleteAll();
+            // 타자 이적(in)
+            for (Long seq : tradeSaveReqDto.getHitterSeq()) {
+                if (manageHitterRepository.existsByHitterSeq(seq)) continue;
+                else {
+                    UserHitter build = UserHitter.builder()
+                            .userSeq(byUserUid.get())
+                            .hitterSeq(seq)
+                            .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
+                    manageHitterRepository.save(build);
                 }
             }
             return true;

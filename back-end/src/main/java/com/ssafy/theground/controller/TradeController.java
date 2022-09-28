@@ -52,7 +52,10 @@ public class TradeController {
     }
 
     @PutMapping("/save")
-    public ResponseEntity<?> tradeSave(@RequestBody TradeSaveReqDto tradeSaveReqDto) throws Exception {
+    public ResponseEntity<?> tradeSave(@RequestBody Map<String, List<Long>> map) throws Exception {
+        TradeSaveReqDto tradeSaveReqDto = new TradeSaveReqDto();
+        tradeSaveReqDto.setPitcherSeq(map.get("pitcher"));
+        tradeSaveReqDto.setHitterSeq(map.get("hitter"));
         boolean b = tradeService.tradeSave(tradeSaveReqDto);
         if (b) {
             return new ResponseEntity<>(true, HttpStatus.OK);
