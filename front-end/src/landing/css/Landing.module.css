@@ -26,10 +26,12 @@
 }
 
 .title > img {
+  -webkit-user-drag: none;
   width: 1100px;
 }
 
 .subtitle > img {
+  -webkit-user-drag: none;
   width: 300px;
 }
 
