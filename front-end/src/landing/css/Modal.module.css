@@ -43,7 +43,6 @@
   object-fit: cover;
 }
 
-
 .buttons {
   width: 100%;
   padding: 60px 0px 100px 0px;
@@ -61,7 +60,9 @@
   background-image: url("../../assets/google_login.png");
 }
 
-.kakaoBtn, .naverBtn, .googleBtn {
+.kakaoBtn,
+.naverBtn,
+.googleBtn {
   margin: 20px auto;
   background-repeat: no-repeat;
   background-size: contain;
@@ -76,7 +77,6 @@
   font-weight: bold;
   cursor: pointer;
 }
-
 
 @keyframes modal-show {
   from {
