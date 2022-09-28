@@ -12,10 +12,10 @@ import HitterList from "./components/HitterList";
 import PitcherList from "./components/PitcherList";
 import BullpenList from "./components/BullpenList";
 
+import BackApi from "../api/BackApi";
 import PitchersData from "../market/PitchersData";
 
 const Manage = () => {
-  const MAIN_URI = "https://j7d109.p.ssafy.io/back";
   const JWT_TOKEN =
     "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
 
@@ -34,7 +34,7 @@ const Manage = () => {
     // 구원 투수 목록 조회
     (async () => {
       await axios
-        .get(`${MAIN_URI}/manage/pitchers`, {
+        .get(BackApi.manage.pitchers, {
           headers: {
             "X-ACCESS-TOKEN": JWT_TOKEN,
           },
@@ -50,7 +50,7 @@ const Manage = () => {
     // 보유 타자 목록 조회
     (async () => {
       await axios
-        .get(`${MAIN_URI}/manage/hitters`, {
+        .get(BackApi.manage.hitters, {
           headers: {
             "X-ACCESS-TOKEN": JWT_TOKEN,
           },

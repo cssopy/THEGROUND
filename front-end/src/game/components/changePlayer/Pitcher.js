@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "../../css/changePlayer/ChangePitchers.module.css";
-import arrowImg from "../../../assets/up-down-arrow.png";
+import arrowImg from "../../../assets/etc/up-down-arrow.png";
 
 const Pitcher = (props) => {
   const ref = useRef(null);

@@ -1,8 +1,8 @@
 import { Col, Row } from "react-bootstrap";
 
-import style from "./css/matchOPPO/MatchOPPO.module.css";
+import style from "../../css/matchOPPO/MatchOPPO.module.css";
 
-import logo from "../assets/ground2.png";
+import logo from "../../../assets/etc/ground2.png";
 
 const MatchOPPO = () => {
   return (
