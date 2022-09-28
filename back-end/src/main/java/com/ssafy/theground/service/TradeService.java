@@ -150,6 +150,7 @@ public class TradeService {
     public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()) {
+            System.out.println("선수 이적 : " + tradeSaveReqDto.getPlayerType() + tradeSaveReqDto.getPlayerSeq());
             if(tradeSaveReqDto.getPlayerType().equals("pitcher")) {
                 // 보유 투수 모두 삭제
                 managePitcherRepository.deleteAll();
