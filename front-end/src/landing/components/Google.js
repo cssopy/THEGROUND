@@ -1,5 +1,5 @@
 import styles from "../css/Modal.module.css";
-import googleBtn from "../../assets/google_login.png";
+import googleBtn from "../../assets/etc/google_login.png";
 
 const Google = () => {
   const CLIENT_ID =
