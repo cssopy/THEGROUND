@@ -7,15 +7,13 @@ const Hitter = (props) => {
         <td>
           <div
             className={
-              style[
-                props.hitter.batArm === "좌타" ? "leftHitter" : "rightHitter"
-              ]
+              style[props.hitter.batArm === "L" ? "leftHitter" : "rightHitter"]
             }
           >
-            {props.hitter.batArm}
+            {props.hitter.batArm === "L" ? "좌타" : "우타"}
           </div>
         </td>
-        <td>{props.hitter.name}</td>
+        <td>{props.hitter.hitterName}</td>
         <td>{props.hitter.avg}</td>
         <td>{props.hitter.game}</td>
         <td>{props.hitter.atBat}</td>

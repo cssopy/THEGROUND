@@ -46,10 +46,10 @@ const PitcherList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>ERA</th>
-            <th>게임수</th>
             <th>이닝수</th>
             <th>승리</th>
             <th>패배</th>
+            <th>연봉</th>
           </tr>
         </thead>
         <tbody
@@ -64,7 +64,7 @@ const PitcherList = memo((props) => {
                 key={pitcher.pitcherSeq}
                 pitcher={pitcher}
                 addBullpens={props.addBullpens}
-                addPitcher={props.addPitcher}
+                addMyPitcher={props.addMyPitcher}
                 onMouseOver={() => {
                   onMouseOver(pitcher);
                 }}

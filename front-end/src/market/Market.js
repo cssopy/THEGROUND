@@ -1,32 +1,30 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+import axios from "axios";
+
 import HitterList from "./components/HitterList";
 import PicherList from "./components/PitcherList";
 import MyHitterList from "./components/MyHitterList";
 import MyPicherList from "./components/MyPitcherList";
 
 import style from "./css/Market.module.css";
-import HittersData from "./HittersData";
-import PitchersData from "./PitchersData";
 
 const Market = () => {
-  // 컴포넌트가 처음 마운트 될 때
-  useEffect(() => {
-    initHittersRef.current = HittersData;
-    initPitchersRef.current = PitchersData;
+  const MAIN_URI = "https://j7d109.p.ssafy.io/back";
+  const JWT_TOKEN =
+    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
 
-    setHitters(initHittersRef.current);
-    setPitchers(initPitchersRef.current);
-    setMyHitters(initHittersRef.current);
-    setMyPitchers(initPitchersRef.current);
-  }, []);
+  const navigate = useNavigate();
 
   // 저장 전 처음 보유 선수 목록
   const initHittersRef = useRef([]);
+  const initMyHittersRef = useRef([]);
   const initPitchersRef = useRef([]);
+  const initMyPitchersRef = useRef([]);
 
   // 타자, 투수 토글 상태
   const [toggle, setToggle] = useState(true);
@@ -45,41 +43,127 @@ const Market = () => {
   // 타자, 투수 목록 탭 css 관련
   const [listTab, setListTab] = useState(["#041e42", "#ffffff00"]);
 
+  // 컴포넌트가 처음 마운트 될 때
+  useEffect(() => {
+    // 미보유 타자 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/trade/not-poss-hitters`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initHittersRef.current = res.data;
+          setHitters(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 보유 타자 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/trade/poss-hitters`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initMyHittersRef.current = res.data;
+          setMyHitters(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 미보유 투수 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/trade/not-poss-pitchers`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initPitchersRef.current = res.data;
+          setPitchers(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 보유 투수 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/trade/poss-pitchers`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initMyPitchersRef.current = res.data;
+          setMyPitchers(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+  }, []);
+
   // 보유 타자에 선수 추가
-  const addHitter = useCallback((hitter) => {
+  const addMyHitter = useCallback((hitter) => {
     setMyHitters((myHitters) => {
       return [...myHitters, hitter];
     });
+    setHitters((hitters) => {
+      return hitters.filter((item) => {
+        return item.hitterSeq !== hitter.hitterSeq;
+      });
+    });
   }, []);
 
-  // 보유 타자에서 선수 제거
-  const removeHitter = useCallback((idx) => {
+  // 미보유 타자에 선수 추가
+  const addHitter = useCallback((hitter) => {
+    setHitters((hitters) => {
+      return [...hitters, hitter];
+    });
     setMyHitters((myHitters) => {
-      let temList = [...myHitters];
-      temList.splice(idx, 1);
-      return temList;
+      return myHitters.filter((item) => {
+        return item.hitterSeq !== hitter.hitterSeq;
+      });
     });
   }, []);
 
   // 보유 투수에 선수 추가
-  const addPitcher = useCallback((pitcher) => {
+  const addMyPitcher = useCallback((pitcher) => {
     setMyPitchers((myPitchers) => {
       return [...myPitchers, pitcher];
     });
+    setPitchers((pitchers) => {
+      return pitchers.filter((item) => {
+        return item.pitcherSeq !== pitcher.pitcherSeq;
+      });
+    });
   }, []);
 
-  // 보유 투수에서 선수 제거
-  const removePitcher = useCallback((idx) => {
+  // 미보유 투수에 선수 추가
+  const addPitcher = useCallback((pitcher) => {
+    setPitchers((pitchers) => {
+      return [...pitchers, pitcher];
+    });
     setMyPitchers((myPitchers) => {
-      let temList = [...myPitchers];
-      temList.splice(idx, 1);
-      return temList;
+      return myPitchers.filter((item) => {
+        return item.pitcherSeq !== pitcher.pitcherSeq;
+      });
     });
   }, []);
 
   const reset = () => {
-    setMyHitters(initHittersRef.current);
-    setMyPitchers(initPitchersRef.current);
+    setHitters(initHittersRef.current);
+    setMyHitters(initMyHittersRef.current);
+    setPitchers(initPitchersRef.current);
+    setMyPitchers(initMyPitchersRef.current);
   };
 
   const save = () => {
@@ -135,13 +219,13 @@ const Market = () => {
                     {toggle && (
                       <HitterList
                         hitters={hitters}
-                        addHitter={addHitter}
+                        addMyHitter={addMyHitter}
                       ></HitterList>
                     )}
                     {!toggle && (
                       <PicherList
                         pitchers={pitchers}
-                        addPitcher={addPitcher}
+                        addMyPitcher={addMyPitcher}
                       ></PicherList>
                     )}
                   </Row>
@@ -179,13 +263,13 @@ const Market = () => {
                       {toggle && (
                         <MyHitterList
                           hitters={myHitters}
-                          removeHitter={removeHitter}
+                          addHitter={addHitter}
                         ></MyHitterList>
                       )}
                       {!toggle && (
                         <MyPicherList
                           pitchers={myPitchers}
-                          removePitcher={removePitcher}
+                          addPitcher={addPitcher}
                         ></MyPicherList>
                       )}
                     </Row>
@@ -193,18 +277,22 @@ const Market = () => {
                 </Col>
               </Row>
               <Row className={style["btnGroup"]}>
-                <Link
+                <div
                   className={`${style["btn"]} ${style["bg-color-cst1"]}`}
-                  to="/main"
+                  onClick={() => {
+                    navigate("/main");
+                  }}
                 >
                   MAIN
-                </Link>
-                <Link
+                </div>
+                <div
                   className={`${style["btn"]} ${style["bg-color-cst3"]}`}
-                  to="/manage"
+                  onClick={() => {
+                    navigate("/manage");
+                  }}
                 >
                   구단관리
-                </Link>
+                </div>
                 <div
                   className={`${style["btn"]} ${style["bg-color-cst4"]}`}
                   onClick={reset}

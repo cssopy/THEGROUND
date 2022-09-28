@@ -7,7 +7,7 @@ import { ItemTypes } from "./ItemTypes.js";
 
 import style from "../css/MyPitcherList.module.css";
 
-import PitcherDetailModal from "./PitcherDetailModal";
+import MyPitcherDetailModal from "./MyPitcherDetailModal";
 
 const PitcherList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -46,10 +46,10 @@ const PitcherList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>ERA</th>
-            <th>게임수</th>
             <th>이닝수</th>
             <th>승리</th>
             <th>패배</th>
+            <th>연봉</th>
           </tr>
         </thead>
         <tbody
@@ -58,13 +58,12 @@ const PitcherList = memo((props) => {
           style={{ backgroundColor }}
           data-testid="myPitcherList"
         >
-          {props.pitchers.map((pitcher, index) => {
+          {props.pitchers.map((pitcher) => {
             return (
               <MyPitcher
-                key={index}
-                idx={index}
+                key={pitcher.pitcherSeq}
                 pitcher={pitcher}
-                removePitcher={props.removePitcher}
+                addPitcher={props.addPitcher}
                 onMouseOver={() => {
                   onMouseOver(pitcher);
                 }}
@@ -74,7 +73,7 @@ const PitcherList = memo((props) => {
           })}
         </tbody>
       </Table>
-      {modalIsOpen && <PitcherDetailModal pitcher={pitcher} />}
+      {modalIsOpen && <MyPitcherDetailModal pitcher={pitcher} />}
     </>
   );
 });

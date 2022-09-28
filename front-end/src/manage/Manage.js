@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+import axios from "axios";
 
 import style from "./css/Manage.module.css";
 
@@ -10,11 +12,15 @@ import HitterList from "./components/HitterList";
 import PitcherList from "./components/PitcherList";
 import BullpenList from "./components/BullpenList";
 
-import HittersData from "../market/HittersData";
 import PitchersData from "../market/PitchersData";
-import BullpensData from "../market/BullpensData";
 
 const Manage = () => {
+  const MAIN_URI = "https://j7d109.p.ssafy.io/back";
+  const JWT_TOKEN =
+    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
+
+  const navigate = useNavigate();
+
   const initHittersRef = useRef([]);
   const initPitchersRef = useRef([]);
   const initBullpensRef = useRef([]);
@@ -25,14 +31,46 @@ const Manage = () => {
 
   // 컴포넌트가 마운트 될때
   useEffect(() => {
-    // 서버에서 데이터 얻어와서 초기화 (hitters, pitchers, bullpens, initPitchers, initBullpens)
-    initHittersRef.current = HittersData;
-    initPitchersRef.current = PitchersData;
-    initBullpensRef.current = BullpensData;
+    // 구원 투수 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/manage/pitchers`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initBullpensRef.current = res.data;
+          setBullpens(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 보유 타자 목록 조회
+    (async () => {
+      await axios
+        .get(`${MAIN_URI}/manage/hitters`, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          initHittersRef.current = res.data;
+          setHitters(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 선발 로테이션 조회
 
-    setHitters(initHittersRef.current);
+    initPitchersRef.current = PitchersData.slice(
+      PitchersData.length / 2,
+      PitchersData.length
+    );
+
     setPitchers(initPitchersRef.current);
-    setBullpens(initBullpensRef.current);
   }, []);
 
   // reset 버튼 함수
@@ -87,84 +125,91 @@ const Manage = () => {
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-        <Container
-          fluid
+        <Row
           className={`${style["background"]} ${style["manage"]}`}
           onContextMenu={(e) => {
             e.preventDefault();
           }}
         >
-          <Container className={style["clubHead"]}>구단 관리</Container>
-          <Container className={style["clubBody"]}>
-            <Row className={style["clubBody-row1"]}>
-              <Col className={style["clubBody-row1-col1"]}>
-                <Row className={style["clubBody-row1-col1-row"]}>
-                  <Container className={style["batterHead"]}>
-                    보유 타자
-                  </Container>
-                  <Container className={style["batterBody"]}>
-                    <HitterList hitters={hitters}></HitterList>
-                  </Container>
-                </Row>
-              </Col>
-              <Col className={style["clubBody-row1-col2"]}>
-                <Row className={style["clubBody-row1-col2-row1"]}>
-                  <Container className={style["pircherHead"]}>
-                    선발 로테이션
-                  </Container>
-                  <Container className={style["pircherBody"]}>
-                    <PitcherList
-                      pitchers={pitchers}
-                      addBullpens={addBullpens}
-                    ></PitcherList>
-                  </Container>
-                </Row>
-                <Row className={style["clubBody-row1-col2-row2"]}>
-                  <Container className={style["pircherHead"]}>
-                    구원 투수
-                  </Container>
-                  <Container className={style["pircherBody"]}>
-                    <BullpenList
-                      bullpens={bullpens}
-                      addPitchers={addPitchers}
-                    ></BullpenList>
-                  </Container>
-                </Row>
-              </Col>
+          <div style={{ marginTop: "auto", marginBottom: "auto" }}>
+            <Row className={style["clubHead"]}>
+              <div>구단 관리</div>
             </Row>
-            <Row className={style["clubBody-row2"]}>
-              <div className={style["clubBody-row2-div"]}>
-                <Link
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
-                  to="/main"
-                >
-                  MAIN
-                </Link>
-                &nbsp;&nbsp;
-                <Link
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
-                  to="/market"
-                >
-                  이적시장
-                </Link>
-                &nbsp;&nbsp;
-                <div
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst4"]}`}
-                  onClick={reset}
-                >
-                  RESET
+            <Container className={style["clubBody"]}>
+              <Row className={style["clubBody-row1"]}>
+                <Col className={style["clubBody-row1-col1"]}>
+                  <Row className={style["clubBody-row1-col1-row"]}>
+                    <Row className={style["batterHead"]}>
+                      <div>보유 타자</div>
+                    </Row>
+                    <Row className={style["batterBody"]}>
+                      <HitterList hitters={hitters}></HitterList>
+                    </Row>
+                  </Row>
+                </Col>
+                <Col className={style["clubBody-row1-col2"]}>
+                  <Row className={style["clubBody-row1-col2-row1"]}>
+                    <Row className={style["pircherHead"]}>
+                      <div>선발 로테이션</div>
+                    </Row>
+                    <Row className={style["pircherBody"]}>
+                      <PitcherList
+                        pitchers={pitchers}
+                        addBullpens={addBullpens}
+                      ></PitcherList>
+                    </Row>
+                  </Row>
+                  <Row className={style["clubBody-row1-col2-row2"]}>
+                    <Row className={style["pircherHead"]}>
+                      <div>구원 투수</div>
+                    </Row>
+                    <Row className={style["pircherBody"]}>
+                      <BullpenList
+                        bullpens={bullpens}
+                        addPitchers={addPitchers}
+                      ></BullpenList>
+                    </Row>
+                  </Row>
+                </Col>
+              </Row>
+              <Row className={style["clubBody-row2"]}>
+                <div className={style["clubBody-row2-div"]}>
+                  <div
+                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
+                    onClick={() => {
+                      navigate("/main");
+                    }}
+                  >
+                    MAIN
+                  </div>
+                  &nbsp;&nbsp;
+                  <div
+                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
+                    onClick={() => {
+                      navigate("/market");
+                    }}
+                  >
+                    이적시장
+                  </div>
+                  &nbsp;&nbsp;
+                  <div
+                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst4"]}`}
+                    onClick={reset}
+                  >
+                    RESET
+                  </div>
+                  &nbsp;&nbsp;
+                  <div
+                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst5"]}`}
+                    onClick={save}
+                  >
+                    SAVE
+                  </div>
                 </div>
-                &nbsp;&nbsp;
-                <div
-                  className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst5"]}`}
-                  onClick={save}
-                >
-                  SAVE
-                </div>
-              </div>
-            </Row>
-          </Container>
-        </Container>
+              </Row>
+            </Container>
+          </div>
+        </Row>
       </DndProvider>
     </>
   );
