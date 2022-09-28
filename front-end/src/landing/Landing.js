@@ -5,15 +5,15 @@ import subtitle from "../assets/subtitle.png";
 import Modal from "./components/Modal.js";
 import NaverLoginHandler from "./components/NaverLoginHandler";
 import KakaoLoginHandler from "./components/KakaoLoginHandler";
-import GoogleLoginHandler from './components/GoogleLoginHandler';
+import GoogleLoginHandler from "./components/GoogleLoginHandler";
 import SignupModal from "./components/SignupModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux/es/exports";
 
 const Landing = () => {
   const [login, setLogin] = useState(false);
-  const loginType = localStorage.getItem('loginType');
-  const uid = useSelector(state => state.user.uid);
+  const loginType = localStorage.getItem("loginType");
+  const uid = useSelector((state) => state.user.uid);
 
   return (
     <>
