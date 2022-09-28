@@ -3,9 +3,7 @@ import landingVideo from "../assets/video/landing-dark.mp4";
 import title from "../assets/etc/title.png";
 import subtitle from "../assets/etc/subtitle.png";
 import Modal from "./components/Modal.js";
-import NaverLoginHandler from "./components/NaverLoginHandler";
-import KakaoLoginHandler from "./components/KakaoLoginHandler";
-import GoogleLoginHandler from "./components/GoogleLoginHandler";
+import LoginHandler from "./components/LoginHandler";
 import SignupModal from "./components/SignupModal";
 import { useState } from "react";
 import { useSelector } from "react-redux/es/exports";
@@ -35,11 +33,9 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <NaverLoginHandler loginType={loginType} />
-      <KakaoLoginHandler loginType={loginType} />
-      <GoogleLoginHandler loginType={loginType} />
+      <LoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
-      {loginType && uid ? <SignupModal uid={uid} /> : <></>}
+      {loginType && uid ? <SignupModal /> : <></>}
     </>
   );
 };
