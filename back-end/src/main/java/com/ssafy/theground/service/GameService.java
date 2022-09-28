@@ -33,7 +33,7 @@ public class GameService {
 
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()){
-            List<Match> ByUserSeq = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+            List<Match> ByUserSeq = matchRepository.findByUserSeq(byUserUid.get());
             Match match = ByUserSeq.get(0);
             boolean matchHomeFlag = match.getMatchHomeFlag();
             BriefInfoResDto homeTeam = new BriefInfoResDto();
@@ -47,10 +47,10 @@ public class GameService {
                 homeTeam.setTeamLose(byUserUid.get().getUserLose());
                 homeTeam.setTeamDraw(byUserUid.get().getUserDraw());
                 TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
-                homeTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp().getPitcherSeq()).getPitcherName());
+                homeTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue()).getPitcherName());
                 map.put("home", homeTeam);
 
-                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
                 awayTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
@@ -65,10 +65,10 @@ public class GameService {
                 awayTeam.setTeamLose(byUserUid.get().getUserLose());
                 awayTeam.setTeamDraw(byUserUid.get().getUserDraw());
                 TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
-                awayTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSetting1stSp().getPitcherSeq()).getPitcherName());
+                awayTeam.setStartingPitcher(pitcherRepository.findByPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue()).getPitcherName());
                 map.put("away", awayTeam);
 
-                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get().getUserSeq());
+                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
