@@ -33,12 +33,14 @@
 }
 
 .modalTitle {
+  -webkit-user-drag: none;
   width: 400px;
   margin-top: 10px;
   object-fit: cover;
 }
 
 .modalSubtitle {
+  -webkit-user-drag: none;
   width: 160px;
   object-fit: cover;
 }
@@ -49,6 +51,7 @@
 }
 
 .loginBtn {
+  -webkit-user-drag: none;
   margin: 10px auto;
   background-repeat: no-repeat;
   background-size: contain;
