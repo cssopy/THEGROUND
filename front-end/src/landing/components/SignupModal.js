@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import playersActions from "../../redux/thunkActions/playerActions";
 
-const SignupModal = (props) => {
-  let { uid } = props;
+const SignupModal = () => {
   const loginType = localStorage.getItem("loginType");
   localStorage.removeItem("loginType");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,12 +20,16 @@ const SignupModal = (props) => {
   const [selectLogo, setSelectLogo] = useState(false);
   const [valid, setValid] = useState(4);
   const [isActive, setIsActive] = useState(true);
-  const clubNameInput = useRef("");
+
   const logos = useSelector((state) => state.logo.logos);
   const myLogo = useSelector((state) => state.user.user.logo);
+  const uid = useSelector((state) => state.user.user.uid);
+
+  const clubNameInput = useRef("");
+
   const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-  var check_num = /[0-9]/;
-  var check_eng = /[a-zA-Z]/;
+  const check_num = /[0-9]/;
+  const check_eng = /[a-zA-Z]/;
 
   const handleClubName = () => {
     const target = clubNameInput.current.value;
@@ -110,7 +114,6 @@ const SignupModal = (props) => {
   };
 
   const closeModal = () => {
-    dispatch(userActions.setJwt(""));
     dispatch(userActions.setUid(""));
   };
 
