@@ -48,22 +48,8 @@
   padding: 60px 0px 100px 0px;
 }
 
-.kakaoBtn {
-  background-image: url("../../assets/kakao_login.png");
-}
-
-.naverBtn {
-  background-image: url("../../assets/naver_login.png");
-}
-
-.googleBtn {
-  background-image: url("../../assets/google_login.png");
-}
-
-.kakaoBtn,
-.naverBtn,
-.googleBtn {
-  margin: 20px auto;
+.loginBtn {
+  margin: 10px auto;
   background-repeat: no-repeat;
   background-size: contain;
   color: transparent;

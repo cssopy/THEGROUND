@@ -1,4 +1,5 @@
 import styles from "../css/Modal.module.css";
+import kakaoBtn from "../../assets/kakao_login.png";
 
 const Kakao = () => {
   const REST_API_KEY = "1ae04a78365d2a5f1e2e1d4ee529fe84";
@@ -14,7 +15,9 @@ const Kakao = () => {
 
   return (
     <>
-      <div className={styles.kakaoBtn} onClick={kakaoLogin} />
+      <div onClick={kakaoLogin}>
+        <img className={styles.loginBtn} src={kakaoBtn} alt="kakaoButton" />
+      </div>
     </>
   );
 };
