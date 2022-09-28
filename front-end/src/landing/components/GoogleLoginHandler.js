@@ -54,7 +54,7 @@ const GoogleLoginHandler = (props) => {
                 navigate("/");
               } else {
                 // jwt 토큰과 유저 이름을 저장 후 메인 페이지로 이동
-                dispatch(userActions.setJwtToken(res.data.jwt));
+                dispatch(userActions.setJwt(res.data.jwt));
                 dispatch(userActions.setUserTeamname(res.data.userTeamname));
                 localStorage.removeItem("loginType");
                 localStorage.setItem("jwt", res.data.jwt);

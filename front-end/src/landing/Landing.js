@@ -22,10 +22,10 @@ const Landing = () => {
       </video>
       <div className={styles.landing}>
         <div>
-          <div className={styles.title}>
+          <div className={`${styles.title} ${styles.img}`}>
             <img src={title} alt="" />
           </div>
-          <div className={styles.subtitle}>
+          <div className={`${styles.subtitle} ${styles.img}`}>
             <img src={subtitle} alt="" />
           </div>
           <div className={styles.buttonLoc}>

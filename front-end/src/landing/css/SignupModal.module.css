@@ -21,11 +21,11 @@
 .smallModal {
   display: none;
   position: relative;
-  margin-left: 680px;
+  margin-left: 750px;
   top: 0;
   left: 0;
-  width: 270px;
-  height: 320px;
+  width: 320px;
+  height: 380px;
   border-radius: 10px;
   padding: 10px;
   z-index: 99;
@@ -55,13 +55,9 @@
 }
 
 .modalTitle {
+  -webkit-user-drag: none;
   width: 400px;
   margin-top: 10px;
-  object-fit: cover;
-}
-
-.modalSubtitle {
-  width: 160px;
   object-fit: cover;
 }
 
@@ -73,9 +69,10 @@
 
 .content {
   display: flex;
+  margin: 25px 0px;
   width: 1200px;
   height: 300px;
-  transition: all 0.5s;
+  transition: all 0.7s;
 }
 
 .contentTitle {
@@ -87,7 +84,7 @@
 .hide {
   width: 350px;
   margin: 25px;
-  transition: all 0.5s;
+  transition: all 0.7s;
 }
 
 .show {
@@ -121,12 +118,14 @@
 }
 
 .img {
+  -webkit-user-drag: none;
   margin: 10px;
   width: 120px;
   height: 120px;
 }
 
 .logo {
+  -webkit-user-drag: none;
   width: 35px;
   height: 35px;
 }
@@ -136,12 +135,41 @@
 }
 
 .logoList {
-  width: 50px;
+  -webkit-user-drag: none;
+  width: 60px;
+  border-radius: 15px;
   transition: all 0.2s;
 }
 
 .selected {
-  border: 2px solid red;
+  padding: 5px;
+  background: #cecece;
+}
+
+.moveBtn {
+  margin-top: -200px;
+  margin-bottom: 100px;
+  display: flex;
+  width: 400px;
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.changeBtn {
+  padding: 10px;
+  width: 35px;
+  height: 100px;
+  background-color: #eeeeee;
+  transition: all 0.2s;
+}
+
+.changeBtn:hover {
+  cursor: pointer;
+}
+
+.closeBtn {
+  opacity: 0;
 }
 
 @keyframes modal-show {
