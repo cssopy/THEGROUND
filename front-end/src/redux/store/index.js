@@ -9,18 +9,22 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 
 import userReducer from "../slice/userSlice";
+import logoReducer from "../slice/logoSlice";
+import playerReducer from "../slice/playerSlice";
 
 const persistConfig = {
   key: "root",
   version: 1,
-  storage,
+  storage: storageSession,
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
+  logo: logoReducer,
+  player: playerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
