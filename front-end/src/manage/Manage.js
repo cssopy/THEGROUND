@@ -34,7 +34,7 @@ const Manage = () => {
     // 구원 투수 목록 조회
     (async () => {
       await axios
-        .get(BackApi.manage.pitchers(), {
+        .get(BackApi.manage.pitchers, {
           headers: {
             "X-ACCESS-TOKEN": JWT_TOKEN,
           },
@@ -50,7 +50,7 @@ const Manage = () => {
     // 보유 타자 목록 조회
     (async () => {
       await axios
-        .get(BackApi.manage.hitters(), {
+        .get(BackApi.manage.hitters, {
           headers: {
             "X-ACCESS-TOKEN": JWT_TOKEN,
           },
