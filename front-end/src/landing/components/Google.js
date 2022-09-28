@@ -1,4 +1,5 @@
 import styles from "../css/Modal.module.css";
+import googleBtn from "../../assets/google_login.png";
 
 const Google = () => {
   const CLIENT_ID =
@@ -15,7 +16,9 @@ const Google = () => {
   };
   return (
     <>
-      <div className={styles.googleBtn} onClick={googleLogin} />
+      <div onClick={googleLogin}>
+        <img className={styles.loginBtn} src={googleBtn} alt="googleButton" />
+      </div>
     </>
   );
 };
