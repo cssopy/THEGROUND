@@ -15,3 +15,5 @@ const Tal = () => {
 };
 
 export default Tal;
+
+// https://j7d109.p.ssafy.io/back/stats
