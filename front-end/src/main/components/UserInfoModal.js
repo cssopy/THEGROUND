@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import { BsPencilSquare } from "react-icons/bs";
 
-import img from "../../assets/ground2.png";
+import img from "../../assets/etc/ground2.png";
 
 import style from "../css/UserInfoModal.module.css";
 

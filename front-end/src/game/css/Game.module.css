@@ -5,7 +5,7 @@
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
     ),
-    url(../../assets/background1.jpg);
+    url(../../assets/image/background1.jpg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: top center;
@@ -22,7 +22,6 @@
   border-radius: 20px;
 }
 
-
 .btn {
   font-size: 28px;
   border: none;
@@ -33,11 +32,11 @@
 }
 
 .change {
-  background: linear-gradient(#A2E90B, rgba(162, 233, 11, 0.4));
+  background: linear-gradient(#a2e90b, rgba(162, 233, 11, 0.4));
 }
 
 .skip {
-  background: linear-gradient(#BF0D3E, rgba(191, 13, 62, 0.4));
+  background: linear-gradient(#bf0d3e, rgba(191, 13, 62, 0.4));
 }
 
 .zero {

@@ -1,6 +1,6 @@
 import styles from "../css/SignupModal.module.css";
-import title from "../../assets/title.png";
-import subtitle from "../../assets/subtitle.png";
+import title from "../../assets/etc/title.png";
+import subtitle from "../../assets/etc/subtitle.png";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
