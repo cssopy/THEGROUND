@@ -58,11 +58,10 @@ const PitcherList = memo((props) => {
           style={{ backgroundColor }}
           data-testid="myPitcherList"
         >
-          {props.pitchers.map((pitcher, index) => {
+          {props.pitchers.map((pitcher) => {
             return (
               <MyPitcher
-                key={index}
-                idx={index}
+                key={pitcher.pitcherSeq}
                 pitcher={pitcher}
                 addPitcher={props.addPitcher}
                 onMouseOver={() => {
