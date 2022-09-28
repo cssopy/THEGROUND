@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Builder
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

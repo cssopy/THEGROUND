@@ -150,19 +150,20 @@ public class TradeService {
     public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()) {
-            UserPitcher pitcher = new UserPitcher();
-            UserHitter hitter = new UserHitter();
+            List<UserPitcher> pitcher = new ArrayList<>();
+            List<UserHitter> hitter = new ArrayList<>();
 
             // 보유 투수 모두 삭제
             managePitcherRepository.deleteAll();
             // 투수 이적(in)
             for (Long seq : tradeSaveReqDto.getPitcherSeq()) {
                 System.out.println("pSeq = " + seq);
-                pitcher.builder()
-                        .userSeq(byUserUid.get())
-                        .pitcherSeq(seq)
-                        .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
-                managePitcherRepository.save(pitcher);
+                UserPitcher p = new UserPitcher();
+                p.setPitcherSeq(seq);
+                p.setUserSeq(byUserUid.get());
+                p.setUserPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName());
+
+                pitcher.add(p);
             }
 
             // 보유 타자 모두 삭제
@@ -170,11 +171,12 @@ public class TradeService {
             // 타자 이적(in)
             for (Long seq : tradeSaveReqDto.getHitterSeq()) {
                 System.out.println("hSeq = " + seq);
-                hitter.builder()
-                        .userSeq(byUserUid.get())
-                        .hitterSeq(seq)
-                        .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
-                manageHitterRepository.save(hitter);
+                UserHitter h = new UserHitter();
+                h.setHitterSeq(seq);
+                h.setUserSeq(byUserUid.get());
+                h.setUserHitterName(hitterRepository.findByHitterSeq(seq).getHitterName());
+
+                hitter.add(h);
             }
             return true;
         }
