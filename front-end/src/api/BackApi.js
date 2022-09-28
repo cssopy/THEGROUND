@@ -13,7 +13,7 @@ export default {
     modify: HOST + USERS + "/modify",
     quit: HOST + USERS + "/quit",
     logos: HOST + USERS + "/logos",
-    mypage: HOST + USERS + "mypage",
+    mypage: HOST + USERS + "/mypage",
   },
   main: {
     matches: HOST + MAIN + "/matches",

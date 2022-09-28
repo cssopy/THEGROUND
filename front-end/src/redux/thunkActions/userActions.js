@@ -1,15 +1,29 @@
-// redux/thunkActions/postsActions.js
-import { userActions } from "../slice/UserSlice";
-import postAPI from "api/postAPI";
+import { userActions } from "../slice/userSlice";
+import BackApi from "../../api/BackApi";
+import axios from "axios";
+
+const userAxios = async (jwt) => {
+  const apiClient = axios.create({
+    baseURL: BackApi.users.mypage,
+    headers: { "X-ACCESS-TOKEN": jwt },
+  });
+
+  try {
+    const res = await apiClient.get();
+    return res;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 //미들웨어
-const getUserAPI = () => {
+const getUserAPI = (jwt) => {
   return async function (dispatch) {
-    const response = await backAPI.userAxios();
-    dispatch(userActions.setPost(response.posts));
+    const response = await userAxios(jwt);
+    dispatch(userActions.setUser(response.data));
   };
 };
 
-const postsActions = { getPostAPI };
+const usersActions = { getUserAPI };
 
-export default postsActions;
+export default usersActions;

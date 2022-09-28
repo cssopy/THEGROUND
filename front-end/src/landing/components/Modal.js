@@ -4,6 +4,7 @@ import subtitle from "../../assets/etc/subtitle.png";
 import Kakao from "./Kakao.js";
 import Naver from "./Naver";
 import Google from "./Google";
+import Tal from "../Tal";
 
 const Modal = (props) => {
   // 로그인 띄우는 모달
@@ -23,6 +24,7 @@ const Modal = (props) => {
             <Kakao />
             <Naver />
             <Google />
+            <Tal />
           </div>
           <span className={styles.back} onClick={closeModal}>
             &#8592;&nbsp;&nbsp;&nbsp;BACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

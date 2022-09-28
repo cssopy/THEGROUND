@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useSelector } from "react-redux/es/exports";
 
 const Tal = () => {
-  const jwt = localStorage.getItem("jwt");
+  const jwt = useSelector((state) => state.user.user.jwt);
   const deleteUser = () => {
     axios
       .delete("https://j7d109.p.ssafy.io/back/users/quit", {
@@ -15,5 +16,3 @@ const Tal = () => {
 };
 
 export default Tal;
-
-// https://j7d109.p.ssafy.io/back/stats
