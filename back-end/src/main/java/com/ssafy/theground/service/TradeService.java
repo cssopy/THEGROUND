@@ -150,34 +150,30 @@ public class TradeService {
     public boolean tradeSave(TradeSaveReqDto tradeSaveReqDto) throws Exception {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if(byUserUid.isPresent()) {
-            System.out.println("투수 : " + tradeSaveReqDto.getPitcherSeq() + "타자 : " +  tradeSaveReqDto.getHitterSeq());
+            UserPitcher pitcher = new UserPitcher();
+            UserHitter hitter = new UserHitter();
+
             // 보유 투수 모두 삭제
             managePitcherRepository.deleteAll();
             // 투수 이적(in)
             for (Long seq : tradeSaveReqDto.getPitcherSeq()) {
-                if (managePitcherRepository.existsByPitcherSeq(seq)) continue;
-                else {
-                    UserPitcher build = UserPitcher.builder()
-                            .userSeq(byUserUid.get())
-                            .pitcherSeq(seq)
-                            .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
-                    managePitcherRepository.save(build);
-                }
+                pitcher.builder()
+                        .userSeq(byUserUid.get())
+                        .pitcherSeq(seq)
+                        .userPitcherName(pitcherRepository.findByPitcherSeq(seq).getPitcherName()).build();
             }
 
             // 보유 타자 모두 삭제
             manageHitterRepository.deleteAll();
             // 타자 이적(in)
             for (Long seq : tradeSaveReqDto.getHitterSeq()) {
-                if (manageHitterRepository.existsByHitterSeq(seq)) continue;
-                else {
-                    UserHitter build = UserHitter.builder()
-                            .userSeq(byUserUid.get())
-                            .hitterSeq(seq)
-                            .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
-                    manageHitterRepository.save(build);
-                }
+                hitter.builder()
+                        .userSeq(byUserUid.get())
+                        .hitterSeq(seq)
+                        .userHitterName(hitterRepository.findByHitterSeq(seq).getHitterName()).build();
             }
+            managePitcherRepository.save(pitcher);
+            manageHitterRepository.save(hitter);
             return true;
         }
         return false;
