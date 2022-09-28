@@ -6,24 +6,31 @@ import usersActions from "../../redux/thunkActions/userActions";
 import { useDispatch } from "react-redux/es/exports";
 import logosActions from "../../redux/thunkActions/logoActions";
 import playersActions from "../../redux/thunkActions/playerActions";
+import BackApi from "../../api/BackApi";
+import SocialApi from "../../api/SocialApi";
 
-const KakaoLoginHandler = (props) => {
+const LoginHandler = (props) => {
   const { loginType } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const REST_API_KEY = "1ae04a78365d2a5f1e2e1d4ee529fe84";
-  const REDIRECT_URI = "https://j7d109.p.ssafy.io";
-  // const REDIRECT_URI = "http://localhost:3000";
+  let loginUrl;
+  const CODE = new URL(window.location.href).searchParams.get("code");
+  const STATE = new URL(window.location.href).searchParams.get("state");
 
-  // 인가코드
-  let CODE = new URL(window.location.href).searchParams.get("code");
+  if (loginType === "N") {
+    loginUrl = SocialApi.naver.login(CODE, STATE);
+  } else if (loginType === "K") {
+    loginUrl = SocialApi.kakao.login(CODE);
+  } else if (loginType === "G") {
+    loginUrl = SocialApi.google.login(CODE);
+  }
 
-  // 카카오로 액세스 토큰 발급 요청
-  const getKakaoToken = () => {
+  // 네이버로 토큰 발급 요청
+  const getToken = () => {
     axios
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${CODE}`,
+        loginUrl,
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -39,10 +46,10 @@ const KakaoLoginHandler = (props) => {
         if (data.access_token) {
           axios
             .post(
-              "https://j7d109.p.ssafy.io/back/users/login",
+              BackApi.users.login,
               {
                 accessToken: data.access_token,
-                loginType: "K",
+                loginType,
               },
               {
                 headers: {
@@ -73,14 +80,21 @@ const KakaoLoginHandler = (props) => {
       });
   };
 
+  // 취소시 로직
+  let error = new URL(window.location.href).searchParams.get(
+    "error_description"
+  );
+
   useEffect(() => {
-    if (!CODE) return;
-    if (loginType === "K") {
-      getKakaoToken();
+    if (loginType) {
+      getToken();
+    }
+    if (error === "Canceled By User") {
+      navigate("/");
     }
   }, []);
 
   return <></>;
 };
 
-export default KakaoLoginHandler;
+export default LoginHandler;
