@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import playersActions from "../../redux/thunkActions/playerActions";
 
-const SignupModal = () => {
-  const loginType = localStorage.getItem("loginType");
+const SignupModal = (props) => {
+  const { loginType } = props;
   localStorage.removeItem("loginType");
 
   const dispatch = useDispatch();
@@ -62,6 +62,12 @@ const SignupModal = () => {
 
   const userSubmit = () => {
     if (valid === 0 && clubNameInput.current.value.trim().length) {
+      console.log({
+        uid,
+        userTeamname: clubNameInput.current.value,
+        logoSeq: myLogo.logoSeq,
+        loginType,
+      });
       axios
         .post("https://j7d109.p.ssafy.io/back/users/signup", {
           uid,
