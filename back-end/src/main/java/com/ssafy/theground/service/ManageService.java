@@ -113,16 +113,29 @@ public class ManageService {
     	return result;
     }
     
-    public void rotationUpdate(String uid, Long[] list) {
+    public void rotationUpdate(String uid, Long[] list) throws Exception {
     	Optional<UserPitcher> o;
+    	User u = userRepository.findByUserUid(uid).get();
+    	TeamSetting t = teamSettingRepository.findByUserSeq_UserSeq(u.getUserSeq());
     	Long userSeq = userRepository.findByUserUid(uid).get().getUserSeq();
     	for(int i=0;i<5;i++) {
     		o = userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(userSeq, list[i]);
     		if(o.isPresent()) {
-    			
+    			if(i==0) {
+    				t.setTeamSetting1stSp(o.get());
+    			}else if(i==1) {
+    				t.setTeamSetting2ndSp(o.get());
+    			}else if(i==2) {
+    				t.setTeamSetting3rdSp(o.get());
+    			}else if(i==3) {
+    				t.setTeamSetting4thSp(o.get());
+    			}else if(i==4) {
+    				t.setTeamSetting5thSp(o.get());
+    			}
     		}else {
-    			return;
+    			throw new Exception("에러 발생");
     		}
     	}
+    	teamSettingRepository.save(t);
     }
 }
