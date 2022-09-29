@@ -6,14 +6,14 @@ const MANAGE = "/manage";
 const TRADE = "/trade";
 const GAME = "/game";
 
-export default {
+const BackApi = {
   users: {
     login: HOST + USERS + "/login",
     signup: HOST + USERS + "/signup",
     modify: HOST + USERS + "/modify",
     quit: HOST + USERS + "/quit",
     logos: HOST + USERS + "/logos",
-    mypage: HOST + USERS + "mypage",
+    mypage: HOST + USERS + "/mypage",
   },
   main: {
     matches: HOST + MAIN + "/matches",
@@ -43,3 +43,5 @@ export default {
   },
   stats: HOST + "/stats",
 };
+
+export default BackApi;
