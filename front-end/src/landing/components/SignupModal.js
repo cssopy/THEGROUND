@@ -78,6 +78,7 @@ const SignupModal = (props) => {
         .then((res) => {
           dispatch(playersActions.getPlayerAPI());
           dispatch(userActions.setJwt(res.data.jwt));
+          dispatch(userActions.setUid(""));
           localStorage.removeItem("loginType");
           navigate("/main");
         });
