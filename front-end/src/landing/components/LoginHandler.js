@@ -92,7 +92,7 @@ const LoginHandler = (props) => {
     if (error === "Canceled By User") {
       navigate("/");
     }
-  }, []);
+  });
 
   return <></>;
 };
