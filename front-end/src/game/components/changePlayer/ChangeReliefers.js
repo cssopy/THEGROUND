@@ -32,7 +32,7 @@ const ChangeReliefers = memo((props) => {
     <>
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>후보 선수</div>
-        <table className={`${styles.table} ${relStyles.table}`}>
+        <table className={`${relStyles.table}`}>
           <thead className={styles.thead}>
             <tr>
               <th>스탠드</th>
