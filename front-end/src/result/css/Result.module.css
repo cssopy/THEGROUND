@@ -5,7 +5,7 @@
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
     ),
-    url(../../assets/image/background2.jpg);
+    url(../../assets/image/background5.jpg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: top center;
@@ -20,6 +20,7 @@
   height: 700px;
   background-color: rgba(05, 20, 48, 0.5);
   border-radius: 20px;
+  color: white;
 }
 
 .btn {
