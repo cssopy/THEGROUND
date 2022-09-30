@@ -22,12 +22,12 @@
   height: 40px;
 }
 
-.ball {
+.strike {
   background: #faff00;
 }
 
-.strike {
-  background: #a2e90b;
+.ball {
+  background: #0be916;
 }
 
 .out {

@@ -1,0 +1,30 @@
+.score {
+  width: 80px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.finish {
+  width: 100px;
+  border-radius: 20px;
+  text-align: center;
+  background-image: linear-gradient(#bf0d3e, rgba(191, 13, 62, 0.4));
+  font-size: 20px;
+}
+
+.homeName,
+.awayName {
+  width: 500px;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0px 20px;
+}
+
+.homeName {
+  text-align: end;
+}
+
+.awayName {
+  text-align: start;
+}
