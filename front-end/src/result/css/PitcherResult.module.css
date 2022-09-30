@@ -1,0 +1,42 @@
+.pit {
+  width: 300px;
+  border-radius: 15px;
+  background: linear-gradient(#041e42, rgba(04, 30, 66, 0.5));
+  color: white;
+  text-align: center;
+  padding: 0px 0px 5px 0px;
+  margin-bottom: 10px;
+}
+
+.title {
+  height: 30px;
+  border-start-end-radius: 15px;
+  border-start-start-radius: 15px;
+  background: linear-gradient(#053167, rgba(5, 49, 103, 0.6));
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  font-size: 16px;
+  height: 30px;
+  padding: 0px 10px;
+}
+
+.L-pitcher {
+  background-color: #bf0d3e;
+}
+
+.R-pitcher {
+  background-color: #0d5fbf;
+}
+
+.L-pitcher,
+.R-pitcher {
+  display: inline-block;
+  width: 40px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 3px;
+}
