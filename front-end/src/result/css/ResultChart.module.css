@@ -1,0 +1,11 @@
+.homeChart {
+  background: linear-gradient(#bf0d3e, rgba(191, 13, 62, 0.4));
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.awayChart {
+  background-image: linear-gradient(#a2e90b, rgba(162, 233, 11, 0.4));
+  border-radius: 8px;
+  transition: all 0.3s;
+}
