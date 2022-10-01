@@ -26,7 +26,7 @@ const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth/oauthchoos
 const GOOGLE_LOGIN = (CODE) =>
   `https://www.googleapis.com/oauth2/v4/token?code=${CODE}&client_id=${GOOGLE_CLIENT_ID}&client_secret=${GOOGLE_CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REDIRECT_URI}`;
 
-export default {
+const SocialApi = {
   naver: {
     auth: NAVER_AUTH_URL,
     login: NAVER_LOGIN,
@@ -40,3 +40,5 @@ export default {
     login: GOOGLE_LOGIN,
   },
 };
+
+export default SocialApi;

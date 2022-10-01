@@ -1,10 +1,11 @@
 import MatchOPPO from "./components/matchOPPO/MatchOPPO";
-import AssignHitters from "./components/assignHitters/assignHitters";
+import AssignHitters from "./components/assignHitters/AssignHitters";
+import { useState } from "react";
 
 const Match = () => {
   return (
     <>
-      {/* <MatchOPPO></MatchOPPO> */}
+      <MatchOPPO></MatchOPPO>
       <AssignHitters></AssignHitters>
     </>
   );

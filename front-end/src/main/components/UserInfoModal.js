@@ -10,7 +10,11 @@ const UserInfoModal = (props) => {
     <>
       <Row className={style["modal"]}>
         <Row className={style["logo"]}>
-          <img src={img} style={{ "-webkit-user-drag": "none" }}></img>
+          <img
+            src={img}
+            style={{ "-webkit-user-drag": "none" }}
+            alt="logo"
+          ></img>
         </Row>
         <Row>
           <BsPencilSquare

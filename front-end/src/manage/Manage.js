@@ -112,6 +112,16 @@ const Manage = () => {
     });
   }, []);
 
+  // Pitcher 순서 변경
+  const pitTopit = useCallback((dragIndex, hoverIndex) => {
+    setPitchers((prevState) => {
+      const pits = prevState.slice();
+      pits.splice(dragIndex, 1);
+      pits.splice(hoverIndex, 0, prevState[dragIndex]);
+      return pits;
+    });
+  }, []);
+
   // useEffect(() => {
   //   console.log(bullpens);
   // }, [bullpens]);
@@ -156,6 +166,7 @@ const Manage = () => {
                       <PitcherList
                         pitchers={pitchers}
                         addBullpens={addBullpens}
+                        pitTopit={pitTopit}
                       ></PitcherList>
                     </Row>
                   </Row>

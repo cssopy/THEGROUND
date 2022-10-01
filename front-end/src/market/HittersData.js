@@ -2,7 +2,7 @@ const HittersData = [
   {
     hitterSeq: 1,
     batArm: "우타",
-    name: "타자1",
+    hitterName: "타자1",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -13,7 +13,7 @@ const HittersData = [
   {
     hitterSeq: 2,
     batArm: "좌타",
-    name: "타자2",
+    hitterName: "타자2",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -24,7 +24,7 @@ const HittersData = [
   {
     hitterSeq: 3,
     batArm: "우타",
-    name: "타자3",
+    hitterName: "타자3",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -35,7 +35,7 @@ const HittersData = [
   {
     hitterSeq: 4,
     batArm: "좌타",
-    name: "타자4",
+    hitterName: "타자4",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -46,7 +46,7 @@ const HittersData = [
   {
     hitterSeq: 5,
     batArm: "우타",
-    name: "타자5",
+    hitterName: "타자5",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -57,7 +57,7 @@ const HittersData = [
   {
     hitterSeq: 6,
     batArm: "좌타",
-    name: "타자6",
+    hitterName: "타자6",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -68,7 +68,7 @@ const HittersData = [
   {
     hitterSeq: 7,
     batArm: "우타",
-    name: "타자7",
+    hitterName: "타자7",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -79,7 +79,7 @@ const HittersData = [
   {
     hitterSeq: 8,
     batArm: "좌타",
-    name: "타자8",
+    hitterName: "타자8",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -90,7 +90,7 @@ const HittersData = [
   {
     hitterSeq: 9,
     batArm: "우타",
-    name: "타자9",
+    hitterName: "타자9",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -101,7 +101,7 @@ const HittersData = [
   {
     hitterSeq: 10,
     batArm: "좌타",
-    name: "타자10",
+    hitterName: "타자10",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -112,7 +112,7 @@ const HittersData = [
   {
     hitterSeq: 11,
     batArm: "우타",
-    name: "타자11",
+    hitterName: "타자11",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -123,7 +123,7 @@ const HittersData = [
   {
     hitterSeq: 12,
     batArm: "좌타",
-    name: "타자12",
+    hitterName: "타자12",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -134,7 +134,7 @@ const HittersData = [
   {
     hitterSeq: 13,
     batArm: "우타",
-    name: "타자13",
+    hitterName: "타자13",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -145,7 +145,7 @@ const HittersData = [
   {
     hitterSeq: 14,
     batArm: "좌타",
-    name: "타자14",
+    hitterName: "타자14",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -156,7 +156,7 @@ const HittersData = [
   {
     hitterSeq: 15,
     batArm: "우타",
-    name: "타자15",
+    hitterName: "타자15",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -167,7 +167,7 @@ const HittersData = [
   {
     hitterSeq: 16,
     batArm: "좌타",
-    name: "타자16",
+    hitterName: "타자16",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -178,7 +178,7 @@ const HittersData = [
   {
     hitterSeq: 17,
     batArm: "우타",
-    name: "타자17",
+    hitterName: "타자17",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -189,7 +189,7 @@ const HittersData = [
   {
     hitterSeq: 18,
     batArm: "좌타",
-    name: "타자18",
+    hitterName: "타자18",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -200,7 +200,7 @@ const HittersData = [
   {
     hitterSeq: 19,
     batArm: "우타",
-    name: "타자19",
+    hitterName: "타자19",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -211,7 +211,7 @@ const HittersData = [
   {
     hitterSeq: 20,
     batArm: "좌타",
-    name: "타자20",
+    hitterName: "타자20",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -222,7 +222,7 @@ const HittersData = [
   {
     hitterSeq: 21,
     batArm: "우타",
-    name: "타자21",
+    hitterName: "타자21",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
@@ -233,7 +233,7 @@ const HittersData = [
   {
     hitterSeq: 22,
     batArm: "좌타",
-    name: "타자22",
+    hitterName: "타자22",
     avg: 0.314,
     game: 0.123,
     atBat: 0.456,
