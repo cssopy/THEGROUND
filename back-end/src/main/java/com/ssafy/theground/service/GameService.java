@@ -1,15 +1,15 @@
 package com.ssafy.theground.service;
 
 import com.ssafy.theground.dto.res.BriefInfoResDto;
+import com.ssafy.theground.dto.res.ChangeHitterResDto;
+import com.ssafy.theground.dto.res.ChangePitcherResDto;
 import com.ssafy.theground.entity.*;
 import com.ssafy.theground.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -24,10 +24,17 @@ public class GameService {
     private final LogoRepository logoRepository;
     private final TeamSettingRepository teamSettingRepository;
 
+    private final ManagePitcherRepository managePitcherRepository;
+
+    private final ManageHitterRepository manageHitterRepository;
+
     private final PitcherRepository pitcherRepository;
+
+    private final HitterRepository hitterRepository;
 
     private final AITeamRepository aiTeamRepository;
 
+    @Transactional
     public Map<String, BriefInfoResDto> teamBriefInfo() throws Exception {
         Map<String, BriefInfoResDto> map = new HashMap<>();
 
@@ -76,6 +83,45 @@ public class GameService {
                 map.put("home", homeTeam);
             }
 
+            return map;
+        }
+        else return null;
+    }
+
+    @Transactional
+    public Map<String, List<?>> changePlayer() throws Exception {
+        Map<String, List<?>> map = new HashMap<>();
+
+        Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
+
+        if(byUserUid.isPresent()){
+            List<ChangePitcherResDto> pitcherList = new ArrayList<>();
+            List<ChangeHitterResDto> hitterList = new ArrayList<>();
+
+            List<UserPitcher> userPitcher = managePitcherRepository.findAllByUserSeq(byUserUid.get());
+            List<UserHitter> userHitter = manageHitterRepository.findAllByUserSeq(byUserUid.get());
+
+            for(UserPitcher u : userPitcher){
+                Pitcher byPitcherSeq = pitcherRepository.findByPitcherSeq(u.getPitcherSeq());
+                ChangePitcherResDto changePitcherResDto = new ChangePitcherResDto();
+                changePitcherResDto.setPitcherSeq(u.getPitcherSeq());
+                changePitcherResDto.setName(u.getUserPitcherName());
+                changePitcherResDto.setPitArm(byPitcherSeq.getPitArm());
+                changePitcherResDto.setEra(byPitcherSeq.getEra());
+                pitcherList.add(changePitcherResDto);
+            }
+            map.put("pitcher", pitcherList);
+
+            for(UserHitter u : userHitter) {
+                Hitter byHitterSeq = hitterRepository.findByHitterSeq(u.getHitterSeq());
+                ChangeHitterResDto changeHitterResDto = new ChangeHitterResDto();
+                changeHitterResDto.setHitterSeq(u.getHitterSeq());
+                changeHitterResDto.setName(u.getUserHitterName());
+                changeHitterResDto.setBatArm(byHitterSeq.getBatArm());
+                changeHitterResDto.setAvg(byHitterSeq.getAvg());
+                hitterList.add(changeHitterResDto);
+            }
+            map.put("hitter", hitterList);
             return map;
         }
         else return null;
