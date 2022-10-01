@@ -1,10 +1,10 @@
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 
-import style from "../css/MyHitterList.module.css";
+import style from "../../css/assignHitters/MyHitterList.module.css";
 
 const MyHitter = (props) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [, drag] = useDrag(() => ({
     type: ItemTypes.MyHitter,
     item: { hitter: props.hitter },
     collect: (monitor) => ({
@@ -12,32 +12,16 @@ const MyHitter = (props) => {
     }),
     end: (item, monitor) => {
       const didDrop = monitor.getDropResult();
-      // 보유타자를 타자 영역에 넣을 경우
+
       if (didDrop) {
-        // 보유 타자목록에서 삭제
-        props.addHitter(item.hitter);
+        props.changeHitter(item.hitter, didDrop.targetIdx);
       }
     },
   }));
 
-  if (isDragging) {
-    props.onMouseLeave();
-  }
-
   return (
     <>
-      <tr
-        ref={drag}
-        data-testid={`myHitter`}
-        onMouseOver={props.onMouseOver}
-        onMouseLeave={props.onMouseLeave}
-        onMouseDown={(e) => {
-          if (e.button === 2) {
-            props.addHitter(props.hitter);
-            props.onMouseLeave();
-          }
-        }}
-      >
+      <tr ref={drag}>
         <td>
           <div
             className={
@@ -49,10 +33,18 @@ const MyHitter = (props) => {
         </td>
         <td>{props.hitter.hitterName}</td>
         <td>{props.hitter.avg}</td>
+        <td>{props.hitter.game}</td>
+        <td>{props.hitter.atBat}</td>
         <td>{props.hitter.obp}</td>
         <td>{props.hitter.slg}</td>
         <td>{props.hitter.homerun}</td>
-        <td>{props.hitter.salary.toLocaleString("ko-KR")}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
+        <td>{props.hitter.slg}</td>
       </tr>
     </>
   );
