@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -67,6 +68,14 @@ public class GameController {
 		}
 		
 		return new ResponseEntity<>(resultMap, status);
-    
+	}
+
+    @GetMapping("/change")
+    public ResponseEntity<?> changePlayer() throws Exception {
+        Map<String, List<?>> stringListMap = gameService.changePlayer();
+        if(!stringListMap.isEmpty()) {
+            return new ResponseEntity<>(gameService.changePlayer(), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }
