@@ -14,7 +14,6 @@ import Hitter from "./components/main/CurrentHitter";
 import GameLogs from "./components/main/GameLogs";
 import ChangePlayer from "./components/changePlayer/ChangePlayer";
 
-
 const Game = () => {
   // 구현 완료
   // 1. Field => runners(현재 출루 상황)
@@ -24,7 +23,7 @@ const Game = () => {
   // 5. BallVelocity => velocity (투구 속도)
   // 6. Pitchers => 양 투수의 name, balls, threes 및 현재 이닝 정보 now
   // 8. ScoreBoard => 현재까지의 기록, 로고
-  
+
   // 구현 미완료
   // 7. 지금까지의 중계 기록 및 점수, 홈런, 볼 정보 등
   // 9. setInterval로 게임 진행
@@ -42,139 +41,101 @@ const Game = () => {
 
   return (
     <>
-    <div
-      className={`${styles.bg} d-flex justify-content-center align-items-center`}
-    >
       <div
-        className={`${styles.box}`}
+        className={`${styles.bg} d-flex justify-content-center align-items-center`}
       >
-        <Row
-          className={styles.zero}
-        >
-          <Col
-            className={styles.zero}
-          >
-            <Row
-              className={styles.zero}
-            >
-              <Field
-                runners={['o', 'o', 'x']}
-              />
-            </Row>
-            <Row
-              className={styles.zero}
-            >
-              <Col
-                className={styles.zero}
-              >
-                <StrikeZone
-                  balls={[{type: 'strike', x:10, y:10}, {type: 'ball', x:50, y:50}]}
-                />
-              </Col>
-              <Col
-                className={styles.zero}
-              >
-                <Row
-                  className={styles.zero}
-                >
-                  <BallVelocity
-                    velocity={130}
-                  />
-                </Row>
-                <Row
-                  className={styles.zero}
-                >
-                  <BallCount
-                    ballCounts={[3, 1, 2]}
-                  />
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col
-            className={styles.zero}
-          >
-            <Row
-              className={`${styles.zero} mb-2`}
-            >
-              <ScoreBoard
-                scores={[0,0,1,2,1,0,0,4,0,0,1]}
-                R={[1, 3]}
-                H={[0, 1]}
-                B={[2, 1]}
-              />
-            </Row>
-            <Row
-              className={styles.zero}
-            >
-              <Col
-                className={styles.zero}
-              >
-                <Row
-                  className={styles.zero}
-                >
-                  <Pitchers
-                    pitchers={[
-                      { name: "류현진", balls: 25, threes: 3 },
-                      { name: "원태인", balls: 14, threes: 0 },
+        <div className={`${styles.box}`}>
+          <Row className={styles.zero}>
+            <Col className={styles.zero}>
+              <Row className={styles.zero}>
+                <Field runners={["o", "o", "x"]} />
+              </Row>
+              <Row className={styles.zero}>
+                <Col className={styles.zero}>
+                  <StrikeZone
+                    balls={[
+                      { type: "strike", x: 10, y: 10 },
+                      { type: "ball", x: 50, y: 50 },
                     ]}
-                    now={1}
                   />
-                </Row>
-                <Row
-                  className={styles.zero}
-                >
-                  <Hitter
-                    hitter={{
-                      name: "류현진",
-                      position: ["좌타", "외야수"],
-                      log: ["삼진", "땅볼"],
-                    }}
-                  />
-                </Row>
-                <Row
-                  className={styles.zero}
-                >
-                  <Col
-                    className={styles.zero}
-                  >
-                    <Button
-                      className={`${styles.btn} ${styles.change}`}
-                      variant="success"
-                      onClick={openModal}
-                    >
-                      선수 교체
-                    </Button>
-                  </Col>
-                  <Col
-                    className={styles.zero}
-                  >
-                    <Button
-                      className={`${styles.btn} ${styles.skip}`}
-                      variant="danger"
-                    >
-                      SKIP
-                    </Button>
-                  </Col>
-                </Row>
-              </Col>
-              <Col
-                className={styles.zero}
-              >
-                <GameLogs
-                  logs={[111,222,333,444,555,666,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}
+                </Col>
+                <Col className={styles.zero}>
+                  <Row className={styles.zero}>
+                    <BallVelocity velocity={130} />
+                  </Row>
+                  <Row className={styles.zero}>
+                    <BallCount ballCounts={[3, 1, 2]} />
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+            <Col className={styles.zero}>
+              <Row className={`${styles.zero} mb-2`}>
+                <ScoreBoard
+                  scores={[0, 0, 1, 2, 1, 0, 0, 4, 0, 0, 1]}
+                  R={[1, 3]}
+                  H={[0, 1]}
+                  B={[2, 1]}
                 />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <ChangePlayer
-          open={modalOpen}
-          close={closeModal}
-          header="Modal heading"
-        />
+              </Row>
+              <Row className={styles.zero}>
+                <Col className={styles.zero}>
+                  <Row className={styles.zero}>
+                    <Pitchers
+                      pitchers={[
+                        { name: "류현진", balls: 25, threes: 3 },
+                        { name: "원태인", balls: 14, threes: 0 },
+                      ]}
+                      now={1}
+                    />
+                  </Row>
+                  <Row className={styles.zero}>
+                    <Hitter
+                      hitter={{
+                        name: "류현진",
+                        position: ["좌타", "외야수"],
+                        log: ["삼진", "땅볼"],
+                      }}
+                    />
+                  </Row>
+                  <Row className={styles.zero}>
+                    <Col className={styles.zero}>
+                      <Button
+                        className={`${styles.btn} ${styles.change}`}
+                        variant="success"
+                        onClick={openModal}
+                      >
+                        선수 교체
+                      </Button>
+                    </Col>
+                    <Col className={styles.zero}>
+                      <Button
+                        className={`${styles.btn} ${styles.skip}`}
+                        variant="danger"
+                      >
+                        SKIP
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col className={styles.zero}>
+                  <GameLogs
+                    logs={[
+                      111, 222, 333, 444, 555, 666, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                      10, 11, 12, 13, 14, 15,
+                    ]}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <ChangePlayer
+            open={modalOpen}
+            close={closeModal}
+            header="Modal heading"
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 };
