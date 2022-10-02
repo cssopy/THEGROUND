@@ -14,4 +14,5 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findByUserSeq_UserUidOrderByMatchSeqDesc(String userUid);
     List<Match> findByUserSeq(User userSeq);
     Optional<Match> findByMatchSeq(Long seq);
+    Match findTop1ByUserSeq_UserUid(String userUid);
 }
