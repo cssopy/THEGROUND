@@ -126,7 +126,9 @@ const SignupModal = (props) => {
 
   return (
     <>
-      <div className={`${styles.modal} ${styles.open}`}>
+      <div
+        className={`${styles.modal} ${styles.open} d-flex justify-content-center`}
+      >
         <div className={styles.modalBody}>
           <img src={title} alt="" className={styles.modalTitle} />
           <div className={`${styles.content} ${styles[`move${progress}`]}`}>
@@ -142,9 +144,13 @@ const SignupModal = (props) => {
                   alt="myLogo"
                 />
               </div>
-              <button className={styles.noBorder} onClick={select}>
+              <div
+                className={styles.selectLogo}
+                onClick={select}
+                style={{ width: selectLogo ? "30px" : "78px" }}
+              >
                 {selectLogo ? "완료" : "로고 고르기"}
-              </button>
+              </div>
             </div>
             <div
               className={`${styles.hide} ${progress === 1 ? styles.show : ""}`}
