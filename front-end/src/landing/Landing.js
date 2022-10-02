@@ -36,6 +36,7 @@ const Landing = () => {
       <LoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
       {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
+      {/* <SignupModal loginType={loginType} /> */}
     </>
   );
 };
