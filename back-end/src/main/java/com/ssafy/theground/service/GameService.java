@@ -84,7 +84,7 @@ public class GameService {
     public Map<String, Object> battingSimulate(String uid) {
         long matchSeq = matchRepository.findTop1ByUserSeq_UserUid(uid).getMatchSeq();
         Log log = logRepository.findByMatchSeq(matchSeq);
-        MatchSetting setting = matchSettingRepository.findMatchSettingByMatchSeq(matchSeq);
+        MatchSetting setting = matchSettingRepository.findByMatchSeq(matchSeq).get();
         Scoreboard scoreboard = scoreboardRepository.findByMatchSeq(matchSeq);
 
         long pitcherSeq = log.getLogPitcher();
@@ -121,31 +121,31 @@ public class GameService {
         nextBat = (nextBat + 1) % 9;
         switch (nextBat) {
             case 1:
-                hitterSeq = setting.getMatchSetting1st();
+                hitterSeq = setting.getMatchSetting1st().getHitterSeq();
                 break;
             case 2:
-                hitterSeq = setting.getMatchSetting2nd();
+                hitterSeq = setting.getMatchSetting2nd().getHitterSeq();
                 break;
             case 3:
-                hitterSeq = setting.getMatchSetting3rd();
+                hitterSeq = setting.getMatchSetting3rd().getHitterSeq();
                 break;
             case 4:
-                hitterSeq = setting.getMatchSetting4th();
+                hitterSeq = setting.getMatchSetting4th().getHitterSeq();
                 break;
             case 5:
-                hitterSeq = setting.getMatchSetting5th();
+                hitterSeq = setting.getMatchSetting5th().getHitterSeq();
                 break;
             case 6:
-                hitterSeq = setting.getMatchSetting6th();
+                hitterSeq = setting.getMatchSetting6th().getHitterSeq();
                 break;
             case 7:
-                hitterSeq = setting.getMatchSetting7th();
+                hitterSeq = setting.getMatchSetting7th().getHitterSeq();
                 break;
             case 8:
-                hitterSeq = setting.getMatchSetting8th();
+                hitterSeq = setting.getMatchSetting8th().getHitterSeq();
                 break;
             case 0:
-                hitterSeq = setting.getMatchSetting9th();
+                hitterSeq = setting.getMatchSetting9th().getHitterSeq();
                 break;
         }
         setting.setMatchSettingNextBat(nextBat);
