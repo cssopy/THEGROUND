@@ -15,6 +15,10 @@ const initialUserState = {
     userPayroll: 1000000000,
     userInPlayFlag: false,
   },
+  loading: {
+    isLoading: true,
+    percentage: 0,
+  },
 };
 
 const userSlice = createSlice({
@@ -36,6 +40,12 @@ const userSlice = createSlice({
     updateUser: (state, action) => {
       state.user.userTeamname = action.payload.userTeamname;
       state.user.logoUrl = action.payload.logoUrl;
+    },
+    toggleIsLoading: (state, action) => {
+      state.loading.isLoading = action.payload;
+    },
+    setPersentage: (state, action) => {
+      state.loading.percentage = action.payload;
     },
   },
 });
