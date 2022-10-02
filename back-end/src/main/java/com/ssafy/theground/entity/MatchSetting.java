@@ -1,8 +1,19 @@
 package com.ssafy.theground.entity;
 
-import lombok.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @Getter
@@ -11,47 +22,60 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "match_settings")
+@Table(name="match_settings")
 public class MatchSetting {
-    @Id
-    @Column(name="match_seq")
-    private Long matchSeq;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="match_seq")
-    private Match match;
-
-    @Column(name="match_setting_pitcher")
-    private long matchSettingPitcher;
-
-    @Column(name="match_setting_1st")
-    private long matchSetting1st;
-
-    @Column(name="match_setting_2nd")
-    private long matchSetting2nd;
-
-    @Column(name="match_setting_3rd")
-    private long matchSetting3rd;
-
-    @Column(name="match_setting_4th")
-    private long matchSetting4th;
-
-    @Column(name="match_setting_5th")
-    private long matchSetting5th;
-
-    @Column(name="match_setting_6th")
-    private long matchSetting6th;
-
-    @Column(name="match_setting_7th")
-    private long matchSetting7th;
-
-    @Column(name="match_setting_8th")
-    private long matchSetting8th;
-
-    @Column(name="match_setting_9th")
-    private long matchSetting9th;
-
-    @Column(name="match_setting_next_bat")
-    private int matchSettingNextBat;
+	@Id
+	@Column(name="match_seq")
+	private Long matchSeq;
+	
+	@OneToOne
+	@MapsId
+	@JoinColumn(name="match_seq")
+	private Match match;
+	
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_pitcher",referencedColumnName="user_pitcher_seq")
+	private UserPitcher matchSettingPitcher;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_1st",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting1st;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_2nd",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting2nd;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_3rd",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting3rd;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_4th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting4th;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_5th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting5th;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_6th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting6th;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_7th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting7th;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_8th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting8th;
+	
+	@OneToOne
+	@JoinColumn(name="match_setting_9th",referencedColumnName="user_hitter_seq")
+	private UserHitter matchSetting9th;
+	
+	@Column(name="match_setting_next_bat")
+	private Integer matchSettingNextBat;
+	
 }
