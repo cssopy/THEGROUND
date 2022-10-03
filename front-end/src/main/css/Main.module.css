@@ -234,6 +234,8 @@
 }
 
 .schedule img {
+  margin: auto;
+  width: 170px;
   -webkit-user-drag: none;
 }
 
