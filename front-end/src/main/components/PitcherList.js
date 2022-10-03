@@ -20,10 +20,8 @@ const PitcherList = (props) => {
           </tr>
         </thead>
         <tbody className={style["tbody"]}>
-          {props.pitchers.map((pitcher) => {
-            return (
-              <Pitcher key={pitcher.pitcherSeq} pitcher={pitcher}></Pitcher>
-            );
+          {props.pitchers.map((pitcher, index) => {
+            return <Pitcher key={index} pitcher={pitcher}></Pitcher>;
           })}
         </tbody>
       </Table>
