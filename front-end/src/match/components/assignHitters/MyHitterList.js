@@ -1,19 +1,17 @@
 import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
-
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "./ItemTypes.js";
+import { ItemTypes } from "./ItemTypes";
 
-import style from "../css/MyHitterList.module.css";
+import style from "../../css/assignHitters/MyHitterList.module.css";
 
-import MyHitter from "./MyHitter";
-
-import MyHitterDetailModal from "./MyHitterDetailModal";
+import Hitter from "./MyHitter";
 
 const MyHitterList = memo((props) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.Hitter,
-    drop: () => ({ name: "MyHitterList" }),
+    item: { hitter: props.hitter },
+    drop: () => ({ name: "myHitters" }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -27,18 +25,6 @@ const MyHitterList = memo((props) => {
     backgroundColor = "#aaaaaa32";
   }
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [hitter, setHitter] = useState();
-
-  const onMouseOver = (hitter) => {
-    setModalIsOpen(true);
-    setHitter(hitter);
-  };
-
-  const onMouseLeave = () => {
-    setModalIsOpen(false);
-  };
-
   return (
     <>
       <Table className={`${style["table"]} table-borderless`}>
@@ -47,32 +33,34 @@ const MyHitterList = memo((props) => {
             <th>스탠드</th>
             <th>이름</th>
             <th>타율</th>
+            <th>게임수</th>
+            <th>타수</th>
+            <th>안타</th>
+            <th>2루타</th>
+            <th>3루타</th>
+            <th>홈런</th>
+            <th>타점</th>
+            <th>볼넷</th>
+            <th>삼진</th>
             <th>출루율</th>
             <th>장타율</th>
-            <th>홈런</th>
-            <th>연봉</th>
+            <th>OPS</th>
           </tr>
         </thead>
         <tbody
           className={style["tbody"]}
-          ref={drop}
           style={{ backgroundColor }}
-          data-testid="myHitterList"
+          ref={drop}
         >
           {props.hitters.map((hitter) => (
-            <MyHitter
+            <Hitter
               key={hitter.hitterSeq}
               hitter={hitter}
-              addHitter={props.addHitter}
-              onMouseOver={() => {
-                onMouseOver(hitter);
-              }}
-              onMouseLeave={onMouseLeave}
-            ></MyHitter>
+              changeHitter={props.changeHitter}
+            ></Hitter>
           ))}
         </tbody>
       </Table>
-      {modalIsOpen && <MyHitterDetailModal hitter={hitter} />}
     </>
   );
 });

@@ -8,14 +8,14 @@ const Rotation = (props) => {
           <div
             className={
               style[
-                props.pitcher.pitArm === "좌완" ? "leftPitcher" : "rightPitcher"
+                props.pitcher.pitArm === "L" ? "leftPitcher" : "rightPitcher"
               ]
             }
           >
-            {props.pitcher.pitArm}
+            {props.pitcher.pitArm === "L" ? "좌완" : "우완"}
           </div>
         </td>
-        <td>{props.pitcher.name}</td>
+        <td>{props.pitcher.pitcherName}</td>
         <td>{props.pitcher.era}</td>
         <td>{props.pitcher.game}</td>
         <td>{props.pitcher.inning}</td>
