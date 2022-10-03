@@ -2,29 +2,90 @@ import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { BsPencilSquare } from "react-icons/bs";
+
+import axios from "axios";
+
 import UserInfoModal from "./components/UserInfoModal";
 import BackDrop from "./components/BackDrop";
-
 import MatchList from "./components/MatchList";
 import PitcherList from "./components/PitcherList";
-
 import title from "../assets/etc/title.png";
 import subtitle from "../assets/etc/subtitle.png";
 import teamLogo from "../assets/etc/ground2.png";
 
 import style from "./css/Main.module.css";
 
+import BackApi from "../api/BackApi";
+
 const Main = () => {
   const navigate = useNavigate();
+
+  const JWT_TOKEN =
+    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
 
   const [menuBar, setMeunuBar] = useState([true, false, false, false]);
   const [matchs, setMatchs] = useState([]);
   const [pitchers, setPitchers] = useState([]);
+  const [schedules, setSchedules] = useState([
+    {
+      teamSeq: null,
+      teamName: null,
+      logoUrl: null,
+    },
+    {
+      teamSeq: null,
+      teamName: null,
+      logoUrl: null,
+    },
+    {
+      teamSeq: null,
+      teamName: null,
+      logoUrl: null,
+    },
+  ]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const activeMenu = "rgba(5, 20, 48, 0.5)";
 
   useEffect(() => {
+    // 선발 로테이션 조회
+    (async () => {
+      await axios
+        .get(BackApi.manage.rotation, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          let pits = [];
+          const keys = Object.keys(res.data);
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const value = res.data[key];
+            pits.push(value);
+          }
+          setPitchers(pits);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+    // 경기 일정 조회
+    (async () => {
+      await axios
+        .get(BackApi.main.schedules, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          setSchedules(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+
     setMatchs([
       {
         home: "삼성 라이온즈",
@@ -90,88 +151,88 @@ const Main = () => {
         result: "Win",
       },
     ]);
-    setPitchers([
-      {
-        pitcherSeq: 1,
-        pitArm: "좌완",
-        name: "투수1",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 2,
-        pitArm: "우완",
-        name: "투수2",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 3,
-        pitArm: "좌완",
-        name: "투수3",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 4,
-        pitArm: "우완",
-        name: "투수4",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 5,
-        pitArm: "좌완",
-        name: "투수5",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 6,
-        pitArm: "우완",
-        name: "투수6",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 7,
-        pitArm: "우완",
-        name: "투수6",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-      {
-        pitcherSeq: 8,
-        pitArm: "우완",
-        name: "투수6",
-        era: 0.274,
-        game: 50,
-        inning: 180,
-        win: 37,
-        lose: 11,
-      },
-    ]);
+    // setPitchers([
+    //   {
+    //     pitcherSeq: 1,
+    //     pitArm: "좌완",
+    //     name: "투수1",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 2,
+    //     pitArm: "우완",
+    //     name: "투수2",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 3,
+    //     pitArm: "좌완",
+    //     name: "투수3",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 4,
+    //     pitArm: "우완",
+    //     name: "투수4",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 5,
+    //     pitArm: "좌완",
+    //     name: "투수5",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 6,
+    //     pitArm: "우완",
+    //     name: "투수6",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 7,
+    //     pitArm: "우완",
+    //     name: "투수6",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    //   {
+    //     pitcherSeq: 8,
+    //     pitArm: "우완",
+    //     name: "투수6",
+    //     era: 0.274,
+    //     game: 50,
+    //     inning: 180,
+    //     win: 37,
+    //     lose: 11,
+    //   },
+    // ]);
   }, []);
 
   return (
@@ -326,22 +387,22 @@ const Main = () => {
                   <Col>
                     <Row className={style["schedule"]}>
                       <div>1st</div>
-                      <img src={teamLogo} alt="teamlogo"></img>
-                      <div>중신 브라더스</div>
+                      <img src={schedules[0].logoUrl} alt="teamlogo"></img>
+                      <div>{schedules[0].teamName}</div>
                     </Row>
                   </Col>
                   <Col>
                     <Row className={style["schedule"]}>
                       <div>2nd</div>
-                      <img src={teamLogo} alt="teamlogo"></img>
-                      <div>중신 브라더스</div>
+                      <img src={schedules[1].logoUrl} alt="teamlogo"></img>
+                      <div>{schedules[1].teamName}</div>
                     </Row>
                   </Col>
                   <Col>
                     <Row className={style["schedule"]}>
                       <div>3th</div>
-                      <img src={teamLogo} alt="teamlogo"></img>
-                      <div>중신 브라더스</div>
+                      <img src={schedules[2].logoUrl} alt="teamlogo"></img>
+                      <div>{schedules[2].teamName}</div>
                     </Row>
                   </Col>
                 </Row>

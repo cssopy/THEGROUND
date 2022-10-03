@@ -2,9 +2,7 @@ import { Col, Row } from "react-bootstrap";
 
 import style from "../../css/matchOPPO/MatchOPPO.module.css";
 
-import logo from "../../../assets/etc/ground2.png";
-
-const MatchOPPO = () => {
+const MatchOPPO = (props) => {
   return (
     <>
       <Row className={style["background"]}>
@@ -24,7 +22,11 @@ const MatchOPPO = () => {
           <Row>
             <Col>
               <Row className={style["homeLogo"]}>
-                <img src={logo} style={{ "-webkit-user-drag": "none" }}></img>
+                <img
+                  src={props.brief.home.teamLogoUrl}
+                  style={{ WebkitUserDrag: "none" }}
+                  alt="homelogo"
+                ></img>
               </Row>
             </Col>
             <Col>
@@ -34,19 +36,23 @@ const MatchOPPO = () => {
             </Col>
             <Col>
               <Row className={style["awayLogo"]}>
-                <img src={logo} style={{ "-webkit-user-drag": "none" }}></img>
+                <img
+                  src={props.brief.away.teamLogoUrl}
+                  style={{ WebkitUserDrag: "none" }}
+                  alt="awaylogo"
+                ></img>
               </Row>
             </Col>
           </Row>
           <Row>
             <Col>
               <Row className={style["homeName"]}>
-                <div>abcdeabcdeabcdeabcde</div>
+                <div>{props.brief.home.teamName}</div>
               </Row>
             </Col>
             <Col>
               <Row className={style["awayName"]}>
-                <div>어웨이팀이름입니다요</div>
+                <div>{props.brief.away.teamName}</div>
               </Row>
             </Col>
           </Row>
@@ -54,18 +60,30 @@ const MatchOPPO = () => {
             <Col>
               <Row className={style["record"]}>
                 <div>
-                  <spna className={style["record-item1"]}>W12</spna>
-                  <spna className={style["record-item2"]}>L2</spna>
-                  <spna className={style["record-item3"]}>D4</spna>
+                  <span className={style["record-item1"]}>
+                    W{props.brief.home.teamWin}
+                  </span>
+                  <span className={style["record-item2"]}>
+                    L{props.brief.home.teamLose}
+                  </span>
+                  <span className={style["record-item3"]}>
+                    D{props.brief.home.teamDraw}
+                  </span>
                 </div>
               </Row>
             </Col>
             <Col>
               <Row className={style["record"]}>
                 <div>
-                  <spna className={style["record-item1"]}>W12</spna>
-                  <spna className={style["record-item2"]}>L2</spna>
-                  <spna className={style["record-item3"]}>D4</spna>
+                  <span className={style["record-item1"]}>
+                    W{props.brief.away.teamWin}
+                  </span>
+                  <span className={style["record-item2"]}>
+                    L{props.brief.away.teamLose}
+                  </span>
+                  <span className={style["record-item3"]}>
+                    D{props.brief.away.teamDraw}
+                  </span>
                 </div>
               </Row>
             </Col>
@@ -84,7 +102,7 @@ const MatchOPPO = () => {
                     >
                       좌완
                     </div>
-                    류현진
+                    {props.brief.home.startingPitcher}
                   </div>
                 </Row>
               </Row>
@@ -102,7 +120,7 @@ const MatchOPPO = () => {
                     >
                       우완
                     </div>
-                    아무고토 모르상
+                    {props.brief.away.startingPitcher}
                   </div>
                 </Row>
               </Row>

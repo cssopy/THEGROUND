@@ -64,13 +64,28 @@ const Manage = () => {
         });
     })();
     // 선발 로테이션 조회
-
-    initPitchersRef.current = PitchersData.slice(
-      PitchersData.length / 2,
-      PitchersData.length
-    );
-
-    setPitchers(initPitchersRef.current);
+    (async () => {
+      await axios
+        .get(BackApi.manage.rotation, {
+          headers: {
+            "X-ACCESS-TOKEN": JWT_TOKEN,
+          },
+        })
+        .then((res) => {
+          let pits = [];
+          const keys = Object.keys(res.data);
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const value = res.data[key];
+            pits.push(value);
+          }
+          initPitchersRef.current = pits;
+          setPitchers(pits);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
   }, []);
 
   // reset 버튼 함수
