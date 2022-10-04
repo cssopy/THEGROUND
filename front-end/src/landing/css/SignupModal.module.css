@@ -19,7 +19,7 @@
 }
 
 .smallModal {
-  display: none;
+  visibility: hidden;
   position: fixed;
   margin-left: 750px;
   width: 330px;
@@ -34,7 +34,7 @@
 }
 
 .openSmall {
-  display: block;
+  visibility: visible;
   animation: modal-show 0.3s;
 }
 
