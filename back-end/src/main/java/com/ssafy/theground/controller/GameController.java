@@ -1,6 +1,8 @@
 package com.ssafy.theground.controller;
 
 import com.ssafy.theground.dto.res.BriefInfoResDto;
+import com.ssafy.theground.dto.res.LineupResDto;
+import com.ssafy.theground.entity.Match;
 import com.ssafy.theground.service.GameService;
 import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.MatchSettingService;
@@ -26,6 +28,7 @@ public class GameController {
     private final GameService gameService;
     private final JwtService jwtService;
     private final MatchSettingService matchSettingService;
+    
 
     @GetMapping("/brief")
     public ResponseEntity<?> teamBriefInfo() throws Exception {
@@ -93,4 +96,21 @@ public class GameController {
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+    
+    @GetMapping("/line-up")
+    public LineupResDto getLineup(@RequestBody Map<String, String> vo) {
+    	try {
+			String uid = jwtService.getUserUid(jwtService.getJwt());
+			Long matchSeq = Long.valueOf(vo.get("matchSeq"));
+			
+			return gameService.getLineup(uid, matchSeq);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+    
+    }
+    
+    
 }
