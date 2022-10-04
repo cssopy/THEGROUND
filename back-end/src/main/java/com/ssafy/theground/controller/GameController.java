@@ -35,7 +35,22 @@ public class GameController {
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
-    
+
+	@GetMapping("/play")
+	public ResponseEntity<Map<String, Object>> playSimulate() {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status;
+		try {
+			String uid = jwtService.getUserUid(jwtService.getJwt());
+			resultMap = gameService.battingSimulate(uid);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("message", "게임 진행 정보를 가져오는 데에 실패했습니다.\nError: Access Denied");
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return new ResponseEntity<>(resultMap, status);
+	}
     
     @PostMapping("/batting-order")
     public ResponseEntity<Map<String, Object>> battingOrder(@RequestBody Map<String, Long> vo){
