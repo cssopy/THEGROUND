@@ -20,6 +20,7 @@
   height: 700px;
   background-color: rgba(05, 20, 48, 0.5);
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .btn {

@@ -49,6 +49,7 @@
 .zero {
   margin: 0px;
   padding: 0px;
+  transition: all 0.3s;
 }
 
 .buttons {
@@ -73,4 +74,39 @@
 
 .button:hover {
   background-color: #041e42;
+}
+
+.toggle {
+  display: block;
+  padding-top: 10px;
+  width: 35px;
+  height: 100%;
+}
+
+.logs {
+  width: 100%;
+  height: 103px;
+  border-radius: 0px 15px 15px 0px;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  background: #041e42;
+  transition: all 0.3s;
+  opacity: 0.9;
+}
+
+.logs:hover {
+  cursor: pointer;
+}
+
+.isOpened {
+  background: #0b418d;
+}
+
+.notOpened:hover {
+  background: #0b418d;
+}
+
+.hide {
+  opacity: 0;
 }
