@@ -23,6 +23,7 @@ public class GameService {
     private final PitcherRepository pitcherRepository;
     private final HitterRepository hitterRepository;
     private final AITeamRepository aiTeamRepository;
+    private final AISettingRepository aiSettingRepository;
     private final LogRepository logRepository;
     private final MatchSettingRepository matchSettingRepository;
     private final ScoreboardRepository scoreboardRepository;
@@ -220,5 +221,73 @@ public class GameService {
             return map;
         }
         else return null;
+    }
+    
+    public LineupResDto getLineup(String uid,Long matchSeq) {
+    	LineupResDto l = new LineupResDto();
+    	Optional<Match> o = matchRepository.findByMatchSeq(matchSeq);
+    	//match가 존재한다면
+    	if(o.isPresent()) {
+    		User u = userRepository.findByUserUid(uid).get();
+    		Match m = o.get();
+    		AITeam aiteam = aiTeamRepository.findByAiTeamSeq(m.getAiTeamSeq());
+    		AISetting aisetting = aiSettingRepository.findByAiTeamSeq(aiteam.getAiTeamSeq()).get();
+    		MatchSetting matchSetting = matchSettingRepository.findByMatchSeq(m.getMatchSeq()).get();
+    		
+    		OrderResDto aiorder = new OrderResDto();
+    		OrderResDto order = new OrderResDto();
+    		aiorder.setTeamLogoUrl(aiteam.getLogoSeq().getLogoUrl());
+    		aiorder.setTeamName(aiteam.getAiTeamName());
+    		aiorder.setHitter1st(aisetting.getAiSetting1st());
+    		aiorder.setHitter2nd(aisetting.getAiSetting2nd());
+    		aiorder.setHitter3rd(aisetting.getAiSetting3rd());
+    		aiorder.setHitter4th(aisetting.getAiSetting4th());
+    		aiorder.setHitter5th(aisetting.getAiSetting5th());
+    		aiorder.setHitter6th(aisetting.getAiSetting6th());
+    		aiorder.setHitter7th(aisetting.getAiSetting7th());
+    		aiorder.setHitter8th(aisetting.getAiSetting8th());
+    		aiorder.setHitter9th(aisetting.getAiSetting9th());
+    		switch(aisetting.getAiSettingPitcher()) {
+    		case 5:
+    			aiorder.setPitcher(aisetting.getAiSettingsp5());
+    			break;
+    		case 4:
+    			aiorder.setPitcher(aisetting.getAiSettingsp4());
+    			break;
+    		case 3:
+    			aiorder.setPitcher(aisetting.getAiSettingsp3());
+    			break;
+    		case 2:
+    			aiorder.setPitcher(aisetting.getAiSettingsp2());
+    			break;
+    		case 1:
+    		default:
+    			aiorder.setPitcher(aisetting.getAiSettingsp1());
+    			break;
+    		}
+    		
+    		order.setTeamLogoUrl(u.getLogo().getLogoUrl());
+    		order.setTeamName(u.getUserTeamname());
+    		order.setHitter1st(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting1st().getHitterSeq()));
+    		order.setHitter2nd(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting2nd().getHitterSeq()));
+    		order.setHitter3rd(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting3rd().getHitterSeq()));
+    		order.setHitter4th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting4th().getHitterSeq()));
+    		order.setHitter5th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting5th().getHitterSeq()));
+    		order.setHitter6th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting6th().getHitterSeq()));
+    		order.setHitter7th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting7th().getHitterSeq()));
+    		order.setHitter8th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting8th().getHitterSeq()));
+    		order.setHitter9th(hitterRepository.findByHitterSeq(matchSetting.getMatchSetting9th().getHitterSeq()));
+    		order.setPitcher(pitcherRepository.findByPitcherSeq(matchSetting.getMatchSettingPitcher().getPitcherSeq()));
+    	
+    		if(m.getMatchHomeFlag()) {
+    			l.setHome(order);
+    			l.setAway(aiorder);
+    		}else {
+    			l.setHome(aiorder);
+    			l.setAway(order);
+    		}
+    	}
+    	return l;
+    	
     }
 }
