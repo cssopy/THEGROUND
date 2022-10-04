@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 
 const ScoreBoard = (props) => {
   // 전광판
-  const { scores, R, H, B } = props;
+  const { scores, R, H, B, gameLog } = props;
   const logos = useSelector((state) => state.logo.logos);
 
   return (
     <>
-      <Table bordered className={`${styles["score-board"]}`}>
+      <Table
+        bordered
+        className={`${styles["score-board"]} ${gameLog[1] ? styles.hide : ""}`}
+      >
         <thead className={styles.thead}>
           <tr className={styles.top}>
             <th className={styles.left}></th>
@@ -30,7 +33,11 @@ const ScoreBoard = (props) => {
         <tbody className={styles.tbody}>
           <tr>
             <th className={styles.left}>
-              <img src={logos && logos[4].logoUrl} className={styles.logo} />
+              <img
+                src={logos && logos[4].logoUrl}
+                className={styles.logo}
+                alt="homeLogo"
+              />
             </th>
             <th>{scores[0]}</th>
             <th>{scores[2]}</th>
@@ -47,7 +54,11 @@ const ScoreBoard = (props) => {
           </tr>
           <tr className={styles.bottom}>
             <th className={styles.left}>
-              <img src={logos && logos[3].logoUrl} className={styles.logo} />
+              <img
+                src={logos && logos[3].logoUrl}
+                className={styles.logo}
+                alt="awayLogo"
+              />
             </th>
             <th>{scores[1]}</th>
             <th>{scores[3]}</th>

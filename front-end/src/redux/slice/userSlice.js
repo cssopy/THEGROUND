@@ -4,6 +4,7 @@ const initialUserState = {
   user: {
     uid: "",
     jwt: "",
+    loginType: "",
     logoUrl: "",
     logo: {},
     userTeamname: "",
@@ -19,6 +20,7 @@ const initialUserState = {
     isLoading: true,
     percentage: 0,
   },
+  visited: false,
 };
 
 const userSlice = createSlice({
@@ -34,6 +36,9 @@ const userSlice = createSlice({
     setLogo: (state, action) => {
       state.user.logo = action.payload;
     },
+    setLoginType: (state, action) => {
+      state.user.loginType = action.payload;
+    },
     setUser: (state, action) => {
       state.user = { ...state.user, ...action.payload };
     },
@@ -46,6 +51,9 @@ const userSlice = createSlice({
     },
     setPersentage: (state, action) => {
       state.loading.percentage = action.payload;
+    },
+    setVisited: (state) => {
+      state.visited = true;
     },
   },
 });
