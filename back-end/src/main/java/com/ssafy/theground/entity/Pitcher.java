@@ -133,4 +133,7 @@ public class Pitcher {
 
     @Column(name = "pitcher_salary")
     private int salary;
+
+    @Column(name = "pitcher_max_velocity")
+    private double maxVelocity;
 }
