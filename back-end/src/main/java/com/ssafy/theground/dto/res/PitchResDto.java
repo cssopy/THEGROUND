@@ -6,11 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PitchResDto {
+    private String pitchType;
     private double ballX;
     private double ballY;
-    private String description;
-    private String pitchType;
+    private int zone;
+    private double velocity;
     private int ball;
     private int strike;
-    private int speed;
+    private String description;
 }
