@@ -1,7 +1,11 @@
 package com.ssafy.theground.controller;
 
 import com.ssafy.theground.dto.res.MatchResDto;
+import com.ssafy.theground.dto.res.ResultResDto;
+import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.MainService;
+import com.ssafy.theground.service.ResultService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,8 @@ import java.util.List;
 public class MainController {
 
     private final MainService mainService;
+    private final ResultService resultService;
+    private final JwtService jwtService;
 
     @GetMapping("/schedules")
     public ResponseEntity<?> getSchedules() throws Exception {
@@ -25,5 +31,15 @@ public class MainController {
             return new ResponseEntity<>(schedules, HttpStatus.OK);
         }
         else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+    
+    @GetMapping("/matches")
+    public List<ResultResDto> getMatches(){
+    	try {
+			return resultService.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
     }
 }
