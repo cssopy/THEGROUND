@@ -3,6 +3,8 @@ import styles from "./css/Game.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import landingMusic from "../assets/bgm/INDIE_ROCK_SPORT.mp3";
+import ReactHowler from "react-howler";
 
 import Field from "./components/main/Field";
 import StrikeZone from "./components/main/StrikeZone";
@@ -13,6 +15,8 @@ import Pitchers from "./components/main/CurrentPitchers";
 import Hitter from "./components/main/CurrentHitter";
 import GameLogs from "./components/main/GameLogs";
 import ChangePlayer from "./components/changePlayer/ChangePlayer";
+import Tutorial from "./components/tutorial/Tutorial";
+import { useSelector } from "react-redux";
 
 const Game = () => {
   // 구현 완료
@@ -30,7 +34,15 @@ const Game = () => {
   // 10. Skip 구현
   // 11. 선수 교체 api
 
+  const user = useSelector((state) => state.user.user);
   const [modalOpen, setModalOpen] = useState(false);
+  const [tutorial, setTutorial] = useState(
+    !(user.userWin + user.userLose + user.userDraw)
+  );
+
+  const closeTutorial = () => {
+    setTutorial(false);
+  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -135,6 +147,13 @@ const Game = () => {
             header="Modal heading"
           />
         </div>
+        {/* <ReactHowler
+          src={landingMusic}
+          playing={true}
+          loop={true}
+          volume={0.05}
+        /> */}
+        {tutorial && <Tutorial closeTutorial={closeTutorial} />}
       </div>
     </>
   );
