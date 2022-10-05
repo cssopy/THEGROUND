@@ -87,6 +87,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void setHitters(User u) {
+		if(userHitterRepository.findByUserSeq(u).size() != 0)
+			return;
 		for(int i=1;i<=13;i++) {
 			UserHitter h = new UserHitter();
 			h.setUserSeq(u);
@@ -99,6 +101,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void setPitchers(User u) {
+		if(userPitcherRepository.findByUserSeq(u).size() != 0)
+			return;
 		for(int i=1;i<=7;i++) {
 			UserPitcher p = new UserPitcher();
 			p.setUserSeq(u);
