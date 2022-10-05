@@ -1,9 +1,14 @@
 import styles from "../../css/matchLineup/MatchLineup.module.css";
 import { Row, Col, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../../../redux/slice/configSlice";
 
 const MatchLineup = () => {
   const logos = useSelector((state) => state.logo.logos);
+
+  const dispatch = useDispatch();
+
   const homeHitters = [
     {
       hitterName: "좌타",
@@ -104,7 +109,7 @@ const MatchLineup = () => {
   const awayName = "삼성 라이온즈";
 
   const startGame = () => {
-    alert("게임 시작하는 버튼");
+    dispatch(configActions.setUrl("game"));
   };
 
   return (

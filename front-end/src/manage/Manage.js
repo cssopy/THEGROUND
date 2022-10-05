@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useNavigate } from "react-router";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../redux/slice/configSlice";
 
 import axios from "axios";
 
@@ -18,7 +19,7 @@ import { useSelector } from "react-redux";
 const Manage = () => {
   const user = useSelector((state) => state.user.user);
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const initHittersRef = useRef([]);
   const initPitchersRef = useRef([]);
@@ -204,7 +205,7 @@ const Manage = () => {
                   <div
                     className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
                     onClick={() => {
-                      navigate("/main");
+                      dispatch(configActions.setUrl("main"));
                     }}
                   >
                     MAIN
@@ -213,7 +214,7 @@ const Manage = () => {
                   <div
                     className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
                     onClick={() => {
-                      navigate("/market");
+                      dispatch(configActions.setUrl("market"));
                     }}
                   >
                     이적시장

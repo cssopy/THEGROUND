@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../../../redux/slice/configSlice";
 
 import ManageGuide from "../../../assets/etc/manage_guide.png";
 import MarketGuide from "../../../assets/etc/market_guide.png";
@@ -7,7 +8,7 @@ import MarketGuide from "../../../assets/etc/market_guide.png";
 import style from "../../css/guide/Guide.module.css";
 
 const Guide = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -22,7 +23,7 @@ const Guide = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/main");
+                dispatch(configActions.setUrl("main"));
               }}
             >
               PvE
@@ -38,7 +39,7 @@ const Guide = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/manage");
+                dispatch(configActions.setUrl("manage"));
               }}
             >
               구단관리
@@ -46,7 +47,7 @@ const Guide = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/market");
+                dispatch(configActions.setUrl("market"));
               }}
             >
               이적시장
