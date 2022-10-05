@@ -32,10 +32,10 @@ public class Log {
     private int logOut;
 
     @Column(name="log_pitcher")
-    private long logPitcher;
+    private Long logPitcher;
 
     @Column(name="log_hitter")
-    private long logHitter;
+    private Long logHitter;
 
     @Column(name="log_1st_base")
     private Long log1stBase;
