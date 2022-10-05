@@ -27,7 +27,6 @@ const LoginHandler = (props) => {
 
   // 네이버로 토큰 발급 요청
   const getToken = () => {
-    dispatch(configActions.setIsLoading(true));
     axios
       .post(
         loginUrl,
@@ -42,6 +41,7 @@ const LoginHandler = (props) => {
       )
       .then((res) => res.data)
       .then((data) => {
+        dispatch(configActions.setIsLoading(true));
         // 액세스 토큰으로 로그인 요청
         if (data.access_token) {
           axios
