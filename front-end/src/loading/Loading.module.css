@@ -48,7 +48,7 @@
 }
 
 .none {
-  visibility: hidden;
+  opacity: 0;
   z-index: -1;
 }
 
