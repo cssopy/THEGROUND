@@ -2,6 +2,13 @@ import styles from "./Loading.module.css";
 import title from "../assets/etc/title.png";
 import subtitle from "../assets/etc/subtitle.png";
 import ball from "../assets/etc/logo192.png";
+import Music1 from "../assets/bgm/GROOVY_HIPHOP.mp3";
+import Music2 from "../assets/bgm/HIGH_OCTANE.mp3";
+import Music3 from "../assets/bgm/INDIE_ROCK_SPORT.mp3";
+import Music4 from "../assets/bgm/STRAIGHT.mp3";
+import Music5 from "../assets/bgm/THE_LOUNGE.mp3";
+import ReactHowler from "react-howler";
+
 import { ProgressBar } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,22 +20,59 @@ const Loading = () => {
   const percentage = useSelector((state) => state.config.loading.percentage);
   const isLoading = useSelector((state) => state.config.loading.isLoading);
   const loginType = useSelector((state) => state.user.user.loginType);
-
+  const jwt = useSelector((state) => state.user.user.jwt);
+  const music = useSelector((state) => state.config.music);
+  const url = useSelector((state) => state.config.url);
   const dispatch = useDispatch();
+  const musicConf = {
+    "": {
+      music: Music3,
+      volume: 0.1,
+    },
+    main: {
+      music: Music3,
+      volume: 0.1,
+    },
+    guide: {
+      music: Music3,
+      volume: 0.1,
+    },
+    manage: {
+      music: Music3,
+      volume: 0.1,
+    },
+    market: {
+      music: Music3,
+      volume: 0.1,
+    },
+    game: {
+      music: Music3,
+      volume: 0.1,
+    },
+    match: {
+      music: Music3,
+      volume: 0.1,
+    },
+    result: {
+      music: Music3,
+      volume: 0.1,
+    },
+  };
 
   useEffect(() => {
     if (percentage === 100) {
       setTimeout(() => {
         dispatch(configActions.setIsLoading(false));
+        dispatch(configActions.setPersentage(0));
       }, 2000);
     }
   }, [percentage]);
 
   useEffect(() => {
     if (!loginType) {
-      dispatch(configActions.setPersentage(0));
       dispatch(configActions.setIsLoading(false));
-      dispatch(configActions.setUrl(""));
+      dispatch(configActions.setPersentage(0));
+      dispatch(configActions.setUrl(jwt ? "main" : ""));
     }
   }, []);
 
@@ -56,6 +100,12 @@ const Loading = () => {
             />
           </ProgressBar>
         </div>
+        <ReactHowler
+          src={musicConf[url].music}
+          playing={music}
+          loop={true}
+          volume={musicConf[url].volume}
+        />
       </div>
     </>
   );
