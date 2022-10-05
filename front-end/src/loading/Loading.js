@@ -76,13 +76,10 @@ const Loading = () => {
         {music && !isLoading && url === "game" && (
           <ReactHowler src={Music4} playing={true} loop={true} volume={1} />
         )}
-        {music && !isLoading && ["main", "guide"].includes(url) && (
-          <ReactHowler src={Music1} playing={true} loop={true} volume={1} />
-        )}
         {music &&
           !isLoading &&
-          ["market", "manage", "result"].includes(url) && (
-            <ReactHowler src={Music5} playing={true} loop={true} volume={1} />
+          ["market", "manage", "result", "main", "guide"].includes(url) && (
+            <ReactHowler src={Music1} playing={true} loop={true} volume={1} />
           )}
         {music && !isLoading && url === "match" && (
           <ReactHowler src={Music2} playing={true} loop={true} volume={1} />
