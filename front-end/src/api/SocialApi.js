@@ -1,5 +1,5 @@
-// const REDIRECT_URI = "https://j7d109.p.ssafy.io";
-const REDIRECT_URI = "http://localhost:3000";
+const REDIRECT_URI = "https://j7d109.p.ssafy.io";
+// const REDIRECT_URI = "http://localhost:3000";
 
 // 네이버
 const NAVER_CLIENT_ID = "PVGrBZM8vqHq_92Vh6Wx";
