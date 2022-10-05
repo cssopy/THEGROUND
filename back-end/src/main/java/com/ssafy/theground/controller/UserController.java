@@ -354,4 +354,18 @@ public class UserController {
 		}
 	}
 	
+	@PostMapping("/loaster")
+	public String setLoaster() {
+		try {
+			String uid = jwtService.getUserUid(jwtService.getJwt());
+			userService.setHitters(userService.findByUserUid(uid).get());
+			userService.setPitchers(userService.findByUserUid(uid).get());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
+		return "success";
+	}
+	
 }
