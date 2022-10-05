@@ -41,7 +41,7 @@ const UserInfoModal = (props) => {
           dispatch(
             userActions.updateUser({
               userTeamname: userTeamName,
-              logoUrl: logos[1].logoUrl,
+              logoUrl: logos[0].logoUrl,
             })
           );
           alert("회원정보 수정 완료");
