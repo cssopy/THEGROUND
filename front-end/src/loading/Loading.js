@@ -60,7 +60,7 @@ const Loading = () => {
   };
 
   useEffect(() => {
-    if (percentage === 100) {
+    if (percentage >= 100) {
       setTimeout(() => {
         dispatch(configActions.setIsLoading(false));
         dispatch(configActions.resetPersentage());
@@ -71,7 +71,7 @@ const Loading = () => {
   useEffect(() => {
     if (!loginType) {
       dispatch(configActions.setIsLoading(false));
-      dispatch(configActions.setPersentage(0));
+      dispatch(configActions.resetPersentage());
       dispatch(configActions.setUrl(jwt ? "main" : ""));
     }
   }, []);

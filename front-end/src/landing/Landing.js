@@ -11,8 +11,8 @@ import StartGame from "./components/StartGame";
 
 const Landing = () => {
   const loginType = useSelector((state) => state.user.user.loginType);
-  const visited = useSelector((state) => state.config.visited);
   const uid = useSelector((state) => state.user.user.uid);
+  const visited = localStorage.getItem("visited");
   const [login, setLogin] = useState(false);
 
   return (

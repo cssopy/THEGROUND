@@ -19,7 +19,7 @@ const StartGame = () => {
   const nowShow = () => {
     dispatch(configActions.setMusic(true));
     setShowLanding(true);
-    setTimeout(() => dispatch(configActions.setVisited()), 1000);
+    localStorage.setItem("visited", true);
   };
   const changeModal = () => {
     if (anime === 10) {
@@ -100,7 +100,9 @@ const StartGame = () => {
           } ${anime > 10 ? "" : styles.hidden}`}
         />
         <div
-          className={`${styles.ball} ${anime > 12 ? "" : styles.hidden}`}
+          className={`${styles.ball} ${anime > 12 ? "" : styles.hidden} ${
+            anime < 12 ? styles.remove : ""
+          }`}
           onClick={nowShow}
         />
         <div
