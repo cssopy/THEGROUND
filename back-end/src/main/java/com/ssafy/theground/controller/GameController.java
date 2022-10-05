@@ -118,6 +118,7 @@ public class GameController {
     	try {
 			String uid = jwtService.getUserUid(jwtService.getJwt());
 			Long matchSeq = Long.valueOf(vo.get("matchSeq"));
+			System.out.println(matchSeq);
 			
 			return gameService.getResult(uid, matchSeq);
 		} catch (Exception e) {
