@@ -95,35 +95,51 @@ public class TradeService {
 
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
 
-        if (byUserUid.isPresent()){
+        if (byUserUid.isPresent()) {
             List<UserPitcher> byUserSeq = managePitcherRepository.findByUserSeq(byUserUid.get());
             List<Long> pitcherSeq = new ArrayList<>();
 
-            for(UserPitcher u : byUserSeq){
-                Long pitSeq = u.getPitcherSeq();
-                if(pitSeq == null){
-                    continue;
+            if (byUserSeq.isEmpty()) {
+                List<Pitcher> allPitcher = pitcherRepository.findAll();
+                for (Pitcher one : allPitcher) {
+                    PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
+                    possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
+                    possOrNotPitcherResDto.setPitcherName(one.getPitcherName());
+                    possOrNotPitcherResDto.setPitArm(one.getPitArm());
+                    possOrNotPitcherResDto.setEra(one.getEra());
+                    possOrNotPitcherResDto.setInning(one.getInning());
+                    possOrNotPitcherResDto.setWin(one.getWin());
+                    possOrNotPitcherResDto.setLose(one.getLose());
+                    possOrNotPitcherResDto.setSalary(one.getSalary());
+
+                    list.add(possOrNotPitcherResDto);
                 }
-                pitcherSeq.add(pitSeq);
+            } else {
+                for (UserPitcher u : byUserSeq) {
+                    Long pitSeq = u.getPitcherSeq();
+                    if (pitSeq == null) {
+                        continue;
+                    }
+                    pitcherSeq.add(pitSeq);
+                }
+                List<Pitcher> all = pitcherRepository.findAllByPitcherSeqNotIn(pitcherSeq);
+                for (Pitcher one : all) {
+                    PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
+                    possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
+                    possOrNotPitcherResDto.setPitcherName(one.getPitcherName());
+                    possOrNotPitcherResDto.setPitArm(one.getPitArm());
+                    possOrNotPitcherResDto.setEra(one.getEra());
+                    possOrNotPitcherResDto.setInning(one.getInning());
+                    possOrNotPitcherResDto.setWin(one.getWin());
+                    possOrNotPitcherResDto.setLose(one.getLose());
+                    possOrNotPitcherResDto.setSalary(one.getSalary());
+
+                    list.add(possOrNotPitcherResDto);
+                }
             }
-
-            List<Pitcher> all = pitcherRepository.findAllByPitcherSeqNotIn(pitcherSeq);
-            for(Pitcher one : all){
-                PossOrNotPitcherResDto possOrNotPitcherResDto = new PossOrNotPitcherResDto();
-                possOrNotPitcherResDto.setPitcherSeq(one.getPitcherSeq());
-                possOrNotPitcherResDto.setPitcherName(one.getPitcherName());
-                possOrNotPitcherResDto.setPitArm(one.getPitArm());
-                possOrNotPitcherResDto.setEra(one.getEra());
-                possOrNotPitcherResDto.setInning(one.getInning());
-                possOrNotPitcherResDto.setWin(one.getWin());
-                possOrNotPitcherResDto.setLose(one.getLose());
-                possOrNotPitcherResDto.setSalary(one.getSalary());
-
-                list.add(possOrNotPitcherResDto);
-            }
-        } else return null;
-
-        return list;
+            return list;
+        }
+        return null;
     }
 
     @Transactional
