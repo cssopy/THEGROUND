@@ -207,8 +207,8 @@ public class GameService {
             }
 
             // 공 좌표 및 zone 결정
-            double ballX = new Random().nextGaussian(0, 0.6);
-            double ballY = new Random().nextGaussian(0, 0.72);
+            double ballX = new Random().nextGaussian() * 0.6;
+            double ballY = new Random().nextGaussian() * 0.72;
             int zone;
             if ((ballX < -0.75 || ballX > 0.75) || (ballY < -0.9 || ballY > 0.9)) {
                 if (ballY < 0) {
