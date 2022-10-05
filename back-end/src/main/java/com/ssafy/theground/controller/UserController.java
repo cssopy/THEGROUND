@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ssafy.theground.dto.res.UserMypageDto;
+import com.ssafy.theground.entity.Hitter;
 import com.ssafy.theground.entity.Logo;
 import com.ssafy.theground.entity.TeamSetting;
 import com.ssafy.theground.entity.User;
@@ -48,6 +49,9 @@ public class UserController {
 	
 	@Autowired
 	LogoService logoService;
+	
+	@Autowired
+	EntityManager em;
 
 	@GetMapping("")
 	public String testMethod() {
@@ -59,9 +63,6 @@ public class UserController {
             result += str+" "; 
 		return result;
 	}
-	
-	@Autowired
-	EntityManager em;
 
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> vo) {
@@ -263,6 +264,11 @@ public class UserController {
 			u.setUserUid(uid);
 			u.setTeamSetting(null);
 			userService.save(u);
+			em.clear();
+			
+			u = userService.findByUserUid(uid).get();
+			userService.setHitters(u);
+			userService.setPitchers(u);
 			
 			resultMap.put("userTeamname", userTeamname);
 			String jwt = jwtService.createJwt(uid);
