@@ -5,14 +5,16 @@ import ball from "../assets/etc/logo192.png";
 import Music1 from "../assets/bgm/GROOVY_HIPHOP.mp3";
 import Music2 from "../assets/bgm/HIGH_OCTANE.mp3";
 import Music3 from "../assets/bgm/INDIE_ROCK_SPORT.mp3";
-import Music4 from "../assets/bgm/STRAIGHT.mp3";
-import Music5 from "../assets/bgm/THE_LOUNGE.mp3";
+import Music4 from "../assets/bgm/INDIE_ROCK_SPORT_2.mp3";
+import Music5 from "../assets/bgm/STRAIGHT.mp3";
+import Music6 from "../assets/bgm/THE_LOUNGE.mp3";
 import ReactHowler from "react-howler";
 
 import { ProgressBar } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { configActions } from "../redux/slice/configSlice";
+import { userActions } from "../redux/slice/userSlice";
 
 const Loading = () => {
   // api 통신 횟수나 크기 및 페이지에서의 useSelector 세팅에 따라 총 100을 채우도록 설계한다.
@@ -68,7 +70,7 @@ const Loading = () => {
             </>
           </ProgressBar>
         </div>
-        {music &&
+        {/* {music &&
           [
             "",
             "main",
@@ -79,8 +81,8 @@ const Loading = () => {
             "match",
             "result",
           ].includes(url) && (
-            <ReactHowler src={Music1} playing={true} loop={true} volume={0.1} />
-          )}
+            <ReactHowler src={Music1} playing={true} loop={true} volume={1} />
+          )} */}
       </div>
     </>
   );

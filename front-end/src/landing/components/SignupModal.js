@@ -281,27 +281,25 @@ const SignupModal = (props) => {
             &#8592;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CANCLE&nbsp;&nbsp;&nbsp;
           </span>
         </div>
-        {logos && (
-          <div
-            className={`${styles.smallModal} ${
-              selectLogo && !progress ? styles.openSmall : ""
-            }`}
-          >
-            {logos.map((logo, idx) => {
-              return (
-                <img
-                  src={logo.logoUrl}
-                  className={`${styles.logoList} ${
-                    myLogo && idx + 1 === myLogo.logoSeq ? styles.selected : ""
-                  }`}
-                  key={idx}
-                  alt={idx}
-                  onClick={changeMyLogo}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div
+          className={`${styles.smallModal} ${
+            selectLogo && !progress ? styles.openSmall : ""
+          }`}
+        >
+          {logos.map((logo, idx) => {
+            return (
+              <img
+                src={logo.logoUrl}
+                className={`${styles.logoList} ${
+                  myLogo && idx + 1 === myLogo.logoSeq ? styles.selected : ""
+                }`}
+                key={idx}
+                alt={idx}
+                onClick={changeMyLogo}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
