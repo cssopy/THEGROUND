@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void setHitters(User u) {
-		for(int i=1;i<=9;i++) {
+		for(int i=1;i<=13;i++) {
 			UserHitter h = new UserHitter();
 			h.setUserSeq(u);
 			h.setHitterSeq(Long.valueOf(Integer.toString(i)));
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void setPitchers(User u) {
-		for(int i=1;i<=5;i++) {
+		for(int i=1;i<=7;i++) {
 			UserPitcher p = new UserPitcher();
 			p.setUserSeq(u);
 			p.setPitcherSeq(Long.valueOf(Integer.toString(i)));
