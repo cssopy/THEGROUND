@@ -90,21 +90,22 @@ const AssignHitters = (props) => {
   }, []);
 
   const next = () => {
-    if (
-      hitters.filter((item) => {
-        return item !== null;
-      }).length === 9
-    ) {
-      setPageActive([false, false, true]);
-    } else {
-      alert(
-        `${
-          hitters.filter((item) => {
-            return item !== null;
-          }).length
-        }명만 지정됨`
-      );
-    }
+    // if (
+    //   hitters.filter((item) => {
+    //     return item !== null;
+    //   }).length === 9
+    // ) {
+    //   setPageActive([false, false, true]);
+    // } else {
+    //   alert(
+    //     `${
+    //       hitters.filter((item) => {
+    //         return item !== null;
+    //       }).length
+    //     }명만 지정됨`
+    //   );
+    // }
+    setPageActive([false, false, true]);
   };
 
   return (
