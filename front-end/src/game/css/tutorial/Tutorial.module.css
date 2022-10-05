@@ -1,0 +1,250 @@
+.box * {
+  transition: all 1s;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: white;
+  transition: all 1s;
+}
+
+.body {
+  position: fixed;
+  width: 1400px;
+  height: 700px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.removeBg {
+  background: rgba(0, 0, 0, 0);
+}
+
+.confirm {
+  position: absolute;
+  width: 1000px;
+  height: 450px;
+  border-radius: 20px;
+  padding: auto;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 50px;
+}
+
+.content {
+  font-size: 32px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  font-size: 28px;
+  margin-top: 100px;
+}
+
+.skip,
+.continue {
+  width: 200px;
+  height: 60px;
+  margin: 0px 10px;
+  font-weight: bold;
+  transition: all 0.5s;
+  text-decoration: underline;
+}
+
+.skip:hover {
+  color: #bf0d3e;
+  font-size: 32px;
+}
+
+.continue:hover {
+  color: #a2e90b;
+  font-size: 32px;
+}
+
+.cardBody {
+  position: absolute;
+  width: 340px;
+  background: linear-gradient(#041e42, rgba(04, 30, 66, 0.8));
+  padding: 0px;
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 24px;
+  border-radius: 10px 10px 0px 0px;
+  width: 100%;
+  background: linear-gradient(#053167, rgba(5, 49, 103, 0.8));
+}
+
+.cardContent {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.field {
+  margin: 10px 0px 0px 10px;
+  width: 480px;
+  height: 420px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.fieldContent {
+  margin: 50px 0px 0px 500px;
+  height: 150px;
+}
+
+.strikeZone {
+  margin: 5px 0px 0px 10px;
+  width: 260px;
+  height: 250px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.strikeZoneContent {
+  margin: 50px 0px 0px 280px;
+  height: 130px;
+}
+
+.ballVel {
+  margin: 5px 0px 0px 0px;
+  width: 220px;
+  height: 100px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.ballVelContent {
+  margin: 0px 0px 0px 240px;
+  height: 130px;
+}
+
+.bso {
+  margin: 5px 0px 0px 0px;
+  width: 220px;
+  height: 150px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.bsoContent {
+  margin: 0px 0px 0px 240px;
+  height: 130px;
+}
+
+.score {
+  margin: 10px 10px 0px 0px;
+  width: 900px;
+  height: 220px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.scoreContent {
+  margin: 0px 0px 0px -370px;
+  height: 130px;
+}
+
+.pitcher {
+  margin: 10px 0px 0px 10px;
+  width: 340px;
+  height: 180px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.pitcherContent {
+  margin: 0px 0px 0px -370px;
+  height: 130px;
+}
+
+.hitter {
+  margin: 10px 0px 0px 10px;
+  width: 340px;
+  height: 160px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.hitterContent {
+  margin: 0px 0px 0px -370px;
+  height: 130px;
+}
+
+.buttons {
+  margin: 10px 0px 0px 10px;
+  width: 340px;
+  height: 80px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.buttonsContent {
+  margin: -50px 0px 0px -350px;
+  height: 130px;
+}
+
+.log {
+  margin: 10px 15px 0px 0px;
+  width: 540px;
+  height: 440px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 0 9999px;
+}
+
+.logContent {
+  margin: 0px 0px 0px -350px;
+  height: 130px;
+}
+
+.pagingButton {
+  position: absolute;
+  margin-top: -30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prev,
+.next {
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  line-height: 24px;
+  transition: all 0.5s;
+}
+
+.prev:hover {
+  color: #bf0d3e;
+  font-size: 20px;
+}
+
+.next:hover {
+  color: #a2e90b;
+  font-size: 20px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.remove {
+  display: none;
+}
