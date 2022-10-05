@@ -12,23 +12,25 @@ const Loading = () => {
   // 아래 now로 퍼센테이지 관리하기
   const percentage = useSelector((state) => state.config.loading.percentage);
   const isLoading = useSelector((state) => state.config.loading.isLoading);
+  const loginType = useSelector((state) => state.user.user.loginType);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (percentage === 100) {
       setTimeout(() => {
-        dispatch(configActions.toggleIsLoading(false));
+        dispatch(configActions.setIsLoading(false));
       }, 2000);
     }
   }, [percentage]);
 
-  const reset = () => {
-    dispatch(configActions.setPersentage(0));
-    dispatch(configActions.toggleIsLoading(true));
-  };
-
-  window.addEventListener("beforeunload", reset);
+  useEffect(() => {
+    if (!loginType) {
+      dispatch(configActions.setPersentage(0));
+      dispatch(configActions.setIsLoading(false));
+      dispatch(configActions.setUrl(""));
+    }
+  }, []);
 
   return (
     <>
@@ -49,7 +51,7 @@ const Loading = () => {
               alt="ball"
               className={styles.ball}
               style={{
-                marginLeft: `${-20 + 10 * (percentage ? percentage : 0)}px`,
+                marginLeft: `${-20 + (percentage ? 10 * percentage : 0)}px`,
               }}
             />
           </ProgressBar>

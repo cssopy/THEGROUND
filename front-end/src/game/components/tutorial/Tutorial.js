@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 const Tutorial = (props) => {
   const { closeTutorial } = props;
   const [orders, setOrders] = useState(1);
+
   useEffect(() => {
     if (orders % 4) {
       setTimeout(() => setOrders((prev) => prev + 1), 500);
       console.log(orders);
     }
   });
+
   const nextOrder = () => {
     setOrders((prev) => prev + 1);
   };
