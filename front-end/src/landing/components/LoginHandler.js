@@ -78,7 +78,8 @@ const LoginHandler = (props) => {
         } else {
           navigate("/");
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   // 취소시 로직

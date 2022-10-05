@@ -81,7 +81,8 @@ const SignupModal = (props) => {
           dispatch(userActions.setUid(""));
           localStorage.removeItem("loginType");
           navigate("/main");
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -122,6 +123,7 @@ const SignupModal = (props) => {
 
   const closeModal = () => {
     dispatch(userActions.setUid(""));
+    dispatch(userActions.setLoginType(""));
   };
 
   return (

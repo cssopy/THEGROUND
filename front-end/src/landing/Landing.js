@@ -13,13 +13,10 @@ import StartGame from "./components/StartGame";
 
 const Landing = () => {
   const loginType = useSelector((state) => state.user.user.loginType);
-  const visited = useSelector((state) => state.user.visited);
+  const visited = useSelector((state) => state.config.visited);
   const uid = useSelector((state) => state.user.user.uid);
   const [login, setLogin] = useState(false);
-  const [music, setMusic] = useState(visited);
-  const startMusic = () => {
-    setMusic(true);
-  };
+  const music = useSelector((state) => state.config.music);
 
   return (
     <>
@@ -43,8 +40,8 @@ const Landing = () => {
       </div>
       <LoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
-      {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
-      {/* <SignupModal loginType={loginType} /> */}
+      {/* {loginType && uid ? <SignupModal loginType={loginType} /> : <></>} */}
+      <SignupModal loginType={loginType} />
       {music && (
         <ReactHowler
           src={landingMusic}
@@ -53,7 +50,7 @@ const Landing = () => {
           volume={0.1}
         />
       )}
-      {!visited && <StartGame startMusic={startMusic} />}
+      {!visited && <StartGame />}
     </>
   );
 };
