@@ -17,7 +17,7 @@ import style from "./css/Market.module.css";
 import BackApi from "../api/BackApi";
 
 const Market = () => {
-  const [user, setUser] = useState(useSelector((state) => state.user.user));
+  const user = useSelector((state) => state.user.user);
 
   const navigate = useNavigate();
 

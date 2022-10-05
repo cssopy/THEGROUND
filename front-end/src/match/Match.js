@@ -10,7 +10,7 @@ import MatchLineup from "./components/matchLineup/MatchLineup";
 import BackApi from "../api/BackApi";
 
 const Match = () => {
-  const [user, setUser] = useState(useSelector((state) => state.user.user));
+  const user = useSelector((state) => state.user.user);
 
   const [pageActive, setPageActive] = useState([true, false, false]);
 

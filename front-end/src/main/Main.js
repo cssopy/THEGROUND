@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { BsPencilSquare } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux/es/exports";
 import { userActions } from "../redux/slice/userSlice";
 
 import axios from "axios";
@@ -19,9 +20,10 @@ import style from "./css/Main.module.css";
 import BackApi from "../api/BackApi";
 
 const Main = () => {
-  const [user, setUser] = useState(useSelector((state) => state.user.user));
+  const user = useSelector((state) => state.user.user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [matchs, setMatchs] = useState([]);
   const [pitchers, setPitchers] = useState([]);
@@ -86,7 +88,7 @@ const Main = () => {
   }, [user]);
 
   const signOut = () => {
-    alert("로그아웃");
+    // dispatch(userActions.setJwt(res.data.jwt));
     navigate("/");
   };
 
