@@ -188,7 +188,7 @@ const Main = () => {
                   <Col>
                     <img
                       className={style["teamLogo"]}
-                      src={user.logo.logoUrl}
+                      src={user.logoUrl}
                       alt="teamlogo"
                     ></img>
                   </Col>
