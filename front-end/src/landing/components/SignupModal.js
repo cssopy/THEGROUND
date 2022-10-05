@@ -9,6 +9,7 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import playersActions from "../../redux/thunkActions/playerActions";
 import BackApi from "../../api/BackApi";
 import { configActions } from "../../redux/slice/configSlice";
+import usersActions from "../../redux/thunkActions/userActions";
 
 const SignupModal = (props) => {
   const { loginType } = props;
@@ -62,12 +63,6 @@ const SignupModal = (props) => {
 
   const userSubmit = () => {
     if (valid === 0 && clubNameInput.current.value.trim().length) {
-      console.log({
-        uid,
-        userTeamname: clubNameInput.current.value,
-        logoSeq: myLogo.logoSeq,
-        loginType,
-      });
       axios
         .post(BackApi.users.signup, {
           uid,
@@ -76,8 +71,9 @@ const SignupModal = (props) => {
           loginType,
         })
         .then((res) => {
-          dispatch(playersActions.getPlayerAPI());
+          dispatch(playersActions.getPlayerAPI(res.data.jwt));
           dispatch(userActions.setJwt(res.data.jwt));
+          dispatch(usersActions.getUserAPI(res.data.jwt));
           dispatch(userActions.setUid(""));
           localStorage.removeItem("loginType");
           dispatch(configActions.setIsLoading(true));

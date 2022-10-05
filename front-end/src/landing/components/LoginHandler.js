@@ -93,7 +93,9 @@ const LoginHandler = (props) => {
   window.history.replaceState({}, null, window.location.pathname);
 
   useEffect(() => {
-    if (loginType) {
+    if (!CODE) {
+      return;
+    } else if (loginType) {
       getToken();
     }
     if (error === "Canceled By User") {
