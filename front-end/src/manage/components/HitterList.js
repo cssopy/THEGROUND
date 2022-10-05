@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux/es/exports";
 
 import style from "../css/HitterList.module.css";
 
@@ -8,12 +9,19 @@ import Hitter from "./Hitter";
 import HitterDetailModal from "./HitterDetailModal";
 
 const HitterList = memo((props) => {
+  const players = useSelector((state) => state.player.players);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [hitter, setHitter] = useState();
 
   const onMouseOver = (hitter) => {
     setModalIsOpen(true);
-    setHitter(hitter);
+    for (let hit of players.hitter) {
+      if (hit.hitterSeq === hitter.hitterSeq) {
+        setHitter(hit);
+      }
+    }
+    // setHitter(hitter);
   };
 
   const onMouseLeave = () => {

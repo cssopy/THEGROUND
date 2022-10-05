@@ -4,26 +4,21 @@ import Radar from "./Radar";
 import style from "../css/HitterDetailModal.module.css";
 
 const HitterDetailModal = (props) => {
+  const { hitter } = props;
+
+  // 타율 출루율 장타율 볼넷 삼진
   const data = [
     {
-      taste: "fruity",
-      chardonay: 30,
+      taste: "타율",
+      chardonay: hitter.avg,
     },
     {
-      taste: "bitter",
-      chardonay: 41,
+      taste: "출루율",
+      chardonay: hitter.obp,
     },
     {
-      taste: "heavy",
-      chardonay: 20,
-    },
-    {
-      taste: "strong",
-      chardonay: 114,
-    },
-    {
-      taste: "sunny",
-      chardonay: 82,
+      taste: "장타율",
+      chardonay: hitter.slg,
     },
   ];
 
