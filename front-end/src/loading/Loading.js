@@ -63,7 +63,7 @@ const Loading = () => {
     if (percentage === 100) {
       setTimeout(() => {
         dispatch(configActions.setIsLoading(false));
-        dispatch(configActions.setPersentage(0));
+        dispatch(configActions.resetPersentage());
       }, 2000);
     }
   }, [percentage]);
