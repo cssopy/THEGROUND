@@ -28,9 +28,6 @@ public class TradeService {
 
     private final HitterRepository hitterRepository;
 
-    private final TeamSettingRepository teamSettingRepository;
-
-
     @Transactional
     public List<PossOrNotPitcherResDto> possPitcherList() throws Exception {
         List<PossOrNotPitcherResDto> list = new ArrayList<>();
@@ -201,9 +198,6 @@ public class TradeService {
         if(byUserUid.isPresent()) {
             List<UserPitcher> pitcher = new ArrayList<>();
             List<UserHitter> hitter = new ArrayList<>();
-
-            // 선발 투수 로테이션 삭제
-            teamSettingRepository.delete(byUserUid.get().getTeamSetting());
 
             // 보유 투수 모두 삭제
             managePitcherRepository.deleteAll();
