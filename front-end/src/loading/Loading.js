@@ -24,40 +24,6 @@ const Loading = () => {
   const music = useSelector((state) => state.config.music);
   const url = useSelector((state) => state.config.url);
   const dispatch = useDispatch();
-  const musicConf = {
-    "": {
-      music: Music3,
-      volume: 0.1,
-    },
-    main: {
-      music: Music3,
-      volume: 0.1,
-    },
-    guide: {
-      music: Music3,
-      volume: 0.1,
-    },
-    manage: {
-      music: Music3,
-      volume: 0.1,
-    },
-    market: {
-      music: Music3,
-      volume: 0.1,
-    },
-    game: {
-      music: Music3,
-      volume: 0.1,
-    },
-    match: {
-      music: Music3,
-      volume: 0.1,
-    },
-    result: {
-      music: Music3,
-      volume: 0.1,
-    },
-  };
 
   useEffect(() => {
     if (percentage >= 100) {
@@ -90,22 +56,31 @@ const Loading = () => {
               now={percentage ? percentage : 0}
               className={styles.loading}
             />
-            <img
-              src={ball}
-              alt="ball"
-              className={styles.ball}
-              style={{
-                marginLeft: `${-20 + (percentage ? 10 * percentage : 0)}px`,
-              }}
-            />
+            <>
+              <img
+                src={ball}
+                alt="ball"
+                className={styles.ball}
+                style={{
+                  marginLeft: `${-20 + (percentage ? 10 * percentage : 0)}px`,
+                }}
+              />
+            </>
           </ProgressBar>
         </div>
-        <ReactHowler
-          src={musicConf[url].music}
-          playing={music}
-          loop={true}
-          volume={musicConf[url].volume}
-        />
+        {music &&
+          [
+            "",
+            "main",
+            "guide",
+            "manage",
+            "market",
+            "game",
+            "match",
+            "result",
+          ].includes(url) && (
+            <ReactHowler src={Music1} playing={true} loop={true} volume={0.1} />
+          )}
       </div>
     </>
   );

@@ -38,9 +38,7 @@ const userSlice = createSlice({
       state.user = { ...state.user, ...action.payload };
     },
     setLogOut: (state) => {
-      for (let key in state.user.keys) {
-        state.user[key] = "";
-      }
+      Object.keys(state.user).forEach((key) => (state.user[key] = ""));
     },
     updateUser: (state, action) => {
       state.user.userTeamname = action.payload.userTeamname;
