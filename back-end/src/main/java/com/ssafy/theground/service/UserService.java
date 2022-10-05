@@ -22,4 +22,6 @@ public interface UserService {
 	public void setHitters(User u);
 	
 	public void setPitchers(User u);
+
+	public void setSeasons(User u);
 }

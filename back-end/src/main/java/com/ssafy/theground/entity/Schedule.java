@@ -20,4 +20,7 @@ public class Schedule {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_seq")
     private AITeam teamSeq;
+
+    @Column(name = "schedule_home_flag")
+    private Boolean scheduleHomeFlag;
 }
