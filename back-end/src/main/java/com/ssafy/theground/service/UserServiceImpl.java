@@ -6,19 +6,10 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.ssafy.theground.entity.*;
+import com.ssafy.theground.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ssafy.theground.entity.TeamSetting;
-import com.ssafy.theground.entity.User;
-import com.ssafy.theground.entity.UserHitter;
-import com.ssafy.theground.entity.UserPitcher;
-import com.ssafy.theground.repository.HitterRepository;
-import com.ssafy.theground.repository.PitcherRepository;
-import com.ssafy.theground.repository.TeamSettingRepository;
-import com.ssafy.theground.repository.UserHitterRepository;
-import com.ssafy.theground.repository.UserPitcherRepository;
-import com.ssafy.theground.repository.UserRepository;
 
 @Service
 @Transactional
@@ -44,6 +35,15 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	TeamSettingRepository teamSettingRepository;
+
+	@Autowired
+	SeasonRepository seasonRepository;
+
+	@Autowired
+	ScheduleRepository scheduleRepository;
+
+	@Autowired
+	MatchRepository matchRepository;
 
 	@Override
 	public Optional<User> findByUserUid(String useruid) {
@@ -123,5 +123,21 @@ public class UserServiceImpl implements UserService{
 		em.clear();
 	}
 
+	@Override
+	public void setSeasons(User u){
+		Season season = new Season();
+		List<Schedule> schedule = scheduleRepository.findAll();
+		seasonRepository.save(season.builder()
+				.userSeq(u)
+				.seasonYear(2022)
+				.scheduleSeq(schedule.get(0))
+				.build());
+		matchRepository.save(Match.builder()
+				.userSeq(u)
+				.seasonSeq(season)
+				.aiTeamSeq(season.getScheduleSeq().getTeamSeq().getAiTeamSeq())
+				.matchHomeFlag(season.getScheduleSeq().getScheduleHomeFlag())
+				.build());
+	}
 
 }
