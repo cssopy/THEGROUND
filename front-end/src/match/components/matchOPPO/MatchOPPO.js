@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 
 import style from "../../css/matchOPPO/MatchOPPO.module.css";
 
 const MatchOPPO = (props) => {
+  useEffect(() => {
+    setTimeout(() => {
+      props.setPageActive([false, true, false]);
+    }, 5000);
+  }, []);
+
   return (
     <>
       <Row className={style["background"]}>

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { BsPencilSquare } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { userActions } from "../redux/slice/userSlice";
 
 import axios from "axios";
 
@@ -11,229 +13,82 @@ import MatchList from "./components/MatchList";
 import PitcherList from "./components/PitcherList";
 import title from "../assets/etc/title.png";
 import subtitle from "../assets/etc/subtitle.png";
-import teamLogo from "../assets/etc/ground2.png";
 
 import style from "./css/Main.module.css";
 
 import BackApi from "../api/BackApi";
 
 const Main = () => {
+  const [user, setUser] = useState(useSelector((state) => state.user.user));
+
   const navigate = useNavigate();
 
-  const JWT_TOKEN =
-    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
-
-  const [menuBar, setMeunuBar] = useState([true, false, false, false]);
   const [matchs, setMatchs] = useState([]);
   const [pitchers, setPitchers] = useState([]);
-  const [schedules, setSchedules] = useState([
-    {
-      teamSeq: null,
-      teamName: null,
-      logoUrl: null,
-    },
-    {
-      teamSeq: null,
-      teamName: null,
-      logoUrl: null,
-    },
-    {
-      teamSeq: null,
-      teamName: null,
-      logoUrl: null,
-    },
-  ]);
+  const [schedules, setSchedules] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const activeMenu = "rgba(5, 20, 48, 0.5)";
-
   useEffect(() => {
-    // 선발 로테이션 조회
-    (async () => {
-      await axios
-        .get(BackApi.manage.rotation, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          let pits = [];
-          const keys = Object.keys(res.data);
-          for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const value = res.data[key];
-            pits.push(value);
-          }
-          setPitchers(pits);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 경기 일정 조회
-    (async () => {
-      await axios
-        .get(BackApi.main.schedules, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          setSchedules(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
+    if (user) {
+      // 선발 로테이션 조회
+      (async () => {
+        await axios
+          .get(BackApi.manage.rotation, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            let pits = [];
+            const keys = Object.keys(res.data);
+            for (let i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              const value = res.data[key];
+              pits.push(value);
+            }
+            setPitchers(pits);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 경기 일정 조회
+      (async () => {
+        await axios
+          .get(BackApi.main.schedules, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            setSchedules(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 최근 경기 조회 없음
+      // (async () => {
+      //   await axios
+      //     .get(BackApi.main.matches, {
+      //       headers: {
+      //         "X-ACCESS-TOKEN": user.jwt,
+      //       },
+      //     })
+      //     .then((res) => {
+      //       setMatchs(res.data);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // })();
+    }
+  }, [user]);
 
-    setMatchs([
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Lose",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Draw",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-      {
-        home: "삼성 라이온즈",
-        away: "롯데 자이언츠",
-        home_score: 3,
-        away_score: 0,
-        result: "Win",
-      },
-    ]);
-    // setPitchers([
-    //   {
-    //     pitcherSeq: 1,
-    //     pitArm: "좌완",
-    //     name: "투수1",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 2,
-    //     pitArm: "우완",
-    //     name: "투수2",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 3,
-    //     pitArm: "좌완",
-    //     name: "투수3",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 4,
-    //     pitArm: "우완",
-    //     name: "투수4",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 5,
-    //     pitArm: "좌완",
-    //     name: "투수5",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 6,
-    //     pitArm: "우완",
-    //     name: "투수6",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 7,
-    //     pitArm: "우완",
-    //     name: "투수6",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    //   {
-    //     pitcherSeq: 8,
-    //     pitArm: "우완",
-    //     name: "투수6",
-    //     era: 0.274,
-    //     game: 50,
-    //     inning: 180,
-    //     win: 37,
-    //     lose: 11,
-    //   },
-    // ]);
-  }, []);
+  const signOut = () => {
+    alert("로그아웃");
+    navigate("/");
+  };
 
   return (
     <>
@@ -246,16 +101,12 @@ const Main = () => {
         <div style={{ marginTop: "auto", marginBottom: "auto" }}>
           <Row className={style["mainHead"]}>
             <div
-              style={menuBar[0] ? { background: activeMenu } : {}}
+              style={{ background: "rgba(5, 20, 48, 0.5)" }}
               className={style["mainHead-menu"]}
-              onClick={() => {
-                setMeunuBar([true, false, false, false]);
-              }}
             >
               PvE
             </div>
             <div
-              style={menuBar[1] ? { background: activeMenu } : {}}
               className={style["mainHead-menu"]}
               onClick={() => {
                 alert("차후 업데이트 예정");
@@ -264,24 +115,28 @@ const Main = () => {
               PvP
             </div>
             <div
-              style={menuBar[2] ? { background: activeMenu } : {}}
               className={style["mainHead-menu"]}
               onClick={() => {
-                setMeunuBar([false, false, true, false]);
                 navigate("/manage");
               }}
             >
               구단관리
             </div>
             <div
-              style={menuBar[3] ? { background: activeMenu } : {}}
               className={style["mainHead-menu"]}
               onClick={() => {
-                setMeunuBar([false, false, false, true]);
                 navigate("/market");
               }}
             >
               이적시장
+            </div>
+            <div
+              className={style["mainHead-menu"]}
+              onClick={() => {
+                navigate("/guide");
+              }}
+            >
+              가이드
             </div>
           </Row>
           <Row className={style["mainBody"]}>
@@ -311,19 +166,14 @@ const Main = () => {
                       <div
                         className={style["startGameBtn"]}
                         onClick={() => {
-                          navigate("/game");
+                          navigate("/match");
                         }}
                       >
                         게임 시작
                       </div>
                     </Row>
                     <Row>
-                      <div
-                        className={style["signOutBtn"]}
-                        onClick={() => {
-                          alert("로그아웃 처리");
-                        }}
-                      >
+                      <div className={style["signOutBtn"]} onClick={signOut}>
                         로그아웃
                       </div>
                     </Row>
@@ -333,17 +183,21 @@ const Main = () => {
                   <Col>
                     <img
                       className={style["teamLogo"]}
-                      src={teamLogo}
+                      src={user.logoUrl}
                       alt="teamlogo"
                     ></img>
                   </Col>
                   <Col>
                     <Row>
                       <Col>
-                        <Row className={style["level"]}>Lv.{3}</Row>
+                        <Row className={style["level"]}>
+                          Lv.{user.userLevel}
+                        </Row>
                       </Col>
                       <Col>
-                        <Row className={style["nickName"]}>구단 명</Row>
+                        <Row className={style["nickName"]}>
+                          {user.userTeamname}
+                        </Row>
                       </Col>
                       <Col>
                         <BsPencilSquare
@@ -357,14 +211,25 @@ const Main = () => {
                     </Row>
                     <Row>
                       <div className={style["barAll"]}>
-                        <div className={style["bar"]}></div>
-                        <div className={style["barVal"]}>28000 / 40000</div>
+                        <div
+                          className={style["bar"]}
+                          style={{ width: user.userExp / 40000 }}
+                        ></div>
+                        <div className={style["barVal"]}>
+                          {user.userExp} / 40000
+                        </div>
                       </div>
                     </Row>
                     <Row className={style["WLD"]}>
-                      <Col style={{ color: "cornflowerblue" }}>W12</Col>
-                      <Col style={{ color: "darksalmon" }}>L1</Col>
-                      <Col style={{ color: "darkseagreen" }}>D2</Col>
+                      <Col style={{ color: "cornflowerblue" }}>
+                        W{user.userWin}
+                      </Col>
+                      <Col style={{ color: "darksalmon" }}>
+                        L{user.userLose}
+                      </Col>
+                      <Col style={{ color: "darkseagreen" }}>
+                        D{user.userDraw}
+                      </Col>
                     </Row>
                   </Col>
                 </Row>
@@ -374,7 +239,10 @@ const Main = () => {
                   <div>최근 경기 목록</div>
                 </Row>
                 <Row className={style["recentMatchListBody"]}>
-                  <MatchList matchs={matchs}></MatchList>
+                  {matchs.length !== 0 && (
+                    <MatchList matchs={matchs}></MatchList>
+                  )}
+                  {matchs.length === 0 && <div>최근 경기 목록이 없습니다.</div>}
                 </Row>
               </Col>
             </Row>
@@ -384,27 +252,32 @@ const Main = () => {
                   <div>경기 일정</div>
                 </Row>
                 <Row className={style["matchScheduleBody"]}>
-                  <Col>
-                    <Row className={style["schedule"]}>
-                      <div>1st</div>
-                      <img src={schedules[0].logoUrl} alt="teamlogo"></img>
-                      <div>{schedules[0].teamName}</div>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row className={style["schedule"]}>
-                      <div>2nd</div>
-                      <img src={schedules[1].logoUrl} alt="teamlogo"></img>
-                      <div>{schedules[1].teamName}</div>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row className={style["schedule"]}>
-                      <div>3th</div>
-                      <img src={schedules[2].logoUrl} alt="teamlogo"></img>
-                      <div>{schedules[2].teamName}</div>
-                    </Row>
-                  </Col>
+                  {schedules.length !== 0 && (
+                    <>
+                      <Col>
+                        <Row className={style["schedule"]}>
+                          <div>1st</div>
+                          <img src={schedules[0].logoUrl} alt="teamlogo"></img>
+                          <div>{schedules[0].teamName}</div>
+                        </Row>
+                      </Col>
+                      <Col>
+                        <Row className={style["schedule"]}>
+                          <div>2nd</div>
+                          <img src={schedules[1].logoUrl} alt="teamlogo"></img>
+                          <div>{schedules[1].teamName}</div>
+                        </Row>
+                      </Col>
+                      <Col>
+                        <Row className={style["schedule"]}>
+                          <div>3th</div>
+                          <img src={schedules[2].logoUrl} alt="teamlogo"></img>
+                          <div>{schedules[2].teamName}</div>
+                        </Row>
+                      </Col>
+                    </>
+                  )}
+                  {schedules.length === 0 && <div>경기 일정이 없습니다.</div>}
                 </Row>
               </Col>
               <Col>
@@ -420,7 +293,9 @@ const Main = () => {
         </div>
       </Row>
       {modalIsOpen && <BackDrop setModalIsOpen={setModalIsOpen} />}
-      {modalIsOpen && <UserInfoModal setModalIsOpen={setModalIsOpen} />}
+      {modalIsOpen && (
+        <UserInfoModal user={user} setModalIsOpen={setModalIsOpen} />
+      )}
     </>
   );
 };

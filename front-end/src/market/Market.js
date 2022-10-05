@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useSelector } from "react-redux";
 
 import axios from "axios";
 
@@ -13,10 +14,10 @@ import MyPicherList from "./components/MyPitcherList";
 
 import style from "./css/Market.module.css";
 
+import BackApi from "../api/BackApi";
+
 const Market = () => {
-  const MAIN_URI = "https://j7d109.p.ssafy.io/back";
-  const JWT_TOKEN =
-    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
+  const [user, setUser] = useState(useSelector((state) => state.user.user));
 
   const navigate = useNavigate();
 
@@ -37,79 +38,78 @@ const Market = () => {
   const [myHitters, setMyHitters] = useState([]);
   const [myPitchers, setMyPitchers] = useState([]);
 
-  // 예산 관련
-  const [number, setNumber] = useState(100000);
-
   // 타자, 투수 목록 탭 css 관련
   const [listTab, setListTab] = useState(["#041e42", "#ffffff00"]);
 
   // 컴포넌트가 처음 마운트 될 때
   useEffect(() => {
-    // 미보유 타자 목록 조회
-    (async () => {
-      await axios
-        .get(`${MAIN_URI}/trade/not-poss-hitters`, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initHittersRef.current = res.data;
-          setHitters(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 보유 타자 목록 조회
-    (async () => {
-      await axios
-        .get(`${MAIN_URI}/trade/poss-hitters`, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initMyHittersRef.current = res.data;
-          setMyHitters(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 미보유 투수 목록 조회
-    (async () => {
-      await axios
-        .get(`${MAIN_URI}/trade/not-poss-pitchers`, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initPitchersRef.current = res.data;
-          setPitchers(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 보유 투수 목록 조회
-    (async () => {
-      await axios
-        .get(`${MAIN_URI}/trade/poss-pitchers`, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initMyPitchersRef.current = res.data;
-          setMyPitchers(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-  }, []);
+    if (user) {
+      // 미보유 타자 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.trade.notPossHitters, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initHittersRef.current = res.data;
+            setHitters(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 보유 타자 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.trade.possHitters, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initMyHittersRef.current = res.data;
+            setMyHitters(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 미보유 투수 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.trade.notPossPitchers, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initPitchersRef.current = res.data;
+            setPitchers(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 보유 투수 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.trade.possPitchers, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initMyPitchersRef.current = res.data;
+            setMyPitchers(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+    }
+  }, [user]);
 
   // 보유 타자에 선수 추가
   const addMyHitter = useCallback((hitter) => {
@@ -243,11 +243,22 @@ const Market = () => {
                     <Row className={style["budget-bottom"]}>
                       <div className={style["budget-bottom-left"]}>
                         <div></div>
-                        <div>{number.toLocaleString("ko-KR")} TG</div>
+                        <div>{user.userPayroll.toLocaleString("ko-KR")} TG</div>
                       </div>
                       <div className={style["budget-bottom-right"]}>
                         <div></div>
-                        <div>{number.toLocaleString("ko-KR")} TG</div>
+                        <div>
+                          {(
+                            user.userPayroll -
+                            myHitters.reduce(function add(sum, item) {
+                              return sum + item.salary;
+                            }, 0) -
+                            myPitchers.reduce(function add(sum, item) {
+                              return sum + item.salary;
+                            }, 0)
+                          ).toLocaleString("ko-KR")}{" "}
+                          TG
+                        </div>
                       </div>
                     </Row>
                   </Row>

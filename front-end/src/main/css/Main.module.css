@@ -127,7 +127,7 @@
 }
 
 .teamLogo {
-  margin-top: 25px;
+  margin-top: 0;
   margin-left: -60px;
   width: 150px;
   -webkit-user-drag: none;
@@ -164,7 +164,6 @@
 .bar {
   margin-left: -12px;
   height: 20px;
-  width: 200px;
   background: linear-gradient(#a2e90b, #a3e90b1d);
   border-radius: 5px;
 }
