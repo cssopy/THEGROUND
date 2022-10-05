@@ -7,7 +7,7 @@ const MatchOPPO = (props) => {
   useEffect(() => {
     setTimeout(() => {
       props.setPageActive([false, true, false]);
-    }, 5000);
+    }, 10000);
   }, []);
 
   return (
