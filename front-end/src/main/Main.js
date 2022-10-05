@@ -9,7 +9,6 @@ import { configActions } from "../redux/slice/configSlice";
 import axios from "axios";
 
 import UserInfoModal from "./components/UserInfoModal";
-import BackDrop from "./components/BackDrop";
 import MatchList from "./components/MatchList";
 import PitcherList from "./components/PitcherList";
 import title from "../assets/etc/title.png";
@@ -189,7 +188,7 @@ const Main = () => {
                   <Col>
                     <img
                       className={style["teamLogo"]}
-                      src={user.logoUrl}
+                      src={user.logo.logoUrl}
                       alt="teamlogo"
                     ></img>
                   </Col>
@@ -298,14 +297,12 @@ const Main = () => {
           </Row>
         </div>
       </Row>
-      {modalIsOpen && <BackDrop setModalIsOpen={setModalIsOpen} />}
-      {modalIsOpen && (
-        <UserInfoModal
-          user={user}
-          logos={logos}
-          setModalIsOpen={setModalIsOpen}
-        />
-      )}
+      <UserInfoModal
+        user={user}
+        logos={logos}
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+      />
     </>
   );
 };
