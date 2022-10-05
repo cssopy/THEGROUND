@@ -94,6 +94,8 @@
 .cardContent {
   font-size: 16px;
   padding: 10px;
+  word-spacing: 1.5px;
+  line-height: 28px;
 }
 
 .field {
@@ -106,7 +108,7 @@
 
 .fieldContent {
   margin: 50px 0px 0px 500px;
-  height: 150px;
+  height: 170px;
 }
 
 .strikeZone {
@@ -119,7 +121,7 @@
 
 .strikeZoneContent {
   margin: 50px 0px 0px 280px;
-  height: 130px;
+  height: 150px;
 }
 
 .ballVel {
@@ -132,7 +134,7 @@
 
 .ballVelContent {
   margin: 0px 0px 0px 240px;
-  height: 130px;
+  height: 150px;
 }
 
 .bso {
@@ -145,7 +147,7 @@
 
 .bsoContent {
   margin: 0px 0px 0px 240px;
-  height: 130px;
+  height: 150px;
 }
 
 .score {
@@ -158,7 +160,7 @@
 
 .scoreContent {
   margin: 0px 0px 0px -370px;
-  height: 130px;
+  height: 150px;
 }
 
 .pitcher {
@@ -171,7 +173,7 @@
 
 .pitcherContent {
   margin: 0px 0px 0px -370px;
-  height: 130px;
+  height: 150px;
 }
 
 .hitter {
@@ -184,7 +186,7 @@
 
 .hitterContent {
   margin: 0px 0px 0px -370px;
-  height: 130px;
+  height: 150px;
 }
 
 .buttons {
@@ -196,8 +198,8 @@
 }
 
 .buttonsContent {
-  margin: -50px 0px 0px -350px;
-  height: 130px;
+  margin: -70px 0px 0px -350px;
+  height: 150px;
 }
 
 .log {
@@ -210,7 +212,7 @@
 
 .logContent {
   margin: 0px 0px 0px -350px;
-  height: 130px;
+  height: 150px;
 }
 
 .pagingButton {

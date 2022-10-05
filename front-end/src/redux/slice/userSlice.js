@@ -16,11 +16,6 @@ const initialUserState = {
     userPayroll: 1000000000,
     userInPlayFlag: false,
   },
-  loading: {
-    isLoading: true,
-    percentage: 0,
-  },
-  visited: false,
 };
 
 const userSlice = createSlice({
@@ -42,18 +37,14 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = { ...state.user, ...action.payload };
     },
+    setLogOut: (state) => {
+      for (const val in state.user) {
+        val = "";
+      }
+    },
     updateUser: (state, action) => {
       state.user.userTeamname = action.payload.userTeamname;
       state.user.logoUrl = action.payload.logoUrl;
-    },
-    toggleIsLoading: (state, action) => {
-      state.loading.isLoading = action.payload;
-    },
-    setPersentage: (state, action) => {
-      state.loading.percentage = action.payload;
-    },
-    setVisited: (state) => {
-      state.visited = true;
     },
   },
 });
