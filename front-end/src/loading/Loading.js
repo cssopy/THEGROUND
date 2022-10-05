@@ -70,7 +70,7 @@ const Loading = () => {
             </>
           </ProgressBar>
         </div>
-        {/* {music &&
+        {music &&
           [
             "",
             "main",
@@ -82,7 +82,7 @@ const Loading = () => {
             "result",
           ].includes(url) && (
             <ReactHowler src={Music1} playing={true} loop={true} volume={1} />
-          )} */}
+          )}
       </div>
     </>
   );
