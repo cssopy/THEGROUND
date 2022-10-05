@@ -49,6 +49,7 @@ const Main = () => {
               pits.push(value);
             }
             setPitchers(pits);
+            dispatch(configActions.setPersentage(65));
           })
           .catch((error) => {
             console.log(error);
@@ -64,6 +65,7 @@ const Main = () => {
           })
           .then((res) => {
             setSchedules(res.data);
+            dispatch(configActions.setPersentage(80));
           })
           .catch((error) => {
             console.log(error);
@@ -79,6 +81,7 @@ const Main = () => {
           })
           .then((res) => {
             setMatchs(res.data);
+            dispatch(configActions.setPersentage(100));
           })
           .catch((error) => {
             console.log(error);
@@ -88,9 +91,8 @@ const Main = () => {
   }, [user]);
 
   const signOut = () => {
-    // dispatch(userActions.setJwt(res.data.jwt));
+    dispatch(userActions.setLogOut());
     dispatch(configActions.setUrl(""));
-    // navigate("/");
   };
 
   return (
