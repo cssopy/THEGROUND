@@ -1,5 +1,6 @@
 package com.ssafy.theground.repository;
 
+import com.ssafy.theground.entity.Schedule;
 import com.ssafy.theground.entity.Season;
 import com.ssafy.theground.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
     List<Season> findByUserSeq(User userSeq);
+
+    Season findByScheduleSeq(Schedule scheduleSeq);
 }

@@ -269,6 +269,7 @@ public class UserController {
 			u = userService.findByUserUid(uid).get();
 			userService.setHitters(u);
 			userService.setPitchers(u);
+			userService.setSeasons(u);
 			
 			resultMap.put("userTeamname", userTeamname);
 			String jwt = jwtService.createJwt(uid);
