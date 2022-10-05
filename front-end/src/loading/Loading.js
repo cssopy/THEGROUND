@@ -5,27 +5,27 @@ import ball from "../assets/etc/logo192.png";
 import { ProgressBar } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../redux/slice/userSlice";
+import { configActions } from "../redux/slice/configSlice";
 
 const Loading = () => {
   // api 통신 횟수나 크기 및 페이지에서의 useSelector 세팅에 따라 총 100을 채우도록 설계한다.
   // 아래 now로 퍼센테이지 관리하기
-  const percentage = useSelector((state) => state.user.loading.percentage);
-  const isLoading = useSelector((state) => state.user.loading.isLoading);
+  const percentage = useSelector((state) => state.config.loading.percentage);
+  const isLoading = useSelector((state) => state.config.loading.isLoading);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (percentage === 100) {
       setTimeout(() => {
-        dispatch(userActions.toggleIsLoading(false));
+        dispatch(configActions.toggleIsLoading(false));
       }, 2000);
     }
   }, [percentage]);
 
   const reset = () => {
-    dispatch(userActions.setPersentage(0));
-    dispatch(userActions.toggleIsLoading(true));
+    dispatch(configActions.setPersentage(0));
+    dispatch(configActions.toggleIsLoading(true));
   };
 
   window.addEventListener("beforeunload", reset);
