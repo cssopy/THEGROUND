@@ -33,6 +33,8 @@ public class GameService {
 	private final ScoreboardRepository scoreboardRepository;
 	private final DescriptionRepository descriptionRepository;
 
+	private final UserPitcherRepository userPitcherRepository;
+
 	private final String[] pitchTypes = { "fourSeam", "slider", "sinker", "changeUp", "curve", "cutter", "knuckleCurve",
 			"splitter", "twoSeam", "knuckleball", "eephus", "screwball" };
 
@@ -56,8 +58,9 @@ public class GameService {
 				homeTeam.setTeamLose(byUserUid.get().getUserLose());
 				homeTeam.setTeamDraw(byUserUid.get().getUserDraw());
 				TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
+				Long nextPitcherSeq = userPitcherRepository.findPitcherSeqByUserPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue());
 				homeTeam.setStartingPitcher(pitcherRepository
-						.findByPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue()).getPitcherName());
+						.findByPitcherSeq(nextPitcherSeq).getPitcherName());
 				map.put("home", homeTeam);
 
 				List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
@@ -75,8 +78,9 @@ public class GameService {
 				awayTeam.setTeamLose(byUserUid.get().getUserLose());
 				awayTeam.setTeamDraw(byUserUid.get().getUserDraw());
 				TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
+				Long nextPitcherSeq = userPitcherRepository.findPitcherSeqByUserPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue());
 				awayTeam.setStartingPitcher(pitcherRepository
-						.findByPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue()).getPitcherName());
+						.findByPitcherSeq(nextPitcherSeq).getPitcherName());
 				map.put("away", awayTeam);
 
 				List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
