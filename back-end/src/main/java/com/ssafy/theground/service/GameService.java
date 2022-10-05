@@ -32,9 +32,9 @@ public class GameService {
     private final MatchSettingRepository matchSettingRepository;
     private final ScoreboardRepository scoreboardRepository;
     private final DescriptionRepository descriptionRepository;
-
     private final UserPitcherRepository userPitcherRepository;
-
+    private final UserHitterRepository userHitterRepository;
+    private final OutPlayerRepository outPlayerRepository;
     private final ScheduleRepository scheduleRepository;
 
     private final String[] pitchTypes = { "fourSeam", "slider", "sinker", "changeUp", "curve", "cutter", "knuckleCurve", "splitter", "twoSeam", "knuckleball", "eephus", "screwball" };
@@ -1020,5 +1020,203 @@ public class GameService {
         }
 
         return s;
+    }
+
+    public List<Map<String, Object>> getLogs(String uid) {
+        long matchSeq = matchRepository.findTop1ByUserSeq_UserUid(uid).getMatchSeq();
+        Description description = descriptionRepository.findByMatchSeq(matchSeq);
+
+        List<Map<String, Object>> resultList = new LinkedList<>();
+        for (int inning = 1; inning <= 9; inning++) {
+            for (int half = 0; half <= 1; half++) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("inning", inning);
+                map.put("half", half == 0 ? "초" : "말");
+                String des = null;
+                if (half == 0) {
+                    switch (inning) {
+                        case 1:
+                            des = description.getDescription1stTop();
+                            break;
+                        case 2:
+                            des = description.getDescription2ndTop();
+                            break;
+                        case 3:
+                            des = description.getDescription3rdTop();
+                            break;
+                        case 4:
+                            des = description.getDescription4thTop();
+                            break;
+                        case 5:
+                            des = description.getDescription5thTop();
+                            break;
+                        case 6:
+                            des = description.getDescription6thTop();
+                            break;
+                        case 7:
+                            des = description.getDescription7thTop();
+                            break;
+                        case 8:
+                            des = description.getDescription8thTop();
+                            break;
+                        case 9:
+                            des = description.getDescription9thTop();
+                            break;
+                    }
+                } else {
+                    switch (inning) {
+                        case 1:
+                            des = description.getDescription1stBottom();
+                            break;
+                        case 2:
+                            des = description.getDescription2ndBottom();
+                            break;
+                        case 3:
+                            des = description.getDescription3rdBottom();
+                            break;
+                        case 4:
+                            des = description.getDescription4thBottom();
+                            break;
+                        case 5:
+                            des = description.getDescription5thBottom();
+                            break;
+                        case 6:
+                            des = description.getDescription6thBottom();
+                            break;
+                        case 7:
+                            des = description.getDescription7thBottom();
+                            break;
+                        case 8:
+                            des = description.getDescription8thBottom();
+                            break;
+                        case 9:
+                            des = description.getDescription9thBottom();
+                            break;
+                    }
+                }
+                map.put("description", des);
+                resultList.add(map);
+            }
+        }
+
+        return resultList;
+    }
+
+    public boolean changePitcher(String uid, long pitcherSeq) {
+        Match match = matchRepository.findTop1ByUserSeq_UserUid(uid);
+        long matchSeq = match.getMatchSeq();
+        long userSeq = match.getUserSeq().getUserSeq();
+
+        if (!matchSettingRepository.findByMatchSeq(matchSeq).isPresent()) {
+            return false;
+        }
+        MatchSetting setting = matchSettingRepository.findByMatchSeq(matchSeq).get();
+
+        UserPitcher outPitcher = setting.getMatchSettingPitcher();
+        long outPitcherSeq = outPitcher.getPitcherSeq();
+        OutPlayer outPlayer = OutPlayer.builder()
+                .matchSeq(match)
+                .outPlayerPlayerSeq(outPitcherSeq)
+                .outPlayerType('P')
+                .build();
+
+        outPlayerRepository.save(outPlayer);
+
+        if (userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(userSeq, pitcherSeq).isPresent()) {
+            return false;
+        }
+        UserPitcher newPitcher = userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(userSeq, pitcherSeq).get();
+        setting.setMatchSettingPitcher(newPitcher);
+        return true;
+    }
+
+    public boolean changeHitter(String uid, long hitterSeq, int battingOrder) {
+        Match match = matchRepository.findTop1ByUserSeq_UserUid(uid);
+        long matchSeq = match.getMatchSeq();
+        long userSeq = match.getUserSeq().getUserSeq();
+
+        if (!matchSettingRepository.findByMatchSeq(matchSeq).isPresent()) {
+            return false;
+        }
+        MatchSetting setting = matchSettingRepository.findByMatchSeq(matchSeq).get();
+
+        UserHitter outHitter = null;
+        switch (battingOrder) {
+            case 1:
+                outHitter = setting.getMatchSetting1st();
+                break;
+            case 2:
+                outHitter = setting.getMatchSetting2nd();
+                break;
+            case 3:
+                outHitter = setting.getMatchSetting3rd();
+                break;
+            case 4:
+                outHitter = setting.getMatchSetting4th();
+                break;
+            case 5:
+                outHitter = setting.getMatchSetting5th();
+                break;
+            case 6:
+                outHitter = setting.getMatchSetting6th();
+                break;
+            case 7:
+                outHitter = setting.getMatchSetting7th();
+                break;
+            case 8:
+                outHitter = setting.getMatchSetting8th();
+                break;
+            case 9:
+                outHitter = setting.getMatchSetting9th();
+                break;
+        }
+        if (outHitter == null) {
+            return false;
+        }
+        long outHitterSeq = outHitter.getHitterSeq();
+        OutPlayer outPlayer = OutPlayer.builder()
+                .matchSeq(match)
+                .outPlayerPlayerSeq(outHitterSeq)
+                .outPlayerType('P')
+                .build();
+
+        outPlayerRepository.save(outPlayer);
+
+        if (userHitterRepository.findByUserSeq_UserSeqAndHitterSeq(userSeq, hitterSeq).isPresent()) {
+            return false;
+        }
+        UserHitter newHitter = userHitterRepository.findByUserSeq_UserSeqAndHitterSeq(userSeq, hitterSeq).get();
+
+        switch (battingOrder) {
+            case 1:
+                setting.setMatchSetting1st(newHitter);
+                break;
+            case 2:
+                setting.setMatchSetting2nd(newHitter);
+                break;
+            case 3:
+                setting.setMatchSetting3rd(newHitter);
+                break;
+            case 4:
+                setting.setMatchSetting4th(newHitter);
+                break;
+            case 5:
+                setting.setMatchSetting5th(newHitter);
+                break;
+            case 6:
+                setting.setMatchSetting6th(newHitter);
+                break;
+            case 7:
+                setting.setMatchSetting7th(newHitter);
+                break;
+            case 8:
+                setting.setMatchSetting8th(newHitter);
+                break;
+            case 9:
+                setting.setMatchSetting9th(newHitter);
+                break;
+        }
+
+        return true;
     }
 }
