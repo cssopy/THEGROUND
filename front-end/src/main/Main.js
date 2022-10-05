@@ -30,7 +30,6 @@ const Main = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    // dispatch(confi);
     if (user) {
       // 선발 로테이션 조회
       (async () => {
@@ -171,6 +170,7 @@ const Main = () => {
                       <div
                         className={style["startGameBtn"]}
                         onClick={() => {
+                          dispatch(configActions.setIsLoading(true));
                           dispatch(configActions.setUrl("match"));
                         }}
                       >

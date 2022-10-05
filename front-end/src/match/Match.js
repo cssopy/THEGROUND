@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux/es/exports";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../redux/slice/configSlice";
 
 import axios from "axios";
 
@@ -11,6 +13,8 @@ import BackApi from "../api/BackApi";
 
 const Match = () => {
   const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch();
 
   const [pageActive, setPageActive] = useState([true, false, false]);
 
@@ -45,6 +49,7 @@ const Match = () => {
           })
           .then((res) => {
             setBrief(res.data);
+            dispatch(configActions.setPersentage(50));
           })
           .catch((error) => {
             console.log(error);
@@ -60,6 +65,7 @@ const Match = () => {
           })
           .then((res) => {
             setMyHitters(res.data);
+            dispatch(configActions.setPersentage(100));
           })
           .catch((error) => {
             console.log(error);
