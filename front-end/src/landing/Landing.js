@@ -2,11 +2,9 @@ import styles from "./css/Landing.module.css";
 import landingVideo from "../assets/video/landing-dark.mp4";
 import title from "../assets/etc/title.png";
 import subtitle from "../assets/etc/subtitle.png";
-import landingMusic from "../assets/bgm/INDIE_ROCK_SPORT.mp3";
 import Modal from "./components/Modal.js";
 import LoginHandler from "./components/LoginHandler";
 import SignupModal from "./components/SignupModal";
-import ReactHowler from "react-howler";
 import { useState } from "react";
 import { useSelector } from "react-redux/es/exports";
 import StartGame from "./components/StartGame";
@@ -16,7 +14,6 @@ const Landing = () => {
   const visited = useSelector((state) => state.config.visited);
   const uid = useSelector((state) => state.user.user.uid);
   const [login, setLogin] = useState(false);
-  const music = useSelector((state) => state.config.music);
 
   return (
     <>
@@ -42,14 +39,6 @@ const Landing = () => {
       <Modal closeModal={() => setLogin(!login)} login={login} />
       {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
       {/* <SignupModal loginType={loginType} /> */}
-      {music && (
-        <ReactHowler
-          src={landingMusic}
-          playing={true}
-          loop={true}
-          volume={0.1}
-        />
-      )}
       {!visited && <StartGame />}
     </>
   );
