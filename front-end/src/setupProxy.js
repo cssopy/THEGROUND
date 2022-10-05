@@ -4,6 +4,19 @@ module.exports = function (app) {
   app.use(
     createProxyMiddleware("/token", {
       target: "https://nid.naver.com/oauth2.0",
+      pathRewrite: {
+        "^/token": "",
+      },
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/back", {
+      target: "https://j7d109.p.ssafy.io/back",
+      pathRewrite: {
+        "^/back": "",
+      },
       changeOrigin: true,
     })
   );
