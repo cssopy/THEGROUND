@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit/";
 const initialConfigState = {
   url: "",
   loading: {
-    isLoading: true,
+    isLoading: false,
     percentage: 0,
   },
   visited: false,
@@ -17,7 +17,7 @@ const configSlice = createSlice({
     setUrl: (state, action) => {
       state.url = action.payload;
     },
-    toggleIsLoading: (state, action) => {
+    setIsLoading: (state, action) => {
       state.loading.isLoading = action.payload;
     },
     setPersentage: (state, action) => {
