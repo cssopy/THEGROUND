@@ -43,7 +43,13 @@ const UserInfoModal = (props) => {
             },
           }
         )
-        .then((res) => {
+        .then(() => {
+          dispatch(
+            userActions.updateUser({
+              userTeamname: userTeamName,
+              logoUrl: logos[0].logoUrl,
+            })
+          );
           alert("회원정보 수정 완료");
           dispatch(userActions.setLogo(selected));
           dispatch(userActions.setUserTeamName(userTeamName));
