@@ -40,8 +40,8 @@ const Landing = () => {
       </div>
       <LoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
-      {/* {loginType && uid ? <SignupModal loginType={loginType} /> : <></>} */}
-      <SignupModal loginType={loginType} />
+      {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
+      {/* <SignupModal loginType={loginType} /> */}
       {music && (
         <ReactHowler
           src={landingMusic}
