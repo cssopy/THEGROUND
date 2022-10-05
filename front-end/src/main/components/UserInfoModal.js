@@ -9,7 +9,7 @@ import BackApi from "../../api/BackApi";
 import style from "../css/UserInfoModal.module.css";
 
 const UserInfoModal = (props) => {
-  const { user } = props;
+  const { user, logos } = props;
 
   const [userTeamName, setUserTeamName] = useState(user.userTeamname);
 

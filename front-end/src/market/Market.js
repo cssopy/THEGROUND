@@ -39,6 +39,9 @@ const Market = () => {
   const [myHitters, setMyHitters] = useState([]);
   const [myPitchers, setMyPitchers] = useState([]);
 
+  // 예산 관련
+  const [myPayroll, setMyPayroll] = useState(0);
+
   // 타자, 투수 목록 탭 css 관련
   const [listTab, setListTab] = useState(["#041e42", "#ffffff00"]);
 
@@ -70,6 +73,10 @@ const Market = () => {
             },
           })
           .then((res) => {
+            let payroll = res.data.reduce(function add(sum, item) {
+              return sum + item.salary;
+            }, 0);
+            setMyPayroll(myPayroll + payroll);
             initMyHittersRef.current = res.data;
             setMyHitters(res.data);
           })
@@ -102,6 +109,10 @@ const Market = () => {
             },
           })
           .then((res) => {
+            let payroll = res.data.reduce(function add(sum, item) {
+              return sum + item.salary;
+            }, 0);
+            setMyPayroll(myPayroll + payroll);
             initMyPitchersRef.current = res.data;
             setMyPitchers(res.data);
           })
@@ -113,7 +124,20 @@ const Market = () => {
   }, [user]);
 
   // 보유 타자에 선수 추가
-  const addMyHitter = useCallback((hitter) => {
+  const addMyHitter = (hitter) => {
+    let totalPayroll =
+      myHitters.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0) +
+      myPitchers.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0) +
+      hitter.salary;
+    if (totalPayroll > user.userPayroll) {
+      alert("예산 한도를 초과할 수 없습니다.");
+      return;
+    }
+
     setMyHitters((myHitters) => {
       return [...myHitters, hitter];
     });
@@ -122,7 +146,7 @@ const Market = () => {
         return item.hitterSeq !== hitter.hitterSeq;
       });
     });
-  }, []);
+  };
 
   // 미보유 타자에 선수 추가
   const addHitter = useCallback((hitter) => {
@@ -137,7 +161,20 @@ const Market = () => {
   }, []);
 
   // 보유 투수에 선수 추가
-  const addMyPitcher = useCallback((pitcher) => {
+  const addMyPitcher = (pitcher) => {
+    let totalPayroll =
+      myHitters.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0) +
+      myPitchers.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0) +
+      pitcher.salary;
+    if (totalPayroll > user.userPayroll) {
+      alert("예산 한도를 초과할 수 없습니다.");
+      return;
+    }
+
     setMyPitchers((myPitchers) => {
       return [...myPitchers, pitcher];
     });
@@ -146,7 +183,7 @@ const Market = () => {
         return item.pitcherSeq !== pitcher.pitcherSeq;
       });
     });
-  }, []);
+  };
 
   // 미보유 투수에 선수 추가
   const addPitcher = useCallback((pitcher) => {
@@ -168,10 +205,63 @@ const Market = () => {
   };
 
   const save = () => {
-    // 예산 관련 로직
-    // 타자, 투수 인원수 관련 로직
-    alert(myHitters.length);
-    alert(myPitchers.length);
+    alert("주석 처리 필요");
+    if (myPitchers.length < 7) {
+      alert("투수는 최소 7명 이상이어야 합니다.");
+      return;
+    }
+    if (myHitters.length < 9) {
+      alert("타자는 최소 9명 이상이어야 합니다.");
+      return;
+    }
+    if (myPitchers.length + myHitters.length < 20) {
+      alert("보유 선수는 최소 20명 이상이어야 합니다.");
+      return;
+    }
+    let myTotalSal =
+      myHitters.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0) +
+      myPitchers.reduce(function add(sum, item) {
+        return sum + item.salary;
+      }, 0);
+    // if (user.userPayroll < myTotalSal) {
+    //   alert("보유 예산을 초과했습니다.");
+    //   return;
+    // }
+
+    let myPitchersSeq = [];
+    let myHittersSeq = [];
+    for (let pitcher of myPitchers) {
+      myPitchersSeq.push(pitcher.pitcherSeq);
+    }
+    for (let hitter of myHitters) {
+      myHittersSeq.push(hitter.hitterSeq);
+    }
+
+    // 이적선수 저장
+    const afterPlayers = {
+      pitcher: myPitchersSeq,
+      hitter: myHittersSeq,
+    };
+    (async () => {
+      axios
+        .put(BackApi.trade.save, afterPlayers, {
+          headers: {
+            "X-ACCESS-TOKEN": user.jwt,
+          },
+        })
+        .then(() => {
+          initHittersRef.current = [...hitters];
+          initMyHittersRef.current = [...myHitters];
+          initPitchersRef.current = [...pitchers];
+          initMyPitchersRef.current = [...myPitchers];
+          alert("저장 완료");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
   };
 
   return (

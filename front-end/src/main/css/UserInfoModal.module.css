@@ -96,3 +96,36 @@
 .deleteAC > div {
   cursor: pointer;
 }
+
+.smallModal {
+  visibility: hidden;
+  position: fixed;
+  margin-left: 750px;
+  width: 330px;
+  height: 392px;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 99;
+  background-color: #eeeeee;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.openSmall {
+  visibility: visible;
+  animation: modal-show 0.3s;
+}
+
+.logoList {
+  -webkit-user-drag: none;
+  width: 60px;
+  border-radius: 15px;
+  margin: 1px;
+  transition: all 0.2s;
+}
+
+.selected {
+  padding: 5px;
+  background: #cecece;
+}

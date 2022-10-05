@@ -21,6 +21,7 @@ import BackApi from "../api/BackApi";
 
 const Main = () => {
   const user = useSelector((state) => state.user.user);
+  const logos = useSelector((state) => state.logo.logos);
 
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ const Main = () => {
           .then((res) => {
             let pits = [];
             const keys = Object.keys(res.data);
-            for (let i = 0; i < keys.length; i++) {
+            for (let i = 0; i < keys.length - 1; i++) {
               const key = keys[i];
               const value = res.data[key];
               pits.push(value);
@@ -299,7 +300,11 @@ const Main = () => {
       </Row>
       {modalIsOpen && <BackDrop setModalIsOpen={setModalIsOpen} />}
       {modalIsOpen && (
-        <UserInfoModal user={user} setModalIsOpen={setModalIsOpen} />
+        <UserInfoModal
+          user={user}
+          logos={logos}
+          setModalIsOpen={setModalIsOpen}
+        />
       )}
     </>
   );

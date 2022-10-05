@@ -75,7 +75,7 @@ const Manage = () => {
           .then((res) => {
             let pits = [];
             const keys = Object.keys(res.data);
-            for (let i = 0; i < keys.length; i++) {
+            for (let i = 0; i < keys.length - 1; i++) {
               const key = keys[i];
               const value = res.data[key];
               pits.push(value);
@@ -100,13 +100,36 @@ const Manage = () => {
   // save 버튼 함수
   const save = () => {
     // 선수들 인원수 체크
-    // 현재 pitchers, bullpens 의 목록을 서버에 전달
-    alert(pitchers.length);
-    alert(bullpens.length);
-    alert(pitchers.length + bullpens.length);
+    if (pitchers.length !== 5) {
+      alert("선발 로테이션 인원이 5명이 되어야 합니다");
+      return;
+    }
+    const rotation = {
+      teamSetting1stSp: pitchers[0].pitcherSeq,
+      teamSetting2ndSp: pitchers[1].pitcherSeq,
+      teamSetting3rdSp: pitchers[2].pitcherSeq,
+      teamSetting4thSp: pitchers[3].pitcherSeq,
+      teamSetting5thSp: pitchers[4].pitcherSeq,
+    };
+
+    (async () => {
+      await axios
+        .put(BackApi.manage.rotation, rotation, {
+          headers: {
+            "X-ACCESS-TOKEN": user.jwt,
+          },
+        })
+        .then(() => {
+          initPitchersRef.current = [...pitchers];
+          initBullpensRef.current = [...bullpens];
+          alert("저장 완료");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
   };
 
-  //
   const addPitchers = useCallback((bullpen) => {
     setPitchers((pitchers) => {
       return [...pitchers, bullpen];
