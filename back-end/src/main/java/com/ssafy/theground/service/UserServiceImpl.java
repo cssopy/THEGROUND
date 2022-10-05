@@ -9,11 +9,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.theground.entity.TeamSetting;
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.entity.UserHitter;
 import com.ssafy.theground.entity.UserPitcher;
 import com.ssafy.theground.repository.HitterRepository;
 import com.ssafy.theground.repository.PitcherRepository;
+import com.ssafy.theground.repository.TeamSettingRepository;
 import com.ssafy.theground.repository.UserHitterRepository;
 import com.ssafy.theground.repository.UserPitcherRepository;
 import com.ssafy.theground.repository.UserRepository;
@@ -39,6 +41,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserPitcherRepository userPitcherRepository;
+	
+	@Autowired
+	TeamSettingRepository teamSettingRepository;
 
 	@Override
 	public Optional<User> findByUserUid(String useruid) {
@@ -82,6 +87,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void setHitters(User u) {
+		if(userHitterRepository.findByUserSeq(u).size() != 0)
+			return;
 		for(int i=1;i<=13;i++) {
 			UserHitter h = new UserHitter();
 			h.setUserSeq(u);
@@ -94,6 +101,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void setPitchers(User u) {
+		if(userPitcherRepository.findByUserSeq(u).size() != 0)
+			return;
 		for(int i=1;i<=7;i++) {
 			UserPitcher p = new UserPitcher();
 			p.setUserSeq(u);
@@ -102,6 +111,16 @@ public class UserServiceImpl implements UserService{
 			userPitcherRepository.save(p);
 			em.clear();
 		}
+		TeamSetting t = new TeamSetting();
+		t.setUserSeq(u);
+		t.setTeamSetting1stSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(1)).get());
+		t.setTeamSetting2ndSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(2)).get());
+		t.setTeamSetting3rdSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(3)).get());
+		t.setTeamSetting4thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(4)).get());
+		t.setTeamSetting5thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(5)).get());
+		t.setTeamSettingNextSp(1);
+		teamSettingRepository.save(t);
+		em.clear();
 	}
 
 
