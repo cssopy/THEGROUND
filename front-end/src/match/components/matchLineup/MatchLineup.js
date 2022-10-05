@@ -109,6 +109,7 @@ const MatchLineup = () => {
   const awayName = "삼성 라이온즈";
 
   const startGame = () => {
+    dispatch(configActions.setIsLoading(true));
     dispatch(configActions.setUrl("game"));
   };
 
