@@ -18,7 +18,7 @@ const Landing = () => {
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
-    dispatch(configActions.setMusic(visited));
+    dispatch(configActions.setMusic(visited ? true : false));
   });
 
   return (
