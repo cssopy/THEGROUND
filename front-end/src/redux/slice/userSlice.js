@@ -30,6 +30,7 @@ const userSlice = createSlice({
     },
     setLogo: (state, action) => {
       state.user.logo = action.payload;
+      state.user.logoUrl = action.payload.logoUrl;
     },
     setLoginType: (state, action) => {
       state.user.loginType = action.payload;
