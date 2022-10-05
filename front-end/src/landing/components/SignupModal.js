@@ -5,16 +5,16 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/slice/userSlice";
-import { useNavigate } from "react-router-dom";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import playersActions from "../../redux/thunkActions/playerActions";
+import BackApi from "../../api/BackApi";
+import { configActions } from "../../redux/slice/configSlice";
 
 const SignupModal = (props) => {
   const { loginType } = props;
   localStorage.removeItem("loginType");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [progress, setProgress] = useState(0);
   const [selectLogo, setSelectLogo] = useState(false);
@@ -69,7 +69,7 @@ const SignupModal = (props) => {
         loginType,
       });
       axios
-        .post("https://j7d109.p.ssafy.io/back/users/signup", {
+        .post(BackApi.users.signup, {
           uid,
           userTeamname: clubNameInput.current.value,
           logoSeq: myLogo.logoSeq,
@@ -80,7 +80,9 @@ const SignupModal = (props) => {
           dispatch(userActions.setJwt(res.data.jwt));
           dispatch(userActions.setUid(""));
           localStorage.removeItem("loginType");
-          navigate("/main");
+          dispatch(configActions.setIsLoading(true));
+          dispatch(configActions.setPersentage(50));
+          dispatch(configActions.setUrl("main"));
         })
         .catch((err) => console.log(err));
     }
@@ -279,27 +281,25 @@ const SignupModal = (props) => {
             &#8592;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CANCLE&nbsp;&nbsp;&nbsp;
           </span>
         </div>
-        {logos && (
-          <div
-            className={`${styles.smallModal} ${
-              selectLogo && !progress ? styles.openSmall : ""
-            }`}
-          >
-            {logos.map((logo, idx) => {
-              return (
-                <img
-                  src={logo.logoUrl}
-                  className={`${styles.logoList} ${
-                    myLogo && idx + 1 === myLogo.logoSeq ? styles.selected : ""
-                  }`}
-                  key={idx}
-                  alt={idx}
-                  onClick={changeMyLogo}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div
+          className={`${styles.smallModal} ${
+            selectLogo && !progress ? styles.openSmall : ""
+          }`}
+        >
+          {logos.map((logo, idx) => {
+            return (
+              <img
+                src={logo.logoUrl}
+                className={`${styles.logoList} ${
+                  myLogo && idx + 1 === myLogo.logoSeq ? styles.selected : ""
+                }`}
+                key={idx}
+                alt={idx}
+                onClick={changeMyLogo}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
