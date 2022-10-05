@@ -73,7 +73,7 @@ const Game = () => {
                 </Col>
                 <Col className={styles.zero}>
                   <Row className={styles.zero}>
-                    <BallVelocity velocity={130} />
+                    <BallVelocity velocity={130} type={"포크"} />
                   </Row>
                   <Row className={styles.zero}>
                     <BallCount ballCounts={[3, 1, 2]} />
@@ -147,12 +147,12 @@ const Game = () => {
             header="Modal heading"
           />
         </div>
-        {/* <ReactHowler
+        <ReactHowler
           src={landingMusic}
           playing={true}
           loop={true}
           volume={0.05}
-        /> */}
+        />
         {tutorial && <Tutorial closeTutorial={closeTutorial} />}
       </div>
     </>

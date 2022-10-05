@@ -8,22 +8,21 @@ import {
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { userActions } from "../../redux/slice/userSlice";
+import { configActions } from "../../redux/slice/configSlice";
 
-const StartGame = (props) => {
+const StartGame = () => {
   const dispatch = useDispatch();
-  const { startMusic } = props;
 
   const [showLanding, setShowLanding] = useState(false);
   const [anime, setAnime] = useState(0);
 
   const nowShow = () => {
-    startMusic();
+    dispatch(configActions.setMusic(true));
     setShowLanding(true);
-    setTimeout(() => dispatch(userActions.setVisited()), 1000);
+    setTimeout(() => dispatch(configActions.setVisited()), 1000);
   };
   const changeModal = () => {
-    if (anime <= 10) {
+    if (anime === 10) {
       setAnime(11);
     }
   };

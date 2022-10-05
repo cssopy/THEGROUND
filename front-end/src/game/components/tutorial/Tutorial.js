@@ -49,9 +49,8 @@ const Tutorial = (props) => {
                   <div className={styles.cardContent}>
                     <div>주자들의 진루 상황을 파악할 수 있습니다.</div>
                     <div>주자들의 위치는 붉은 원으로 표시됩니다.</div>
-                    <div>
-                      다음 타자, 혹은 다음 투수를 교체할 때 참고할 수 있습니다.
-                    </div>
+                    <div>다음 타자, 혹은 다음 투수를 교체할 때</div>
+                    <div>참고할 수 있습니다.</div>
                   </div>
                 </div>
               </Row>
