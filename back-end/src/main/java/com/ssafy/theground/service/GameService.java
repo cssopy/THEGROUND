@@ -35,9 +35,6 @@ public class GameService {
     private final UserPitcherRepository userPitcherRepository;
     private final UserHitterRepository userHitterRepository;
     private final OutPlayerRepository outPlayerRepository;
-
-    private final UserPitcherRepository userPitcherRepository;
-
     private final ScheduleRepository scheduleRepository;
 
     private final String[] pitchTypes = { "fourSeam", "slider", "sinker", "changeUp", "curve", "cutter", "knuckleCurve", "splitter", "twoSeam", "knuckleball", "eephus", "screwball" };
