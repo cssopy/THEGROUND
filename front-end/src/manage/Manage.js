@@ -13,11 +13,10 @@ import PitcherList from "./components/PitcherList";
 import BullpenList from "./components/BullpenList";
 
 import BackApi from "../api/BackApi";
-import PitchersData from "../market/PitchersData";
+import { useSelector } from "react-redux";
 
 const Manage = () => {
-  const JWT_TOKEN =
-    "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyVWlkIjoiMTExMTExMTExMTExIiwiaWF0IjoxNjYzNTY2NzM1LCJleHAiOjMwMDAwMDAwMDB9.CVgg2N9NcxYDtA61W52HABxFCxv5robWwTxYll0dEa4";
+  const [user, setUser] = useState(useSelector((state) => state.user.user));
 
   const navigate = useNavigate();
 
@@ -31,61 +30,63 @@ const Manage = () => {
 
   // 컴포넌트가 마운트 될때
   useEffect(() => {
-    // 구원 투수 목록 조회
-    (async () => {
-      await axios
-        .get(BackApi.manage.pitchers, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initBullpensRef.current = res.data;
-          setBullpens(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 보유 타자 목록 조회
-    (async () => {
-      await axios
-        .get(BackApi.manage.hitters, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          initHittersRef.current = res.data;
-          setHitters(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
-    // 선발 로테이션 조회
-    (async () => {
-      await axios
-        .get(BackApi.manage.rotation, {
-          headers: {
-            "X-ACCESS-TOKEN": JWT_TOKEN,
-          },
-        })
-        .then((res) => {
-          let pits = [];
-          const keys = Object.keys(res.data);
-          for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const value = res.data[key];
-            pits.push(value);
-          }
-          initPitchersRef.current = pits;
-          setPitchers(pits);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
+    if (user) {
+      // 구원 투수 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.manage.pitchers, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initBullpensRef.current = res.data;
+            setBullpens(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 보유 타자 목록 조회
+      (async () => {
+        await axios
+          .get(BackApi.manage.hitters, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            initHittersRef.current = res.data;
+            setHitters(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+      // 선발 로테이션 조회
+      (async () => {
+        await axios
+          .get(BackApi.manage.rotation, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            let pits = [];
+            const keys = Object.keys(res.data);
+            for (let i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              const value = res.data[key];
+              pits.push(value);
+            }
+            initPitchersRef.current = pits;
+            setPitchers(pits);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
+    }
   }, []);
 
   // reset 버튼 함수

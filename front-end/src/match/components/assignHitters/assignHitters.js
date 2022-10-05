@@ -11,7 +11,9 @@ import Pitcher from "./Pitcher";
 import style from "../../css/assignHitters/AssignHitters.module.css";
 
 const AssignHitters = (props) => {
-  const { myHitters, setMyHitters } = props;
+  const { myHitters, setPageActive } = props;
+
+  const [myHitters2, setMyHitters] = useState(myHitters);
   const [hitters, setHitters] = useState([
     null,
     null,
@@ -27,7 +29,7 @@ const AssignHitters = (props) => {
 
   const changeHitter = useCallback((hitter, targetIdx) => {
     let temHitters = hitters;
-    let temMyHitters = myHitters;
+    let temMyHitters = myHitters2;
 
     if (temHitters[targetIdx]) {
       let rIdx;
@@ -72,7 +74,7 @@ const AssignHitters = (props) => {
 
   const removeHitter = useCallback((originIdx) => {
     let temHitters = hitters;
-    let temMyHitters = myHitters;
+    let temMyHitters = myHitters2;
 
     if (hitters[originIdx] !== null) {
       temMyHitters.push(temHitters[originIdx]);
@@ -93,7 +95,7 @@ const AssignHitters = (props) => {
         return item !== null;
       }).length === 9
     ) {
-      alert("9명 전원 지정 완료");
+      setPageActive([false, false, true]);
     } else {
       alert(
         `${
@@ -125,7 +127,7 @@ const AssignHitters = (props) => {
                 </Row>
                 <Row className={style["playerBody"]}>
                   <MyHitterList
-                    hitters={myHitters}
+                    hitters={myHitters2}
                     changeHitter={changeHitter}
                   />
                 </Row>
