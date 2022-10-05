@@ -49,11 +49,14 @@ public class GameService {
             Match match = ByUserSeq.get(0);
 
             Log log = new Log();
-            Description description = Description.builder().build();
+            Description description = Description.builder()
+                    .matchSeq(match.getMatchSeq()).build();
             descriptionRepository.save(description);
-            MatchSetting matchSetting = MatchSetting.builder().build();
+            MatchSetting matchSetting = MatchSetting.builder()
+                    .matchSeq(match.getMatchSeq()).build();
             matchSettingRepository.save(matchSetting);
-            Scoreboard scoreboard = Scoreboard.builder().build();
+            Scoreboard scoreboard = Scoreboard.builder()
+                    .matchSeq(match.getMatchSeq()).build();
             scoreboardRepository.save(scoreboard);
 
             boolean matchHomeFlag = match.getMatchHomeFlag();
@@ -886,7 +889,9 @@ public class GameService {
             AITeam aiteam = aiTeamRepository.findByAiTeamSeq(m.getAiTeamSeq());
             AISetting aisetting = aiSettingRepository.findByAiTeamSeq(aiteam.getAiTeamSeq()).get();
             MatchSetting matchSetting = matchSettingRepository.findByMatchSeq(m.getMatchSeq()).get();
-            
+
+            Log log = logRepository.findByMatchSeq(m.getMatchSeq());
+
             OrderResDto aiorder = new OrderResDto();
             OrderResDto order = new OrderResDto();
             aiorder.setTeamLogoUrl(aiteam.getLogoSeq().getLogoUrl());
@@ -935,9 +940,11 @@ public class GameService {
             if(m.getMatchHomeFlag()) {
                 l.setHome(order);
                 l.setAway(aiorder);
+                log.setLogHitter(aiorder.getHitter1st().getHitterSeq());
             }else {
                 l.setHome(aiorder);
                 l.setAway(order);
+                log.setLogHitter(order.getHitter1st().getHitterSeq());
             }
         }
         return l;
