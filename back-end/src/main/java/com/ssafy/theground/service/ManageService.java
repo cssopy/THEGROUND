@@ -106,8 +106,9 @@ public class ManageService {
 	public RotationResDto rotationList(String uid) {
 		User u = userRepository.findByUserUid(uid).get();
 		TeamSetting t = teamSettingRepository.findByUserSeq_UserSeq(u.getUserSeq());
-		RotationResDto result = new RotationResDto();
+		RotationResDto result = null;
 		if (t != null) {
+			result = new RotationResDto();
 			result.setTeamSetting1stSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting1stSp().getPitcherSeq()));
 			result.setTeamSetting2ndSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting2ndSp().getPitcherSeq()));
 			result.setTeamSetting3rdSp(pitcherRepository.findByPitcherSeq(t.getTeamSetting3rdSp().getPitcherSeq()));
