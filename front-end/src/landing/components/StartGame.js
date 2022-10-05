@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { configActions } from "../../redux/slice/configSlice";
 
-const StartGame = () => {
+const StartGame = ({ setVisited }) => {
   const dispatch = useDispatch();
 
   const [showLanding, setShowLanding] = useState(false);
@@ -20,7 +20,7 @@ const StartGame = () => {
     dispatch(configActions.setMusic(true));
     setShowLanding(true);
     localStorage.setItem("visited", true);
-    setTimeout(() => setAnime(1000), 1000);
+    setTimeout(() => setVisited(true), 500);
   };
   const changeModal = () => {
     if (anime === 10) {
@@ -39,11 +39,7 @@ const StartGame = () => {
 
   return (
     <>
-      <div
-        className={`${anime > 12 ? styles.change : ""} ${styles.start} ${
-          anime >= 1000 ? styles.remove : ""
-        }`}
-      >
+      <div className={`${anime > 12 ? styles.change : ""} ${styles.start} `}>
         <div
           className={`${styles.notiBody} ${anime > 10 ? styles.hidden : ""} ${
             anime > 12 ? styles.remove : ""
