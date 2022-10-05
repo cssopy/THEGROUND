@@ -90,6 +90,8 @@ const LoginHandler = (props) => {
     "error_description"
   );
 
+  window.history.replaceState({}, null, window.location.pathname);
+
   useEffect(() => {
     if (loginType) {
       getToken();
