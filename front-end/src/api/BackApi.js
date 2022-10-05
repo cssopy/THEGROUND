@@ -1,4 +1,4 @@
-const HOST = "https://j7d109.p.ssafy.io/back";
+const HOST = "/back";
 
 const USERS = "/users";
 const MAIN = "/main";
