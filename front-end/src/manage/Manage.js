@@ -16,7 +16,7 @@ import BackApi from "../api/BackApi";
 import { useSelector } from "react-redux";
 
 const Manage = () => {
-  const [user, setUser] = useState(useSelector((state) => state.user.user));
+  const user = useSelector((state) => state.user.user);
 
   const navigate = useNavigate();
 
