@@ -2,11 +2,12 @@
   width: 870px;
   height: 200px;
   margin-top: 10px;
-  border-radius: 15px;
+  border-radius: 15px 0px 0px 15px;
   background: linear-gradient(#041e42, rgba(04, 30, 66, 0.6));
   color: white;
   text-align: center;
   border-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s;
 }
 
 .logo {
@@ -36,4 +37,8 @@
 }
 .bottom {
   border-bottom: none;
+}
+
+.hide {
+  opacity: 0;
 }
