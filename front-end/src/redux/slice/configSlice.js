@@ -6,7 +6,6 @@ const initialConfigState = {
     isLoading: false,
     percentage: 0,
   },
-  visited: false,
   music: false,
 };
 
@@ -21,10 +20,10 @@ const configSlice = createSlice({
       state.loading.isLoading = action.payload;
     },
     setPersentage: (state, action) => {
-      state.loading.percentage = action.payload;
+      state.loading.percentage = state.loading.percentage + action.payload;
     },
-    setVisited: (state) => {
-      state.visited = true;
+    resetPersentage: (state) => {
+      state.loading.percentage = 0;
     },
     setMusic: (state, action) => {
       state.music = action.payload;

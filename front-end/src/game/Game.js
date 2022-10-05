@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./css/Game.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -16,7 +16,8 @@ import Hitter from "./components/main/CurrentHitter";
 import GameLogs from "./components/main/GameLogs";
 import ChangePlayer from "./components/changePlayer/ChangePlayer";
 import Tutorial from "./components/tutorial/Tutorial";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { configActions } from "../redux/slice/configSlice";
 
 const Game = () => {
   // 구현 완료
@@ -34,6 +35,7 @@ const Game = () => {
   // 10. Skip 구현
   // 11. 선수 교체 api
 
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [modalOpen, setModalOpen] = useState(false);
   const [tutorial, setTutorial] = useState(
@@ -50,6 +52,11 @@ const Game = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(configActions.setPersentage(100));
+    // 로직 넣기
+  }, []);
 
   return (
     <>
