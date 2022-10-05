@@ -265,7 +265,9 @@ public class UserController {
 			userService.save(u);
 			
 			resultMap.put("userTeamname", userTeamname);
-			resultMap.put("jwt", jwtService.createJwt(uid));
+			String jwt = jwtService.createJwt(uid);
+			System.out.println(jwt);
+			resultMap.put("jwt", jwt);
 			resultMap.put("message", "success");
 			status = HttpStatus.ACCEPTED;
 		}
