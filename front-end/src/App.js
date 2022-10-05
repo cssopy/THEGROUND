@@ -1,4 +1,3 @@
-import { Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Landing from "./landing/Landing";
 import Main from "./main/Main";
@@ -8,19 +7,24 @@ import Game from "./game/Game";
 import Match from "./match/Match";
 import Result from "./result/Result";
 import Guide from "./main/components/guide/Guide";
+import Loading from "./loading/Loading";
+import { useSelector } from "react-redux";
 
 function App() {
+  const url = useSelector((state) => state.config.url);
+
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/main" element={<Main />}></Route>
-      <Route path="/guide" element={<Guide />}></Route>
-      <Route path="/manage" element={<Manage />}></Route>
-      <Route path="/market" element={<Market />}></Route>
-      <Route path="/game" element={<Game />}></Route>
-      <Route path="/match" element={<Match />}></Route>
-      <Route path="/result" element={<Result />}></Route>
-    </Routes>
+    <>
+      <Loading />
+      {url === "" && <Landing />}
+      {url === "main" && <Main />}
+      {url === "guide" && <Guide />}
+      {url === "manage" && <Manage />}
+      {url === "market" && <Market />}
+      {url === "game" && <Game />}
+      {url === "match" && <Match />}
+      {url === "result" && <Result />}
+    </>
   );
 }
 
