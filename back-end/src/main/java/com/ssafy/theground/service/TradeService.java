@@ -151,24 +151,48 @@ public class TradeService {
         if (byUserUid.isPresent()){
             List<UserHitter> byUserSeq = manageHitterRepository.findByUserSeq(byUserUid.get());
             List<Long> hitterSeq = new ArrayList<>();
-            byUserSeq.forEach(userHitter -> hitterSeq.add(userHitter.getHitterSeq()));
-            List<Hitter> all = hitterRepository.findAllByHitterSeqNotIn(hitterSeq);
-            for(Hitter one : all){
-                PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
-                possOrNotHitterResDto.setHitterSeq(one.getHitterSeq());
-                possOrNotHitterResDto.setHitterName(one.getHitterName());
-                possOrNotHitterResDto.setBatArm(one.getBatArm());
-                possOrNotHitterResDto.setAvg(one.getAvg());
-                possOrNotHitterResDto.setObp(one.getObp());
-                possOrNotHitterResDto.setSlg(one.getSlg());
-                possOrNotHitterResDto.setHomerun(one.getHomerun());
-                possOrNotHitterResDto.setSalary(one.getSalary());
+            if(byUserSeq.isEmpty()){
+                List<Hitter> allHitter = hitterRepository.findAll();
+                for(Hitter one : allHitter){
+                    PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
+                    possOrNotHitterResDto.setHitterSeq(one.getHitterSeq());
+                    possOrNotHitterResDto.setHitterName(one.getHitterName());
+                    possOrNotHitterResDto.setBatArm(one.getBatArm());
+                    possOrNotHitterResDto.setAvg(one.getAvg());
+                    possOrNotHitterResDto.setObp(one.getObp());
+                    possOrNotHitterResDto.setSlg(one.getSlg());
+                    possOrNotHitterResDto.setHomerun(one.getHomerun());
+                    possOrNotHitterResDto.setSalary(one.getSalary());
 
-                list.add(possOrNotHitterResDto);
+                    list.add(possOrNotHitterResDto);
+                }
             }
-        } else return null;
+            else {
+                for(UserHitter u : byUserSeq){
+                    Long hitSeq = u.getHitterSeq();
+                    if(hitSeq == null){
+                        continue;
+                    }
+                    hitterSeq.add(hitSeq);
+                }
+                List<Hitter> all = hitterRepository.findAllByHitterSeqNotIn(hitterSeq);
+                for(Hitter one : all){
+                    PossOrNotHitterResDto possOrNotHitterResDto = new PossOrNotHitterResDto();
+                    possOrNotHitterResDto.setHitterSeq(one.getHitterSeq());
+                    possOrNotHitterResDto.setHitterName(one.getHitterName());
+                    possOrNotHitterResDto.setBatArm(one.getBatArm());
+                    possOrNotHitterResDto.setAvg(one.getAvg());
+                    possOrNotHitterResDto.setObp(one.getObp());
+                    possOrNotHitterResDto.setSlg(one.getSlg());
+                    possOrNotHitterResDto.setHomerun(one.getHomerun());
+                    possOrNotHitterResDto.setSalary(one.getSalary());
 
-        return list;
+                    list.add(possOrNotHitterResDto);
+                }
+            }
+            return list;
+        }
+        return null;
     }
 
     @Transactional
