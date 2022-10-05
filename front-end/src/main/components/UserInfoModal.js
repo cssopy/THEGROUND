@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
 import { BsPencilSquare } from "react-icons/bs";
+import { userActions } from "../../redux/slice/userSlice";
+import { useDispatch } from "react-redux/es/exports";
 
 import axios from "axios";
 
@@ -9,9 +11,14 @@ import BackApi from "../../api/BackApi";
 import style from "../css/UserInfoModal.module.css";
 
 const UserInfoModal = (props) => {
+  const dispatch = useDispatch();
+
   const { user, logos } = props;
 
   const [userTeamName, setUserTeamName] = useState(user.userTeamname);
+  const [progress, setProgress] = useState(0);
+  const [selectLogo, setSelectLogo] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   const onChange = useCallback((e) => {
     setUserTeamName(e.target.value);
@@ -46,6 +53,21 @@ const UserInfoModal = (props) => {
     }
   };
 
+  const btnToggle = () => {
+    setIsActive((prev) => !prev);
+    setTimeout(() => {
+      setIsActive((prev) => !prev);
+    }, 700);
+  };
+
+  const select = () => {
+    setSelectLogo((prev) => !prev);
+  };
+
+  const changeMyLogo = (event) => {
+    dispatch(userActions.setLogo(logos[parseInt(event.target.alt)]));
+  };
+
   return (
     <>
       <Row className={style["modal"]}>
@@ -57,12 +79,7 @@ const UserInfoModal = (props) => {
           ></img>
         </Row>
         <Row>
-          <BsPencilSquare
-            className={style["logoBtn"]}
-            onClick={() => {
-              alert("로고 변경");
-            }}
-          />
+          <BsPencilSquare className={style["logoBtn"]} onClick={select} />
         </Row>
         <Row>
           <Col>
@@ -127,6 +144,23 @@ const UserInfoModal = (props) => {
           <div onClick={deleteUser}>회원탈퇴</div>
         </Row>
       </Row>
+      <div
+        className={`${style.smallModal} ${selectLogo ? style.openSmall : ""}`}
+      >
+        {logos.map((logo, idx) => {
+          return (
+            <img
+              src={logo.logoUrl}
+              className={`${style.logoList} ${
+                user.logo && idx + 1 === user.logo.logoSeq ? style.selected : ""
+              }`}
+              key={idx}
+              alt={idx}
+              onClick={changeMyLogo}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
