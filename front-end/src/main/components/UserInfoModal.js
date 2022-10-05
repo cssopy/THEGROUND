@@ -37,8 +37,7 @@ const UserInfoModal = (props) => {
             },
           }
         )
-        .then((res) => {
-          console.log(logos);
+        .then(() => {
           dispatch(
             userActions.updateUser({
               userTeamname: userTeamName,
