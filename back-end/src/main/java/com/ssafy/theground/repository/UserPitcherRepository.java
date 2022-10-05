@@ -9,5 +9,6 @@ import com.ssafy.theground.entity.UserPitcher;
 
 @Repository
 public interface UserPitcherRepository extends JpaRepository<UserPitcher, Long>{
+	Long findPitcherSeqByUserPitcherSeq(Long userPitcherSeq);
 	Optional<UserPitcher> findByUserSeq_UserSeqAndPitcherSeq(Long userSeq, Long pitcherSeq);
 }
