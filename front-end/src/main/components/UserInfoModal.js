@@ -26,12 +26,11 @@ const UserInfoModal = (props) => {
 
   const save = () => {
     if (window.confirm("회원정보 수정 하겠습니까?")) {
-      user.userTeamname = userTeamName;
       // 회원 정보 수정
       axios
         .put(
           BackApi.users.modify,
-          { userTeamname: user.userTeamname, logoSeq: 1 },
+          { userTeamname: userTeamName, logoSeq: 1 },
           {
             headers: {
               "X-ACCESS-TOKEN": user.jwt,
@@ -39,6 +38,13 @@ const UserInfoModal = (props) => {
           }
         )
         .then((res) => {
+          console.log(logos);
+          dispatch(
+            userActions.updateUser({
+              userTeamname: userTeamName,
+              logoUrl: logos[1].logoUrl,
+            })
+          );
           alert("회원정보 수정 완료");
         })
         .catch((error) => {
