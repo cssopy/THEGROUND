@@ -16,5 +16,5 @@ public class BriefInfoResDto {
 
     private int teamDraw;
 
-    private String startingPitcher;
+    private Long startingPitcher;
 }
