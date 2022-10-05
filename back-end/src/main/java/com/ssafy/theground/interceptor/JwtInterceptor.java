@@ -25,7 +25,8 @@ public class JwtInterceptor implements HandlerInterceptor {
 		if (jwt != null && jwtService.isUsable(jwt)) {
 			return true;
 		} else {
-			throw new UnauthorizedException();
+			response.setStatus(401);
+			return false;
 		}
 
 	}
