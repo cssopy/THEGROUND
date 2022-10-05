@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router";
 import { BsPencilSquare } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux/es/exports";
 import { userActions } from "../redux/slice/userSlice";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../redux/slice/configSlice";
 
 import axios from "axios";
 
@@ -22,7 +22,6 @@ import BackApi from "../api/BackApi";
 const Main = () => {
   const user = useSelector((state) => state.user.user);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [matchs, setMatchs] = useState([]);
@@ -31,6 +30,7 @@ const Main = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
+    // dispatch(confi);
     if (user) {
       // 선발 로테이션 조회
       (async () => {
@@ -70,26 +70,27 @@ const Main = () => {
           });
       })();
       // 최근 경기 조회 없음
-      // (async () => {
-      //   await axios
-      //     .get(BackApi.main.matches, {
-      //       headers: {
-      //         "X-ACCESS-TOKEN": user.jwt,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       setMatchs(res.data);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // })();
+      (async () => {
+        await axios
+          .get(BackApi.main.matches, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            setMatchs(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
     }
   }, [user]);
 
   const signOut = () => {
     // dispatch(userActions.setJwt(res.data.jwt));
-    navigate("/");
+    dispatch(configActions.setUrl(""));
+    // navigate("/");
   };
 
   return (
@@ -119,7 +120,7 @@ const Main = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/manage");
+                dispatch(configActions.setUrl("manage"));
               }}
             >
               구단관리
@@ -127,7 +128,7 @@ const Main = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/market");
+                dispatch(configActions.setUrl("market"));
               }}
             >
               이적시장
@@ -135,7 +136,7 @@ const Main = () => {
             <div
               className={style["mainHead-menu"]}
               onClick={() => {
-                navigate("/guide");
+                dispatch(configActions.setUrl("guide"));
               }}
             >
               가이드
@@ -168,7 +169,7 @@ const Main = () => {
                       <div
                         className={style["startGameBtn"]}
                         onClick={() => {
-                          navigate("/match");
+                          dispatch(configActions.setUrl("match"));
                         }}
                       >
                         게임 시작

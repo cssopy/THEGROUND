@@ -70,7 +70,7 @@ const LoginHandler = (props) => {
               } else {
                 // jwt 토큰과 유저 이름을 저장 후 메인 페이지로 이동
                 // 메인 페이지 이동 시 선수 전체 데이터와 유저 데이터를 요청 및 저장
-                dispatch(configActions.setPersentage(100));
+                dispatch(configActions.setPersentage(50));
                 dispatch(playersActions.getPlayerAPI());
                 dispatch(userActions.setJwt(res.data.jwt));
                 dispatch(userActions.setLoginType(""));

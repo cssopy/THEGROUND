@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux/es/exports";
+import { configActions } from "../redux/slice/configSlice";
 
 import axios from "axios";
 
@@ -19,7 +20,7 @@ import BackApi from "../api/BackApi";
 const Market = () => {
   const user = useSelector((state) => state.user.user);
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 저장 전 처음 보유 선수 목록
   const initHittersRef = useRef([]);
@@ -291,7 +292,7 @@ const Market = () => {
                 <div
                   className={`${style["btn"]} ${style["bg-color-cst1"]}`}
                   onClick={() => {
-                    navigate("/main");
+                    dispatch(configActions.setUrl("main"));
                   }}
                 >
                   MAIN
@@ -299,7 +300,7 @@ const Market = () => {
                 <div
                   className={`${style["btn"]} ${style["bg-color-cst3"]}`}
                   onClick={() => {
-                    navigate("/manage");
+                    dispatch(configActions.setUrl("manage"));
                   }}
                 >
                   구단관리
