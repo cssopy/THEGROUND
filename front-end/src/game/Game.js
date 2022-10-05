@@ -54,6 +54,10 @@ const Game = () => {
     setModalOpen(false);
   };
   const modalCheck = (orders) => {
+    if (orders === 40) {
+      setTutorial(false);
+      return;
+    }
     if (orders === 41) {
       openModal();
     } else if (orders === 45) {

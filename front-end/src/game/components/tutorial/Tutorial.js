@@ -12,7 +12,6 @@ const Tutorial = (props) => {
         () =>
           setOrders((prev) => {
             modalCheck(prev);
-            console.log(prev);
             return prev + 1;
           }),
         500
