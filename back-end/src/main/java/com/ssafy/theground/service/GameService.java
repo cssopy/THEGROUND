@@ -59,7 +59,7 @@ public class GameService {
                 TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
                 UserPitcher nextPitcherSeq = userPitcherRepository.findByUserPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue());
                 homeTeam.setStartingPitcher(pitcherRepository
-                        .findByPitcherSeq(nextPitcherSeq.getUserPitcherSeq()).getPitcherName());
+                        .findByPitcherSeq(nextPitcherSeq.getPitcherSeq()).getPitcherName());
                 map.put("home", homeTeam);
 
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
@@ -79,7 +79,7 @@ public class GameService {
                 TeamSetting byUserSeq = teamSettingRepository.findByUserSeq_UserSeq(byUserUid.get().getUserSeq());
                 UserPitcher nextPitcherSeq = userPitcherRepository.findByUserPitcherSeq(byUserSeq.getTeamSettingNextSp().longValue());
                 awayTeam.setStartingPitcher(pitcherRepository
-                        .findByPitcherSeq(nextPitcherSeq.getUserPitcherSeq()).getPitcherName());
+                        .findByPitcherSeq(nextPitcherSeq.getPitcherSeq()).getPitcherName());
                 map.put("away", awayTeam);
 
                 List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
