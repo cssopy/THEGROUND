@@ -21,7 +21,7 @@ const configSlice = createSlice({
       state.loading.isLoading = action.payload;
     },
     setPersentage: (state, action) => {
-      state.loading.percentage = action.payload;
+      state.loading.percentage = state.loading.percentage + action.payload;
     },
     setVisited: (state) => {
       state.visited = true;
