@@ -35,6 +35,8 @@ public class GameService {
 
     private final UserPitcherRepository userPitcherRepository;
 
+    private final ScheduleRepository scheduleRepository;
+
     private final String[] pitchTypes = { "fourSeam", "slider", "sinker", "changeUp", "curve", "cutter", "knuckleCurve", "splitter", "twoSeam", "knuckleball", "eephus", "screwball" };
 
 
@@ -44,9 +46,9 @@ public class GameService {
         Optional<User> byUserUid = userRepository.findByUserUid(jwtService.getUserUid(jwtService.getJwt()));
         if (byUserUid.isPresent()) {
 
-            // match
+            // 매치 불러오기
             List<Match> ByUserSeq = matchRepository.findByUserSeq(byUserUid.get());
-            Match match = ByUserSeq.get(0);
+            Match match = ByUserSeq.get(ByUserSeq.size() - 1);
 
             Log log = new Log();
             Description description = Description.builder()
@@ -76,8 +78,7 @@ public class GameService {
                         .findByPitcherSeq(nextPitcherSeq.getPitcherSeq()).getPitcherSeq());
                 map.put("home", homeTeam);
 
-                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
-                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
+                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(match.getAiTeamSeq());
                 awayTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 awayTeam.setTeamLogoUrl(logoUrl);
@@ -96,8 +97,7 @@ public class GameService {
                         .findByPitcherSeq(nextPitcherSeq.getPitcherSeq()).getPitcherSeq());
                 map.put("away", awayTeam);
 
-                List<Match> byUserSeq1 = matchRepository.findByUserSeq(byUserUid.get());
-                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(byUserSeq1.get(0).getAiTeamSeq());
+                AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(match.getAiTeamSeq());
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 homeTeam.setTeamLogoUrl(logoUrl);
@@ -1002,6 +1002,21 @@ public class GameService {
                 s.setScoreboardHomeHomerun(scoreboard.getScoreboardHomeHomerun());
                 s.setScoreboardHomeStrikeout(scoreboard.getScoreboardHomeStrikeout());
             }
+            Season seasonSeq = m.getSeasonSeq();
+            Schedule schedule = scheduleRepository.findByScheduleSeq(seasonSeq.getScheduleSeq().getScheduleSeq());
+
+            if(schedule.getScheduleSeq() % 16 == 0){
+                seasonSeq.setSeasonSeq(seasonSeq.getSeasonSeq()+1);
+            } else {
+                seasonSeq.setScheduleSeq(scheduleRepository.findByScheduleSeq(seasonSeq.getScheduleSeq().getScheduleSeq() + 1));
+            }
+            Match ma = new Match();
+            matchRepository.save(ma.builder()
+                    .userSeq(u)
+                    .seasonSeq(seasonSeq)
+                    .aiTeamSeq(aiTeamRepository.findByAiTeamSeq(seasonSeq.getScheduleSeq().getTeamSeq().getAiTeamSeq()).getAiTeamSeq())
+                    .matchHomeFlag(seasonSeq.getScheduleSeq().getScheduleHomeFlag())
+                    .build());
         }
 
         return s;
