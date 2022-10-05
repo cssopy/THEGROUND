@@ -257,14 +257,14 @@ const Tutorial = (props) => {
               orders >= 2 && orders <= 4 ? "" : styles.hidden
             }`}
           >
-            첫 게임에서는 튜토리얼을 체험하실 수 있습니다.
+            튜토리얼을 체험하시겠습니까?
           </p>
           <p
             className={`${styles.content} ${
               orders >= 3 && orders <= 4 ? "" : styles.hidden
             }`}
           >
-            체험하시겠습니까?
+            첫 게임에서는 튜토리얼을 체험하실 수 있습니다.
           </p>
           <div
             className={`${styles.button} ${orders === 4 ? "" : styles.hidden}`}
