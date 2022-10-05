@@ -19,16 +19,15 @@ const UserInfoModal = (props) => {
   const [userTeamName, setUserTeamName] = useState("");
   const [selectLogo, setSelectLogo] = useState(false);
   const [selected, setSelected] = useState("");
-  const [isActive, setIsActive] = useState(true);
 
   const onChange = useCallback((e) => {
     setUserTeamName(e.target.value);
   }, []);
 
   useEffect(() => {
-    setSelected(user.logo);
+    setSelected(logos.filter((logo) => logo.logoUrl === user.logoUrl)[0]);
     setUserTeamName(user.userTeamname);
-  }, []);
+  }, [user, logos]);
 
   const save = () => {
     if (window.confirm("회원정보 수정 하겠습니까?")) {
@@ -47,12 +46,10 @@ const UserInfoModal = (props) => {
           dispatch(
             userActions.updateUser({
               userTeamname: userTeamName,
-              logoUrl: logos[0].logoUrl,
+              logoUrl: selected.logoUrl,
             })
           );
           alert("회원정보 수정 완료");
-          dispatch(userActions.setLogo(selected));
-          dispatch(userActions.setUserTeamName(userTeamName));
         })
         .catch((error) => {
           console.log(error);
@@ -84,107 +81,109 @@ const UserInfoModal = (props) => {
 
   return (
     <>
-      <div
-        className={`${style["box"]} ${modalIsOpen ? style["open"] : ""}`}
-        onClick={() => {
-          setModalIsOpen(false);
-        }}
-      >
-        <Row className={style["modal"]} onClick={(e) => e.stopPropagation()}>
-          <Row className={style["logo"]}>
-            <img
-              src={selected.logoUrl}
-              style={{ WebkitUserDrag: "none", padding: "0px" }}
-              alt="logo"
-            ></img>
-          </Row>
-          <Row>
-            <BsPencilSquare className={style["logoBtn"]} onClick={select} />
-          </Row>
-          <Row>
-            <Col>
-              <Row className={style["level"]}>Lv.{user.userLevel}</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col>
-                  <Row className={style["win"]}>
-                    <div>W{user.userWin}</div>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row className={style["lose"]}>
-                    <div>L{user.userLose}</div>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row className={style["draw"]}>
-                    <div>D{user.userDraw}</div>
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Row className={style["nickname-left"]}>
-                <div>구단명</div>
-              </Row>
-            </Col>
-            <Col>
-              <Row className={style["nickname-right"]}>
-                <input
-                  type="text"
-                  name="userTeamName"
-                  value={userTeamName}
-                  onChange={onChange}
-                ></input>
-              </Row>
-            </Col>
-          </Row>
-          <Row style={{ margin: "0", padding: "0" }}>
-            <Col>
-              <Row className={style["btn-left"]}>
-                <div onClick={save}>SAVE</div>
-              </Row>
-            </Col>
-            <Col>
-              <Row className={style["btn-right"]}>
-                <div
-                  onClick={() => {
-                    setModalIsOpen(false);
-                  }}
-                >
-                  BACK
-                </div>
-              </Row>
-            </Col>
-          </Row>
-          <Row className={style["deleteAC"]}>
-            <div onClick={deleteUser}>회원탈퇴</div>
-          </Row>
-        </Row>
+      {selected && (
         <div
-          className={`${style.smallModal} ${selectLogo ? style.openSmall : ""}`}
-          onClick={(e) => e.stopPropagation()}
+          className={`${style["box"]} ${modalIsOpen ? style["open"] : ""}`}
+          onClick={() => {
+            setModalIsOpen(false);
+          }}
         >
-          {logos.map((logo, idx) => {
-            return (
+          <Row className={style["modal"]} onClick={(e) => e.stopPropagation()}>
+            <Row className={style["logo"]}>
               <img
-                src={logo.logoUrl}
-                className={`${style.logoList} ${
-                  user.logo && idx + 1 === selected.logoSeq
-                    ? style.selected
-                    : ""
-                }`}
-                key={idx}
-                alt={idx}
-                onClick={changeMyLogo}
-              />
-            );
-          })}
+                src={selected.logoUrl}
+                style={{ WebkitUserDrag: "none", padding: "0px" }}
+                alt="logo"
+              ></img>
+            </Row>
+            <Row>
+              <BsPencilSquare className={style["logoBtn"]} onClick={select} />
+            </Row>
+            <Row>
+              <Col>
+                <Row className={style["level"]}>Lv.{user.userLevel}</Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>
+                    <Row className={style["win"]}>
+                      <div>W{user.userWin}</div>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row className={style["lose"]}>
+                      <div>L{user.userLose}</div>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row className={style["draw"]}>
+                      <div>D{user.userDraw}</div>
+                    </Row>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Row className={style["nickname-left"]}>
+                  <div>구단명</div>
+                </Row>
+              </Col>
+              <Col>
+                <Row className={style["nickname-right"]}>
+                  <input
+                    type="text"
+                    name="userTeamName"
+                    value={userTeamName}
+                    onChange={onChange}
+                  ></input>
+                </Row>
+              </Col>
+            </Row>
+            <Row style={{ margin: "0", padding: "0" }}>
+              <Col>
+                <Row className={style["btn-left"]}>
+                  <div onClick={save}>SAVE</div>
+                </Row>
+              </Col>
+              <Col>
+                <Row className={style["btn-right"]}>
+                  <div
+                    onClick={() => {
+                      setModalIsOpen(false);
+                    }}
+                  >
+                    BACK
+                  </div>
+                </Row>
+              </Col>
+            </Row>
+            <Row className={style["deleteAC"]}>
+              <div onClick={deleteUser}>회원탈퇴</div>
+            </Row>
+          </Row>
+          <div
+            className={`${style.smallModal} ${
+              selectLogo ? style.openSmall : ""
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {logos.map((logo, idx) => {
+              return (
+                <img
+                  src={logo.logoUrl}
+                  className={`${style.logoList} ${
+                    idx + 1 === selected.logoSeq ? style.selected : ""
+                  }`}
+                  key={idx}
+                  alt={idx}
+                  onClick={changeMyLogo}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
