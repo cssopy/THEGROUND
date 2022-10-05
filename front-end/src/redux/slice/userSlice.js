@@ -38,8 +38,8 @@ const userSlice = createSlice({
       state.user = { ...state.user, ...action.payload };
     },
     setLogOut: (state) => {
-      for (const value in state.user) {
-        value = "";
+      for (let key in state.user.keys) {
+        state.user[key] = "";
       }
     },
     updateUser: (state, action) => {
