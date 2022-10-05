@@ -2,6 +2,7 @@ package com.ssafy.theground.controller;
 
 import com.ssafy.theground.dto.res.BriefInfoResDto;
 import com.ssafy.theground.dto.res.LineupResDto;
+import com.ssafy.theground.dto.res.ScoreResultResDto;
 import com.ssafy.theground.entity.Match;
 import com.ssafy.theground.service.GameService;
 import com.ssafy.theground.service.JwtService;
@@ -110,6 +111,20 @@ public class GameController {
 			return null;
 		}
     
+    }
+    
+    @GetMapping("/result")
+    public ScoreResultResDto getResult(@RequestBody Map<String, String> vo) {
+    	try {
+			String uid = jwtService.getUserUid(jwtService.getJwt());
+			Long matchSeq = Long.valueOf(vo.get("matchSeq"));
+			
+			return gameService.getResult(uid, matchSeq);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
     
     
