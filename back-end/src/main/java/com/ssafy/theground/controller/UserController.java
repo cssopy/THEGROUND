@@ -256,7 +256,7 @@ public class UserController {
 			u.setUserExp(0);
 			u.setUserLevel(1);
 			u.setUserLogintype(loginType.charAt(0));
-			u.setUserPayroll(138000000);
+			u.setUserPayroll(200000000);
 			u.setUserTeamname(userTeamname);
 			u.setUserWin(0);
 			u.setUserLose(0);
