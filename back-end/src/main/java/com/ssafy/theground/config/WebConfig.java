@@ -23,8 +23,8 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// 실제환경에서는 패턴추가 다해줘야함.
-//		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
-//											.excludePathPatterns(EXCLUDE_PATHS);
+		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
+											.excludePathPatterns(EXCLUDE_PATHS);
 	}
 
 	@Override
