@@ -18,4 +18,8 @@ public interface UserService {
 	public Long count();
 	
 	public List<User> findAll();
+	
+	public void setHitters(User u);
+	
+	public void setPitchers(User u);
 }
