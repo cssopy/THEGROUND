@@ -18,6 +18,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "descriptions")
 public class Description {
     @Id
+    @Column(name = "match_seq")
+    private Long matchSeq;
+
     @OneToOne
     @MapsId
     @JoinColumn(name="match_seq")
