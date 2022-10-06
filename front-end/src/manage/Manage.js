@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 
 const Manage = () => {
   const user = useSelector((state) => state.user.user);
+  const isLoading = useSelector((state) => state.config.isLoading);
 
   const dispatch = useDispatch();
 
@@ -181,85 +182,87 @@ const Manage = () => {
             e.preventDefault();
           }}
         >
-          <div style={{ marginTop: "auto", marginBottom: "auto" }}>
-            <Row className={style["clubHead"]}>
-              <div>구단 관리</div>
-            </Row>
-            <Container className={style["clubBody"]}>
-              <Row className={style["clubBody-row1"]}>
-                <Col className={style["clubBody-row1-col1"]}>
-                  <Row className={style["clubBody-row1-col1-row"]}>
-                    <Row className={style["batterHead"]}>
-                      <div>보유 타자</div>
-                    </Row>
-                    <Row className={style["batterBody"]}>
-                      <HitterList hitters={hitters}></HitterList>
-                    </Row>
-                  </Row>
-                </Col>
-                <Col className={style["clubBody-row1-col2"]}>
-                  <Row className={style["clubBody-row1-col2-row1"]}>
-                    <Row className={style["pircherHead"]}>
-                      <div>선발 로테이션</div>
-                    </Row>
-                    <Row className={style["pircherBody"]}>
-                      <PitcherList
-                        pitchers={pitchers}
-                        addBullpens={addBullpens}
-                        pitTopit={pitTopit}
-                      ></PitcherList>
-                    </Row>
-                  </Row>
-                  <Row className={style["clubBody-row1-col2-row2"]}>
-                    <Row className={style["pircherHead"]}>
-                      <div>구원 투수</div>
-                    </Row>
-                    <Row className={style["pircherBody"]}>
-                      <BullpenList
-                        bullpens={bullpens}
-                        addPitchers={addPitchers}
-                      ></BullpenList>
-                    </Row>
-                  </Row>
-                </Col>
+          {!isLoading && (
+            <div style={{ marginTop: "auto", marginBottom: "auto" }}>
+              <Row className={style["clubHead"]}>
+                <div>구단 관리</div>
               </Row>
-              <Row className={style["clubBody-row2"]}>
-                <div className={style["clubBody-row2-div"]}>
-                  <div
-                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
-                    onClick={() => {
-                      dispatch(configActions.setUrl("main"));
-                    }}
-                  >
-                    MAIN
+              <Container className={style["clubBody"]}>
+                <Row className={style["clubBody-row1"]}>
+                  <Col className={style["clubBody-row1-col1"]}>
+                    <Row className={style["clubBody-row1-col1-row"]}>
+                      <Row className={style["batterHead"]}>
+                        <div>보유 타자</div>
+                      </Row>
+                      <Row className={style["batterBody"]}>
+                        <HitterList hitters={hitters}></HitterList>
+                      </Row>
+                    </Row>
+                  </Col>
+                  <Col className={style["clubBody-row1-col2"]}>
+                    <Row className={style["clubBody-row1-col2-row1"]}>
+                      <Row className={style["pircherHead"]}>
+                        <div>선발 로테이션</div>
+                      </Row>
+                      <Row className={style["pircherBody"]}>
+                        <PitcherList
+                          pitchers={pitchers}
+                          addBullpens={addBullpens}
+                          pitTopit={pitTopit}
+                        ></PitcherList>
+                      </Row>
+                    </Row>
+                    <Row className={style["clubBody-row1-col2-row2"]}>
+                      <Row className={style["pircherHead"]}>
+                        <div>구원 투수</div>
+                      </Row>
+                      <Row className={style["pircherBody"]}>
+                        <BullpenList
+                          bullpens={bullpens}
+                          addPitchers={addPitchers}
+                        ></BullpenList>
+                      </Row>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row className={style["clubBody-row2"]}>
+                  <div className={style["clubBody-row2-div"]}>
+                    <div
+                      className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst1"]} ${style["link"]}`}
+                      onClick={() => {
+                        dispatch(configActions.setUrl("main"));
+                      }}
+                    >
+                      MAIN
+                    </div>
+                    &nbsp;&nbsp;
+                    <div
+                      className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
+                      onClick={() => {
+                        dispatch(configActions.setUrl("market"));
+                      }}
+                    >
+                      이적시장
+                    </div>
+                    &nbsp;&nbsp;
+                    <div
+                      className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst4"]}`}
+                      onClick={reset}
+                    >
+                      RESET
+                    </div>
+                    &nbsp;&nbsp;
+                    <div
+                      className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst5"]}`}
+                      onClick={save}
+                    >
+                      SAVE
+                    </div>
                   </div>
-                  &nbsp;&nbsp;
-                  <div
-                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst3"]} ${style["link"]}`}
-                    onClick={() => {
-                      dispatch(configActions.setUrl("market"));
-                    }}
-                  >
-                    이적시장
-                  </div>
-                  &nbsp;&nbsp;
-                  <div
-                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst4"]}`}
-                    onClick={reset}
-                  >
-                    RESET
-                  </div>
-                  &nbsp;&nbsp;
-                  <div
-                    className={`${style["clubBody-row2-div-btn"]} ${style["bg-color-cst5"]}`}
-                    onClick={save}
-                  >
-                    SAVE
-                  </div>
-                </div>
-              </Row>
-            </Container>
-          </div>
+                </Row>
+              </Container>
+            </div>
+          )}
         </Row>
       </DndProvider>
     </>
