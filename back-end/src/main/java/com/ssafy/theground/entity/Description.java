@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Builder
 @Getter
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "descriptions")
-public class Description {
+public class Description implements Serializable {
 
     @Id
     @OneToOne
