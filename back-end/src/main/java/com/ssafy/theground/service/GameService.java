@@ -64,6 +64,7 @@ public class GameService {
             boolean matchHomeFlag = match.getMatchHomeFlag();
             BriefInfoResDto homeTeam = new BriefInfoResDto();
             BriefInfoResDto awayTeam = new BriefInfoResDto();
+            BriefInfoResDto matchSeq = new BriefInfoResDto();
 
             // 유저가 Home
             if (matchHomeFlag) {
@@ -83,6 +84,10 @@ public class GameService {
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 awayTeam.setTeamLogoUrl(logoUrl);
                 map.put("away", awayTeam);
+
+                matchSeq.setTeamName(homeTeam.getTeamName());
+                matchSeq.setStartingPitcher(match.getMatchSeq());
+                map.put("matchSeq", matchSeq);
             }
             // 유저가 Away
             else {
@@ -102,7 +107,11 @@ public class GameService {
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
                 homeTeam.setTeamLogoUrl(logoUrl);
                 map.put("home", homeTeam);
+
+                matchSeq.setStartingPitcher(match.getMatchSeq());
+                map.put("matchSeq", matchSeq);
             }
+
             logRepository.save(log.builder()
                     .matchSeq(match.getMatchSeq())
                     .logInning(1)
