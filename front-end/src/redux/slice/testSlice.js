@@ -260,7 +260,7 @@ const testSlice = createSlice({
       state.battingOrder = action.payload;
     },
     setNextMatchIndex: (state, action) => {
-      state.battingOrder = state.battingOrder + action.payload;
+      state.nextMatchIndex = state.nextMatchIndex + action.payload;
     },
     setLineUp: (state, action) => {
       state.lineUp = action.payload;
