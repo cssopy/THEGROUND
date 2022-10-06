@@ -14,7 +14,6 @@ import { ProgressBar } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { configActions } from "../redux/slice/configSlice";
-import { userActions } from "../redux/slice/userSlice";
 
 const Loading = () => {
   // api 통신 횟수나 크기 및 페이지에서의 useSelector 세팅에 따라 총 100을 채우도록 설계한다.
@@ -70,7 +69,7 @@ const Loading = () => {
             </>
           </ProgressBar>
         </div>
-        {music && !isLoading && url === "" && (
+        {/* {music && !isLoading && url === "" && (
           <ReactHowler src={Music3} playing={true} loop={true} volume={1} />
         )}
         {music && !isLoading && url === "game" && (
@@ -83,7 +82,7 @@ const Loading = () => {
           )}
         {music && !isLoading && url === "match" && (
           <ReactHowler src={Music2} playing={true} loop={true} volume={1} />
-        )}
+        )} */}
       </div>
     </>
   );

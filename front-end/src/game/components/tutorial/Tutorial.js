@@ -3,19 +3,12 @@ import { Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 const Tutorial = (props) => {
-  const { closeTutorial, modalCheck } = props;
+  const { closeTutorial } = props;
   const [orders, setOrders] = useState(1);
 
   useEffect(() => {
     if (orders % 4) {
-      setTimeout(
-        () =>
-          setOrders((prev) => {
-            modalCheck(prev);
-            return prev + 1;
-          }),
-        500
-      );
+      setTimeout(() => setOrders((prev) => prev + 1), 500);
     }
   }, [orders]);
 
