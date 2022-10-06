@@ -126,9 +126,7 @@ public class UserController {
 				resultMap.put("message", e.getMessage());
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
-		}
-
-		else if(loginType.equals("N")) {
+		} else if(loginType.equals("N")) {
 			String reqURL = "https://openapi.naver.com/v1/nid/me";
 			try {
 	            URL url = new URL(reqURL);
@@ -177,10 +175,7 @@ public class UserController {
 				resultMap.put("message", e.getMessage());
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 	        }
-		}
-//
-//
-		else if(loginType.equals("G")) {
+		} else if(loginType.equals("G")) {
 			String reqURL = "https://www.googleapis.com/oauth2/v3/userinfo";
 
 			try {
@@ -233,7 +228,8 @@ public class UserController {
 				resultMap.put("message", e.getMessage());
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
-
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(resultMap, status);
 	}
@@ -285,7 +281,7 @@ public class UserController {
 	@PutMapping("/modify")
 	public ResponseEntity<Map<String, Object>> modify(@RequestBody Map<String, String> vo) {
 		Map<String, Object> resultMap = new HashMap<>();
-		HttpStatus status = null;
+		HttpStatus status;
 		String userTeamname = vo.get("userTeamname");
 		Long logoSeq = Long.valueOf(vo.get("logoSeq"));
 		try {
@@ -308,7 +304,7 @@ public class UserController {
 	@DeleteMapping("/quit")
 	public ResponseEntity<Map<String, Object>> quit(){
 		Map<String, Object> resultMap = new HashMap<>();
-		HttpStatus status = null;
+		HttpStatus status;
 		String uid;
 		try {
 			uid = jwtService.getUserUid(jwtService.getJwt());
