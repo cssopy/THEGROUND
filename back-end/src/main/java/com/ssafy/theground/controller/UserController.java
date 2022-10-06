@@ -28,9 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ssafy.theground.dto.res.UserMypageDto;
-import com.ssafy.theground.entity.Hitter;
 import com.ssafy.theground.entity.Logo;
-import com.ssafy.theground.entity.TeamSetting;
 import com.ssafy.theground.entity.User;
 import com.ssafy.theground.service.JwtService;
 import com.ssafy.theground.service.LogoService;
@@ -59,7 +57,7 @@ public class UserController {
         File file = new File(path);
         String[] strs =  file.list();
         String result = "";
-        for(String str : strs)
+        for (String str : strs)
             result += str+" "; 
 		return result;
 	}
@@ -243,7 +241,7 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<Map<String, Object>> signup(@RequestBody Map<String, String> vo) {
 		Map<String, Object> resultMap = new HashMap<>();
-		HttpStatus status = null;
+		HttpStatus status;
 		String uid = vo.get("uid");
 		String userTeamname = vo.get("userTeamname");
 		Long logoSeq = Long.valueOf(vo.get("logoSeq"));
@@ -277,6 +275,8 @@ public class UserController {
 			resultMap.put("jwt", jwt);
 			resultMap.put("message", "success");
 			status = HttpStatus.ACCEPTED;
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return new ResponseEntity<>(resultMap, status);
