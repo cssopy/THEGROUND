@@ -14,4 +14,6 @@ public interface ManageHitterRepository extends JpaRepository<UserHitter, Long> 
     boolean existsByHitterSeq(Long hitterSeq);
 
     List<UserHitter> findByUserSeq(User userSeq);
+
+    void deleteByUserSeq(User user);
 }
