@@ -64,17 +64,18 @@ const Match = () => {
       // })();
       (async () => {
         await axios
-          .get(BackApi.trade.possHitters, {
+          .get(BackApi.game.brief, {
             headers: {
               "X-ACCESS-TOKEN": user.jwt,
             },
           })
           .then((res) => {
-            setMyHitters(res.data);
+            setBrief(res.data);
             dispatch(configActions.setPersentage(50));
           })
           .catch((error) => {
             console.log(error);
+            dispatch(configActions.setPersentage(50));
           });
       })();
     }
