@@ -52,7 +52,7 @@ public class GameService {
 
             Log log = new Log();
             Description description = Description.builder()
-                    .matchSeq(match.getMatchSeq()).build();
+                    .match(match).build();
             descriptionRepository.save(description);
             MatchSetting matchSetting = MatchSetting.builder()
                     .matchSeq(match.getMatchSeq()).build();
@@ -125,7 +125,7 @@ public class GameService {
         Log log = logRepository.findByMatchSeq(matchSeq);
         MatchSetting setting = matchSettingRepository.findByMatchSeq(matchSeq).get();
         Scoreboard scoreboard = scoreboardRepository.findByMatchSeq(matchSeq);
-        Description descriptions = descriptionRepository.findByMatchSeq(matchSeq);
+        Description descriptions = descriptionRepository.findByMatch_MatchSeq(matchSeq);
 
         long pitcherSeq = log.getLogPitcher();
         Pitcher pitcher = pitcherRepository.findByPitcherSeq(pitcherSeq);
