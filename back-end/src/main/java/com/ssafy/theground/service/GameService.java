@@ -82,7 +82,9 @@ public class GameService {
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(match.getAiTeamSeq());
                 awayTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
+                Integer aiSettingPitcher = aiSettingRepository.findByAiTeamSeq(byAITeamSeq.getAiTeamSeq()).get().getAiSettingPitcher();
                 awayTeam.setTeamLogoUrl(logoUrl);
+                awayTeam.setStartingPitcher(aiSettingPitcher.longValue());
                 map.put("away", awayTeam);
 
                 matchSeq.setTeamName(homeTeam.getTeamName());
@@ -105,7 +107,9 @@ public class GameService {
                 AITeam byAITeamSeq = aiTeamRepository.findByAiTeamSeq(match.getAiTeamSeq());
                 homeTeam.setTeamName(byAITeamSeq.getAiTeamName());
                 String logoUrl = logoRepository.findByLogoSeq(byAITeamSeq.getLogoSeq().getLogoSeq()).getLogoUrl();
+                Integer aiSettingPitcher = aiSettingRepository.findByAiTeamSeq(byAITeamSeq.getAiTeamSeq()).get().getAiSettingPitcher();
                 homeTeam.setTeamLogoUrl(logoUrl);
+                homeTeam.setStartingPitcher(aiSettingPitcher.longValue());
                 map.put("home", homeTeam);
 
                 matchSeq.setStartingPitcher(match.getMatchSeq());
