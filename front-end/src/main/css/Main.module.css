@@ -139,14 +139,16 @@
 }
 
 .nickName {
-  margin-top: 23px;
-  margin-left: -90px;
-  font-size: 30px;
+  margin-top: 27px;
+  margin-left: -30px;
+  width: 240px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .infoBtn {
-  margin-left: 60px;
+  width: 20px;
+  margin-left: 0px;
 }
 
 .barAll {

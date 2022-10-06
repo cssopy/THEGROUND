@@ -225,10 +225,10 @@ const Market = () => {
       myPitchers.reduce(function add(sum, item) {
         return sum + item.salary;
       }, 0);
-    // if (user.userPayroll < myTotalSal) {
-    //   alert("보유 예산을 초과했습니다.");
-    //   return;
-    // }
+    if (user.userPayroll < myTotalSal) {
+      alert("보유 예산을 초과했습니다.");
+      return;
+    }
 
     let myPitchersSeq = [];
     let myHittersSeq = [];

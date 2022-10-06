@@ -34,7 +34,11 @@ const PitcherList = memo((props) => {
 
   const onMouseOver = (pitcher) => {
     setModalIsOpen(true);
-    setPitcher(pitcher);
+    for (let pit of players.pitcher) {
+      if (pit.pitcherSeq === pitcher.pitcherSeq) {
+        setPitcher(pit);
+      }
+    }
   };
 
   const onMouseLeave = () => {

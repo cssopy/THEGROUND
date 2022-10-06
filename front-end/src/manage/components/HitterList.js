@@ -21,7 +21,6 @@ const HitterList = memo((props) => {
         setHitter(hit);
       }
     }
-    // setHitter(hitter);
   };
 
   const onMouseLeave = () => {
@@ -38,8 +37,8 @@ const HitterList = memo((props) => {
             <th>타율</th>
             <th>게임수</th>
             <th>타수</th>
-            <th>OBP</th>
-            <th>SLG</th>
+            <th>장타율</th>
+            <th>출루율</th>
             <th>홈런</th>
           </tr>
         </thead>

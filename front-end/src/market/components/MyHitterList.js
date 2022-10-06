@@ -50,7 +50,7 @@ const MyHitterList = memo((props) => {
             <th>출루율</th>
             <th>장타율</th>
             <th>홈런</th>
-            <th>연봉</th>
+            <th>TG</th>
           </tr>
         </thead>
         <tbody

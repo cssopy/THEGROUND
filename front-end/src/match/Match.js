@@ -65,14 +65,14 @@ const Match = () => {
           })
           .then((res) => {
             setMyHitters(res.data);
-            dispatch(configActions.setPersentage(100));
+            dispatch(configActions.setPersentage(50));
           })
           .catch((error) => {
             console.log(error);
           });
       })();
     }
-  }, [user]);
+  }, []);
 
   return (
     <>

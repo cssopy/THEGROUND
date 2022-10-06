@@ -20,9 +20,9 @@ const Hitter = (props) => {
     },
   }));
 
-  if (isDragging) {
-    props.onMouseLeave();
-  }
+  // if (isDragging) {
+  //   props.onMouseLeave();
+  // }
 
   return (
     <>
@@ -34,7 +34,7 @@ const Hitter = (props) => {
         onMouseDown={(e) => {
           if (e.button === 2) {
             props.addMyHitter(props.hitter);
-            props.onMouseLeave();
+            // props.onMouseLeave();
           }
         }}
       >
