@@ -158,7 +158,7 @@ const AssignHitters = (props) => {
         playerSeq: oppoPitcher.picherSeq,
       });
 
-      dispatch(testActions.setLineUp(hitterLineup));
+      dispatch(testActions.setBattingOrder(hitterLineup));
       setPageActive([false, false, true]);
 
       // (async () => {
