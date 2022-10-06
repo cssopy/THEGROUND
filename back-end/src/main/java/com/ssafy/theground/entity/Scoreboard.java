@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Builder
 @Getter
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "scoreboards")
-public class Scoreboard {
+public class Scoreboard implements Serializable {
     @Id
     @Column(name="match_seq")
     private Long matchSeq;
