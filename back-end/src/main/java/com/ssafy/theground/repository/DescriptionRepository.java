@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DescriptionRepository extends JpaRepository<Description, Long> {
-    Description findByMatchSeq(Long matchSeq);
+    Description findByMatch_MatchSeq(Long matchSeq);
 }

@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtServiceImpl implements JwtService{
-	private String SECRET_KEY = "ssafybaseballssafybaseballssafybaseballssafybaseballssafybaseball";
+	private final String SECRET_KEY = "ssafybaseballssafybaseballssafybaseballssafybaseballssafybaseball";
 	/*
 	@param userUid
 	@return String
@@ -32,7 +30,7 @@ public class JwtServiceImpl implements JwtService{
 				.setHeaderParam("type", "jwt")
 				.claim("userUid", userUid)
 				.setIssuedAt(now)
-				.setExpiration(new Date(System.currentTimeMillis()+1*(1000*60*60*24*365)))
+				.setExpiration(new Date(System.currentTimeMillis() + (1000L * 60 * 60 * 24 * 365)))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
 				.compact();
 	}
@@ -58,10 +56,9 @@ public class JwtServiceImpl implements JwtService{
 	public String getUserUid(String jwt) throws Exception{
 
 
-		Jws<Claims> claims = null;
+		Jws<Claims> claims;
 		try {
-			claims = Jwts.parser()
-					.setSigningKey(SECRET_KEY).parseClaimsJws(jwt);
+			claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(jwt);
 		}catch(Exception e) {
 			throw new Exception("JWT가 유효하지 않음");
 		}
@@ -72,7 +69,7 @@ public class JwtServiceImpl implements JwtService{
 	@Override
 	public boolean isUsable(String jwt) {
 		try {
-			Jws<Claims> claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(jwt);
+			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(jwt);
 			return true;
 		}catch(Exception e) {
 			throw new UnauthorizedException();
