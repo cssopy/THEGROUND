@@ -3,6 +3,7 @@ package com.ssafy.theground.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Builder
 @Getter
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "logs")
-public class Log {
+public class Log implements Serializable {
     @Id
     @Column(name="match_seq")
     private Long matchSeq;
