@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDrop } from "react-dnd";
-
+import { useSelector } from "react-redux/es/exports.js";
 import Pitcher from "./Pitcher";
 import { ItemTypes } from "./ItemTypes.js";
 
@@ -26,12 +26,18 @@ const PitcherList = memo((props) => {
     backgroundColor = "#aaaaaa32";
   }
 
+  const players = useSelector((state) => state.player.players);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pitcher, setPitcher] = useState();
 
   const onMouseOver = (pitcher) => {
     setModalIsOpen(true);
-    setPitcher(pitcher);
+    for (let pit of players.pitcher) {
+      if (pit.pitcherSeq === pitcher.pitcherSeq) {
+        setPitcher(pit);
+      }
+    }
   };
 
   const onMouseLeave = () => {

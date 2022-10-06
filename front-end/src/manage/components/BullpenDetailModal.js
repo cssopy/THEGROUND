@@ -4,26 +4,28 @@ import Radar from "./Radar";
 import style from "../css/BullpenDetailModal.module.css";
 
 const BullpenDetailModal = (props) => {
+  const { pitcher } = props;
+
   const data = [
     {
-      taste: "fruity",
-      chardonay: 30,
+      taste: "평균자책점",
+      chardonay: pitcher.era / 5,
     },
     {
-      taste: "bitter",
-      chardonay: 41,
+      taste: "경기",
+      chardonay: pitcher.game / 100,
     },
     {
-      taste: "heavy",
-      chardonay: 20,
+      taste: "이닝",
+      chardonay: pitcher.inning / 300,
     },
     {
-      taste: "strong",
-      chardonay: 114,
+      taste: "승리",
+      chardonay: pitcher.win / pitcher.game,
     },
     {
-      taste: "sunny",
-      chardonay: 82,
+      taste: "패배",
+      chardonay: pitcher.lose / pitcher.game,
     },
   ];
   return (

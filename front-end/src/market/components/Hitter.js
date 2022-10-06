@@ -2,6 +2,7 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 
 import style from "../css/HitterList.module.css";
+import { useEffect } from "react";
 
 const Hitter = (props) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -20,9 +21,9 @@ const Hitter = (props) => {
     },
   }));
 
-  // if (isDragging) {
-  //   props.onMouseLeave();
-  // }
+  useEffect(() => {
+    props.onMouseLeave();
+  }, [isDragging]);
 
   return (
     <>
@@ -34,7 +35,7 @@ const Hitter = (props) => {
         onMouseDown={(e) => {
           if (e.button === 2) {
             props.addMyHitter(props.hitter);
-            // props.onMouseLeave();
+            props.onMouseLeave();
           }
         }}
       >
