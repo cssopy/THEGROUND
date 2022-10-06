@@ -18,8 +18,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "descriptions")
 public class Description implements Serializable {
-
     @Id
+    @Column(name = "match_seq")
+    private Long matchSeq;
+
     @OneToOne
     @MapsId
     @JoinColumn(name="match_seq")
