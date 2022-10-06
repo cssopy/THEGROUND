@@ -87,7 +87,7 @@ const Main = () => {
           });
       })();
     }
-  }, [user]);
+  }, []);
 
   const signOut = () => {
     dispatch(userActions.setLogOut());
@@ -259,27 +259,42 @@ const Main = () => {
                 <Row className={style["matchScheduleBody"]}>
                   {schedules.length !== 0 && (
                     <>
-                      <Col>
-                        <Row className={style["schedule"]}>
-                          <div>1st</div>
-                          <img src={schedules[0].logoUrl} alt="teamlogo"></img>
-                          <div>{schedules[0].teamName}</div>
-                        </Row>
-                      </Col>
-                      <Col>
-                        <Row className={style["schedule"]}>
-                          <div>2nd</div>
-                          <img src={schedules[1].logoUrl} alt="teamlogo"></img>
-                          <div>{schedules[1].teamName}</div>
-                        </Row>
-                      </Col>
-                      <Col>
-                        <Row className={style["schedule"]}>
-                          <div>3th</div>
-                          <img src={schedules[2].logoUrl} alt="teamlogo"></img>
-                          <div>{schedules[2].teamName}</div>
-                        </Row>
-                      </Col>
+                      {schedules[0] && (
+                        <Col>
+                          <Row className={style["schedule"]}>
+                            <div>1st</div>
+                            <img
+                              src={schedules[0].logoUrl}
+                              alt="teamlogo"
+                            ></img>
+                            <div>{schedules[0].teamName}</div>
+                          </Row>
+                        </Col>
+                      )}
+                      {schedules[1] && (
+                        <Col>
+                          <Row className={style["schedule"]}>
+                            <div>1st</div>
+                            <img
+                              src={schedules[1].logoUrl}
+                              alt="teamlogo"
+                            ></img>
+                            <div>{schedules[1].teamName}</div>
+                          </Row>
+                        </Col>
+                      )}
+                      {schedules[2] && (
+                        <Col>
+                          <Row className={style["schedule"]}>
+                            <div>1st</div>
+                            <img
+                              src={schedules[2].logoUrl}
+                              alt="teamlogo"
+                            ></img>
+                            <div>{schedules[2].teamName}</div>
+                          </Row>
+                        </Col>
+                      )}
                     </>
                   )}
                   {schedules.length === 0 && <div>경기 일정이 없습니다.</div>}
