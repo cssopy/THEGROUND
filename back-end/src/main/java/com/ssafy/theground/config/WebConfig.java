@@ -1,6 +1,6 @@
 package com.ssafy.theground.config;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,17 +12,15 @@ import com.ssafy.theground.interceptor.JwtInterceptor;
 public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(this.jwtInterceptor())
+		registry.addInterceptor(this.jwtInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns("/users/login")
 				.excludePathPatterns("/users/signup")
 				.excludePathPatterns("/users/logos");
 	}
 
-	@Bean
-	protected JwtInterceptor jwtInterceptor() {
-		return new JwtInterceptor();
-	}
+	@Autowired
+	protected JwtInterceptor jwtInterceptor;
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
