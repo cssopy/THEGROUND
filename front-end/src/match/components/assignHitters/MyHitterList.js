@@ -25,6 +25,14 @@ const MyHitterList = memo((props) => {
     backgroundColor = "#aaaaaa32";
   }
 
+  const findHitter = (hitSeq) => {
+    for (let hit of props.players.hitter) {
+      if (hit.hitterSeq === hitSeq) {
+        return hit;
+      }
+    }
+  };
+
   return (
     <>
       <Table className={`${style["table"]} table-borderless`}>
@@ -55,7 +63,7 @@ const MyHitterList = memo((props) => {
           {props.hitters.map((hitter) => (
             <Hitter
               key={hitter.hitterSeq}
-              hitter={hitter}
+              hitter={findHitter(hitter.hitterSeq)}
               changeHitter={props.changeHitter}
             ></Hitter>
           ))}

@@ -207,6 +207,7 @@ const AssignHitters = (props) => {
                 <Row className={style["playerBody"]}>
                   <MyHitterList
                     hitters={myHitters2}
+                    players={players}
                     changeHitter={changeHitter}
                   />
                 </Row>
