@@ -117,7 +117,7 @@ public class GameService {
             }
 
             logRepository.save(log.builder()
-                    .matchSeq(match.getMatchSeq())
+                    .match(match)
                     .logInning(1)
                     .logHalf("TOP")
                     .logOut(0)
