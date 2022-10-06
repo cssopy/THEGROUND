@@ -202,9 +202,9 @@ public class TradeService {
             List<UserHitter> hitter = new ArrayList<>();
 
             // 선발 로테이션 삭제
-            teamSettingRepository.deleteAll();
+            teamSettingRepository.deleteByUserSeq(byUserUid.get());
             // 보유 투수 모두 삭제
-            managePitcherRepository.deleteAll();
+            managePitcherRepository.deleteByUserSeq(byUserUid.get());
             // 투수 이적(in)
             for (Long seq : tradeSaveReqDto.getPitcherSeq()) {
                 System.out.println("pSeq = " + seq);
@@ -228,7 +228,7 @@ public class TradeService {
                     .build());
 
             // 보유 타자 모두 삭제
-            manageHitterRepository.deleteAll();
+            manageHitterRepository.deleteByUserSeq(byUserUid.get());
             // 타자 이적(in)
             for (Long seq : tradeSaveReqDto.getHitterSeq()) {
                 System.out.println("hSeq = " + seq);
