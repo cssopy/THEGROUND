@@ -7,6 +7,7 @@ const initialConfigState = {
     percentage: 0,
   },
   music: false,
+  visited: false,
 };
 
 const configSlice = createSlice({
@@ -28,6 +29,9 @@ const configSlice = createSlice({
     },
     setMusic: (state, action) => {
       state.music = action.payload;
+    },
+    setVisited: (state) => {
+      state.visited = true;
     },
   },
 });

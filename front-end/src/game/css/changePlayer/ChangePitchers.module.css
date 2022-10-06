@@ -76,3 +76,6 @@
 .rightPitcher {
   background-color: #0d5fbf;
 }
+.selected {
+  background: rgb(23, 88, 202);
+}

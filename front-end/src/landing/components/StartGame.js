@@ -19,8 +19,7 @@ const StartGame = ({ setVisited }) => {
   const nowShow = () => {
     dispatch(configActions.setMusic(true));
     setShowLanding(true);
-    localStorage.setItem("visited", true);
-    setTimeout(() => setVisited(true), 500);
+    setTimeout(() => dispatch(configActions.setVisited()), 500);
   };
   const changeModal = () => {
     if (anime === 10) {
