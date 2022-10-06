@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 
@@ -57,9 +57,9 @@ const Pitcher = (props) => {
 
   drag(drop(ref));
 
-  if (isDragging) {
+  useEffect(() => {
     props.onMouseLeave();
-  }
+  }, [isDragging]);
 
   return (
     <>

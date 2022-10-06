@@ -6,8 +6,9 @@ const MyResponsiveRadar = ({ data /* see data tab */ }) => (
       data={data}
       keys={["chardonay"]}
       indexBy="taste"
+      maxValue={1}
       valueFormat=" >-.2f"
-      margin={{ top: 0, right: 150, bottom: 150, left: 150 }}
+      margin={{ top: 0, right: 80, bottom: 150, left: 100 }}
       borderColor="#ffffff"
       gridShape="linear"
       gridLabelOffset={14}

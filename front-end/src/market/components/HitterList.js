@@ -1,7 +1,8 @@
 import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
-
 import { useDrop } from "react-dnd";
+import { useSelector } from "react-redux/es/exports.js";
+
 import { ItemTypes } from "./ItemTypes.js";
 
 import style from "../css/HitterList.module.css";
@@ -27,17 +28,23 @@ const HitterList = memo((props) => {
     backgroundColor = "#aaaaaa32";
   }
 
+  const players = useSelector((state) => state.player.players);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [hitter, setHitter] = useState();
 
-  // const onMouseOver = (hitter) => {
-  //   setModalIsOpen(true);
-  //   setHitter(hitter);
-  // };
+  const onMouseOver = (hitter) => {
+    setModalIsOpen(true);
+    for (let hit of players.hitter) {
+      if (hit.hitterSeq === hitter.hitterSeq) {
+        setHitter(hit);
+      }
+    }
+  };
 
-  // const onMouseLeave = () => {
-  //   setModalIsOpen(false);
-  // };
+  const onMouseLeave = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <>
@@ -64,15 +71,15 @@ const HitterList = memo((props) => {
               key={hitter.hitterSeq}
               hitter={hitter}
               addMyHitter={props.addMyHitter}
-              // onMouseOver={() => {
-              //   onMouseOver(hitter);
-              // }}
-              // onMouseLeave={onMouseLeave}
+              onMouseOver={() => {
+                onMouseOver(hitter);
+              }}
+              onMouseLeave={onMouseLeave}
             ></Hitter>
           ))}
         </tbody>
       </Table>
-      {/* {modalIsOpen && <HitterDetailModal hitter={hitter} />} */}
+      {modalIsOpen && <HitterDetailModal hitter={hitter} />}
     </>
   );
 });

@@ -4,9 +4,11 @@ import { Col, Row } from "react-bootstrap";
 import style from "../../css/matchOPPO/MatchOPPO.module.css";
 
 const MatchOPPO = (props) => {
+  const { brief, players, setPageActive } = props;
+
   useEffect(() => {
     setTimeout(() => {
-      props.setPageActive([false, true, false]);
+      setPageActive([false, true, false]);
     }, 7000);
   }, []);
 
@@ -30,7 +32,7 @@ const MatchOPPO = (props) => {
             <Col>
               <Row className={style["homeLogo"]}>
                 <img
-                  src={props.brief.home.teamLogoUrl}
+                  src={brief.home.teamLogoUrl}
                   style={{ WebkitUserDrag: "none" }}
                   alt="homelogo"
                 ></img>
@@ -44,7 +46,7 @@ const MatchOPPO = (props) => {
             <Col>
               <Row className={style["awayLogo"]}>
                 <img
-                  src={props.brief.away.teamLogoUrl}
+                  src={brief.away.teamLogoUrl}
                   style={{ WebkitUserDrag: "none" }}
                   alt="awaylogo"
                 ></img>
@@ -54,12 +56,12 @@ const MatchOPPO = (props) => {
           <Row>
             <Col>
               <Row className={style["homeName"]}>
-                <div>{props.brief.home.teamName}</div>
+                <div>{brief.home.teamName}</div>
               </Row>
             </Col>
             <Col>
               <Row className={style["awayName"]}>
-                <div>{props.brief.away.teamName}</div>
+                <div>{brief.away.teamName}</div>
               </Row>
             </Col>
           </Row>
@@ -68,13 +70,13 @@ const MatchOPPO = (props) => {
               <Row className={style["record"]}>
                 <div>
                   <span className={style["record-item1"]}>
-                    W{props.brief.home.teamWin}
+                    W{brief.home.teamWin}
                   </span>
                   <span className={style["record-item2"]}>
-                    L{props.brief.home.teamLose}
+                    L{brief.home.teamLose}
                   </span>
                   <span className={style["record-item3"]}>
-                    D{props.brief.home.teamDraw}
+                    D{brief.home.teamDraw}
                   </span>
                 </div>
               </Row>
@@ -83,13 +85,13 @@ const MatchOPPO = (props) => {
               <Row className={style["record"]}>
                 <div>
                   <span className={style["record-item1"]}>
-                    W{props.brief.away.teamWin}
+                    W{brief.away.teamWin}
                   </span>
                   <span className={style["record-item2"]}>
-                    L{props.brief.away.teamLose}
+                    L{brief.away.teamLose}
                   </span>
                   <span className={style["record-item3"]}>
-                    D{props.brief.away.teamDraw}
+                    D{brief.away.teamDraw}
                   </span>
                 </div>
               </Row>
@@ -109,7 +111,7 @@ const MatchOPPO = (props) => {
                     >
                       좌완
                     </div>
-                    {props.brief.home.startingPitcher}
+                    {brief.home.startingPitcher}
                   </div>
                 </Row>
               </Row>
@@ -127,7 +129,7 @@ const MatchOPPO = (props) => {
                     >
                       우완
                     </div>
-                    {props.brief.away.startingPitcher}
+                    {brief.away.startingPitcher}
                   </div>
                 </Row>
               </Row>

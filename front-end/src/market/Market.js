@@ -205,7 +205,6 @@ const Market = () => {
   };
 
   const save = () => {
-    alert("주석 처리 필요");
     if (myPitchers.length < 7) {
       alert("투수는 최소 7명 이상이어야 합니다.");
       return;
@@ -214,10 +213,10 @@ const Market = () => {
       alert("타자는 최소 9명 이상이어야 합니다.");
       return;
     }
-    if (myPitchers.length + myHitters.length < 20) {
-      alert("보유 선수는 최소 20명 이상이어야 합니다.");
-      return;
-    }
+    // if (myPitchers.length + myHitters.length < 20) {
+    //   alert("보유 선수는 최소 20명 이상이어야 합니다.");
+    //   return;
+    // }
     let myTotalSal =
       myHitters.reduce(function add(sum, item) {
         return sum + item.salary;

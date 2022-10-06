@@ -2,6 +2,7 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 
 import style from "../css/BullpenList.module.css";
+import { useEffect } from "react";
 
 const Bullpen = (props) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -20,9 +21,9 @@ const Bullpen = (props) => {
     },
   }));
 
-  if (isDragging) {
+  useEffect(() => {
     props.onMouseLeave();
-  }
+  }, [isDragging]);
 
   return (
     <>

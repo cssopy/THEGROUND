@@ -20,6 +20,14 @@ const HitterDetailModal = (props) => {
       taste: "장타율",
       chardonay: hitter.slg,
     },
+    {
+      taste: "볼넷",
+      chardonay: hitter.walks / 200,
+    },
+    {
+      taste: "삼진",
+      chardonay: hitter.strikeout / 200,
+    },
   ];
 
   return (
