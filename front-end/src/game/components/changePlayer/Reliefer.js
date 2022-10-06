@@ -2,11 +2,14 @@ import styles from "../../css/changePlayer/ChangeReliefers.module.css";
 
 const Reliefer = (props) => {
   // 단일 교체 선수 객체
-  const { reliefer, relToHit, idx } = props;
+  const { reliefer, relToHit, idx, isSelected } = props;
 
   return (
     <>
-      <tr>
+      <tr
+        onClick={() => relToHit(reliefer)}
+        className={`${isSelected ? styles.selected : ""}`}
+      >
         <td>
           <div
             className={

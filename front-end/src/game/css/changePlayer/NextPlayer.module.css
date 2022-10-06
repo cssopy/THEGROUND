@@ -21,21 +21,29 @@
 }
 
 .content {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   overflow: auto;
+  height: 36px;
   line-height: 30px;
+  font-size: 16px;
 }
 
 .leftHitter,
-.rightHitter {
-  width: 80%;
-  height: 15px;
+.rightHitter,
+.leftPitcher,
+.rightPitcher {
+  display: inline;
+  width: 40px;
+  height: 20px;
   margin-right: 2px;
+  font-size: 14px;
   text-align: center;
   border-radius: 3px;
-  margin: 0;
-  line-height: 15px;
+  line-height: 20px;
+  margin: 0px 10px 0px 0px;
 }
 
 .leftHitter {
@@ -44,17 +52,6 @@
 
 .rightHitter {
   background-color: green;
-}
-
-.leftPitcher,
-.rightPitcher {
-  width: 80%;
-  height: 15px;
-  margin-right: 2px;
-  text-align: center;
-  border-radius: 3px;
-  margin: 0;
-  line-height: 15px;
 }
 
 .leftPitcher {

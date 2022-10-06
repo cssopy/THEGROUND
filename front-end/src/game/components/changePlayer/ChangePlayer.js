@@ -15,7 +15,8 @@ const ChangePlayer = (props) => {
   // 사용자가 save 하기전 선발투수 및 구원투수 목록
   const [initPitchers, setInitPitchers] = useState([]);
   const [initReliefers, setInitReliefers] = useState([]);
-  const inning = 1;
+  const [selected, setSelected] = useState("");
+  const inning = 0;
 
   // 최초 한번 타자, 선발투수, 구원투수 데이터를 받아 초기화
   useEffect(() => {
@@ -113,6 +114,7 @@ const ChangePlayer = (props) => {
     setReliefers([...apiReliefers]);
     setInitPitchers([...apiPitchers]);
     setInitReliefers([...apiReliefers]);
+    setSelected(inning ? apiReliefers[0] : apiPitchers[0]);
   }, []);
 
   // reset 버튼 함수
@@ -120,6 +122,7 @@ const ChangePlayer = (props) => {
     // pitchers, reliefers를 save 하기전 값들인 initPitchersin, itReliefers으로 재초기화
     setPitchers([...initPitchers]);
     setReliefers([...initReliefers]);
+    close();
   };
 
   // save 버튼 함수
@@ -130,27 +133,31 @@ const ChangePlayer = (props) => {
   };
 
   // Reliefer에서 Hitter로
-  const relToHit = useCallback((rel, idx) => {
+  const relToHit = useCallback((rel) => {
     // setHitters((prevState) => {
     //   return [...prevState, rel];
     // });
-    setReliefers((prevState) => prevState.filter((r) => r.hitterSeq !== idx));
+    setSelected(rel);
   }, []);
 
   // Pitcher 순서 변경
-  const pitTopit = useCallback((dragIndex, hoverIndex) => {
-    setPitchers((prevState) => {
-      const pits = prevState.slice();
-      pits.splice(dragIndex, 1);
-      pits.splice(hoverIndex, 0, prevState[dragIndex]);
-      return pits;
-    });
-  }, []);
+  // const pitTopit = useCallback((dragIndex, hoverIndex) => {
+  //   setPitchers((prevState) => {
+  //     const pits = prevState.slice();
+  //     pits.splice(dragIndex, 1);
+  //     pits.splice(hoverIndex, 0, prevState[dragIndex]);
+  //     return pits;
+  //   });
+  // }, []);
+
+  const pitTopit = (pitcher) => {
+    setSelected(pitcher);
+  };
 
   return (
     <div
       className={`${styles.modal} ${open ? styles.openModal : ""}`}
-      onClick={close}
+      onClick={reset}
     >
       {open ? (
         <div className={styles.section} onClick={(e) => e.stopPropagation()}>
@@ -165,17 +172,33 @@ const ChangePlayer = (props) => {
               {inning ? (
                 <Col>
                   <Row>
-                    <NextPlayer player={""} now={inning} />
+                    <NextPlayer
+                      player={selected}
+                      now={inning}
+                      hand={selected.batArm}
+                    />
                   </Row>
-                  <ChangeReliefers reliefers={reliefers} relToHit={relToHit} />
+                  <ChangeReliefers
+                    reliefers={reliefers}
+                    relToHit={relToHit}
+                    selected={selected}
+                  />
                 </Col>
               ) : (
                 <Col>
                   <Row>
-                    <NextPlayer player={""} now={inning} />
+                    <NextPlayer
+                      player={selected}
+                      now={inning}
+                      hand={selected.pitArm}
+                    />
                   </Row>
                   <Row>
-                    <ChangePitcher pitchers={pitchers} pitTopit={pitTopit} />
+                    <ChangePitcher
+                      pitchers={pitchers}
+                      pitTopit={pitTopit}
+                      selected={selected}
+                    />
                   </Row>
                 </Col>
               )}

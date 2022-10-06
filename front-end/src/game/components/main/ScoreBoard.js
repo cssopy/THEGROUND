@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 
 const ScoreBoard = (props) => {
   // 전광판
-  const { scores, R, H, B } = props;
+  const { scores, R, H, B, awayLogo, homeLogo } = props;
 
   // 현재 이닝은 빨간색으로 표시
   const score = (num) => {
@@ -39,7 +39,9 @@ const ScoreBoard = (props) => {
         </thead>
         <tbody className={styles.tbody}>
           <tr>
-            <th className={styles.left}>logo</th>
+            <th className={styles.left}>
+              <img className={styles.logo} src={homeLogo} alt="homeLogo" />
+            </th>
             <th>{score(0)}</th>
             <th>{score(2)}</th>
             <th>{score(4)}</th>
@@ -54,7 +56,9 @@ const ScoreBoard = (props) => {
             <th className={styles.right}>{B[0]}</th>
           </tr>
           <tr className={styles.bottom}>
-            <th className={styles.left}>logo</th>
+            <th className={styles.left}>
+              <img className={styles.logo} src={awayLogo} alt="awayLogo" />
+            </th>
             <th>{score(1)}</th>
             <th>{score(3)}</th>
             <th>{score(5)}</th>

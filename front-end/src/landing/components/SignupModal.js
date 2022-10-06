@@ -76,6 +76,7 @@ const SignupModal = (props) => {
           dispatch(usersActions.getUserAPI(res.data.jwt));
           dispatch(userActions.setUid(""));
           localStorage.removeItem("loginType");
+          dispatch(userActions.setLoginType(""));
           dispatch(configActions.setIsLoading(true));
           dispatch(configActions.setPersentage(50));
           dispatch(configActions.setUrl("main"));

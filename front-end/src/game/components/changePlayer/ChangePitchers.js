@@ -7,7 +7,7 @@ import Pitcher from "./Pitcher";
 
 const ChangePitchers = memo((props) => {
   // 선발 투수 목록
-  const { pitchers, pitTopit } = props;
+  const { pitchers, pitTopit, selected } = props;
 
   return (
     <>
@@ -34,6 +34,7 @@ const ChangePitchers = memo((props) => {
                     index={idx}
                     pitcher={pit}
                     pitTopit={pitTopit}
+                    isSelected={pit.pitcherSeq === selected.pitcherSeq ? 1 : 0}
                   />
                 );
               })}
