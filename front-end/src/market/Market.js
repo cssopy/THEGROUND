@@ -19,6 +19,7 @@ import BackApi from "../api/BackApi";
 
 const Market = () => {
   const user = useSelector((state) => state.user.user);
+  const isLoading = useSelector((state) => state.config.isLoading);
 
   const dispatch = useDispatch();
 
@@ -272,143 +273,147 @@ const Market = () => {
             e.preventDefault();
           }}
         >
-          <div style={{ marginTop: "auto", marginBottom: "auto" }}>
-            <Row className={style["marketHead"]}>
-              <div>이적 시장</div>
-            </Row>
-            <Row className={style["marketBody"]}>
-              <Row className={style["mpZero"]}>
-                <Col>
-                  <Row className={style["playerListHead"]}>
-                    <Col className={style["playerListHead-div"]}>
-                      <div
-                        className={style["playerListHead-div"]}
-                        style={{ backgroundColor: listTab[0] }}
-                        onClick={() => {
-                          setListTab(["#041e42", "#ffffff00"]);
-                          setToggle(true);
-                        }}
-                      >
-                        타자 선수 목록
-                      </div>
-                    </Col>
-                    <Col className={style["playerListHead-div"]}>
-                      <div
-                        className={style["playerListHead-div"]}
-                        style={{ backgroundColor: listTab[1] }}
-                        onClick={() => {
-                          setListTab(["#ffffff00", "#041e42"]);
-                          setToggle(false);
-                        }}
-                      >
-                        투수 선수 목록
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row className={style["playerListBody"]}>
-                    {toggle && (
-                      <HitterList
-                        hitters={hitters}
-                        addMyHitter={addMyHitter}
-                      ></HitterList>
-                    )}
-                    {!toggle && (
-                      <PicherList
-                        pitchers={pitchers}
-                        addMyPitcher={addMyPitcher}
-                      ></PicherList>
-                    )}
-                  </Row>
-                </Col>
-                <Col>
-                  <Row>
-                    <Row className={style["budget-top"]}>
-                      <Col>
-                        <div>예산 한도</div>
-                      </Col>
-                      <Col>
-                        <div>사용 가능 예산</div>
-                      </Col>
-                    </Row>
-                    <Row className={style["budget-bottom"]}>
-                      <div className={style["budget-bottom-left"]}>
-                        <div></div>
-                        <div>{user.userPayroll.toLocaleString("ko-KR")} TG</div>
-                      </div>
-                      <div className={style["budget-bottom-right"]}>
-                        <div></div>
-                        <div>
-                          {(
-                            user.userPayroll -
-                            myHitters.reduce(function add(sum, item) {
-                              return sum + item.salary;
-                            }, 0) -
-                            myPitchers.reduce(function add(sum, item) {
-                              return sum + item.salary;
-                            }, 0)
-                          ).toLocaleString("ko-KR")}{" "}
-                          TG
+          {!isLoading && (
+            <div style={{ marginTop: "auto", marginBottom: "auto" }}>
+              <Row className={style["marketHead"]}>
+                <div>이적 시장</div>
+              </Row>
+              <Row className={style["marketBody"]}>
+                <Row className={style["mpZero"]}>
+                  <Col>
+                    <Row className={style["playerListHead"]}>
+                      <Col className={style["playerListHead-div"]}>
+                        <div
+                          className={style["playerListHead-div"]}
+                          style={{ backgroundColor: listTab[0] }}
+                          onClick={() => {
+                            setListTab(["#041e42", "#ffffff00"]);
+                            setToggle(true);
+                          }}
+                        >
+                          타자 선수 목록
                         </div>
-                      </div>
+                      </Col>
+                      <Col className={style["playerListHead-div"]}>
+                        <div
+                          className={style["playerListHead-div"]}
+                          style={{ backgroundColor: listTab[1] }}
+                          onClick={() => {
+                            setListTab(["#ffffff00", "#041e42"]);
+                            setToggle(false);
+                          }}
+                        >
+                          투수 선수 목록
+                        </div>
+                      </Col>
                     </Row>
-                  </Row>
-                  <Row className={style["mpZero"]}>
-                    <Row className={style["playerHead"]}>
-                      <div>
-                        보유 선수 / 타자:{myHitters.length} 투수:
-                        {myPitchers.length} 총:
-                        {myHitters.length + myPitchers.length}
-                      </div>
-                    </Row>
-                    <Row className={`${style["playerBody"]}`}>
+                    <Row className={style["playerListBody"]}>
                       {toggle && (
-                        <MyHitterList
-                          hitters={myHitters}
-                          addHitter={addHitter}
-                        ></MyHitterList>
+                        <HitterList
+                          hitters={hitters}
+                          addMyHitter={addMyHitter}
+                        ></HitterList>
                       )}
                       {!toggle && (
-                        <MyPicherList
-                          pitchers={myPitchers}
-                          addPitcher={addPitcher}
-                        ></MyPicherList>
+                        <PicherList
+                          pitchers={pitchers}
+                          addMyPitcher={addMyPitcher}
+                        ></PicherList>
                       )}
                     </Row>
-                  </Row>
-                </Col>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Row className={style["budget-top"]}>
+                        <Col>
+                          <div>예산 한도</div>
+                        </Col>
+                        <Col>
+                          <div>사용 가능 예산</div>
+                        </Col>
+                      </Row>
+                      <Row className={style["budget-bottom"]}>
+                        <div className={style["budget-bottom-left"]}>
+                          <div></div>
+                          <div>
+                            {user.userPayroll.toLocaleString("ko-KR")} TG
+                          </div>
+                        </div>
+                        <div className={style["budget-bottom-right"]}>
+                          <div></div>
+                          <div>
+                            {(
+                              user.userPayroll -
+                              myHitters.reduce(function add(sum, item) {
+                                return sum + item.salary;
+                              }, 0) -
+                              myPitchers.reduce(function add(sum, item) {
+                                return sum + item.salary;
+                              }, 0)
+                            ).toLocaleString("ko-KR")}{" "}
+                            TG
+                          </div>
+                        </div>
+                      </Row>
+                    </Row>
+                    <Row className={style["mpZero"]}>
+                      <Row className={style["playerHead"]}>
+                        <div>
+                          보유 선수 / 타자:{myHitters.length} 투수:
+                          {myPitchers.length} 총:
+                          {myHitters.length + myPitchers.length}
+                        </div>
+                      </Row>
+                      <Row className={`${style["playerBody"]}`}>
+                        {toggle && (
+                          <MyHitterList
+                            hitters={myHitters}
+                            addHitter={addHitter}
+                          ></MyHitterList>
+                        )}
+                        {!toggle && (
+                          <MyPicherList
+                            pitchers={myPitchers}
+                            addPitcher={addPitcher}
+                          ></MyPicherList>
+                        )}
+                      </Row>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row className={style["btnGroup"]}>
+                  <div
+                    className={`${style["btn"]} ${style["bg-color-cst1"]}`}
+                    onClick={() => {
+                      dispatch(configActions.setUrl("main"));
+                    }}
+                  >
+                    MAIN
+                  </div>
+                  <div
+                    className={`${style["btn"]} ${style["bg-color-cst3"]}`}
+                    onClick={() => {
+                      dispatch(configActions.setUrl("manage"));
+                    }}
+                  >
+                    구단관리
+                  </div>
+                  <div
+                    className={`${style["btn"]} ${style["bg-color-cst4"]}`}
+                    onClick={reset}
+                  >
+                    RESET
+                  </div>
+                  <div
+                    className={`${style["btn"]} ${style["bg-color-cst5"]}`}
+                    onClick={save}
+                  >
+                    SAVE
+                  </div>
+                </Row>
               </Row>
-              <Row className={style["btnGroup"]}>
-                <div
-                  className={`${style["btn"]} ${style["bg-color-cst1"]}`}
-                  onClick={() => {
-                    dispatch(configActions.setUrl("main"));
-                  }}
-                >
-                  MAIN
-                </div>
-                <div
-                  className={`${style["btn"]} ${style["bg-color-cst3"]}`}
-                  onClick={() => {
-                    dispatch(configActions.setUrl("manage"));
-                  }}
-                >
-                  구단관리
-                </div>
-                <div
-                  className={`${style["btn"]} ${style["bg-color-cst4"]}`}
-                  onClick={reset}
-                >
-                  RESET
-                </div>
-                <div
-                  className={`${style["btn"]} ${style["bg-color-cst5"]}`}
-                  onClick={save}
-                >
-                  SAVE
-                </div>
-              </Row>
-            </Row>
-          </div>
+            </div>
+          )}
         </Row>
       </DndProvider>
     </>
