@@ -6,6 +6,22 @@ import style from "../../css/matchOPPO/MatchOPPO.module.css";
 const MatchOPPO = (props) => {
   const { brief, players, setPageActive } = props;
 
+  const findPitName = (findSeq) => {
+    for (let pit of players.pitcher) {
+      if (pit.pitcherSeq === findSeq) {
+        return pit.pitcherName;
+      }
+    }
+  };
+
+  const findPitArm = (findSeq) => {
+    for (let pit of players.pitcher) {
+      if (pit.pitcherSeq === findSeq) {
+        return pit.pitArm;
+      }
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setPageActive([false, true, false]);
@@ -107,11 +123,18 @@ const MatchOPPO = (props) => {
                   <div>
                     <div
                       className={style["stand"]}
-                      style={{ backgroundColor: true ? "#bf0d3e" : "#0d5fbf" }}
+                      style={{
+                        backgroundColor:
+                          findPitArm(brief.home.startingPitcher) === "L"
+                            ? "#bf0d3e"
+                            : "#0d5fbf",
+                      }}
                     >
-                      좌완
+                      {findPitArm(brief.home.startingPitcher) === "L"
+                        ? "좌완"
+                        : "우완"}
                     </div>
-                    {brief.home.startingPitcher}
+                    {findPitName(brief.home.startingPitcher)}
                   </div>
                 </Row>
               </Row>
@@ -125,11 +148,18 @@ const MatchOPPO = (props) => {
                   <div>
                     <div
                       className={style["stand"]}
-                      style={{ backgroundColor: false ? "#bf0d3e" : "#0d5fbf" }}
+                      style={{
+                        backgroundColor:
+                          findPitArm(brief.away.startingPitcher) === "L"
+                            ? "#bf0d3e"
+                            : "#0d5fbf",
+                      }}
                     >
-                      우완
+                      {findPitArm(brief.home.startingPitcher) === "L"
+                        ? "좌완"
+                        : "우완"}
                     </div>
-                    {brief.away.startingPitcher}
+                    {findPitName(brief.away.startingPitcher)}
                   </div>
                 </Row>
               </Row>

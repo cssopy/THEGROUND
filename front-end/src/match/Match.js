@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux/es/exports";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux/es/exports";
 import { configActions } from "../redux/slice/configSlice";
 import { testActions } from "../redux/slice/testSlice";
@@ -43,6 +43,8 @@ const Match = () => {
     },
   });
   const [myHitters, setMyHitters] = useState([]);
+  const [myPitcher, setMyPitcher] = useState({});
+  const [oppoPitcher, setOppoPitcher] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -62,15 +64,26 @@ const Match = () => {
       //       dispatch(configActions.setPersentage(50));
       //     });
       // })();
+
       (async () => {
         await axios
-          .get(BackApi.game.brief, {
+          .get(BackApi.manage.rotation, {
             headers: {
               "X-ACCESS-TOKEN": user.jwt,
             },
           })
           .then((res) => {
-            setBrief(res.data);
+            dispatch(
+              testActions.setHome({
+                teamName: user.userTeamname,
+                teamLogoUrl: user.logoUrl,
+                teamWin: user.userWin,
+                teamLose: user.userLose,
+                teamDraw: user.userDraw,
+                startingPitcher: res.data.teamSetting1stSp.pitcherSeq,
+              })
+            );
+            setBrief(matches[nextMatchIndex]);
             dispatch(configActions.setPersentage(50));
           })
           .catch((error) => {
@@ -78,8 +91,58 @@ const Match = () => {
             dispatch(configActions.setPersentage(50));
           });
       })();
+
+      (async () => {
+        await axios
+          .get(BackApi.trade.possHitters, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            setMyHitters(res.data);
+            dispatch(configActions.setPersentage(50));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
     }
   }, []);
+
+  useEffect(() => {
+    if (brief.matchSeq) {
+      setMyPitcher(() => {
+        for (let pit of players.pitcher) {
+          if (pit.pitcherSeq === brief.home.startingPitcher) {
+            return pit;
+          }
+        }
+      });
+      setOppoPitcher(() => {
+        for (let pit of players.pitcher) {
+          if (pit.pitcherSeq === brief.away.startingPitcher) {
+            return pit;
+          }
+        }
+      });
+    } else {
+      setMyPitcher(() => {
+        for (let pit of players.pitcher) {
+          if (pit.pitcherSeq === brief.away.startingPitcher) {
+            return pit;
+          }
+        }
+      });
+      setOppoPitcher(() => {
+        for (let pit of players.pitcher) {
+          if (pit.pitcherSeq === brief.home.startingPitcher) {
+            return pit;
+          }
+        }
+      });
+    }
+  }, [brief]);
 
   return (
     <>
@@ -95,6 +158,8 @@ const Match = () => {
           user={user}
           brief={brief}
           myHitters={myHitters}
+          pitcher={myPitcher}
+          oppoPitcher={oppoPitcher}
           players={players}
           setPageActive={setPageActive}
         ></AssignHitters>
