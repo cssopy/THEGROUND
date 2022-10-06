@@ -11,105 +11,10 @@ import { testActions } from "../../../redux/slice/testSlice";
 const MatchLineup = () => {
   const logos = useSelector((state) => state.logo.logos);
   const jwt = useSelector((state) => state.user.user.jwt);
-  const players = useSelector((state) => state.test.testPlayers);
-  const lineUp = useSelector((state) => state.test.lineup);
+  const players = useSelector((state) => state.player.players);
+  const lineUp = useSelector((state) => state.test.lineUp);
   // const [lineUp, setLineUp] = useState("")
   const dispatch = useDispatch();
-
-  const testLineUp = {
-    home: {
-      teamName: "",
-      teamLogoUrl: "",
-      lineup: [
-        {
-          order: 1,
-          playerSeq: 1,
-        },
-        {
-          order: 2,
-          playerSeq: 2,
-        },
-        {
-          order: 3,
-          playerSeq: 1,
-        },
-        {
-          order: 4,
-          playerSeq: 2,
-        },
-        {
-          order: 5,
-          playerSeq: 1,
-        },
-        {
-          order: 6,
-          playerSeq: 2,
-        },
-        {
-          order: 7,
-          playerSeq: 1,
-        },
-        {
-          order: 8,
-          playerSeq: 2,
-        },
-        {
-          order: 9,
-          playerSeq: 1,
-        },
-        {
-          order: 10,
-          playerSeq: 2,
-        },
-      ],
-    },
-    away: {
-      teamName: "",
-      teamLogoUrl: "",
-      lineup: [
-        {
-          order: 1,
-          playerSeq: 1,
-        },
-        {
-          order: 2,
-          playerSeq: 2,
-        },
-        {
-          order: 3,
-          playerSeq: 1,
-        },
-        {
-          order: 4,
-          playerSeq: 2,
-        },
-        {
-          order: 5,
-          playerSeq: 1,
-        },
-        {
-          order: 6,
-          playerSeq: 2,
-        },
-        {
-          order: 7,
-          playerSeq: 1,
-        },
-        {
-          order: 8,
-          playerSeq: 2,
-        },
-        {
-          order: 9,
-          playerSeq: 1,
-        },
-        {
-          order: 10,
-          playerSeq: 2,
-        },
-      ],
-    },
-  };
 
   useEffect(() => {
     // axios
@@ -120,6 +25,100 @@ const MatchLineup = () => {
     //   })
     //   .then((res) => setLineUp(res.data))
     //   .catch((err) => console.error(err));
+    const testLineUp = {
+      home: {
+        teamName: "",
+        teamLogoUrl: "",
+        lineup: [
+          {
+            order: 1,
+            playerSeq: 1,
+          },
+          {
+            order: 2,
+            playerSeq: 2,
+          },
+          {
+            order: 3,
+            playerSeq: 3,
+          },
+          {
+            order: 4,
+            playerSeq: 4,
+          },
+          {
+            order: 5,
+            playerSeq: 5,
+          },
+          {
+            order: 6,
+            playerSeq: 6,
+          },
+          {
+            order: 7,
+            playerSeq: 7,
+          },
+          {
+            order: 8,
+            playerSeq: 8,
+          },
+          {
+            order: 9,
+            playerSeq: 9,
+          },
+          {
+            order: 10,
+            playerSeq: 2,
+          },
+        ],
+      },
+      away: {
+        teamName: "",
+        teamLogoUrl: "",
+        lineup: [
+          {
+            order: 1,
+            playerSeq: 9,
+          },
+          {
+            order: 2,
+            playerSeq: 8,
+          },
+          {
+            order: 3,
+            playerSeq: 7,
+          },
+          {
+            order: 4,
+            playerSeq: 6,
+          },
+          {
+            order: 5,
+            playerSeq: 5,
+          },
+          {
+            order: 6,
+            playerSeq: 4,
+          },
+          {
+            order: 7,
+            playerSeq: 3,
+          },
+          {
+            order: 8,
+            playerSeq: 2,
+          },
+          {
+            order: 9,
+            playerSeq: 1,
+          },
+          {
+            order: 10,
+            playerSeq: 1,
+          },
+        ],
+      },
+    };
     dispatch(testActions.setLineUp(testLineUp));
   }, []);
 
@@ -134,7 +133,7 @@ const MatchLineup = () => {
         className={`${styles.bg} d-flex justify-content-center align-items-center`}
       >
         <div className={styles.box}>
-          {lineUp && players && (
+          {!!lineUp && !!players ? (
             <>
               <Row className={`${styles.zero}`}>
                 <Col className={`${styles.zero}`} style={{ height: "100%" }}>
@@ -146,16 +145,18 @@ const MatchLineup = () => {
                         src={lineUp.home.teamLogoUrl}
                         alt="homeLogo"
                       />
-                      <div className={styles.name}>{lineUp.home.teamName}</div>
+                      <span className={styles.name}>
+                        {lineUp.home.teamName}
+                      </span>
                     </div>
                   </Row>
                   <Row className={`${styles.zero} ${styles.lineup}`}>
                     <div className={styles.title}>라인업</div>
-                    {lineUp.home.lineUp.map((line, idx) => {
+                    {lineUp.home.lineup.map((line, idx) => {
                       if (idx === 9) return;
-                      let hit = players.hitters.filter(
+                      let hit = players.hitter.filter(
                         (hitter) => hitter.hitterSeq === line.playerSeq
-                      );
+                      )[0];
                       return (
                         <div key={idx} className={styles.row}>
                           <div style={{ width: "40px", marginRight: "5px" }}>
@@ -173,7 +174,7 @@ const MatchLineup = () => {
                         </div>
                       );
                     })}
-                    {players.pitchers
+                    {players.pitcher
                       .filter(
                         (pitcher) =>
                           pitcher.pitcherSeq === lineUp.home.lineup[9].playerSeq
@@ -229,11 +230,11 @@ const MatchLineup = () => {
                   </Row>
                   <Row className={`${styles.zero} ${styles.lineup}`}>
                     <div className={styles.title}>라인업</div>
-                    {lineUp.away.lineUp.map((line, idx) => {
+                    {lineUp.away.lineup.map((line, idx) => {
                       if (idx === 9) return;
-                      let hit = players.hitters.filter(
+                      let hit = players.hitter.filter(
                         (hitter) => hitter.hitterSeq === line.playerSeq
-                      );
+                      )[0];
                       return (
                         <div key={idx} className={styles.row}>
                           <div style={{ width: "40px", marginRight: "5px" }}>
@@ -251,7 +252,7 @@ const MatchLineup = () => {
                         </div>
                       );
                     })}
-                    {players.pitchers
+                    {players.pitcher
                       .filter(
                         (pitcher) =>
                           pitcher.pitcherSeq === lineUp.away.lineup[9].playerSeq
@@ -291,6 +292,8 @@ const MatchLineup = () => {
                 </Button>
               </div>
             </>
+          ) : (
+            <></>
           )}
         </div>
       </div>

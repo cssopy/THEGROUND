@@ -32,7 +32,7 @@
 }
 
 .section {
-  width: 1200px;
+  width: 600px;
   position: absolute;
   border-radius: 15px;
   background: rgba(5, 20, 48, 0.5);
@@ -74,6 +74,13 @@
 
 .save {
   background: linear-gradient(#a2e90b, rgba(162, 233, 11, 0.4));
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 30px;
 }
 
 @keyframes modal-show {

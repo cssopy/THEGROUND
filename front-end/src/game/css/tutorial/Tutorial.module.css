@@ -240,10 +240,9 @@
   margin-top: -30px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
 }
 
-.prev,
 .next {
   width: 80px;
   height: 30px;
@@ -251,16 +250,13 @@
   font-weight: bold;
   line-height: 24px;
   transition: all 0.5s;
-}
-
-.prev:hover {
-  color: #bf0d3e;
-  font-size: 20px;
+  font-size: 32px;
+  margin-right: 20px;
 }
 
 .next:hover {
   color: #a2e90b;
-  font-size: 20px;
+  font-size: 36px;
 }
 
 .hidden {
@@ -269,4 +265,17 @@
 
 .remove {
   display: none;
+}
+
+.ending {
+  position: fixed;
+  display: flex;
+  width: 1400px;
+  height: 700px;
+  border-radius: 20px;
+  margin-top: -690px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
 }

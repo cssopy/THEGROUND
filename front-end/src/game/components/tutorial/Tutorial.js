@@ -15,20 +15,23 @@ const Tutorial = (props) => {
   }, [orders, isLoading]);
 
   const nextOrder = () => {
-    setOrders((prev) => prev + 1);
+    if (orders === 44) {
+      skipTuto();
+    } else {
+      setOrders((prev) => prev + 1);
+    }
   };
   const skipTuto = () => {
     setOrders(1001);
     setTimeout(() => closeTutorial(), 1000);
   };
-  const changePrev = () => {
-    if (orders > 8) {
-      setOrders((prev) => prev - 6);
-    }
-  };
   const changeNext = () => {
     if (orders < 1000) {
-      setOrders((prev) => prev + 1);
+      if (orders === 44) {
+        skipTuto();
+      } else {
+        setOrders((prev) => prev + 1);
+      }
     }
   };
 
@@ -229,15 +232,29 @@ const Tutorial = (props) => {
               </Row>
             </Col>
           </Row>
-          <div className={styles.pagingButton}>
+          <div
+            className={`${styles.ending} ${
+              orders >= 43 && orders <= 44 ? "" : styles.hidden
+            }`}
+          >
             <div
-              className={`${styles.prev} ${
-                orders > 5 && orders % 4 === 0 ? "" : styles.remove
+              className={`${styles.comment} ${
+                orders === 44 ? "" : styles.hidden
               }`}
-              onClick={changePrev}
             >
-              PREV
+              <div
+                style={{
+                  fontSize: "40px",
+                  fontWeight: "bolder",
+                  margin: "20px",
+                }}
+              >
+                튜토리얼은 여기까지입니다!
+              </div>
+              <div style={{ fontSize: "16px" }}>재밌게 게임을 즐겨주세요!</div>
             </div>
+          </div>
+          <div className={styles.pagingButton}>
             <div
               className={`${styles.next} ${
                 orders > 5 && orders % 4 === 0 ? "" : styles.remove
@@ -250,20 +267,14 @@ const Tutorial = (props) => {
         </div>
         <div
           className={`${styles.confirm} ${
-            orders >= 1 && orders <= 4 ? "" : styles.hidden
+            orders >= 3 && orders <= 4 ? "" : styles.hidden
           } ${orders >= 6 ? styles.remove : ""}`}
         >
-          <p
-            className={`${styles.title} ${
-              orders >= 2 && orders <= 4 ? "" : styles.hidden
-            }`}
-          >
+          <p className={`${styles.title} ${orders === 4 ? "" : styles.hidden}`}>
             튜토리얼을 체험하시겠습니까?
           </p>
           <p
-            className={`${styles.content} ${
-              orders >= 3 && orders <= 4 ? "" : styles.hidden
-            }`}
+            className={`${styles.content} ${orders === 4 ? "" : styles.hidden}`}
           >
             첫 게임에서는 튜토리얼을 체험하실 수 있습니다.
           </p>

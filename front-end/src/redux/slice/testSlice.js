@@ -263,15 +263,21 @@ const testSlice = createSlice({
       state.nextMatchIndex = state.nextMatchIndex + action.payload;
     },
     setLineUp: (state, action) => {
-      state.lineUp = action.payload;
-      state.lineUp.home.teamName =
-        state.matches[state.nextMatchIndex].home.teamName;
-      state.lineUp.home.teamLogoUrl =
-        state.matches[state.nextMatchIndex].home.teamLogoUrl;
-      state.lineUp.away.teamName =
-        state.matches[state.nextMatchIndex].away.teamName;
-      state.lineUp.away.teamLogoUrl =
-        state.matches[state.nextMatchIndex].away.teamLogoUrl;
+      const lines = {
+        home: {
+          teamName: state.matches[state.nextMatchIndex].home.teamName,
+          teamLogoUrl: state.matches[state.nextMatchIndex].home.teamLogoUrl,
+          lineup: action.payload.home.lineup,
+        },
+        away: {
+          teamName: state.matches[state.nextMatchIndex].away.teamName,
+          teamLogoUrl: state.matches[state.nextMatchIndex].away.teamLogoUrl,
+          lineup: action.payload.away.lineup,
+        },
+      };
+      state.lineUp = lines;
+
+      // state.lineUp = action.payload
     },
   },
 });
