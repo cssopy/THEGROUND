@@ -7,22 +7,22 @@ const Scores = (props) => {
     <div className={`d-flex justify-content-center align-items-center`}>
       <div className={styles.homeName}>
         <img
-          src={home.logo && home.logo.logoUrl}
+          src={home && home.teamLogoUrl}
           style={{ width: "50px", height: "50px" }}
           alt="home"
         />
-        {home.userTeamname}
+        {home.teamName}
       </div>
       <div className={styles.score}>{R[0]}</div>
       <div className={styles.finish}>경기 종료</div>
       <div className={styles.score}>{R[1]}</div>
       <div className={styles.awayName}>
         <img
-          src={away.logo && away.logo.logoUrl}
+          src={away && away.teamLogoUrl}
           style={{ width: "50px", height: "50px" }}
           alt="away"
         />
-        {away.userTeamname}
+        {away.teamName}
       </div>
     </div>
   );

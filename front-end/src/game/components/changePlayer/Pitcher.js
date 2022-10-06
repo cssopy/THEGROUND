@@ -1,17 +1,15 @@
-import { useRef } from "react";
 import styles from "../../css/changePlayer/ChangePitchers.module.css";
 
 const Pitcher = (props) => {
-  const ref = useRef(null);
-
   // 단일 투수 객체
-  const { pitcher, pitTopit } = props;
-
-  // 드래그 가능하게 해줌
+  const { pitcher, pitTopit, isSelected } = props;
 
   return (
     <>
-      <tr>
+      <tr
+        onClick={() => pitTopit(pitcher)}
+        className={`${isSelected ? styles.selected : ""}`}
+      >
         <td>
           <div
             className={
