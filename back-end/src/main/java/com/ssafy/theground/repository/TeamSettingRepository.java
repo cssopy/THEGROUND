@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface TeamSettingRepository extends JpaRepository<TeamSetting, Long> {
 
     TeamSetting findByUserSeq_UserSeq(Long seq);
+
+    void deleteByUserSeq(User user);
     
 }
