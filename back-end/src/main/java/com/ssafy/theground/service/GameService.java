@@ -130,7 +130,7 @@ public class GameService {
     }
 
     public Map<String, Object> battingSimulate(String uid) {
-        long matchSeq = matchRepository.findTop1ByUserSeq_UserUid(uid).getMatchSeq();
+        long matchSeq = matchRepository.findTop1ByUserSeq_UserUidOrderByMatchSeq(uid).getMatchSeq();
         Log log = logRepository.findByMatchSeq(matchSeq);
         MatchSetting setting = matchSettingRepository.findByMatchSeq(matchSeq).get();
         Scoreboard scoreboard = scoreboardRepository.findByMatchSeq(matchSeq);
@@ -1032,7 +1032,7 @@ public class GameService {
     }
 
     public List<Map<String, Object>> getLogs(String uid) {
-        long matchSeq = matchRepository.findTop1ByUserSeq_UserUid(uid).getMatchSeq();
+        long matchSeq = matchRepository.findTop1ByUserSeq_UserUidOrderByMatchSeq(uid).getMatchSeq();
         Description description = descriptionRepository.findByMatch_MatchSeq(matchSeq);
 
         List<Map<String, Object>> resultList = new LinkedList<>();
@@ -1112,7 +1112,7 @@ public class GameService {
     }
 
     public boolean changePitcher(String uid, long pitcherSeq) {
-        Match match = matchRepository.findTop1ByUserSeq_UserUid(uid);
+        Match match = matchRepository.findTop1ByUserSeq_UserUidOrderByMatchSeq(uid);
         long matchSeq = match.getMatchSeq();
         long userSeq = match.getUserSeq().getUserSeq();
 
@@ -1140,7 +1140,7 @@ public class GameService {
     }
 
     public boolean changeHitter(String uid, long hitterSeq, int battingOrder) {
-        Match match = matchRepository.findTop1ByUserSeq_UserUid(uid);
+        Match match = matchRepository.findTop1ByUserSeq_UserUidOrderByMatchSeq(uid);
         long matchSeq = match.getMatchSeq();
         long userSeq = match.getUserSeq().getUserSeq();
 

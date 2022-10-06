@@ -18,11 +18,10 @@ public class JwtInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
 		String jwt = request.getHeader("X-ACCESS-TOKEN");
 //		String jwt = request.getHeader("Authorization");
-		if (jwt != null && jwtService.isUsable(jwt)) {
-			return true;
-		} else {
+		if (jwt == null || !jwtService.isUsable(jwt)) {
 			response.setStatus(401);
 			return false;
 		}
+		return true;
 	}
 }
