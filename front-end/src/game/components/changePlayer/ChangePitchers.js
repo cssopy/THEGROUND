@@ -26,7 +26,7 @@ const ChangePitchers = memo((props) => {
                 <th>패배</th>
               </tr>
             </thead>
-            <tbody className={styles.content} style={{ height: "160px" }}>
+            <tbody className={styles.content} style={{ height: "350px" }}>
               {pitchers.map((pit, idx) => {
                 return (
                   <Pitcher

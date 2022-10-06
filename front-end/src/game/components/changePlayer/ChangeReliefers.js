@@ -25,7 +25,7 @@ const ChangeReliefers = memo((props) => {
               <th>홈런</th>
             </tr>
           </thead>
-          <tbody className={styles.content} style={{ height: "500px" }}>
+          <tbody className={styles.content} style={{ height: "350px" }}>
             {reliefers.map((rel) => {
               return (
                 <Reliefer
