@@ -44,6 +44,11 @@ const userSlice = createSlice({
       state.user.userTeamname = action.payload.userTeamname;
       state.user.logoUrl = action.payload.logoUrl;
     },
+    updateLogs: (state, action) => {
+      state.user.userWin = state.user.userWin + action.payload[0];
+      state.user.userDraw = state.user.userDraw + action.payload[1];
+      state.user.userLose = state.user.userLose + action.payload[2];
+    },
   },
 });
 

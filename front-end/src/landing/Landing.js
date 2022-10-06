@@ -14,13 +14,13 @@ const Landing = () => {
   const dispatch = useDispatch();
   const loginType = useSelector((state) => state.user.user.loginType);
   const uid = useSelector((state) => state.user.user.uid);
-  const [visited, setVisited] = useState(localStorage.getItem("visited"));
+  const music = useSelector((state) => state.config.music);
+  // const [visited, setVisited] = useState(localStorage.getItem("visited"));
+  const visited = useSelector((state) => state.config.visited);
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
-    dispatch(
-      configActions.setMusic(localStorage.getItem("visited") ? true : false)
-    );
+    dispatch(configActions.setMusic(visited ? true : false));
   });
 
   return (
@@ -46,7 +46,7 @@ const Landing = () => {
       <LoginHandler loginType={loginType} />
       <Modal closeModal={() => setLogin(!login)} login={login} />
       {loginType && uid ? <SignupModal loginType={loginType} /> : <></>}
-      {!visited && <StartGame setVisited={setVisited} />}
+      {!visited && <StartGame />}
     </>
   );
 };

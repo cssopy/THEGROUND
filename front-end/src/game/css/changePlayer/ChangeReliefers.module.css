@@ -76,3 +76,7 @@
 .rightHitter {
   background-color: green;
 }
+
+.selected {
+  background: rgb(23, 88, 202);
+}

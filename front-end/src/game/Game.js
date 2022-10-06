@@ -29,14 +29,19 @@ const Game = () => {
   // 6. Pitchers => 양 투수의 name, balls, threes 및 현재 이닝 정보 now
   // 8. ScoreBoard => 현재까지의 기록, 로고
   // 10. Skip 구현
+  // 11. 선수 교체 api
 
   // 구현 미완료
   // 7. 지금까지의 중계 기록 및 점수, 홈런, 볼 정보 등
   // 9. setInterval로 게임 진행
-  // 11. 선수 교체 api
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const game = useSelector((state) => state.game.games);
+  const matchIdx = useSelector((state) => state.test.nextMatchIndex);
+  const match = useSelector((state) => state.test.matches)[
+    matchIdx ? matchIdx : 0
+  ];
   const [modalOpen, setModalOpen] = useState(false);
   const [skipOpen, setSkipOpen] = useState(false);
   const [tutorial, setTutorial] = useState(
@@ -74,122 +79,130 @@ const Game = () => {
 
   return (
     <>
-      <div
-        className={`${styles.bg} d-flex justify-content-center align-items-center`}
-      >
-        <div className={`${styles.box}`}>
-          <Row className={styles.zero}>
-            <Col className={styles.zero}>
-              <Row className={styles.zero}>
-                <Field runners={["o", "o", "x"]} />
-              </Row>
-              <Row className={styles.zero}>
-                <Col className={styles.zero}>
-                  <StrikeZone
-                    balls={[
-                      { type: "strike", x: 10, y: 10 },
-                      { type: "ball", x: 50, y: 50 },
-                    ]}
-                  />
-                </Col>
-                <Col className={styles.zero}>
-                  <Row className={styles.zero}>
-                    <BallVelocity velocity={130} type={"포크"} />
-                  </Row>
-                  <Row className={styles.zero}>
-                    <BallCount ballCounts={[3, 1, 2]} />
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-            <Col className={styles.zero}>
-              <Row className={`${styles.zero} mb-2`}>
-                <ScoreBoard
-                  scores={[0, 0, 1, 2, 1, 0, 0, 4, 0, 0, 1]}
-                  R={[1, 3]}
-                  H={[0, 1]}
-                  B={[2, 1]}
-                />
-              </Row>
+      {match && matchIdx && (
+        <>
+          <div
+            className={`${styles.bg} d-flex justify-content-center align-items-center`}
+          >
+            <div className={`${styles.box}`}>
               <Row className={styles.zero}>
                 <Col className={styles.zero}>
                   <Row className={styles.zero}>
-                    <Pitchers
-                      pitchers={[
-                        { name: "류현진", balls: 25, threes: 3 },
-                        { name: "원태인", balls: 14, threes: 0 },
-                      ]}
-                      now={1}
-                    />
-                  </Row>
-                  <Row className={styles.zero}>
-                    <Hitter
-                      hitter={{
-                        name: "류현진",
-                        position: ["좌타", "외야수"],
-                        log: ["삼진", "땅볼"],
-                      }}
-                    />
+                    <Field runners={["o", "o", "x"]} />
                   </Row>
                   <Row className={styles.zero}>
                     <Col className={styles.zero}>
-                      <Button
-                        className={`${styles.btn} ${styles.change}`}
-                        variant="success"
-                        onClick={openModal}
-                      >
-                        선수 교체
-                      </Button>
+                      <StrikeZone
+                        balls={[
+                          { type: "strike", x: 10, y: 10 },
+                          { type: "ball", x: 50, y: 50 },
+                        ]}
+                      />
                     </Col>
                     <Col className={styles.zero}>
-                      <Button
-                        className={`${styles.btn} ${styles.skip}`}
-                        variant="danger"
-                        onClick={skipModal}
-                      >
-                        SKIP
-                      </Button>
+                      <Row className={styles.zero}>
+                        <BallVelocity velocity={130} type={"포크"} />
+                      </Row>
+                      <Row className={styles.zero}>
+                        <BallCount ballCounts={[3, 1, 2]} />
+                      </Row>
                     </Col>
                   </Row>
                 </Col>
                 <Col className={styles.zero}>
-                  <GameLogs
-                    logs={[
-                      111, 222, 333, 444, 555, 666, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                      10, 11, 12, 13, 14, 15,
-                    ]}
-                  />
+                  <Row className={`${styles.zero} mb-2`}>
+                    <ScoreBoard
+                      scores={[0, 0, 1, 2, 1, 0, 0, 4, 0, 0, 1]}
+                      R={[1, 3]}
+                      H={[0, 1]}
+                      B={[2, 1]}
+                      homeLogo={match.home.teamLogoUrl}
+                      awayLogo={match.away.teamLogoUrl}
+                    />
+                  </Row>
+                  <Row className={styles.zero}>
+                    <Col className={styles.zero}>
+                      <Row className={styles.zero}>
+                        <Pitchers
+                          pitchers={[
+                            { name: "류현진", balls: 25, threes: 3 },
+                            { name: "원태인", balls: 14, threes: 0 },
+                          ]}
+                          now={1}
+                        />
+                      </Row>
+                      <Row className={styles.zero}>
+                        <Hitter
+                          hitter={{
+                            name: "강시몬",
+                            position: ["좌타", "외야수"],
+                            log: ["삼진", "땅볼"],
+                          }}
+                        />
+                      </Row>
+                      <Row className={styles.zero}>
+                        <Col className={styles.zero}>
+                          <Button
+                            className={`${styles.btn} ${styles.change}`}
+                            variant="success"
+                            onClick={openModal}
+                          >
+                            선수 교체
+                          </Button>
+                        </Col>
+                        <Col className={styles.zero}>
+                          <Button
+                            className={`${styles.btn} ${styles.skip}`}
+                            variant="danger"
+                            onClick={skipModal}
+                          >
+                            SKIP
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col className={styles.zero}>
+                      <GameLogs
+                        logs={[
+                          "게임 시작!",
+                          "김타자 아웃",
+                          "스트라이크",
+                          "투수 교체: 원태인",
+                        ]}
+                      />
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
-            </Col>
-          </Row>
-          <ChangePlayer
-            open={modalOpen}
-            close={closeModal}
-            header="Modal heading"
-          />
-        </div>
-        {tutorial && <Tutorial closeTutorial={closeTutorial} />}
-      </div>
-      <div
-        className={`${styles.modalBg} ${skipOpen ? styles.openBg : ""}`}
-        onClick={skipModal}
-      >
-        <div
-          className={`${styles.modal} ${skipOpen ? styles.openModal : ""}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <p className={`${styles.title}`}>게임을 스킵하시겠습니까?</p>
-          <div className={`${styles.button} `}>
-            <div className={styles.continueGame} onClick={skipModal}>
-              CANCLE
+              <ChangePlayer
+                open={modalOpen}
+                close={closeModal}
+                header="Modal heading"
+              />
             </div>
-            <div className={styles.skipGame} onClick={skipGame}>
-              SKIP
+            {tutorial && <Tutorial closeTutorial={closeTutorial} />}
+          </div>
+          <div
+            className={`${styles.modalBg} ${skipOpen ? styles.openBg : ""}`}
+            onClick={skipModal}
+          >
+            <div
+              className={`${styles.modal} ${skipOpen ? styles.openModal : ""}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className={`${styles.title}`}>게임을 스킵하시겠습니까?</p>
+              <div className={`${styles.button} `}>
+                <div className={styles.continueGame} onClick={skipModal}>
+                  CANCLE
+                </div>
+                <div className={styles.skipGame} onClick={skipGame}>
+                  SKIP
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

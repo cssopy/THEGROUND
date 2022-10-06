@@ -6,8 +6,7 @@ import Reliefer from "./Reliefer";
 
 const ChangeReliefers = memo((props) => {
   // 예비 타자들의 목록
-  const { reliefers, relToHit } = props;
-
+  const { reliefers, relToHit, selected } = props;
   return (
     <>
       <div className={`${styles.body}`}>
@@ -33,6 +32,7 @@ const ChangeReliefers = memo((props) => {
                   idx={rel.hitterSeq}
                   reliefer={rel}
                   relToHit={relToHit}
+                  isSelected={rel.hitterSeq === selected.hitterSeq ? 1 : 0}
                 />
               );
             })}

@@ -58,7 +58,7 @@
 }
 
 .content tr:hover {
-  background-color: #264b7d;
+  cursor: pointer;
 }
 
 .content tr:active {
