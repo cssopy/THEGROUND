@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useDispatch } from "react-redux/es/exports";
 
 import axios from "axios";
 
@@ -13,9 +14,20 @@ import Pitcher from "./Pitcher";
 import style from "../../css/assignHitters/AssignHitters.module.css";
 
 import BackApi from "../../../api/BackApi";
+import { testActions } from "../../../redux/slice/testSlice";
 
 const AssignHitters = (props) => {
-  const { myHitters, setPageActive, brief, user } = props;
+  const {
+    myHitters,
+    setPageActive,
+    brief,
+    user,
+    pitcher,
+    oppoPitcher,
+    players,
+  } = props;
+
+  const dispatch = useDispatch();
 
   const [myHitters2, setMyHitters] = useState(myHitters);
   const [hitters, setHitters] = useState([
@@ -29,7 +41,6 @@ const AssignHitters = (props) => {
     null,
     null,
   ]);
-  const pitcher = { pitcherSeq: 1, pitcherName: "박찬호", pitArm: "L" };
 
   const changeHitter = useCallback((hitter, targetIdx) => {
     let temHitters = hitters;
@@ -115,20 +126,55 @@ const AssignHitters = (props) => {
         matchSetting9th: hitters[8],
       };
 
-      (async () => {
-        await axios
-          .post(BackApi.game.brief, hitterLineup, {
-            headers: {
-              "X-ACCESS-TOKEN": user.jwt,
-            },
-          })
-          .then(() => {
-            setPageActive([false, false, true]);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })();
+      let lineUp = {};
+      lineUp.home = {
+        teamName: brief.home.teamName,
+        teamLogoUrl: brief.home.teamLogoUrl,
+      };
+      lineUp.home.lineup = [];
+      for (const [index, hit] of hitters.entries()) {
+        lineUp.home.lineup.push({
+          order: index + 1,
+          playerSeq: hit.hitterSeq,
+        });
+      }
+      lineUp.home.lineup.push({
+        order: 10,
+        playerSeq: pitcher.picherSeq,
+      });
+      lineUp.away = {
+        teamName: brief.away.teamName,
+        teamLogoUrl: brief.away.teamLogoUrl,
+      };
+      lineUp.away.lineup = [];
+      for (const [index, hit] of players.hitter.entries()) {
+        lineUp.away.lineup.push({
+          order: index + 1,
+          playerSeq: hit.hitterSeq,
+        });
+      }
+      lineUp.away.lineup.push({
+        order: 10,
+        playerSeq: oppoPitcher.picherSeq,
+      });
+
+      dispatch(testActions.setLineUp(hitterLineup));
+      setPageActive([false, false, true]);
+
+      // (async () => {
+      //   await axios
+      //     .post(BackApi.game.brief, hitterLineup, {
+      //       headers: {
+      //         "X-ACCESS-TOKEN": user.jwt,
+      //       },
+      //     })
+      //     .then(() => {
+      //       setPageActive([false, false, true]);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // })();
     } else {
       alert(
         `${
@@ -175,12 +221,13 @@ const AssignHitters = (props) => {
                       <div
                         className={style["stand"]}
                         style={{
-                          backgroundColor: true ? "#bf0d3e" : "#0d5fbf",
+                          backgroundColor:
+                            oppoPitcher.pitArm === "L" ? "#bf0d3e" : "#0d5fbf",
                         }}
                       >
-                        좌완
+                        {oppoPitcher.pitArm === "L" ? "좌완" : "우완"}
                       </div>
-                      류현진
+                      {oppoPitcher.pitcherName}
                     </div>
                   </Row>
                 </Row>
