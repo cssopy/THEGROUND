@@ -113,11 +113,11 @@ public class UserServiceImpl implements UserService{
 		}
 		TeamSetting t = new TeamSetting();
 		t.setUserSeq(u);
-		t.setTeamSetting1stSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(1)).get());
-		t.setTeamSetting2ndSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(2)).get());
-		t.setTeamSetting3rdSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(3)).get());
-		t.setTeamSetting4thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(4)).get());
-		t.setTeamSetting5thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), Long.valueOf(5)).get());
+		t.setTeamSetting1stSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), 1L).get());
+		t.setTeamSetting2ndSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), 2L).get());
+		t.setTeamSetting3rdSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), 3L).get());
+		t.setTeamSetting4thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), 4L).get());
+		t.setTeamSetting5thSp(userPitcherRepository.findByUserSeq_UserSeqAndPitcherSeq(u.getUserSeq(), 5L).get());
 		t.setTeamSettingNextSp(1);
 		teamSettingRepository.save(t);
 		em.clear();
@@ -125,13 +125,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void setSeasons(User u){
-		Season season = new Season();
 		List<Schedule> schedule = scheduleRepository.findAll();
-		seasonRepository.save(season.builder()
+		Season season = Season.builder()
 				.userSeq(u)
 				.seasonYear(2022)
 				.scheduleSeq(schedule.get(0))
-				.build());
+				.build();
+		seasonRepository.save(season);
 		matchRepository.save(Match.builder()
 				.userSeq(u)
 				.seasonSeq(season)
