@@ -14,31 +14,6 @@ const ChangePitchers = memo((props) => {
       <div className={`${styles.body}`}>
         <div className={`${styles.title}`}>선발 투수</div>
         <Row>
-          <table className={pitStyles.count}>
-            <thead className={styles.thead}>
-              <tr></tr>
-            </thead>
-            <tbody
-              className={styles.content}
-              style={{ height: "160px", paddingLeft: "15px" }}
-            >
-              <tr>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>3</td>
-              </tr>
-              <tr>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td>5</td>
-              </tr>
-            </tbody>
-          </table>
           <table className={pitStyles.table}>
             <thead className={styles.thead}>
               <tr>
@@ -49,7 +24,6 @@ const ChangePitchers = memo((props) => {
                 <th>이닝수</th>
                 <th>승리</th>
                 <th>패배</th>
-                <th></th>
               </tr>
             </thead>
             <tbody className={styles.content} style={{ height: "160px" }}>

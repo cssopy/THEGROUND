@@ -28,11 +28,11 @@ const Game = () => {
   // 5. BallVelocity => velocity (투구 속도)
   // 6. Pitchers => 양 투수의 name, balls, threes 및 현재 이닝 정보 now
   // 8. ScoreBoard => 현재까지의 기록, 로고
+  // 10. Skip 구현
 
   // 구현 미완료
   // 7. 지금까지의 중계 기록 및 점수, 홈런, 볼 정보 등
   // 9. setInterval로 게임 진행
-  // 10. Skip 구현
   // 11. 선수 교체 api
 
   const dispatch = useDispatch();
@@ -63,13 +63,13 @@ const Game = () => {
 
   useEffect(() => {
     dispatch(configActions.setPersentage(100));
-    axios
-      .get(BackApi.game.play, {
-        headers: {
-          "X-ACCESS-TOKEN": user.jwt,
-        },
-      })
-      .then((res) => console.log(res));
+    // axios
+    //   .get(BackApi.game.play, {
+    //     headers: {
+    //       "X-ACCESS-TOKEN": user.jwt,
+    //     },
+    //   })
+    //   .then((res) => console.log());
   }, []);
 
   return (
