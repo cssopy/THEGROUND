@@ -83,7 +83,6 @@ const Match = () => {
                 startingPitcher: res.data.teamSetting1stSp.pitcherSeq,
               })
             );
-            setBrief(matches[nextMatchIndex]);
             dispatch(configActions.setPersentage(50));
           })
           .catch((error) => {
@@ -109,6 +108,10 @@ const Match = () => {
       })();
     }
   }, []);
+
+  useEffect(() => {
+    setBrief(matches[nextMatchIndex]);
+  }, [matches]);
 
   useEffect(() => {
     if (brief.matchSeq) {
