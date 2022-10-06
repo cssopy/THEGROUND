@@ -69,7 +69,7 @@ const Loading = () => {
             </>
           </ProgressBar>
         </div>
-        {music && !isLoading && url === "" && (
+        {/* {music && !isLoading && url === "" && (
           <ReactHowler src={Music3} playing={true} loop={true} volume={1} />
         )}
         {music && !isLoading && url === "game" && (
@@ -82,7 +82,7 @@ const Loading = () => {
           )}
         {music && !isLoading && url === "match" && (
           <ReactHowler src={Music2} playing={true} loop={true} volume={1} />
-        )}
+        )} */}
       </div>
     </>
   );

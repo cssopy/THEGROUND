@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { useDrop } from "react-dnd";
 
 import relStyles from "../../css/changePlayer/ChangeReliefers.module.css";
 import styles from "../../css/changePlayer/ChangeCard.module.css";
@@ -8,25 +7,6 @@ import Reliefer from "./Reliefer";
 const ChangeReliefers = memo((props) => {
   // 예비 타자들의 목록
   const { reliefers, relToHit } = props;
-
-  // 이 영역에 드랍 되었을 경우 추가됨
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: "hitter",
-    drop: () => ({ name: "ChangeHitters" }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  }));
-
-  // 드래그 중일 때 색상 변화
-  const isActive = canDrop && isOver;
-  let backgroundColor = "#ffffff00";
-  if (isActive) {
-    backgroundColor = "#aaaaaa6b";
-  } else if (canDrop) {
-    backgroundColor = "#aaaaaa32";
-  }
 
   return (
     <>
@@ -45,11 +25,7 @@ const ChangeReliefers = memo((props) => {
               <th>홈런</th>
             </tr>
           </thead>
-          <tbody
-            className={styles.content}
-            style={{ backgroundColor, height: "500px" }}
-            ref={drop}
-          >
+          <tbody className={styles.content} style={{ height: "500px" }}>
             {reliefers.map((rel) => {
               return (
                 <Reliefer

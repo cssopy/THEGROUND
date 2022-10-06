@@ -17,7 +17,7 @@ const Match = () => {
   const players = useSelector((state) => state.player.players);
 
   // 테스트 데이터
-  const matchs = useSelector((state) => state.test.matchs);
+  const matches = useSelector((state) => state.test.matches);
   const nextMatchIndex = useSelector((state) => state.test.nextMatchIndex);
 
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const Match = () => {
       //       dispatch(configActions.setPersentage(50));
       //     });
       // })();
-      dispatch()(async () => {
+      (async () => {
         await axios
           .get(BackApi.trade.possHitters, {
             headers: {

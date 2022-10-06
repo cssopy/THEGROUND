@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit/";
 
 const initialTestState = {
   nextMatchIndex: 0,
-  matchs: [
+  matches: [
     {
       home: {
         teamName: "본인",
@@ -225,6 +225,27 @@ const initialTestState = {
     },
   ],
   battingOrder: {},
+  lineUp: {},
+  testPlayers: {
+    hitters: [
+      {
+        hitterSeq: 1,
+        hitterName: "좌타",
+        batArm: "L",
+        avg: 0.123,
+      },
+      {
+        hitterSeq: 2,
+        hitterName: "우타",
+        batArm: "R",
+        avg: 0.123,
+      },
+    ],
+    pitchers: [
+      { pitcherSeq: 1, pitcherName: "김투수", pitArm: "R" },
+      { pitcherSeq: 2, pitcherName: "김투수", pitArm: "L" },
+    ],
+  },
   game: {},
 };
 
@@ -233,13 +254,24 @@ const testSlice = createSlice({
   initialState: initialTestState,
   reducers: {
     setHome: (state, action) => {
-      state.matchs[state.nextMatchIndex].home = action.payload;
+      state.matches[state.nextMatchIndex].home = action.payload;
     },
     setBattingOrder: (state, action) => {
       state.battingOrder = action.payload;
     },
     setNextMatchIndex: (state, action) => {
       state.battingOrder = state.battingOrder + action.payload;
+    },
+    setLineUp: (state, action) => {
+      state.lineUp = action.payload;
+      state.lineUp.home.teamName =
+        state.matches[state.nextMatchIndex].home.teamName;
+      state.lineUp.home.teamLogoUrl =
+        state.matches[state.nextMatchIndex].home.teamLogoUrl;
+      state.lineUp.away.teamName =
+        state.matches[state.nextMatchIndex].away.teamName;
+      state.lineUp.away.teamLogoUrl =
+        state.matches[state.nextMatchIndex].away.teamLogoUrl;
     },
   },
 });

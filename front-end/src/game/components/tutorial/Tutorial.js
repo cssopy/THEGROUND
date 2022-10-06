@@ -1,16 +1,18 @@
 import styles from "../../css/tutorial/Tutorial.module.css";
 import { Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Tutorial = (props) => {
   const { closeTutorial } = props;
   const [orders, setOrders] = useState(1);
+  const isLoading = useSelector((state) => state.config.loading.isLoading);
 
   useEffect(() => {
-    if (orders % 4) {
+    if (!isLoading && orders % 4) {
       setTimeout(() => setOrders((prev) => prev + 1), 500);
     }
-  }, [orders]);
+  }, [orders, isLoading]);
 
   const nextOrder = () => {
     setOrders((prev) => prev + 1);
