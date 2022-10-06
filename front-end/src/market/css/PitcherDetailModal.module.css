@@ -27,9 +27,19 @@
 }
 
 .stat {
-  position: absolute;
-  top: 350px;
+  margin-top: -200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  height: 140px;
+  font-size: 12px;
   text-align: center;
+}
+
+.stat tr:nth-child(2n + 1) {
+  color: #053167;
+  font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.767);
 }
 
 .table {
