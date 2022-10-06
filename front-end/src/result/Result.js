@@ -73,109 +73,107 @@ const Result = () => {
 
   return (
     <>
-      {!!match && !!matchIdx && (
-        <div
-          className={`${styles.bg} d-flex justify-content-center align-items-center`}
-        >
-          <div className={styles.box}>
-            {isWin === 0 && (
-              <Row
-                className={`${styles.zero} justify-content-center ${styles.win}`}
-              >
-                WIN
-              </Row>
-            )}
-            {isWin === 1 && (
-              <Row
-                className={`${styles.zero} justify-content-center ${styles.draw}`}
-              >
-                DRAW
-              </Row>
-            )}
-            {isWin === 2 && (
-              <Row
-                className={`${styles.zero} justify-content-center ${styles.lose}`}
-              >
-                LOSE
-              </Row>
-            )}
-            <Row className={`${styles.zero} justify-content-center`}>
-              <Scores home={match.home} away={match.away} R={R} />
+      <div
+        className={`${styles.bg} d-flex justify-content-center align-items-center`}
+      >
+        <div className={styles.box}>
+          {isWin === 0 && (
+            <Row
+              className={`${styles.zero} justify-content-center ${styles.win}`}
+            >
+              WIN
             </Row>
-            <Row className={`${styles.zero} justify-content-center`}>
-              <ScoreBoard
-                scores={scores}
-                R={R}
-                H={H}
-                B={B}
-                gameLog={gameLog}
-                homeLogo={match.home.teamLogoUrl}
-                awayLogo={match.away.teamLogoUrl}
-              />
-              <ResultLogs logs={logs} gameLog={gameLog} />
-              <div className={`${styles.toggle} ${styles.zero}`}>
-                <div
-                  className={`${styles.logs} ${
-                    gameLog[0] ? styles.isOpened : styles.notOpened
-                  }`}
-                  onClick={openLogs}
-                >
-                  중계 기록
-                </div>
-                <div
-                  className={`${styles.logs} ${
-                    !gameLog[0] ? styles.isOpened : styles.notOpened
-                  }`}
-                  onClick={closeLogs}
-                >
-                  경기 결과
-                </div>
+          )}
+          {isWin === 1 && (
+            <Row
+              className={`${styles.zero} justify-content-center ${styles.draw}`}
+            >
+              DRAW
+            </Row>
+          )}
+          {isWin === 2 && (
+            <Row
+              className={`${styles.zero} justify-content-center ${styles.lose}`}
+            >
+              LOSE
+            </Row>
+          )}
+          <Row className={`${styles.zero} justify-content-center`}>
+            <Scores home={match.home} away={match.away} R={R} />
+          </Row>
+          <Row className={`${styles.zero} justify-content-center`}>
+            <ScoreBoard
+              scores={scores}
+              R={R}
+              H={H}
+              B={B}
+              gameLog={gameLog}
+              homeLogo={match.home.teamLogoUrl}
+              awayLogo={match.away.teamLogoUrl}
+            />
+            <ResultLogs logs={logs} gameLog={gameLog} />
+            <div className={`${styles.toggle} ${styles.zero}`}>
+              <div
+                className={`${styles.logs} ${
+                  gameLog[0] ? styles.isOpened : styles.notOpened
+                }`}
+                onClick={openLogs}
+              >
+                중계 기록
               </div>
-            </Row>
-            <Row
-              className={`${styles.zero} ${
-                gameLog[1] ? styles.hide : ""
-              } justify-content-center`}
-            ></Row>
-            <Row
-              className={`${styles.zero} ${
-                gameLog[1] ? styles.hide : ""
-              } justify-content-center`}
-            >
-              <ResultChart val={[1, 5]}>안타</ResultChart>
-            </Row>
-            <Row
-              className={`${styles.zero} ${
-                gameLog[1] ? styles.hide : ""
-              } justify-content-center`}
-            >
-              <ResultChart val={[4, 2]}>홈런</ResultChart>
-            </Row>
-            <Row
-              className={`${styles.zero} ${
-                gameLog[1] ? styles.hide : ""
-              } justify-content-center`}
-            >
-              <ResultChart val={[10, 7]}>삼진</ResultChart>
-            </Row>
-            <Row
-              className={`${styles.zero} ${
-                gameLog[1] ? styles.hide : ""
-              } justify-content-center`}
-            >
-              <ResultChart val={[5, 8]}>볼넷</ResultChart>
-            </Row>
-            <div className={styles.buttons}>
-              <button className={styles.button} onClick={restartGame}>
-                다음 경기
-              </button>
-              <button className={styles.button} onClick={quitGame}>
-                종료
-              </button>
+              <div
+                className={`${styles.logs} ${
+                  !gameLog[0] ? styles.isOpened : styles.notOpened
+                }`}
+                onClick={closeLogs}
+              >
+                경기 결과
+              </div>
             </div>
+          </Row>
+          <Row
+            className={`${styles.zero} ${
+              gameLog[1] ? styles.hide : ""
+            } justify-content-center`}
+          ></Row>
+          <Row
+            className={`${styles.zero} ${
+              gameLog[1] ? styles.hide : ""
+            } justify-content-center`}
+          >
+            <ResultChart val={[1, 5]}>안타</ResultChart>
+          </Row>
+          <Row
+            className={`${styles.zero} ${
+              gameLog[1] ? styles.hide : ""
+            } justify-content-center`}
+          >
+            <ResultChart val={[4, 2]}>홈런</ResultChart>
+          </Row>
+          <Row
+            className={`${styles.zero} ${
+              gameLog[1] ? styles.hide : ""
+            } justify-content-center`}
+          >
+            <ResultChart val={[10, 7]}>삼진</ResultChart>
+          </Row>
+          <Row
+            className={`${styles.zero} ${
+              gameLog[1] ? styles.hide : ""
+            } justify-content-center`}
+          >
+            <ResultChart val={[5, 8]}>볼넷</ResultChart>
+          </Row>
+          <div className={styles.buttons}>
+            <button className={styles.button} onClick={restartGame}>
+              다음 경기
+            </button>
+            <button className={styles.button} onClick={quitGame}>
+              종료
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
