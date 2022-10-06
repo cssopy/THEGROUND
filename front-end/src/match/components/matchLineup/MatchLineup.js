@@ -133,7 +133,7 @@ const MatchLineup = () => {
         className={`${styles.bg} d-flex justify-content-center align-items-center`}
       >
         <div className={styles.box}>
-          {!!lineUp && !!players ? (
+          {!!lineUp.home && !!players ? (
             <>
               <Row className={`${styles.zero}`}>
                 <Col className={`${styles.zero}`} style={{ height: "100%" }}>
