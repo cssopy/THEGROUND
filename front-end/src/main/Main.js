@@ -274,7 +274,7 @@ const Main = () => {
                       {schedules[1] && (
                         <Col>
                           <Row className={style["schedule"]}>
-                            <div>1st</div>
+                            <div>2nd</div>
                             <img
                               src={schedules[1].logoUrl}
                               alt="teamlogo"
@@ -286,7 +286,7 @@ const Main = () => {
                       {schedules[2] && (
                         <Col>
                           <Row className={style["schedule"]}>
-                            <div>1st</div>
+                            <div>3rd</div>
                             <img
                               src={schedules[2].logoUrl}
                               alt="teamlogo"
