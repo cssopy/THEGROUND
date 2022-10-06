@@ -127,7 +127,7 @@
 }
 
 .teamLogo {
-  margin-top: 0;
+  margin-top: 10px;
   margin-left: -60px;
   width: 150px;
   -webkit-user-drag: none;

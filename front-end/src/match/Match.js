@@ -13,6 +13,7 @@ import BackApi from "../api/BackApi";
 
 const Match = () => {
   const user = useSelector((state) => state.user.user);
+  const players = useSelector((state) => state.player.players);
 
   const dispatch = useDispatch();
 
@@ -77,11 +78,18 @@ const Match = () => {
   return (
     <>
       {pageActive[0] && (
-        <MatchOPPO brief={brief} setPageActive={setPageActive}></MatchOPPO>
+        <MatchOPPO
+          brief={brief}
+          players={players}
+          setPageActive={setPageActive}
+        ></MatchOPPO>
       )}
       {pageActive[1] && (
         <AssignHitters
+          user={user}
+          brief={brief}
           myHitters={myHitters}
+          players={players}
           setPageActive={setPageActive}
         ></AssignHitters>
       )}

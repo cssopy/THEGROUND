@@ -4,14 +4,18 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+import axios from "axios";
+
 import MyHitterList from "./MyHitterList";
 import Hitter from "./Hitter";
 import Pitcher from "./Pitcher";
 
 import style from "../../css/assignHitters/AssignHitters.module.css";
 
+import BackApi from "../../../api/BackApi";
+
 const AssignHitters = (props) => {
-  const { myHitters, setPageActive } = props;
+  const { myHitters, setPageActive, brief, user } = props;
 
   const [myHitters2, setMyHitters] = useState(myHitters);
   const [hitters, setHitters] = useState([
@@ -95,7 +99,36 @@ const AssignHitters = (props) => {
         return item !== null;
       }).length === 9
     ) {
-      setPageActive([false, false, true]);
+      const hitterLineup = {
+        matchSeq: brief.matchSeq.startingPitcher,
+        matchSettingPitcher: !brief.matchSeq.teamName
+          ? brief.home.startingPitcher
+          : brief.away.startingPitcher,
+        matchSetting1st: hitters[0],
+        matchSetting2nd: hitters[1],
+        matchSetting3rd: hitters[2],
+        matchSetting4th: hitters[3],
+        matchSetting5th: hitters[4],
+        matchSetting6th: hitters[5],
+        matchSetting7th: hitters[6],
+        matchSetting8th: hitters[7],
+        matchSetting9th: hitters[8],
+      };
+
+      (async () => {
+        await axios
+          .post(BackApi.game.brief, hitterLineup, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then(() => {
+            setPageActive([false, false, true]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })();
     } else {
       alert(
         `${
