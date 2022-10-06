@@ -16,6 +16,7 @@ import logoReducer from "../slice/logoSlice";
 import playerReducer from "../slice/playerSlice";
 import gameReducer from "../slice/gameSlice";
 import configReducer from "../slice/configSlice";
+import testReducer from "../slice/testSlice";
 
 const persistConfig = {
   key: "root",
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   player: playerReducer,
   game: gameReducer,
   config: configReducer,
+  test: testReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
