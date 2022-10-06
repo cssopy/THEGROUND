@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Builder
 @Getter
 @Setter
@@ -23,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name="match_settings")
-public class MatchSetting {
+public class MatchSetting implements Serializable {
 
 	@Id
 	@Column(name="match_seq")
