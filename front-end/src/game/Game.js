@@ -3,8 +3,6 @@ import styles from "./css/Game.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import landingMusic from "../assets/bgm/INDIE_ROCK_SPORT.mp3";
-import ReactHowler from "react-howler";
 
 import Field from "./components/main/Field";
 import StrikeZone from "./components/main/StrikeZone";
@@ -18,6 +16,8 @@ import ChangePlayer from "./components/changePlayer/ChangePlayer";
 import Tutorial from "./components/tutorial/Tutorial";
 import { useSelector, useDispatch } from "react-redux";
 import { configActions } from "../redux/slice/configSlice";
+import axios from "axios";
+import BackApi from "../api/BackApi";
 
 const Game = () => {
   // 구현 완료
@@ -53,17 +53,6 @@ const Game = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const modalCheck = (orders) => {
-    if (orders === 40) {
-      setTutorial(false);
-      return;
-    }
-    if (orders === 41) {
-      openModal();
-    } else if (orders === 45) {
-      closeModal();
-    }
-  };
   const skipModal = () => {
     setSkipOpen((prev) => !prev);
   };
@@ -74,7 +63,13 @@ const Game = () => {
 
   useEffect(() => {
     dispatch(configActions.setPersentage(100));
-    // 로직 넣기
+    axios
+      .get(BackApi.game.play, {
+        headers: {
+          "X-ACCESS-TOKEN": user.jwt,
+        },
+      })
+      .then((res) => console.log(res));
   }, []);
 
   return (
@@ -174,15 +169,7 @@ const Game = () => {
             header="Modal heading"
           />
         </div>
-        <ReactHowler
-          src={landingMusic}
-          playing={true}
-          loop={true}
-          volume={0.05}
-        />
-        {tutorial && (
-          <Tutorial closeTutorial={closeTutorial} modalCheck={modalCheck} />
-        )}
+        {tutorial && <Tutorial closeTutorial={closeTutorial} />}
       </div>
       <div
         className={`${styles.modalBg} ${skipOpen ? styles.openBg : ""}`}
