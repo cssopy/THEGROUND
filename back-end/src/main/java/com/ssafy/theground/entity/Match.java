@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,4 +30,24 @@ public class Match {
 
     @Column(name = "match_home_flag")
     private Boolean matchHomeFlag;
+
+    @OneToOne(mappedBy = "match")
+    @PrimaryKeyJoinColumn
+    private Log log;
+
+    @OneToOne(mappedBy = "match")
+    @PrimaryKeyJoinColumn
+    private Description description;
+
+    @OneToOne(mappedBy = "match")
+    @PrimaryKeyJoinColumn
+    private MatchSetting matchSetting;
+
+    @OneToOne(mappedBy = "match")
+    @PrimaryKeyJoinColumn
+    private Scoreboard scoreboard;
+
+    @OneToOne(mappedBy = "match")
+    @PrimaryKeyJoinColumn
+    private Result result;
 }
