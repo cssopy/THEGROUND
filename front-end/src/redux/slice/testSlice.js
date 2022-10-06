@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit/";
 
 const initialTestState = {
   nextMatchIndex: 0,
-  matchs: [
+  matches: [
     {
       home: {
         teamName: "본인",
@@ -233,13 +233,13 @@ const testSlice = createSlice({
   initialState: initialTestState,
   reducers: {
     setHome: (state, action) => {
-      state.matchs[state.nextMatchIndex].home = action.payload;
+      state.matches[state.nextMatchIndex].home = action.payload;
     },
     setBattingOrder: (state, action) => {
       state.battingOrder = action.payload;
     },
     setNextMatchIndex: (state, action) => {
-      state.battingOrder = state.battingOrder + action.payload;
+      state.nextMatchIndex = state.nextMatchIndex + action.payload;
     },
   },
 });

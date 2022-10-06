@@ -17,7 +17,7 @@ const Match = () => {
   const players = useSelector((state) => state.player.players);
 
   // 테스트 데이터
-  const matchs = useSelector((state) => state.test.matchs);
+  const matches = useSelector((state) => state.test.matches);
   const nextMatchIndex = useSelector((state) => state.test.nextMatchIndex);
 
   const dispatch = useDispatch();
@@ -46,23 +46,24 @@ const Match = () => {
 
   useEffect(() => {
     if (user) {
-      // (async () => {
-      //   await axios
-      //     .get(BackApi.game.brief, {
-      //       headers: {
-      //         "X-ACCESS-TOKEN": user.jwt,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       setBrief(res.data);
-      //       dispatch(configActions.setPersentage(50));
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //       dispatch(configActions.setPersentage(50));
-      //     });
-      // })();
-      dispatch()(async () => {
+      (async () => {
+        await axios
+          .get(BackApi.game.brief, {
+            headers: {
+              "X-ACCESS-TOKEN": user.jwt,
+            },
+          })
+          .then((res) => {
+            setBrief(res.data);
+            dispatch(configActions.setPersentage(50));
+          })
+          .catch((error) => {
+            console.log(error);
+            dispatch(configActions.setPersentage(50));
+          });
+      })();
+
+      (async () => {
         await axios
           .get(BackApi.trade.possHitters, {
             headers: {
