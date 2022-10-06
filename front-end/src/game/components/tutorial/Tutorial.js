@@ -3,21 +3,27 @@ import { Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 const Tutorial = (props) => {
-  const { closeTutorial } = props;
+  const { closeTutorial, modalCheck } = props;
   const [orders, setOrders] = useState(1);
 
   useEffect(() => {
     if (orders % 4) {
-      setTimeout(() => setOrders((prev) => prev + 1), 500);
-      console.log(orders);
+      setTimeout(
+        () =>
+          setOrders((prev) => {
+            modalCheck(prev);
+            return prev + 1;
+          }),
+        500
+      );
     }
-  });
+  }, [orders]);
 
   const nextOrder = () => {
     setOrders((prev) => prev + 1);
   };
   const skipTuto = () => {
-    setOrders(1000);
+    setOrders(1001);
     setTimeout(() => closeTutorial(), 1000);
   };
   const changePrev = () => {
@@ -94,7 +100,7 @@ const Tutorial = (props) => {
                       <div className={styles.cardContent}>
                         <div>직전 투구의 구속과 구종을 알 수 있습니다.</div>
                         <div>해당 투수가 주로 구사하는 구종을 파악하면,</div>
-                        <div> 선수 교체에 도움이 될 수 있습니다.</div>
+                        <div> 선수 교체에 도움이 될 것입니다.</div>
                       </div>
                     </div>
                   </Row>

@@ -30,18 +30,19 @@ const Result = () => {
 
   const restartGame = () => {
     dispatch(configActions.setIsLoading(true));
-    dispatch(configActions.setUrl(""));
+    dispatch(configActions.setUrl("match"));
   };
   const quitGame = () => {
     dispatch(configActions.setIsLoading(true));
-    dispatch(configActions.setUrl(""));
+    dispatch(configActions.setPersentage(50));
+    dispatch(configActions.setUrl("main"));
   };
   const openLogs = () => {
-    setGameLog((prev) => [true, true]);
+    setGameLog([true, true]);
   };
   const closeLogs = () => {
     setGameLog((prev) => [false, prev[1]]);
-    setTimeout(() => setGameLog((prev) => [false, false]), 200);
+    setTimeout(() => setGameLog([false, false]), 200);
   };
 
   useEffect(() => {
