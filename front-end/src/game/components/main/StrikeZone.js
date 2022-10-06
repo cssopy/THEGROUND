@@ -9,7 +9,7 @@ const StrikeZone = (props) => {
   const makeBalls = () => {
     const result = [];
     for (let i = 0; i < balls.length; i++) {
-      result.push(<Ball ball={{ ...balls[i], num: i }} key={i} />);
+      result.push(<Ball ball={{ ...balls[i], num: i + 1 }} key={i} />);
     }
     return result;
   };
