@@ -55,10 +55,10 @@ public class GameService {
                     .match(match).build();
             descriptionRepository.save(description);
             MatchSetting matchSetting = MatchSetting.builder()
-                    .matchSeq(match.getMatchSeq()).build();
+                    .match(match).build();
             matchSettingRepository.save(matchSetting);
             Scoreboard scoreboard = Scoreboard.builder()
-                    .matchSeq(match.getMatchSeq()).build();
+                    .match(match).build();
             scoreboardRepository.save(scoreboard);
 
             boolean matchHomeFlag = match.getMatchHomeFlag();
