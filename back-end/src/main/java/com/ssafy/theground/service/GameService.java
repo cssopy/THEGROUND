@@ -1024,7 +1024,7 @@ public class GameService {
 
     public List<Map<String, Object>> getLogs(String uid) {
         long matchSeq = matchRepository.findTop1ByUserSeq_UserUid(uid).getMatchSeq();
-        Description description = descriptionRepository.findByMatchSeq(matchSeq);
+        Description description = descriptionRepository.findByMatch_MatchSeq(matchSeq);
 
         List<Map<String, Object>> resultList = new LinkedList<>();
         for (int inning = 1; inning <= 9; inning++) {
