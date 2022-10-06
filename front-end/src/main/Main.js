@@ -23,6 +23,7 @@ const Main = () => {
   const logos = useSelector((state) => state.logo.logos);
   const matches = useSelector((state) => state.test.matches);
   const isLoading = useSelector((state) => state.config.isLoading);
+  const nextMatchIndex = useSelector((state) => state.test.nextMatchIndex);
 
   const dispatch = useDispatch();
 
@@ -264,39 +265,47 @@ const Main = () => {
                   <Row className={style["matchScheduleBody"]}>
                     {matches.length !== 0 && (
                       <>
-                        {matches[0] && (
+                        {matches[nextMatchIndex] && (
                           <Col>
                             <Row className={style["schedule"]}>
                               <div>1st</div>
                               <img
-                                src={matches[0].away.teamLogoUrl}
+                                src={matches[nextMatchIndex].away.teamLogoUrl}
                                 alt="teamlogo"
                               ></img>
-                              <div>{matches[0].away.teamName}</div>
+                              <div>{matches[nextMatchIndex].away.teamName}</div>
                             </Row>
                           </Col>
                         )}
-                        {matches[1] && (
+                        {matches[nextMatchIndex + 1] && (
                           <Col>
                             <Row className={style["schedule"]}>
                               <div>2nd</div>
                               <img
-                                src={matches[1].away.teamLogoUrl}
+                                src={
+                                  matches[nextMatchIndex + 1].away.teamLogoUrl
+                                }
                                 alt="teamlogo"
                               ></img>
-                              <div>{matches[1].away.teamName}</div>
+                              <div>
+                                {matches[nextMatchIndex + 1].away.teamName}
+                              </div>
                             </Row>
                           </Col>
                         )}
-                        {matches[2] && (
+                        {matches[nextMatchIndex + 2] && (
                           <Col>
                             <Row className={style["schedule"]}>
                               <div>3rd</div>
                               <img
-                                src={matches[2].away.teamLogoUrl}
+                                src={
+                                  matches[nextMatchIndex + 2].away.teamLogoUrl
+                                }
                                 alt="teamlogo"
                               ></img>
-                              <div>{matches[2].away.teamName}</div>
+                              <div>
+                                {matches[nextMatchIndex + 2].away.teamName}
+                              </div>
                             </Row>
                           </Col>
                         )}
