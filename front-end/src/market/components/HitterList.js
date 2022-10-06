@@ -30,14 +30,14 @@ const HitterList = memo((props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [hitter, setHitter] = useState();
 
-  const onMouseOver = (hitter) => {
-    setModalIsOpen(true);
-    setHitter(hitter);
-  };
+  // const onMouseOver = (hitter) => {
+  //   setModalIsOpen(true);
+  //   setHitter(hitter);
+  // };
 
-  const onMouseLeave = () => {
-    setModalIsOpen(false);
-  };
+  // const onMouseLeave = () => {
+  //   setModalIsOpen(false);
+  // };
 
   return (
     <>
@@ -50,7 +50,7 @@ const HitterList = memo((props) => {
             <th>출루율</th>
             <th>장타율</th>
             <th>홈런</th>
-            <th>연봉</th>
+            <th>TG</th>
           </tr>
         </thead>
         <tbody
@@ -64,15 +64,15 @@ const HitterList = memo((props) => {
               key={hitter.hitterSeq}
               hitter={hitter}
               addMyHitter={props.addMyHitter}
-              onMouseOver={() => {
-                onMouseOver(hitter);
-              }}
-              onMouseLeave={onMouseLeave}
+              // onMouseOver={() => {
+              //   onMouseOver(hitter);
+              // }}
+              // onMouseLeave={onMouseLeave}
             ></Hitter>
           ))}
         </tbody>
       </Table>
-      {modalIsOpen && <HitterDetailModal hitter={hitter} />}
+      {/* {modalIsOpen && <HitterDetailModal hitter={hitter} />} */}
     </>
   );
 });

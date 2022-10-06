@@ -49,7 +49,7 @@ const PitcherList = memo((props) => {
             <th>이닝수</th>
             <th>승리</th>
             <th>패배</th>
-            <th>연봉</th>
+            <th>TG</th>
           </tr>
         </thead>
         <tbody
