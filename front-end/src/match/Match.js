@@ -54,6 +54,7 @@ const Match = () => {
           })
           .catch((error) => {
             console.log(error);
+            dispatch(configActions.setPersentage(50));
           });
       })();
 
