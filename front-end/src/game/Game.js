@@ -38,6 +38,7 @@ const Game = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [modalOpen, setModalOpen] = useState(false);
+  const [skipOpen, setSkipOpen] = useState(false);
   const [tutorial, setTutorial] = useState(
     !(user.userWin + user.userLose + user.userDraw)
   );
@@ -51,6 +52,24 @@ const Game = () => {
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+  const modalCheck = (orders) => {
+    if (orders === 40) {
+      setTutorial(false);
+      return;
+    }
+    if (orders === 41) {
+      openModal();
+    } else if (orders === 45) {
+      closeModal();
+    }
+  };
+  const skipModal = () => {
+    setSkipOpen((prev) => !prev);
+  };
+  const skipGame = () => {
+    dispatch(configActions.setIsLoading(true));
+    dispatch(configActions.setUrl("result"));
   };
 
   useEffect(() => {
@@ -131,6 +150,7 @@ const Game = () => {
                       <Button
                         className={`${styles.btn} ${styles.skip}`}
                         variant="danger"
+                        onClick={skipModal}
                       >
                         SKIP
                       </Button>
@@ -160,7 +180,28 @@ const Game = () => {
           loop={true}
           volume={0.05}
         />
-        {tutorial && <Tutorial closeTutorial={closeTutorial} />}
+        {tutorial && (
+          <Tutorial closeTutorial={closeTutorial} modalCheck={modalCheck} />
+        )}
+      </div>
+      <div
+        className={`${styles.modalBg} ${skipOpen ? styles.openBg : ""}`}
+        onClick={skipModal}
+      >
+        <div
+          className={`${styles.modal} ${skipOpen ? styles.openModal : ""}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <p className={`${styles.title}`}>게임을 스킵하시겠습니까?</p>
+          <div className={`${styles.button} `}>
+            <div className={styles.continueGame} onClick={skipModal}>
+              CANCLE
+            </div>
+            <div className={styles.skipGame} onClick={skipGame}>
+              SKIP
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
