@@ -1,0 +1,132 @@
+.background {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url(../../../assets/image/background1.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+}
+
+.mainHead {
+  margin: auto auto auto auto;
+  padding: 0;
+  height: 30px;
+  width: 1300px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167b1);
+  border-radius: 20px 20px 0 0;
+}
+
+.mainBody {
+  margin: auto;
+  padding: 0;
+  width: 1300px;
+  height: 600px;
+  background-color: rgba(5, 20, 48, 0.5);
+  border-radius: 0 0 20px 20px;
+}
+
+.playerHead {
+  margin: 30px auto auto 30px;
+  padding: 0;
+  height: 30px;
+  width: 900px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167b1);
+  border-radius: 15px 15px 0 0;
+}
+
+.playerBody {
+  margin: auto auto auto 30px;
+  padding: 0;
+  height: 500px;
+  width: 900px;
+  background-color: rgba(4, 30, 66, 0.9);
+  border-radius: 0 0 15px 15px;
+}
+
+.oppoPitcherHead {
+  margin: 30px auto auto auto;
+  padding: 0;
+  height: 30px;
+  width: 250px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167b1);
+  border-radius: 15px 15px 0 0;
+}
+
+.oppoPitcherBody {
+  margin: auto;
+  padding: 0;
+  height: 30px;
+  width: 250px;
+  line-height: 30px;
+  text-align: center;
+  color: white;
+  background-color: rgba(4, 30, 66, 0.9);
+  border-radius: 0 0 15px 15px;
+}
+
+.stand {
+  display: inline-block;
+  margin: auto 10px auto auto;
+  padding: auto;
+  width: 50px;
+  height: 20px;
+  line-height: 17px;
+  border-radius: 5px;
+}
+
+.hitterHead {
+  margin: 10px auto auto auto;
+  padding: 0;
+  height: 30px;
+  width: 250px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167b1);
+  border-radius: 15px 15px 0 0;
+}
+
+.hitterBody {
+  margin: auto;
+  padding: 10px;
+  height: 360px;
+  width: 250px;
+  background-color: rgba(4, 30, 66, 0.9);
+  border-radius: 0 0 15px 15px;
+}
+
+.btn {
+  margin: 10px auto auto auto;
+  padding: 0;
+  height: 60px;
+  width: 250px;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  background: linear-gradient(#a2e90b, #a3e90b1d);
+  border-radius: 15px;
+}
+
+.start {
+  margin-top: -5px;
+  margin-left: 40px;
+  margin-right: -50px;
+  font-size: 40px;
+}
