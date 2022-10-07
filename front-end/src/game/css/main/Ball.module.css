@@ -1,0 +1,20 @@
+.ball,
+.strike {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.6;
+  border-radius: 15px;
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  line-height: 27px;
+}
+
+.strike {
+  background-color: #faff00;
+}
+
+.ball {
+  background-color: #0be916;
+}
