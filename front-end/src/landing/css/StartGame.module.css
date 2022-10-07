@@ -1,0 +1,172 @@
+.hidden {
+  opacity: 0;
+}
+
+.remove {
+  display: none;
+}
+
+.change {
+  background: #00000000 !important;
+}
+
+.start {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  color: #cccccc;
+  background: #000000;
+  overflow: hidden;
+  transition: all 2s;
+}
+
+.notiBody {
+  position: absolute;
+  width: 1600px;
+  height: 780px;
+  transition: all 1.2s;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 150px;
+  transition: all 2s;
+}
+
+.notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 480px;
+  font-size: 24px;
+}
+
+.title {
+  font-size: 60px;
+  margin-bottom: 50px;
+  text-align: center;
+  transition: all 2s;
+}
+
+.text {
+  text-align: center;
+  margin: 10px;
+  transition: all 2s;
+}
+
+.small {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.nextButton {
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  margin: 100px auto 0px auto;
+  font-size: 30px;
+  font-weight: bold;
+  color: #cccccc;
+  transition: all 1s;
+}
+
+.nextButton:hover {
+  color: #bf0d3e;
+  font-size: 32px;
+}
+
+.upLeft,
+.upRight,
+.downLeft,
+.downRight {
+  width: 150px;
+  height: 150px;
+}
+
+.upLeft {
+  top: 0;
+  left: 0;
+}
+
+.upRight {
+  top: 0;
+  right: 0;
+}
+
+.downLeft {
+  bottom: 0;
+  left: 0;
+}
+
+.downRight {
+  bottom: 0;
+  right: 0;
+}
+
+.hiddenButton {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  margin-left: 221px;
+  margin-bottom: 214px;
+  width: 62px;
+  height: 62px;
+  border-radius: 31px;
+  box-shadow: rgba(0, 0, 0, 1) 0 0 0 9999px;
+  transition: all 2s;
+}
+
+.ball {
+  position: absolute;
+  margin-left: 220px;
+  margin-bottom: 214px;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background-image: url(../../assets/etc/ball.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  transition: all 2s;
+}
+
+.ball:hover {
+  cursor: pointer;
+  animation: rotate 1000s infinite;
+}
+
+.showLanding {
+  width: 10000px;
+  height: 10000px;
+  border-radius: 5000px;
+}
+
+.hello {
+  position: absolute;
+  margin-left: 220px;
+  margin-bottom: 340px;
+  font-size: 40px;
+  color: white;
+  transition: all 0.2s;
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360000deg);
+    -o-transform: rotate(360000deg);
+    transform: rotate(360000deg);
+  }
+}
