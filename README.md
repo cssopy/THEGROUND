@@ -1,4 +1,4 @@
-# ⚾ 나와 : 나와 잘맞는 동네 운동 메이트를 찾는 플랫폼
+# ⚾ The Ground : 보이지 않는 손
 
 ![image-2.png](./etc/image-2.png)
 
