@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.30ce781a.css",
+    "main.js": "/static/js/main.badee3a9.js",
+    "static/media/landing-dark.mp4": "/static/media/landing-dark.66a2bd2f2abe62c9097c.mp4",
+    "static/media/background1.jpg": "/static/media/background1.59fa995c72126707e6b4.jpg",
+    "static/media/NotoSansKR-Regular.otf": "/static/media/NotoSansKR-Regular.e1aa54c04a18648e6468.otf",
+    "static/media/THE_LOUNGE.mp3": "/static/media/THE_LOUNGE.7d10b8490c1f773453c5.mp3",
+    "static/media/STRAIGHT.mp3": "/static/media/STRAIGHT.12d8fd69a2974c61319f.mp3",
+    "static/media/GROOVY_HIPHOP.mp3": "/static/media/GROOVY_HIPHOP.8bfeecdd983ab45d460a.mp3",
+    "static/media/background2.jpg": "/static/media/background2.6253ecf0186656c94c51.jpg",
+    "static/media/HIGH_OCTANE.mp3": "/static/media/HIGH_OCTANE.1f4d79cbea603c136dd6.mp3",
+    "static/media/INDIE_ROCK_SPORT.mp3": "/static/media/INDIE_ROCK_SPORT.6e7174c0c6be1d9be0d4.mp3",
+    "static/media/INDIE_ROCK_SPORT_2.mp3": "/static/media/INDIE_ROCK_SPORT_2.ce9347bf8228ceb8d1d0.mp3",
+    "static/media/background3.jpg": "/static/media/background3.3ee105ce773b1c159283.jpg",
+    "static/media/market_guide.png": "/static/media/market_guide.4755761abaccc7351f7e.png",
+    "static/media/manage_guide.png": "/static/media/manage_guide.b1d122d49ec298b7fe93.png",
+    "static/media/background5.jpg": "/static/media/background5.a4963e9c51bb96a01d12.jpg",
+    "static/media/ground2.png": "/static/media/ground2.b7f7e8f4496b1f599999.png",
+    "static/media/title.png": "/static/media/title.55f189a596f44b9a238d.png",
+    "static/media/throw.mp3": "/static/media/throw.6485b7b112a1422fa820.mp3",
+    "static/media/logo192.png": "/static/media/logo192.544703c0203f71d4b0c0.png",
+    "static/media/hit.mp3": "/static/media/hit.d61ee26659f0a42bc11d.mp3",
+    "static/media/subtitle.png": "/static/media/subtitle.3e753e7228ade256c733.png",
+    "static/media/swing.mp3": "/static/media/swing.3306afbd211256679bc6.mp3",
+    "index.html": "/index.html",
+    "main.30ce781a.css.map": "/static/css/main.30ce781a.css.map",
+    "main.badee3a9.js.map": "/static/js/main.badee3a9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30ce781a.css",
+    "static/js/main.badee3a9.js"
+  ]
+}
