@@ -1,0 +1,81 @@
+.table {
+  height: 380px;
+  width: 95%;
+  display: block;
+  color: #aaaaaa;
+  padding: 0px 0px 0px 30px;
+  font-size: 12px;
+  text-align: start;
+}
+
+.table th:nth-of-type(1) {
+  width: 10vw;
+}
+.table th:nth-of-type(2) {
+  width: 38vw;
+}
+.table th:nth-of-type(3) {
+  width: 6vw;
+}
+.table th:nth-of-type(4) {
+  width: 9vw;
+}
+.table th:nth-of-type(5) {
+  width: 9vw;
+}
+.table th:nth-of-type(6) {
+  width: 7vw;
+}
+.table th:nth-of-type(7) {
+  width: 9vw;
+}
+.table th:nth-of-type(8) {
+  width: 5vw;
+}
+
+.table td:nth-of-type(1) {
+  width: 10vw;
+}
+.table td:nth-of-type(2) {
+  width: 35vw;
+}
+.table td:nth-of-type(3) {
+  width: 7vw;
+}
+.table td:nth-of-type(4) {
+  width: 7vw;
+}
+.table td:nth-of-type(5) {
+  width: 7vw;
+}
+.table td:nth-of-type(6) {
+  width: 7vw;
+}
+.table td:nth-of-type(7) {
+  width: 7vw;
+}
+.table td:nth-of-type(8) {
+  width: 3vw;
+}
+
+.leftPitcher,
+.rightPitcher {
+  width: 80%;
+  height: 15px;
+  margin-right: 2px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
+  line-height: 15px;
+}
+
+.leftPitcher {
+  background-color: #bf0d3e;
+}
+
+.rightPitcher {
+  background-color: #0d5fbf;
+}
+.selected {
+  background: rgb(23, 88, 202);
+}

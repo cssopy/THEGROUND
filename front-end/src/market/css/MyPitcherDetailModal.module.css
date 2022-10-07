@@ -1,0 +1,61 @@
+.modal {
+  padding: 0px;
+  margin-top: -100px;
+  margin-left: -1048px;
+  animation: animation-modal-show 0.5s;
+  z-index: 1;
+}
+
+.head {
+  height: 30px;
+  width: 500px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(#053167, #053167);
+  border-radius: 20px 20px 0 0;
+}
+
+.body {
+  margin-top: -6px;
+  height: 518px;
+  width: 500px;
+  background-color: rgb(4, 30, 66);
+  border-radius: 0 0 20px 20px;
+  color: white;
+  text-align: center;
+}
+
+.stat {
+  margin-top: -200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  height: 140px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.stat tr:nth-child(2n + 1) {
+  color: #053167;
+  font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.767);
+}
+
+.table {
+  color: white;
+  font-size: 0.5rem;
+}
+
+.table tr:nth-child(2n + 1) {
+  color: #aaaaaa;
+}
+
+@keyframes animation-modal-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
