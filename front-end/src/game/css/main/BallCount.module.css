@@ -1,0 +1,35 @@
+.bso {
+  width: 200px;
+  height: 130px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.count {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-left: 10px;
+}
+
+.subtitle {
+  width: 40px;
+  height: 40px;
+}
+
+.strike {
+  background: #faff00;
+}
+
+.ball {
+  background: #0be916;
+}
+
+.out {
+  background: #ff0000;
+}
