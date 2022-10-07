@@ -1,0 +1,25 @@
+.pitchers {
+  width: 320px;
+  height: 170px;
+  background: linear-gradient(#041e42, rgba(04, 30, 66, 0.6));
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+
+.now {
+  color: #bf0d3e;
+}
+
+.vs {
+  font-size: 24px;
+}
+
+.content {
+  font-size: 18px;
+}
