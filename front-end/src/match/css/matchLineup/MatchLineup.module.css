@@ -1,0 +1,121 @@
+.bg {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url(../../../assets/image/background1.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+  font-size: 2vh;
+  overflow: hidden;
+}
+
+.box {
+  position: fixed;
+  width: 900px;
+  height: 600px;
+  background-color: #041e42e5;
+  border-radius: 20px;
+  color: white;
+  padding: 50px 10px;
+}
+
+.where {
+  font-size: 20px;
+}
+
+.zero {
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.logo {
+  width: 45px;
+  margin: 0px 5px;
+}
+
+.name {
+  height: 45px;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.vs {
+  margin: auto;
+  padding: auto;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.lineup {
+  width: 300px;
+  border-radius: 15px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(#041e42, rgba(04, 30, 66, 0.5));
+  color: white;
+  text-align: center;
+  padding: 0px 0px 10px 0px;
+}
+
+.title {
+  height: 24px;
+  border-start-end-radius: 15px;
+  border-start-start-radius: 15px;
+  background: linear-gradient(#053167, rgba(5, 49, 103, 0.6));
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  font-size: 12px;
+  height: 30px;
+  padding: 5px 10px;
+}
+
+.L-hitter,
+.R-hitter,
+.L-pitcher,
+.R-pitcher {
+  display: inline-block;
+  width: 40px;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.L-hitter {
+  background-color: rgb(194, 94, 0);
+}
+
+.R-hitter {
+  background-color: green;
+}
+
+.L-pitcher {
+  background-color: #bf0d3e;
+}
+
+.R-pitcher {
+  background-color: #0d5fbf;
+}
+
+.Button {
+  font-size: 18px;
+  border: none;
+  height: 32px;
+  width: 120px;
+  border-radius: 10px;
+  line-height: 20px;
+  background: linear-gradient(#a2e90b, rgba(162, 233, 11, 0.4));
+}
