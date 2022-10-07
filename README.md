@@ -41,7 +41,13 @@
 - 백엔드
     |이름|버전|적용|
     |---|---|---|
-    ||||
+    |Gson|2.9.0|JSON 파싱|
+    |Guava|31.1-jre|Json 파싱|
+    |JJWT|0.11.5|JWT JWT 생성 및 검증|
+    |Lombok|1.18.24|Repository Class 사용|
+    |Spring Boot|2.7.4|Spring 프로젝트|
+    |Spring TestContext Framework|5.3.23|테스트에 사용되는 애플리케이션 컨텍스트를 생성하고 관리|
+    |MariaDB|3.0.6|오픈 소스 DB|
 
 ## 👥 멤버
 
