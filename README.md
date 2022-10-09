@@ -31,11 +31,9 @@
     |react-axios|^2.0.6|서버와의 API 통신|
     |react-bootstrap|^2.5.0|컴포넌트 디자인 구조|
     |react-dnd|16.0.1|특정 컴포넌트 마우스 드래그 앤 드랍 기능 구현|
-    |react-howler|^5.2.0|내용|
+    |react-howler|^5.2.0|백그라운드 자동 음악 재생|
     |react-icons|^4.4.0|디자인적인 아이콘 적용|
-    |react-scripts|^5.0.1|내용|
     |react-persist|^6.0.0|페이지 새로고침시 휘발되는 state 방지|
-    |react-vitals|^2.1.4|내용|
 - 백엔드
     |이름|버전|적용|
     |---|---|---|
