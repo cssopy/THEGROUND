@@ -51,7 +51,7 @@ const Main = () => {
               pits.push(value);
             }
             setPitchers(pits);
-            dispatch(configActions.setPersentage(15));
+            dispatch(configActions.setPercentage(15));
           })
           .catch((error) => {
             console.log(error);
@@ -67,7 +67,7 @@ const Main = () => {
           })
           .then((res) => {
             setSchedules(res.data);
-            dispatch(configActions.setPersentage(15));
+            dispatch(configActions.setPercentage(15));
           })
           .catch((error) => {
             console.log(error);
@@ -83,7 +83,7 @@ const Main = () => {
           })
           .then((res) => {
             setMatchs(res.data);
-            dispatch(configActions.setPersentage(20));
+            dispatch(configActions.setPercentage(20));
           })
           .catch((error) => {
             console.log(error);

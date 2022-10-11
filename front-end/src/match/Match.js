@@ -57,11 +57,11 @@ const Match = () => {
       //     })
       //     .then((res) => {
       //       setBrief(res.data);
-      //       dispatch(configActions.setPersentage(50));
+      //       dispatch(configActions.setPercentage(50));
       //     })
       //     .catch((error) => {
       //       console.log(error);
-      //       dispatch(configActions.setPersentage(50));
+      //       dispatch(configActions.setPercentage(50));
       //     });
       // })();
 
@@ -83,11 +83,11 @@ const Match = () => {
                 startingPitcher: res.data.teamSetting1stSp.pitcherSeq,
               })
             );
-            dispatch(configActions.setPersentage(50));
+            dispatch(configActions.setPercentage(50));
           })
           .catch((error) => {
             console.log(error);
-            dispatch(configActions.setPersentage(50));
+            dispatch(configActions.setPercentage(50));
           });
       })();
 
@@ -100,7 +100,7 @@ const Match = () => {
           })
           .then((res) => {
             setMyHitters(res.data);
-            dispatch(configActions.setPersentage(50));
+            dispatch(configActions.setPercentage(50));
           })
           .catch((error) => {
             console.log(error);

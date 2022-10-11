@@ -59,10 +59,10 @@ const LoginHandler = (props) => {
               }
             )
             .then((res) => {
-              dispatch(configActions.setPersentage(50));
+              dispatch(configActions.setPercentage(50));
               dispatch(logosActions.getLogoAPI());
               if (res.data.message === "회원가입을 먼저 해주세요.") {
-                dispatch(configActions.setPersentage(50));
+                dispatch(configActions.setPercentage(50));
                 // 회원가입을 위해 uid를 저장 후 이동
                 // loginType은 로컬 스토리지에 있음
                 dispatch(userActions.setUid(res.data.uid));
@@ -78,7 +78,7 @@ const LoginHandler = (props) => {
               }
             });
         } else {
-          dispatch(configActions.setPersentage(100));
+          dispatch(configActions.setPercentage(100));
           dispatch(configActions.setUrl(""));
         }
       })

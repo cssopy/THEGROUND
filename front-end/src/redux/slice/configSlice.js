@@ -20,11 +20,11 @@ const configSlice = createSlice({
     setIsLoading: (state, action) => {
       state.loading.isLoading = action.payload;
     },
-    setPersentage: (state, action) => {
+    setPercentage: (state, action) => {
       const percentage = state.loading.percentage + action.payload;
       state.loading.percentage = percentage > 100 ? 100 : percentage;
     },
-    resetPersentage: (state) => {
+    resetPercentage: (state) => {
       state.loading.percentage = 0;
     },
     setMusic: (state, action) => {
