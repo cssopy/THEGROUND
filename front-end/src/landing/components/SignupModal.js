@@ -78,7 +78,7 @@ const SignupModal = (props) => {
           localStorage.removeItem("loginType");
           dispatch(userActions.setLoginType(""));
           dispatch(configActions.setIsLoading(true));
-          dispatch(configActions.setPersentage(50));
+          dispatch(configActions.setPercentage(50));
           dispatch(configActions.setUrl("main"));
         })
         .catch((err) => console.log(err));

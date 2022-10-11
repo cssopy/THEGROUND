@@ -182,7 +182,7 @@ const Game = () => {
   });
 
   useEffect(() => {
-    dispatch(configActions.setPersentage(100));
+    dispatch(configActions.setPercentage(100));
     // axios
     //   .get(BackApi.game.play, {
     //     headers: {

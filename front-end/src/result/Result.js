@@ -43,7 +43,7 @@ const Result = () => {
   const quitGame = () => {
     saveGame();
     dispatch(configActions.setIsLoading(true));
-    dispatch(configActions.setPersentage(50));
+    dispatch(configActions.setPercentage(50));
     dispatch(configActions.setUrl("main"));
   };
   const openLogs = () => {
@@ -68,7 +68,7 @@ const Result = () => {
     //   })
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err))
-    dispatch(configActions.setPersentage(100));
+    dispatch(configActions.setPercentage(100));
   }, []);
 
   return (
