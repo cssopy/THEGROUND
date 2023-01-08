@@ -45,16 +45,23 @@
     |Spring Boot|2.7.4|Spring 프로젝트|
     |Spring TestContext Framework|5.3.23|테스트에 사용되는 애플리케이션 컨텍스트를 생성하고 관리|
     |MariaDB|3.0.6|오픈 소스 DB|
+    
+    
+## 🎨 서비스화면
+![image](https://user-images.githubusercontent.com/83584721/211179989-743d13ba-90a2-44cf-b6b3-3b3b10e74d8c.png)
+![image](https://user-images.githubusercontent.com/83584721/211180011-42438d3e-6497-44e4-a6b1-2ab25a2d3c2a.png)
+![image](https://user-images.githubusercontent.com/83584721/211180069-f22dfccb-3749-43ff-a842-914c23a270ad.png)
+
 
 ## 👥 멤버
 
 - 프론트엔드
-    - 이정재
-    - 홍성목
+    - [이정재]
+    - [홍성목]
 - 백엔드
-    - 김주원
-    - 이대희
-    - 이호승
+    - [김주원]
+    - [이대희]
+    - [이호승]
 
 
 ## **🔗 자세한 내용**
